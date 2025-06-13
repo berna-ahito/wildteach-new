@@ -1,0 +1,125 @@
+.landing-container {
+  min-height: 100vh;
+  width: 100vw; 
+  background-size: cover;
+  background-position: center;
+  padding: 20px;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+  color: #5b2121;
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  padding: 25px 55px;
+  background-color: white;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.navbar .logo {
+  font-size: 40px;
+  font-weight: bold;
+  color: #5b2121;
+}
+
+.navbar .nav-links {
+  display: flex;
+  gap: 20px; 
+  margin-left: 1000px;
+  font-size: 20px;
+}
+
+.navbar .nav-links a {
+  text-decoration: none;
+  color: #5b2121;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.navbar .nav-links a:hover {
+  color: #ff9800;
+}
+
+.content-box {
+  margin: 40px auto;
+  background-color: white;
+  border: 3px solid gold;
+  border-radius: 30px;
+  display: flex;
+  max-width: 70%;
+  padding: 30px;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.left-side {
+  flex: 1;
+  padding-right: 20px;
+}
+
+.main-image {
+  width: 100%;
+  border-radius: 15px;
+}
+
+.right-side {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-left: 15px;
+}
+
+.right-side h2 {
+  font-size: 55px;
+  margin-bottom: 15px;
+  color: #8d2f2f;
+  margin-left: 15px;
+}
+
+.tags span {
+  background-color: #f0d6d6;
+  margin-right: 8px;
+  padding: 6px 12px;
+  border-radius: 10px;
+  font-size: 20px;
+  display: inline-block;
+  margin-left: 15px;
+}
+
+.right-side p {
+  margin-top: 20px;
+  margin-left: 15px; 
+  font-size: 17px;
+  line-height: 1.4;
+  color: #333;
+}
+
+.buttons {
+  margin-top: 25px;
+  display: flex;
+  gap: 50px;
+  margin-left: 150px;
+}
+
+.login-btn,
+.register-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background-color: white;
+  color: #8d2f2f;
+  border: 2px solid gold;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.login-btn:hover,
+.register-btn:hover {
+  background-color: gold;
+  color: white;
+}
+
