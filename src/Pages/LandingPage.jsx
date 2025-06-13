@@ -13,7 +13,10 @@ const LandingPage = () => {
   };
 
   const goToLogin = () => {
-    navigate('/login');
+    navigate('/login')
+  };
+  const goToRegister = ()=> {
+    navigate('/register')
   };
 
   return (
@@ -64,7 +67,7 @@ const LandingPage = () => {
               </p>
               <div className="buttons">
                 <button className="login-btn" onClick={goToLogin}>Login</button>
-                <button className="register-btn">Register</button>
+                <button className="register-btn" onClick = {goToRegister}>Register</button>
               </div>
             </div>
           </div>
