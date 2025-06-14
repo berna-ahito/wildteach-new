@@ -6,7 +6,7 @@ export default function Header({ title = "Dashboard", leftIcon, rightIcon }) {
     <AppBar position="fixed" color="primary" elevation={1}>
       <Toolbar>
         {leftIcon}
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1, tectAlign: 'left', ml: 4 }}>
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1, tectAlign: 'left', ml: 5 }}>
           {title}
         </Typography>
         {rightIcon}

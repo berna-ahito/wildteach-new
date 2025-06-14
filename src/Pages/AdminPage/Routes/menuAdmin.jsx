@@ -1,4 +1,3 @@
-// src/routes/menuAdmin.jsx or src/components/menuAdmin.js
 export default (navigate) => [
   { text: "Dashboard", onClick: () => navigate('/adminDashboard') },
   { text: "Manage Users", onClick: () => navigate('/manageUsers') },

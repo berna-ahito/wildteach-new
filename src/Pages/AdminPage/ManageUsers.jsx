@@ -9,7 +9,7 @@ export default function ManageUsers() {
 
   return (
     <>
-      <Header title="Manage Users" />
+      <Header title="User Management" />
       <Sidebar menuItems={menuItems} />
       <div style={{ paddingTop: '80px', paddingLeft: '16px' }}>
         <h1>Manage Users Page</h1>
