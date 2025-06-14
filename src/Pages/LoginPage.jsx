@@ -8,54 +8,44 @@ function LoginPage({ setIsLoggedIn }) {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleLogin = async (e) => {
+  // Dummy accounts for all user roles
+  const dummyAccounts = [
+    { email: "admin@example.com", password: "admin123", role: "admin" },
+    { email: "tutor@example.com", password: "tutor123", role: "tutor" },
+    { email: "tutee@example.com", password: "tutee123", role: "tutee" },
+  ];
+
+  const handleLogin = (e) => {
     e.preventDefault();
     setError("");
 
-    try {
-     
-      const roleRaw = await roleRes.text();
-      const role = roleRaw.trim().toLowerCase();
+    const foundUser = dummyAccounts.find(
+      (user) => user.email === email && user.password === password
+    );
 
-      let endpoint = "";
-      let requestBody = { email, password };
+    if (!foundUser) {
+      setError("Invalid email or password.");
+      return;
+    }
 
-      switch (role) {
-        case "admin":
-          endpoint = "admin/login";
-          break;
-        case "tutee":
-          endpoint = "student/login";
-          break;
-        case "tutor":
-          endpoint = "tutor/login";
-          break;
-        default:
-          setError("Unknown role or role not assigned.");
-          return;
-      }
+    const { role } = foundUser;
+    setIsLoggedIn(true);
+    localStorage.setItem("isLoggedIn", true);
+    localStorage.setItem("role", role);
 
-      if (!loginRes.ok) {
-        const errorText = await loginRes.text();
-        setError(`Login failed: ${errorText}`);
-        return;
-      }
-
-      const responseData = await loginRes.json()
-    
-      setIsLoggedIn(true);
-      localStorage.setItem("isLoggedIn", true);
-      localStorage.setItem("role", role);
-      navigate(`/${role}/home`);
-    } catch (err) {
-      console.error("Login error:", err);
-      setError("Server error. Please try again later.");
+    // Redirect based on role
+    if (role === "admin") {
+      navigate("/adminDashboard");
+    } else if (role === "tutor") {
+      navigate("/tutorDashboard");
+    } else {
+      navigate("/studentDashboard");
     }
   };
 
   return (
     <>
-      <div className="bg-image"></div>
+      <div className="bg-image"> </div>
       <div className="login-container">
         <h1>Login</h1>
         {error && <p className="error-message">{error}</p>}
@@ -76,7 +66,12 @@ function LoginPage({ setIsLoggedIn }) {
           />
           <button type="submit">Login</button>
         </form>
-        <p><a href="/register">New user? Register here</a></p>
+        <p>Use these test accounts:</p>
+        <ul>
+          <li>Admin: admin@example.com / admin123</li>
+          <li>Tutor: tutor@example.com / tutor123</li>
+          <li>Student: tutee@example.com / tutee123</li>
+        </ul>
       </div>
     </>
   );
