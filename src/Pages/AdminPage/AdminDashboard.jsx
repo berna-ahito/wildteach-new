@@ -11,7 +11,7 @@ export default function AdminDashboard() {
 
   return (
     <>
-      <Header title="Admin Dashboard" />
+      <Header title="WildTeach" />
       <Sidebar menuItems={menuItems} />
       <div style={{ marginTop: '10px', paddingRight: '800px' }}>
         <h1 style={{ marginBottom: '32px' }}>Welcome Admin</h1>
