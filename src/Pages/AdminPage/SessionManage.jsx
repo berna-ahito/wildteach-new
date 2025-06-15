@@ -3,6 +3,7 @@ import Sidebar from '../../Components/Sidebar';
 import Header from '../../Components/Header';
 import { useNavigate } from 'react-router-dom';
 import getAdminMenu from './Routes/menuAdmin';
+import Card from '../../Components/Card';
 
 import bookingData from '../../Data/Booking';
 
@@ -19,8 +20,22 @@ export default function ManageUsers() {
     <>
       <Header title="WildTeach" />
       <Sidebar menuItems={menuItems} />
-      <div style={{ marginTop: '190px', paddingRight: '10px' , marginBottom: '40px'  }}>
+      <div style={{ marginTop: '420px', paddingRight: '10px' , marginBottom: '40px'  }}>
         <h1>Session Management</h1>
+        <div style={{ display: 'flex',flexWrap: 'wrap', marginBottom: '20px' }}>
+          <Card
+            title="Active Sessions"
+            content="4"
+            style={{ width: '200px', height: '120px', margin: '0 16px' }}/>
+          <Card
+            title="Pending Bookings"
+            content="20"
+            style={{ width: '200px', height: '120px', margin: '0 16px' }}/>
+          <Card
+            title="Completed Sessions"
+            content="15"
+            style={{ width: '200px', height: '120px', margin: '0 16px' }}/>
+        </div>
         <TableContainer component={Paper} sx={{ mt: 2, width: '100%' }}>
           <Table sx={{ minWidth: 1400 }} aria-label="session table">
             <TableHead>
