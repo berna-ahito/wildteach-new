@@ -7,8 +7,10 @@ export default (navigate) => [
   {
     text: "Logout",
     onClick: () => {
-      localStorage.clear();
-      navigate('/login');
+      if (window.confirm("Are you sure you want to logout?")) {
+        localStorage.clear();
+        navigate('/login');
+      }
     }
   }
 ];

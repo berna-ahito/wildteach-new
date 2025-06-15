@@ -4,7 +4,8 @@ export default function Card({ title, content, children, style }) {
   return (
     <div
       style={{
-        border: '1px solid #ddd',
+        border: '2px solid',
+        borderColor: '#black',
         borderRadius: '8px',
         padding: '16px',
         background: '#fff',

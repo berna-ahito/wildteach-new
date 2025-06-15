@@ -32,8 +32,8 @@ export default function ManageUsers() {
             content="20"
             style={{ width: '200px', height: '120px', margin: '0 16px' }}/>
           <Card
-            title="Completed Sessions"
-            content="15"
+            title="Total Sessions"
+            content="24"
             style={{ width: '200px', height: '120px', margin: '0 16px' }}/>
         </div>
         <TableContainer component={Paper} sx={{ mt: 2, width: '100%' }}>
