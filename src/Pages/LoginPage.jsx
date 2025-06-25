@@ -8,7 +8,6 @@ function LoginPage({ setIsLoggedIn }) {
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  // Dummy accounts for all user roles
   const dummyAccounts = [
     { email: "admin@example.com", password: "admin123", role: "admin" },
     { email: "tutor@example.com", password: "tutor123", role: "tutor" },
@@ -33,19 +32,18 @@ function LoginPage({ setIsLoggedIn }) {
     localStorage.setItem("isLoggedIn", true);
     localStorage.setItem("role", role);
 
-    // Redirect based on role
     if (role === "admin") {
       navigate("/adminDashboard");
     } else if (role === "tutor") {
       navigate("/tutorDashboard");
     } else {
-      navigate("/studentDashboard");
+      navigate("/tuteeDashboard");
     }
   };
 
   return (
     <>
-      <div className="bg-image"> </div>
+      <div className="bg-image"></div>
       <div className="login-container">
         <h1>Login</h1>
         {error && <p className="error-message">{error}</p>}
@@ -66,12 +64,16 @@ function LoginPage({ setIsLoggedIn }) {
           />
           <button type="submit">Login</button>
         </form>
-        <p>Use these test accounts:</p>
-        <ul>
-          <li>Admin: admin@example.com / admin123</li>
-          <li>Tutor: tutor@example.com / tutor123</li>
-          <li>Student: tutee@example.com / tutee123</li>
-        </ul>
+
+        <p className="register-link">
+          No account?{" "}
+          <span
+            className="clickable"
+            onClick={() => navigate("/register")}
+          >
+            Click here to Register
+          </span>
+        </p>
       </div>
     </>
   );

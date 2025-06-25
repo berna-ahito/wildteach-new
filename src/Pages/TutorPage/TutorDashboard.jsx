@@ -9,19 +9,26 @@ import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import WavingHandIcon from '@mui/icons-material/WavingHand';
 
-import Header from '../../Components/Header'; 
+import Header from '../../Components/Header';
 import '../Styles/TutorPage.css';
 
 const TutorDashboard = () => {
   const navigate = useNavigate();
   const tutorName = 'Maria';
 
-  const [stats] = useState({ students: 12, earnings: 1250, bookings: 5, sessions: 28 });
+  const [stats] = useState({
+    students: 12,
+    earnings: 1250,
+    bookings: 5,
+    sessions: 28,
+  });
+
   const [schedule] = useState([
     { time: '10:00 AM', student: 'Sarah K.', subject: 'Calculus', status: 'confirmed' },
     { time: '2:00 PM', student: 'Mike J.', subject: 'Statistics', status: 'pending' },
     { time: '4:30 PM', student: 'Emma W.', subject: 'Algebra', status: 'confirmed' },
   ]);
+
   const [recent] = useState([
     { name: 'Juan Dela Cruz', subject: 'Physics', time: '3:30 PM', status: 'completed', avatar: 'JD' },
     { name: 'Ana R.', subject: 'Chemistry', time: '4:00 PM', status: 'upcoming', avatar: 'AR' },
@@ -32,7 +39,7 @@ const TutorDashboard = () => {
       <Sidebar menuItems={menuTutor(navigate)} />
 
       <div className="content">
-        <Header title = "WILDTEACH"tutorName={tutorName} />
+        <Header title="WILDTEACH" tutorName={tutorName} />
 
         <header className="greeting-section">
           <div className="greeting-avatar">
@@ -50,33 +57,28 @@ const TutorDashboard = () => {
             className="stat-card orange"
             title="Students"
             content={stats.students}
-          >
-           
-          </Card>
+          />
 
           <Card
-            icon = {<MonetizationOnIcon className="stat-icon" />}
+            icon={<MonetizationOnIcon className="stat-icon" />}
             className="stat-card purple"
             title="Earnings"
             content={`₱${stats.earnings}`}
-          >
-          </Card>
+          />
 
           <Card
-            icon = {<HourglassBottomIcon className="stat-icon" />}
+            icon={<HourglassBottomIcon className="stat-icon" />}
             className="stat-card yellow"
             title="Pending"
             content={stats.bookings}
-          >
-          </Card>
+          />
 
           <Card
-            icon = {<CheckCircleIcon className="stat-icon" />}
+            icon={<CheckCircleIcon className="stat-icon" />}
             className="stat-card green"
             title="Sessions"
             content={stats.sessions}
-          >
-          </Card>
+          />
         </div>
 
         <div className="dashboard-panels">
