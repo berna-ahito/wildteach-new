@@ -33,7 +33,7 @@ const TutorDashboard = () => {
       <Sidebar menuItems={menuTutor(navigate)} />
 
       <div className="content">
-        <Header tutorName={tutorName} />
+        <Header title = "WILDTEACH"tutorName={tutorName} />
 
         <header className="greeting-section">
           <div className="greeting-avatar">
