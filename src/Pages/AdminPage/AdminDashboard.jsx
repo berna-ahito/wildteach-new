@@ -31,18 +31,10 @@ export default function AdminDashboard() {
         </div>
 
         <div className="stat-grid">
-          <Card className="stat-card orange" title="Active Tutors" content="9">
-            <GroupIcon className="stat-icon" />
-          </Card>
-          <Card className="stat-card purple" title="Active Students" content="100">
-            <SchoolIcon className="stat-icon" />
-          </Card>
-          <Card className="stat-card yellow" title="Active Sessions" content="5">
-            <PlayCircleOutlineIcon className="stat-icon" />
-          </Card>
-          <Card className="stat-card green" title="Total Revenue" content="₱25,000">
-            <AnnouncementIcon className="stat-icon" />
-          </Card>
+          <Card className="stat-card orange" icon = {<GroupIcon className="stat-icon"/>} title="Active Tutors" content="9"></Card>
+          <Card className="stat-card purple" icon = {<SchoolIcon className="stat-icon" />} title="Active Students" content="100"></Card>
+          <Card className="stat-card yellow" icon ={<PlayCircleOutlineIcon className="stat-icon" />}title="Active Sessions" content="5"></Card>
+          <Card className="stat-card green" icon ={<AnnouncementIcon className="stat-icon" />}title="Total Revenue" content="₱25,000"></Card>
         </div>
 
         <div className="dashboard-panels">

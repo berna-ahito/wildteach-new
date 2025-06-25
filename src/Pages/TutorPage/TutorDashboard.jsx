@@ -1,4 +1,3 @@
-// src/Pages/TutorDashboard.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Sidebar from '../../Components/Sidebar';
@@ -47,35 +46,36 @@ const TutorDashboard = () => {
 
         <div className="stat-grid">
           <Card
+            icon={<GroupIcon className="stat-icon" />}
             className="stat-card orange"
             title="Students"
             content={stats.students}
           >
-            <GroupIcon className="stat-icon" />
+           
           </Card>
 
           <Card
+            icon = {<MonetizationOnIcon className="stat-icon" />}
             className="stat-card purple"
             title="Earnings"
             content={`₱${stats.earnings}`}
           >
-            <MonetizationOnIcon className="stat-icon" />
           </Card>
 
           <Card
+            icon = {<HourglassBottomIcon className="stat-icon" />}
             className="stat-card yellow"
             title="Pending"
             content={stats.bookings}
           >
-            <HourglassBottomIcon className="stat-icon" />
           </Card>
 
           <Card
+            icon = {<CheckCircleIcon className="stat-icon" />}
             className="stat-card green"
             title="Sessions"
             content={stats.sessions}
           >
-            <CheckCircleIcon className="stat-icon" />
           </Card>
         </div>
 

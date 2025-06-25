@@ -1,11 +1,14 @@
-import React from 'react';
 
-export default function Card({ title, content, children, className = '', style = {} }) {
+
+
+
+export default function Card({ icon,title, content, children, className = '', style = {} }) {
   return (
     <div className={className} style={style}>
-      {children}
+      {icon}
       {title && <h3>{title}</h3>}
       {content && <p>{content}</p>}
+      {children}
     </div>
   );
 }

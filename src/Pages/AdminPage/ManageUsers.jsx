@@ -8,18 +8,21 @@ import { Button, ButtonGroup } from '@mui/material';
 import UserTable from '../../Components/Table'; 
 import students from '../../Data/Student';   
 
+import '../Styles/TutorPage.css'; // ✅ Make sure it's imported
+
 export default function ManageUsers() {
   const navigate = useNavigate();
   const menuItems = getAdminMenu(navigate);
   const [view, setView] = useState('students');
 
   return (
-    <>
-      <Header title="WildTeach" />
+    <div className="tutor-dashboard bright-theme">
       <Sidebar menuItems={menuItems} />
+      <div className="content">
+        <Header title="WildTeach" />
 
-      <div style={{ paddingRight: '620px', marginTop: '400px' , marginBottom: '40px' }}>
-        <h1>User Management</h1>
+        <h1 style={{ marginBottom: '24px' }}>User Management</h1>
+
         <ButtonGroup variant="contained" sx={{ mb: 3 }}>
           <Button
             color={view === 'students' ? 'primary' : 'inherit'}
@@ -35,9 +38,9 @@ export default function ManageUsers() {
           </Button>
         </ButtonGroup>
 
-        <div style ={{width: '180%'}}className="ManageUsers">
+        <div className="ManageUsers" style={{ width: '100%' }}>
           {view === 'students' && (
-            <div  className="ViewStudents">
+            <div className="ViewStudents">
               <h2>Students</h2>
               <UserTable data={students} roleFilter="tutee" />
             </div>
@@ -50,6 +53,6 @@ export default function ManageUsers() {
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 }
