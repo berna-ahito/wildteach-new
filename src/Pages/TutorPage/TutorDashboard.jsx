@@ -1,3 +1,4 @@
+// src/Pages/TutorDashboard.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Sidebar from '../../Components/Sidebar';
@@ -32,7 +33,7 @@ const TutorDashboard = () => {
       <Sidebar menuItems={menuTutor(navigate)} />
 
       <div className="content">
-        <Header tutorName={tutorName} /> 
+        <Header tutorName={tutorName} />
 
         <header className="greeting-section">
           <div className="greeting-avatar">
@@ -40,7 +41,7 @@ const TutorDashboard = () => {
           </div>
           <div>
             <h1>Hello, {tutorName}!</h1>
-            <p>Welcome back to your learning hub! 🌟</p>
+            <p>Welcome back to your learning hub!</p>
           </div>
         </header>
 
