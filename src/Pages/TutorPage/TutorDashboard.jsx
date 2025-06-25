@@ -6,9 +6,9 @@ import GroupIcon from '@mui/icons-material/Group';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import SearchIcon from '@mui/icons-material/Search';
 import WavingHandIcon from '@mui/icons-material/WavingHand';
+
+import Header from '../../components/Header'; 
 import '../Styles/TutorPage.css';
 
 const TutorDashboard = () => {
@@ -31,24 +31,7 @@ const TutorDashboard = () => {
       <Sidebar menuItems={menuTutor(navigate)} />
 
       <div className="content">
-        <nav className="navbar playful">
-          <div className="navbar-left">
-            <div className="navbar-logo-circle">
-              <span className="logo-circle-text">W</span>
-            </div>
-            <div className="navbar-title">WILDTEACH</div>
-          </div>
-          <div className="navbar-center">
-            <SearchIcon className="navbar-icon" />
-            <input type="text" placeholder="Search students, subjects..." />
-          </div>
-          <div className="navbar-right">
-            <div className="notif-icon">
-              <NotificationsIcon />
-              <span className="notif-badge">3</span>
-            </div>
-          </div>
-        </nav>
+        <Header tutorName={tutorName} /> {/* ✅ Merged Header */}
 
         <header className="greeting-section">
           <div className="greeting-avatar">
