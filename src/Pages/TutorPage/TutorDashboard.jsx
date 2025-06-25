@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Sidebar from '../../Components/Sidebar';
+import Card from '../../Components/Card';
 import menuTutor from './Routes/MenuTutor';
 import GroupIcon from '@mui/icons-material/Group';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
@@ -44,26 +45,37 @@ const TutorDashboard = () => {
         </header>
 
         <div className="stat-grid">
-          <div className="stat-block orange">
+          <Card
+            className="stat-card orange"
+            title="Students"
+            content={stats.students}
+          >
             <GroupIcon className="stat-icon" />
-            <h2>{stats.students}</h2>
-            <p>Students</p>
-          </div>
-          <div className="stat-block purple">
+          </Card>
+
+          <Card
+            className="stat-card purple"
+            title="Earnings"
+            content={`₱${stats.earnings}`}
+          >
             <MonetizationOnIcon className="stat-icon" />
-            <h2>₱{stats.earnings}</h2>
-            <p>Earnings</p>
-          </div>
-          <div className="stat-block yellow">
+          </Card>
+
+          <Card
+            className="stat-card yellow"
+            title="Pending"
+            content={stats.bookings}
+          >
             <HourglassBottomIcon className="stat-icon" />
-            <h2>{stats.bookings}</h2>
-            <p>Pending</p>
-          </div>
-          <div className="stat-block green">
+          </Card>
+
+          <Card
+            className="stat-card green"
+            title="Sessions"
+            content={stats.sessions}
+          >
             <CheckCircleIcon className="stat-icon" />
-            <h2>{stats.sessions}</h2>
-            <p>Sessions</p>
-          </div>
+          </Card>
         </div>
 
         <div className="dashboard-panels">
