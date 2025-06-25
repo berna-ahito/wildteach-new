@@ -4,7 +4,7 @@ import LandingPage from './Pages/LandingPage';
 import LoginPage from './Pages/LoginPage';
 import RegisterPage from './Pages/RegisterPage';
 import StudentDashboard from './Pages/StudentPage/StudentDashboard';
-import TutorDashboard from './Pages/TutorPage/TutorPage';
+import TutorDashboard from './Pages/TutorPage/TutorDashboard';
 
 // Admin pages
 import AdminDashboard from './Pages/AdminPage/AdminDashboard';
