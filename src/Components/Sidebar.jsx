@@ -45,6 +45,7 @@ export default function Sidebar({ menuItems = [] }) {
             boxShadow: '0 4px 12px rgba(137, 52, 59, 0.3)',
             borderRadius: '12px',
             padding: '10px',
+            marginTop: '10px',
             '&:hover': {
               background: '#F8C400',
               color: '#89343B',
