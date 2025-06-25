@@ -33,8 +33,18 @@ export default function UserTable({ data = [], roleFilter }) {
   };
 
   return (
-    <TableContainer component={Paper} sx={{ mt: 2 }}>
-      <Table sx={{ minWidth: 650 }} aria-label="user table">
+    <TableContainer
+      component={Paper}
+      sx={{
+        mt: 2,
+        mb: 10,
+        maxWidth: '100%',
+        overflowX: 'auto',
+        maxHeight: '550px',        // ✅ vertical scroll for large data
+        overflowY: 'auto',         // ✅ vertical scroll enabled
+      }}
+    >
+      <Table stickyHeader sx={{ minWidth: 650 }} aria-label="user table">
         <TableHead>
           <TableRow>
             <TableCell><b>Name</b></TableCell>
