@@ -3,7 +3,7 @@ import Header from '../../Components/Header';
 import getAdminMenu from './Routes/menuAdmin';
 import { useNavigate } from 'react-router-dom';
 import Card from '../../Components/Card';
-import '../Styles/TutorPage.css'; // Make sure to import the CSS
+import '../Styles/TutorPage.css'; 
 
 export default function Announcements() {
   const navigate = useNavigate();
