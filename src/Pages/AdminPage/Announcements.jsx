@@ -6,6 +6,7 @@ import Card from '../../Components/Card';
 export default function Announcements() {
   const navigate = useNavigate();
   const menuItems = getAdminMenu(navigate);
+  const style1 = { marginTop: '30px', width: '100px', height: '150px', margin: '0 16px' }
 
   return (
     <>
@@ -21,11 +22,11 @@ export default function Announcements() {
               <Card
                   title="Create New Announcement"
                   content="+"
-                  style={{ marginTop: '30px', width: '100px', height: '150px', margin: '0 16px' }}/>
+                  style={{style1}}/>
               <Card 
                   title="View All Announcements"
                   content="View"
-                  style={{ marginTop: '30px', width: '100px', height: '150px', margin: '0 16px' }}/>
+                  style={{style1}}/>
           </div>
       
       </div>

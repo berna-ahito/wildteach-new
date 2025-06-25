@@ -13,8 +13,7 @@ export default function Settings() {
       <Sidebar menuItems={menuItems} />
       <div style={{ paddingTop: "80px", paddingLeft: "16px" }}>
         <h1>Settings Page</h1>
-        <p>This is where you can manage settings.</p>
-        {/* Add your settings management components here */}
+      
       </div>
     </>
   );
