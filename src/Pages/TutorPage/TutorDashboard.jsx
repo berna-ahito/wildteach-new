@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Sidebar from '../../components/sidebar';
+import Sidebar from '../../Components/Sidebar';
 import menuTutor from './Routes/MenuTutor';
 import GroupIcon from '@mui/icons-material/Group';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
@@ -8,7 +8,7 @@ import HourglassBottomIcon from '@mui/icons-material/HourglassBottom';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import WavingHandIcon from '@mui/icons-material/WavingHand';
 
-import Header from '../../components/Header'; 
+import Header from '../../Components/Header'; 
 import '../Styles/TutorPage.css';
 
 const TutorDashboard = () => {

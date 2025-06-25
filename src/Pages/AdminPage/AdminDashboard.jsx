@@ -4,6 +4,7 @@ import Header from '../../Components/Header';
 import getAdminMenu from './Routes/menuAdmin';
 import Card from '../../Components/Card'; 
 import { useNavigate } from 'react-router-dom';  
+import "../Styles/Admin.css"
 
 export default function AdminDashboard() {
   const navigate = useNavigate();
@@ -16,9 +17,9 @@ export default function AdminDashboard() {
       <div style={{ marginTop: '10px', paddingRight: '800px' }}>
         <h1 style={{ marginBottom: '32px' }}>Welcome Admin</h1>
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px' }}>
-          <Card title="Active Tutors" content="9" />
-          <Card title="Active Students" content="100" />
-          <Card title="Active Sessions" content="5" />
+          <Card className= "smallBox" title="Active Tutors" content="9" />
+          <Card className= "smallBox" title="Active Students" content="100" />
+          <Card className= "smallBox" title="Active Sessions" content="5" />
         </div>
       </div>
       <hr style={{ width: '100%', margin: '32px 0' }} />
