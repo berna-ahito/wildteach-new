@@ -39,7 +39,7 @@ function LoginPage({ setIsLoggedIn }) {
     } else if (role === "tutor") {
       navigate("/tutorDashboard");
     } else {
-      navigate("/studentDashboard");
+      navigate("/tuteeDashboard");
     }
   };
 

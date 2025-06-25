@@ -32,6 +32,7 @@ const TutorDashboard = () => {
       <Sidebar menuItems={menuTutor(navigate)} />
 
       <div className="content">
+        <Header tutorName={tutorName} />
         <Header title = "WILDTEACH"tutorName={tutorName} />
 
         <header className="greeting-section">
@@ -46,11 +47,15 @@ const TutorDashboard = () => {
 
         <div className="stat-grid">
           <Card
+
             icon={<GroupIcon className="stat-icon" />}
             className="stat-card orange"
             title="Students"
             content={stats.students}
           >
+          </Card>
+
+          <Card
            
           </Card>
 
@@ -60,6 +65,10 @@ const TutorDashboard = () => {
             title="Earnings"
             content={`₱${stats.earnings}`}
           >
+
+          </Card>
+
+          <Card
           </Card>
 
           <Card
@@ -68,6 +77,9 @@ const TutorDashboard = () => {
             title="Pending"
             content={stats.bookings}
           >
+          </Card>
+
+          <Card
           </Card>
 
           <Card
