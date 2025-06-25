@@ -64,6 +64,8 @@ input {
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #89343B;
+
 }
 
 .greeting-section h1 {
