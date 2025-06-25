@@ -4,7 +4,7 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import SearchIcon from '@mui/icons-material/Search';
 import "../Pages/Styles/Header.css";
 
-export default function Header({ tutorName = "Tutor" }) {
+export default function Header({ title }) {
   return (
     <AppBar position="fixed" color="default" elevation={1} className="custom-header">
       <Toolbar className="header-toolbar">
@@ -12,7 +12,7 @@ export default function Header({ tutorName = "Tutor" }) {
           <div className="navbar-logo-circle">
             <span className="logo-circle-text">W</span>
           </div>
-          <Typography variant="h6" className="navbar-title">WILDTEACH</Typography>
+          <Typography variant="h6" className="navbar-title">{title}</Typography>
         </div>
 
         <div className="navbar-right-group">

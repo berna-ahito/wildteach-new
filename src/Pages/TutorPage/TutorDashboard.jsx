@@ -32,7 +32,7 @@ const TutorDashboard = () => {
       <Sidebar menuItems={menuTutor(navigate)} />
 
       <div className="content">
-        <Header tutorName={tutorName} /> {/* ✅ Merged Header */}
+        <Header tutorName={tutorName} /> 
 
         <header className="greeting-section">
           <div className="greeting-avatar">

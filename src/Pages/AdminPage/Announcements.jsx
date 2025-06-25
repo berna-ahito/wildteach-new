@@ -9,7 +9,7 @@ export default function Announcements() {
 
   return (
     <>
-      <Header title="WildTeach" />
+      <Header title="ANNOUNCEMENTS" />
       <Sidebar menuItems={menuItems} />
       <div style={{ marginTop: '-80px', paddingRight: '370px' }}>
         <h1>Announcements</h1>
