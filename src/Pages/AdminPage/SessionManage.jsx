@@ -4,7 +4,6 @@ import Header from '../../Components/Header';
 import { useNavigate } from 'react-router-dom';
 import getAdminMenu from './Routes/menuAdmin';
 import Card from '../../Components/Card';
-
 import bookingData from '../../Data/Booking';
 
 import {
@@ -12,32 +11,37 @@ import {
   TableHead, TableRow, Paper, Typography, Chip
 } from '@mui/material';
 
+import '../Styles/TutorPage.css';
+
 export default function ManageUsers() {
   const navigate = useNavigate();
   const menuItems = getAdminMenu(navigate);
 
   return (
-    <>
-      <Header title="WildTeach" />
+    <div className="tutor-dashboard bright-theme">
       <Sidebar menuItems={menuItems} />
-      <div style={{ marginTop: '420px', paddingRight: '10px' , marginBottom: '40px'  }}>
-        <h1>Session Management</h1>
-        <div style={{ display: 'flex',flexWrap: 'wrap', marginBottom: '20px' }}>
-          <Card
-            title="Active Sessions"
-            content="4"
-            style={{ width: '200px', height: '120px', margin: '0 16px' }}/>
-          <Card
-            title="Pending Bookings"
-            content="20"
-            style={{ width: '200px', height: '120px', margin: '0 16px' }}/>
-          <Card
-            title="Total Sessions"
-            content="24"
-            style={{ width: '200px', height: '120px', margin: '0 16px' }}/>
+      <div className="content">
+        <Header title="WildTeach" />
+        <h1 style={{ marginBottom: '32px' }}>Session Management</h1>
+
+        {/* Stat Cards */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '16px', marginBottom: '24px' }}>
+          <Card title="Active Sessions" content="4" className="stat-card" style={{ width: '220px', height: '120px' }} />
+          <Card title="Pending Bookings" content="20" className="stat-card" style={{ width: '220px', height: '120px' }} />
+          <Card title="Total Sessions" content="24" className="stat-card" style={{ width: '220px', height: '120px' }} />
         </div>
-        <TableContainer component={Paper} sx={{ mt: 2, width: '100%' }}>
-          <Table sx={{ minWidth: 1400 }} aria-label="session table">
+
+        {/* Scrollable Table */}
+        <TableContainer
+          component={Paper}
+          sx={{
+            maxHeight: '500px',     // scroll vertically if too many rows
+            overflowY: 'auto',
+            overflowX: 'auto',
+            marginBottom: 4,
+          }}
+        >
+          <Table stickyHeader sx={{ minWidth: 1000 }} aria-label="session table">
             <TableHead>
               <TableRow>
                 <TableCell><b>Booking ID</b></TableCell>
@@ -72,8 +76,8 @@ export default function ManageUsers() {
                           session.status === 'Accepted'
                             ? 'success'
                             : session.status === 'Pending'
-                            ? 'warning'
-                            : 'error'
+                              ? 'warning'
+                              : 'error'
                         }
                         variant="outlined"
                       />
@@ -85,6 +89,6 @@ export default function ManageUsers() {
           </Table>
         </TableContainer>
       </div>
-    </>
+    </div>
   );
 }
