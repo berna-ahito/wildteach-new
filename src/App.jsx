@@ -13,8 +13,10 @@ import SessionManage from './Pages/AdminPage/SessionManage';
 import Announcements from './Pages/AdminPage/Announcements';
 import Settings from './Pages/AdminPage/Settings';
 
-// Students pages
+// Tutee pages
 import MyBookings from './Pages/TuteePage/MyBookings';
+// import Profile from './Pages/TuteePage/Profile';
+import FindTutor from './Pages/TuteePage/FindTutor';
 
 
 function App() {
@@ -39,9 +41,11 @@ function App() {
         <Route path="/announcements" element={<Announcements />} />
         <Route path="/settings" element={<Settings />} />
 
-        {/* Student Routes */}
+        {/* Tutee Routes */}
         <Route path="/my-bookings" element={<MyBookings />} />
-        
+        {/* <Route path="/profile" element={<Profile />} /> */}
+        <Route path="/findTutor" element={<FindTutor />} />
+        {/* <Route path="/settings" element={<Settings />} /> */}
 
       </Routes>
     </Router>
