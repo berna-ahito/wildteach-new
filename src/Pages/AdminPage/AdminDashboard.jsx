@@ -1,8 +1,8 @@
 import React from 'react';
 import Sidebar from '../../Components/Sidebar';
 import Header from '../../Components/Header';
-import getAdminMenu from './Routes/menuAdmin';
-import Card from '../../Components/Card'; 
+import getAdminMenu from "../../RoutesConfig/menuAdmin";
+import Card from "../../Components/Shared/Card"; 
 import { useNavigate } from 'react-router-dom';  
 import GroupIcon from '@mui/icons-material/Group';
 import SchoolIcon from '@mui/icons-material/School';

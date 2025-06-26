@@ -9,16 +9,17 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import LogoutDialog from './Logout';
 import { useNavigate } from 'react-router-dom';
+import tutorMenu from "../RoutesConfig/MenuTutor";
+import adminMenu from "../RoutesConfig/menuAdmin";
 
-export default function Sidebar({ menuItems = [] }) {
+export default function Sidebar({ role = 'tutor' }) {
   const [open, setOpen] = useState(false);
   const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
   const navigate = useNavigate();
 
-  const handleIconClick = () => {
-    setOpen((prev) => !prev);
-  };
+  const menuItems = role === 'admin' ? adminMenu(navigate) : tutorMenu(navigate);
 
+  const handleIconClick = () => setOpen(prev => !prev);
   const handleLogoutConfirm = () => {
     localStorage.clear();
     navigate('/login');
@@ -26,15 +27,7 @@ export default function Sidebar({ menuItems = [] }) {
 
   return (
     <>
-      {/* Stylish Icon Button */}
-      <div
-        style={{
-          position: 'fixed',
-          top: 16,
-          left: 20,
-          zIndex: 1301,
-        }}
-      >
+      <div style={{ position: 'fixed', top: 16, left: 20, zIndex: 1301 }}>
         <IconButton
           aria-label="open drawer"
           onClick={handleIconClick}
@@ -58,7 +51,6 @@ export default function Sidebar({ menuItems = [] }) {
         </IconButton>
       </div>
 
-      {/* Drawer */}
       <SwipeableDrawer
         anchor="left"
         open={open}
@@ -79,11 +71,8 @@ export default function Sidebar({ menuItems = [] }) {
               button
               key={idx}
               onClick={() => {
-                if (item.text === 'Logout') {
-                  setLogoutDialogOpen(true);
-                } else {
-                  item.onClick?.();
-                }
+                if (item.text === 'Logout') setLogoutDialogOpen(true);
+                else item.onClick?.();
                 setOpen(false);
               }}
               sx={{
@@ -107,7 +96,6 @@ export default function Sidebar({ menuItems = [] }) {
         </List>
       </SwipeableDrawer>
 
-      {/* Logout Dialog */}
       <LogoutDialog
         open={logoutDialogOpen}
         onClose={() => setLogoutDialogOpen(false)}

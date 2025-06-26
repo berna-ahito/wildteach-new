@@ -1,8 +1,8 @@
 import Sidebar from '../../Components/Sidebar';
 import Header from '../../Components/Header';
-import getAdminMenu from './Routes/menuAdmin';
+import getAdminMenu from "../../RoutesConfig/menuAdmin";
 import { useNavigate } from 'react-router-dom';
-import Card from '../../Components/Card';
+import Card from "../../Components/Shared/Card"; 
 import '../Styles/TutorPage.css'; 
 
 export default function Announcements() {

@@ -2,8 +2,8 @@ import React from 'react';
 import Sidebar from '../../Components/Sidebar';
 import Header from '../../Components/Header';
 import { useNavigate } from 'react-router-dom';
-import getAdminMenu from './Routes/menuAdmin';
-import Card from '../../Components/Card';
+import getAdminMenu from "../../RoutesConfig/menuAdmin";
+import Card from "../../Components/Shared/Card"; 
 import bookingData from '../../Data/Booking';
 
 import {

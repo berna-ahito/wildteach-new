@@ -1,4 +1,4 @@
-export default (navigate) => [
+const menuAdmin = (navigate) => [
   { text: "Dashboard", onClick: () => navigate('/adminDashboard') },
   { text: "Manage Users", onClick: () => navigate('/manageUsers') },
   { text: "Session Manage", onClick: () => navigate('/sessionManage') },
@@ -7,8 +7,9 @@ export default (navigate) => [
   {
     text: "Logout",
     onClick: () => {
-        navigate('/login');
-      
+      navigate('/login');
     }
   }
 ];
+
+export default menuAdmin;

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Sidebar from '../../Components/Sidebar';
 import Header from '../../Components/Header';
 import { useNavigate } from 'react-router-dom';
-import getAdminMenu from './Routes/menuAdmin';
+import getAdminMenu from "../../RoutesConfig/menuAdmin";
 import { Button, ButtonGroup } from '@mui/material';
 
 import UserTable from '../../Components/Table'; 

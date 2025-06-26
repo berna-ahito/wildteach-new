@@ -1,29 +1,18 @@
-// MODIFIED CODE | 06-24-25
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Sidebar from '../../Components/Sidebar';
 import Header from '../../Components/Header';
-import Card from '../../Components/Card';
-import menuTutee from './Routes/MenuTutee';
+import Card from "../../Components/Shared/Card"; 
+import menuTutee from '../../RoutesConfig/MenuTutee';
 import { Typography, Divider, Button } from '@mui/material';
 import '../Styles/TuteePage.css';
-
-const menuItems = [
-  { text: 'Home', onClick: () => window.location.href = '/tuteeDashboard' },
-  { text: 'Find Tutor', onClick: () => window.location.href = '/findTutor' },
-  { text: 'My Bookings', onClick: () => window.location.href = '/my-bookings' },
-  { text: 'Profile', onClick: () => window.location.href = '/profile' },
-  { text: 'Contact Us', onClick: () => window.location.href = '/contactUs' },
-  { text: 'Settings', onClick: () => window.location.href = '/settings' },
-  { text: 'Logout' },
-];
 
 export default function TuteeDashboard() {
   const navigate = useNavigate();
 
   return (
     <div className="tutee-dashboard bright-theme">
-      <Sidebar menuItems={menuItems} />
+      <Sidebar menuItems={menuTutee(navigate)} />
 
       <div className="tutee-content">
         <Header title="Tutee Dashboard" />

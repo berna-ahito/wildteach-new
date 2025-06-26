@@ -15,6 +15,11 @@
     "@mui/icons-material": "^7.1.1",
     "@mui/material": "^7.1.2",
     "axios": "^1.10.0",
+    "bcrypt": "^6.0.0",
+    "better-sqlite3": "^12.1.1",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.6.2"
@@ -28,6 +33,20 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^16.0.0",
+    "nodeman": "^1.1.2",
     "vite": "^6.3.5"
-  }
+  },
+  "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",
+  "main": "eslint.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Nagazta/react-wildteach.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Nagazta/react-wildteach/issues"
+  },
+  "homepage": "https://github.com/Nagazta/react-wildteach#readme"
 }

@@ -1,8 +1,4 @@
-
-
-
-
-export default function Card({ icon,title, content, children, className = '', style = {} }) {
+export default function Card({ icon, title, content, children, className = '', style = {} }) {
   return (
     <div className={className} style={style}>
       {icon}
