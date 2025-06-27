@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import Sidebar from '../../Components/Sidebar';
-import Header from '../../Components/Header';
+import Sidebar from '../../Components/Shared/Sidebar';
+import Header from '../../Components/Shared/Header';
 import { useNavigate } from 'react-router-dom';
 import getAdminMenu from "../../RoutesConfig/menuAdmin";
 import { Button, ButtonGroup } from '@mui/material';
 
-import UserTable from '../../Components/Table'; 
+import UserTable from '../../Components/Shared/Table'; 
 import students from '../../Data/Student';   
 
 import '../Styles/TutorPage.css'; // ✅ Make sure it's imported

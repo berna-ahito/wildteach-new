@@ -1,5 +1,5 @@
-import Sidebar from '../../Components/Sidebar';
-import Header from '../../Components/Header';
+import Sidebar from '../../Components/Shared/Sidebar';
+import Header from '../../Components/Shared/Header';
 import getAdminMenu from "../../RoutesConfig/menuAdmin";
 import { useNavigate } from 'react-router-dom';
 import Card from "../../Components/Shared/Card"; 

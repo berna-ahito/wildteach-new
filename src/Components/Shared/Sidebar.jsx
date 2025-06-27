@@ -9,8 +9,8 @@ import {
 import MenuIcon from '@mui/icons-material/Menu';
 import LogoutDialog from './Logout';
 import { useNavigate } from 'react-router-dom';
-import tutorMenu from "../RoutesConfig/MenuTutor";
-import adminMenu from "../RoutesConfig/menuAdmin";
+import tutorMenu from "../../RoutesConfig/MenuTutor";
+import adminMenu from "../../RoutesConfig/menuAdmin";
 
 export default function Sidebar({ role = 'tutor' }) {
   const [open, setOpen] = useState(false);

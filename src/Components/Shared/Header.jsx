@@ -2,7 +2,7 @@ import React from 'react';
 import { AppBar, Toolbar, Typography, Badge, InputBase } from '@mui/material';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import SearchIcon from '@mui/icons-material/Search';
-import "../Pages/Styles/Header.css";
+import "../../Pages/Styles/Header.css";
 
 export default function Header({ title }) {
   return (

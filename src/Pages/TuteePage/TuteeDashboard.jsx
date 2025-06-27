@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import Sidebar from '../../Components/Sidebar';
-import Header from '../../Components/Header';
+import Sidebar from '../../Components/Shared/Sidebar';
+import Header from '../../Components/Shared/Header';
 import Card from "../../Components/Shared/Card"; 
 import menuTutee from '../../RoutesConfig/MenuTutee';
 import { Typography, Divider, Button } from '@mui/material';

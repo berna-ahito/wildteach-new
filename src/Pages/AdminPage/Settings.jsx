@@ -1,9 +1,9 @@
-import Sidebar from "../../Components/Sidebar";
-import Header from "../../Components/Header";
+import Sidebar from "../../Components/Shared/Sidebar";
+import Header from "../../Components/Shared/Header";
 import { useNavigate } from "react-router-dom";
 import getAdminMenu from "../../RoutesConfig/menuAdmin";
-import Card from "../../Components/Shared/Card"; // ✅ correct path
-import '../Styles/TutorPage.css'; // ✅ Use same styles for consistency
+import Card from "../../Components/Shared/Card"; 
+import '../Styles/TutorPage.css'; 
 
 export default function Settings() {
   const navigate = useNavigate();

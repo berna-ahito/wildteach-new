@@ -9,8 +9,8 @@ import {
   Paper,
 } from '@mui/material';
 
-import Header from '../../Components/Header';
-import Sidebar from '../../Components/Sidebar';
+import Header from '../../Components/Shared/Header';
+import Sidebar from '../../Components/Shared/Sidebar';
 import '../Styles/TuteePage.css';   // ← entire page’s CSS lives here
 
 const menuItems = [

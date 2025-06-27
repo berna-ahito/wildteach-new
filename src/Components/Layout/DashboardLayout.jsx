@@ -1,6 +1,6 @@
 import React from 'react';
-import Sidebar from '../Sidebar';
-import Header from '../Header';
+import Sidebar from '../Shared/Sidebar';
+import Header from '../Shared/Header';
 import { useNavigate } from 'react-router-dom';
 import menuTutor from '../../RoutesConfig/MenuTutor';
 import '../../Pages/Styles/TutorPage.css';

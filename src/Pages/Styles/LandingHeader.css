@@ -1,0 +1,43 @@
+.landing-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  padding: 25px 50px;
+  background-color: white;
+  border-bottom: 3px solid #5b2121;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1200;
+}
+
+.landing-logo {
+  font-weight: 800;
+  font-size: 30px;
+  color: #89343B;
+  font-family: 'Poppins', sans-serif;
+}
+
+.landing-nav {
+  display: flex;
+  gap: 32px;
+}
+
+.landing-nav a {
+  text-decoration: none;
+  color: #5b2121;
+  font-weight: bold;
+  padding-bottom: 5px;
+  transition: color 0.2s ease, border-bottom 0.2s ease;
+}
+
+.landing-nav a:hover {
+  color: #F8C400;
+}
+
+.landing-nav a.active {
+  color: #F8C400;
+  border-bottom: 2px solid #F8C400;
+}

@@ -1,16 +1,26 @@
 .custom-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
   background-color: white;
   border-bottom: 3px solid #f8c40033;
   z-index: 1200;
-  padding-top: 30px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
 }
 
+.header-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+}
+
+/* Left section (logo + title) */
 .navbar-left {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-left: 40px;
-  margin-top: -30px;
 }
 
 .navbar-logo-circle {
@@ -26,23 +36,20 @@
   font-size: 18px;
 }
 
+.logo-circle-text {
+  margin: 0;
+  padding: 0;
+  font-weight: bold;
+  font-size: 18px;
+}
+
 .navbar-title {
   font-weight: 800;
   font-size: 22px;
   color: #89343B;
 }
 
-/* NEW: wrapper that pushes contents to the right */
-.navbar-right-group {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  margin-left: auto;
-  margin-right: 40px;
-  margin-top: -30px;
-
-}
-
+/* Center: Search bar */
 .navbar-center {
   flex: none;
   display: flex;
@@ -51,7 +58,6 @@
   padding: 8px 16px;
   border-radius: 16px;
   box-shadow: inset 0 0 0 2px #f8c40044;
-  margin: 0; /* removed hard-coded margin */
 }
 
 .search-input {
@@ -62,15 +68,23 @@
   width: 100%;
 }
 
+/* Right section */
+.navbar-right-group {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-left: auto;
+}
+
 .navbar-icon {
   color: #89343B;
 }
 
 .navbar-right {
-  margin: 0; /* reset old margin */
+  margin: 0;
 }
 
 .notif-icon {
   font-size: 24px;
   color: #89343B;
-
+}
