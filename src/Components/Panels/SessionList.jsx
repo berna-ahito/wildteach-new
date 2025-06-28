@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Card from "../../Shared/Card"; 
-import '../../../Pages/Styles/TutorPage.css';
+import Card from "../Shared/Card"; 
+import '../../Pages/Styles/TutorPage.css';
 
 export default function SessionList({ sessions }) {
   const [editingIndex, setEditingIndex] = useState(null);

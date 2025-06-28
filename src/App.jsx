@@ -37,10 +37,10 @@ function App() {
 
         {/* Admin Routes */}
         <Route path="/adminDashboard" element={<AdminDashboard />} />
-        <Route path="/manageUsers" element={<ManageUsers />} />
-        <Route path="/sessionManage" element={<SessionManage />} />
-        <Route path="/announcements" element={<Announcements />} />
-        <Route path="/settings" element={<Settings />} />
+        <Route path="/admin/manageUsers" element={<ManageUsers />} />
+        <Route path="/admin/sessionManage" element={<SessionManage />} />
+        <Route path="/admin/announcements" element={<Announcements />} />
+        <Route path="/admin/settings" element={<Settings />} />
 
         {/* Tutee Routes */}
         <Route path="/tuteeDashboard" element={<TuteeDashboard />} />

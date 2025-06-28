@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import SessionList from '../Panels/SessionList';
+import SessionList from '../../Panels/SessionList';
 
 export default function TutorSessionData() {
   const [sessions] = useState([
