@@ -20,8 +20,13 @@ import Settings from './Pages/AdminPage/Settings';
 // Tutee pages
 import TuteeDashboard from './Pages/TuteePage/TuteeDashboard';
 import MyBookings from './Pages/TuteePage/MyBookings';
-import Profile from './Pages/TuteePage/ProfileTutee';
+import BookingPage from './Pages/TuteePage/BookingPage';
+import Profile from './Pages/TuteePage/Profile';
 import FindTutor from './Pages/TuteePage/FindTutor';
+import ContactSection from './Pages/TuteePage/ContactSection';
+import AboutSection from './Pages/TuteePage/AboutSection';
+import SettingsTutee from './Pages/TuteePage/SettingsTutee';
+
 
 
 function App() {
@@ -33,7 +38,7 @@ function App() {
         {/* Public Routes */}
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage setIsLoggedIn={setIsLoggedIn} />} />
-        <Route path= "/register" element= {<RegisterPage/>}/>
+        <Route path="/register" element={<RegisterPage />} />
 
         {/* Admin Routes */}
         <Route path="/adminDashboard" element={<AdminDashboard />} />
@@ -44,10 +49,13 @@ function App() {
 
         {/* Tutee Routes */}
         <Route path="/tuteeDashboard" element={<TuteeDashboard />} />
-        <Route path="/my-bookings" element={<MyBookings />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/findTutor" element={<FindTutor />} /> 
-        <Route path="/settings" element={<Settings />} />
+        <Route path="/tutee/my-bookings" element={<MyBookings />} />
+        <Route path="/tutee/profile" element={<Profile />} />
+        <Route path="/tutee/findTutor" element={<FindTutor />} />
+        <Route path="/book-tutor/:tutorId" element={<BookingPage />} />
+        <Route path="/tutee/contact-us" element={<ContactSection />} />
+       <Route path="/tutee/about-us" element={<AboutSection />} />
+        <Route path="/tutee/settings-tutee" element={<SettingsTutee />} />
 
         {/* Tutor Routes */}
         <Route path="/tutorDashboard" element={<TutorDashboard />} />

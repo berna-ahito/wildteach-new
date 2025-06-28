@@ -26,7 +26,7 @@
 .navbar-logo-circle {
   width: 36px;
   height: 36px;
-  background: linear-gradient(135deg, #F8C400, #89343B);
+  background: linear-gradient(135deg, #f8c400, #89343b);
   color: white;
   border-radius: 50%;
   display: flex;
@@ -34,6 +34,7 @@
   justify-content: center;
   font-weight: bold;
   font-size: 18px;
+  margin-left: 60px;
 }
 
 .logo-circle-text {
@@ -46,7 +47,7 @@
 .navbar-title {
   font-weight: 800;
   font-size: 22px;
-  color: #89343B;
+  color: #89343b;
 }
 
 /* Center: Search bar */
@@ -77,7 +78,7 @@
 }
 
 .navbar-icon {
-  color: #89343B;
+  color: #89343b;
 }
 
 .navbar-right {
@@ -86,5 +87,5 @@
 
 .notif-icon {
   font-size: 24px;
-  color: #89343B;
+  color: #89343b;
 }

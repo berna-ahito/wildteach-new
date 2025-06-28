@@ -11,13 +11,21 @@ import LogoutDialog from './Logout';
 import { useNavigate } from 'react-router-dom';
 import tutorMenu from "../../RoutesConfig/MenuTutor";
 import adminMenu from "../../RoutesConfig/menuAdmin";
+import tuteeMenu from "../../RoutesConfig/MenuTutee"; 
 
-export default function Sidebar({ role = 'tutor' }) {
+export default function Sidebar(props) {
+  const { role = 'tutor', menuItems: passedMenuItems } = props;
   const [open, setOpen] = useState(false);
   const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
   const navigate = useNavigate();
 
-  const menuItems = role === 'admin' ? adminMenu(navigate) : tutorMenu(navigate);
+  const menuItems = passedMenuItems || (
+    role === 'admin'
+      ? adminMenu(navigate)
+      : role === 'tutee'
+      ? tuteeMenu(navigate)
+      : tutorMenu(navigate)
+  );
 
   const handleIconClick = () => setOpen(prev => !prev);
   const handleLogoutConfirm = () => {
@@ -27,7 +35,7 @@ export default function Sidebar({ role = 'tutor' }) {
 
   return (
     <>
-      <div style={{ position: 'fixed', top: 16, left: 20, zIndex: 1301 }}>
+      <div style={{ position: 'fixed', top: 0, left: 20, zIndex: 1301 }}>
         <IconButton
           aria-label="open drawer"
           onClick={handleIconClick}
