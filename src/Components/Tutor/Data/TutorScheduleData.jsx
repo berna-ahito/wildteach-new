@@ -1,5 +1,5 @@
 import React from 'react';
-import SchedulePanel from '../Panels/SchedulePanel';
+import SchedulePanel from '../../Panels/SchedulePanel';
 
 export default function TutorScheduleData() {
   const schedule = [
