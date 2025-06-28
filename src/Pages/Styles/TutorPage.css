@@ -1,12 +1,14 @@
-/* src/Pages/Styles/TutorPage.css */
 body,
-input,
-button {
+input
+ {
+  background: linear-gradient(to bottom, #fdf8f3, #f5eee9);
+
+}
+button{
   font-family: 'Poppins', sans-serif;
   color: #34251F;
 }
 
-/* Reset and base styles for fullscreen */
 * {
   margin: 0;
   padding: 0;
@@ -28,11 +30,12 @@ input {
   margin: 0;
   padding: 0;
 }
+.navbar-left{
+  margin-left: 50px;
+}
 
 .tutor-dashboard.bright-theme {
   display: flex;
-  height: 100vh;
-  background: linear-gradient(to bottom, #fdf8f3, #f5eee9);
   width: 80vw;
   overflow: hidden;
   background: linear-gradient(to bottom, #fdf8f3, #f5eee9);
@@ -42,18 +45,16 @@ input {
 
 .content {
   flex: 1;
-  padding: 100px 40px 40px 100px;
-  margin-top: 50px;
   overflow-x: hidden;
   overflow-y: auto;
   background-color: transparent;
   padding: 20px;
   overflow-y: auto;
-  background-color: transparent;
   height: 100vh;
   display: flex;
   flex-direction: column;
   margin-top: 150px;
+  
 }
 
 /* Greeting Section */
@@ -68,7 +69,6 @@ input {
   display: flex;
   align-items: center;
   gap: 15px;
-  margin-bottom: 40px;
 
 }
 
@@ -294,7 +294,14 @@ input {
   background: #6d2a30;
 }
 
-/* Avatar Circle */
+.panel-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #f4e3db;
+}
 .avatar-circle {
   width: 34px;
   height: 34px;

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import DashboardLayout from '../../Components/Layout/DashboardLayout';
 import TutorStatData from '../../Components/Tutor/Data/TutorStatData';
 import TutorScheduleData from '../../Components/Tutor/Data/TutorScheduleData';
@@ -6,8 +7,9 @@ import TutorRecentActivity from '../../Components/Tutor/Data/TutorRecentActivity
 import WavingHandIcon from '@mui/icons-material/WavingHand';
 
 export default function TutorDashboard() {
+  const navigate = useNavigate();
   return (
-    <DashboardLayout title="WILDTEACH">
+    <DashboardLayout title="WILDTEACH" role='tutor'>
       <header className="greeting-section">
         <div className="greeting-avatar">
           <WavingHandIcon fontSize="large" />

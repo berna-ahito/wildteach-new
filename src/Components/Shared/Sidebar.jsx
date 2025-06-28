@@ -18,7 +18,7 @@ export default function Sidebar(props) {
   const [open, setOpen] = useState(false);
   const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
   const navigate = useNavigate();
-
+  
   const menuItems = passedMenuItems || (
     role === 'admin'
       ? adminMenu(navigate)

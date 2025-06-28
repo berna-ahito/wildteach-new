@@ -1,12 +1,16 @@
 import React from "react";
-import ProfileInfo from "../../Components/Tutor/Panels/ProfileInfo";
-import PersonalInfo from "../../Components/Tutor/Panels/PersonalInfo";
-import SkillsSubjects from "../../Components/Tutor/Panels/SkillsSubjects";
-import AddressInfo from "../../Components/Tutor/Panels/AddressInfo";
+import menuTutor from "../../RoutesConfig/MenuTutor";
+import Sidebar from "../../Components/Shared/Sidebar";
+import { useNavigate } from "react-router-dom";
+import ProfileInfo from "../../Components/Panels/ProfileInfo";
+import PersonalInfo from "../../Components/Panels/PersonalInfo";
+import SkillsSubjects from "../../Components/Panels/SkillsSubjects";
+import AddressInfo from "../../Components/Panels/AddressInfo";
 import DashboardLayout from "../../Components/Layout/DashboardLayout";
 import "../../Pages/Styles/TutorPage.css";
 
 export default function Profile() {
+  const navigate = useNavigate();
   const profile = {
     fullname: "Berna Ahito",
     email: "berna@cit.edu",
@@ -21,7 +25,7 @@ export default function Profile() {
   };
 
   return (
-    <DashboardLayout title="Profile">
+    <DashboardLayout title="Profile" role="tutor">
       <div className="profile-container">
         <h2 className="profile-title">Profile</h2>
         <ProfileInfo profile={profile} />
