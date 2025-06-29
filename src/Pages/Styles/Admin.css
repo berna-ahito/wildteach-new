@@ -1,12 +1,12 @@
-
 .manage-users-header {
   display: flex;
   align-items: center;
   margin-bottom: 24px;
   gap: 16px;
 }
-.Page{
-    margin-top: -20px ;
+
+.Page {
+  margin-top: -20px;
 }
 
 .page-title {
@@ -36,6 +36,29 @@
   text-transform: none;
 }
 
+.toggle-btn-settings {
+  background-color: #fffaf5;
+  color: #89343B;
+  border: 1px solid #f5eee9;
+  font-weight: 600;
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  padding: 14px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  text-transform: none;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.settings-section {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  /* ⬅️ More vertical space between inputs */
+}
+
 .toggle-btn:hover {
   background-color: #ffe066;
 }
@@ -47,8 +70,8 @@
 
 .admin-manage-table {
   margin-top: 20px;
-  margin-bottom: 40px; 
-  max-height: calc(100vh - 250px); 
+  margin-bottom: 40px;
+  max-height: calc(100vh - 250px);
   overflow-y: auto;
   padding-right: 10px;
   background-color: #fffdfb;
@@ -59,7 +82,7 @@
 
 .admin-manage-table table {
   width: 100%;
-  min-width: 600px; 
+  min-width: 600px;
   border-collapse: collapse;
 }
 
@@ -88,14 +111,77 @@
 
 .status-btn.active {
   background-color: #4CAF50 !important;
-  color: #ffffff!important;    
+  color: #ffffff !important;
 }
 
 .status-btn.inactive {
   background-color: #89343B !important;
   color: #ffffff !important;
 }
+
 .status-btn.pending {
   background-color: #fff3c4 !important;
   color: #a67c00 !important;
+}
+
+/* Add Announcement + Card Styling */
+.add-announcement-card {
+  width: 220px;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  font-weight: bold;
+  background-color: #fffaf5;
+  border: 1px dashed #f5eee9;
+  cursor: pointer;
+  border-radius: 12px;
+  color: #89343B;
+  transition: background-color 0.2s ease;
+}
+
+/* Form inside Dialog */
+.add-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding-bottom: 16px;
+}
+
+.add-form .submit-btn {
+  align-self: flex-end;
+}
+
+.input-card-wrapper {
+  background-color: white;
+  border-top: 4px solid #89343B;
+  background-color: white;
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  width: 100%;
+  max-width: 450px;
+  margin-left: -40px;
+}
+
+.input-card-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #89343B;
+  margin-bottom: 16px;
+}
+
+.input-card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.forms {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 20px 40px;
+  gap: 40px;
 }

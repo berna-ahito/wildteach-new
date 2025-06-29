@@ -1,10 +1,10 @@
 body,
-input
- {
+input {
   background: linear-gradient(to bottom, #fdf8f3, #f5eee9);
 
 }
-button{
+
+button {
   font-family: 'Poppins', sans-serif;
   color: #34251F;
 }
@@ -30,7 +30,8 @@ input {
   margin: 0;
   padding: 0;
 }
-.navbar-left{
+
+.navbar-left {
   margin-left: 50px;
 }
 
@@ -54,7 +55,7 @@ input {
   display: flex;
   flex-direction: column;
   margin-top: 150px;
-  
+
 }
 
 /* Greeting Section */
@@ -302,6 +303,7 @@ input {
   padding: 10px 0;
   border-bottom: 1px solid #f4e3db;
 }
+
 .avatar-circle {
   width: 34px;
   height: 34px;
@@ -490,7 +492,7 @@ input {
   border: 1px solid #ccc;
   margin-bottom: 20px;
   padding: 20px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .profile-header {
