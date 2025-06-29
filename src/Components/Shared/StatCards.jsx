@@ -7,7 +7,7 @@ export default function StatCards({ stats }) {
       {stats.map((item, index) => (
         <Card
           key={index}
-          icon={<item.icon className="stat-icon" />}
+          icon={item.icon?<item.icon className="stat-icon" /> : null}
           className={`stat-card ${item.color}`}
           title={item.label}
           content={item.value}
