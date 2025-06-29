@@ -6,17 +6,26 @@ export default function LandingHeader({ activePage, setActivePage }) {
 
   return (
     <header className="landing-header">
-      <div className="landing-logo">WILDTEACH</div>
-      <nav className="landing-nav">
+      <div className="brand-zone">
+        <div className="logo-badge">
+          <div className="logo-inner">W</div>
+        </div>
+        <div className="brand-title">
+          <span className="wild-text">WILD</span>
+          <span className="teach-text">TEACH</span>
+          <div className="brand-underline"></div>
+        </div>
+      </div>
+      
+      <nav className="navigation-bar">
         {pages.map((page) => (
-          <a
+          <button
             key={page}
-            href="#"
             onClick={() => setActivePage && setActivePage(page)}
-            className={activePage === page ? "active" : ""}
+            className={`nav-btn ${activePage === page ? "nav-active" : ""}`}
           >
-            {page}
-          </a>
+            <span>{page}</span>
+          </button>
         ))}
       </nav>
     </header>

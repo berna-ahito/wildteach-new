@@ -3,41 +3,164 @@
   top: 0;
   left: 0;
   width: 100vw;
-  padding: 25px 50px;
-  background-color: white;
-  border-bottom: 3px solid #5b2121;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  height: 100px;
+  padding: 18px 45px;
+  background: linear-gradient(145deg, #ffffff 0%, #fdfcfa 100%);
+  border-bottom: 3px solid transparent;
+  border-image: linear-gradient(90deg, #e8b547, #7a3034, #e8b547) 1;
+  box-shadow: 0 10px 40px rgba(232, 181, 71, 0.12);
   display: flex;
   justify-content: space-between;
   align-items: center;
   z-index: 1200;
 }
 
-.landing-logo {
-  font-weight: 800;
-  font-size: 30px;
-  color: #89343B;
-  font-family: 'Poppins', sans-serif;
-}
-
-.landing-nav {
+.brand-zone {
   display: flex;
-  gap: 32px;
+  align-items: center;
+  gap: 18px;
 }
 
-.landing-nav a {
-  text-decoration: none;
-  color: #5b2121;
-  font-weight: bold;
-  padding-bottom: 5px;
-  transition: color 0.2s ease, border-bottom 0.2s ease;
+.logo-badge {
+  position: relative;
+  width: 55px;
+  height: 55px;
+  background: conic-gradient(from 45deg, #e8b547, #7a3034, #e8b547, #7a3034, #e8b547);
+  border-radius: 50%;
+  padding: 3px;
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-.landing-nav a:hover {
-  color: #F8C400;
+.logo-badge:hover {
+  transform: rotate(360deg) scale(1.1);
+  box-shadow: 0 15px 35px rgba(232, 181, 71, 0.25);
 }
 
-.landing-nav a.active {
-  color: #F8C400;
-  border-bottom: 2px solid #F8C400;
+.logo-inner {
+  width: 100%;
+  height: 100%;
+  background: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  font-size: 24px;
+  color: #7a3034;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.logo-badge:hover .logo-inner {
+  color: #cd9f49;
+  transform: rotate(-360deg);
+}
+
+.brand-title {
+  position: relative;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 800;
+  font-size: 32px;
+  line-height: 1;
+}
+
+.wild-text {
+  color: #5a2025;
+  margin-right: 2px;
+  transition: all 0.3s ease;
+}
+
+.teach-text {
+  background: linear-gradient(135deg, #e8b547 0%, #d4a145 50%, #c19843 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.brand-underline {
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #e8b547, transparent);
+  border-radius: 2px;
+  transition: width 0.6s ease;
+}
+
+.brand-title:hover .brand-underline {
+  width: 90%;
+}
+
+.brand-title:hover .wild-text {
+  transform: translateY(-2px);
+}
+
+.brand-title:hover .teach-text {
+  transform: translateY(-2px);
+  filter: drop-shadow(0 4px 8px rgba(232, 181, 71, 0.2));
+}
+
+.navigation-bar {
+  display: flex;
+  gap: 8px;
+  background: rgba(90, 32, 37, 0.04);
+  padding: 10px 14px;
+  border-radius: 50px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(232, 181, 71, 0.15);
+}
+
+.nav-btn {
+  position: relative;
+  background: none;
+  border: none;
+  color: #5a2025;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 12px 22px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-family: 'Poppins', sans-serif;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.nav-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: linear-gradient(135deg, rgba(232, 181, 71, 0.15), rgba(232, 181, 71, 0.08));
+  border-radius: 50%;
+  transition: all 0.4s ease;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
+.nav-btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.nav-btn:hover {
+  color: #7a3034;
+  background: rgba(232, 181, 71, 0.12);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(232, 181, 71, 0.18);
+}
+
+.nav-btn.nav-active {
+  background: linear-gradient(135deg, #7a3034, #863337);
+  color: white;
+  box-shadow: 0 8px 25px rgba(122, 48, 52, 0.3);
+  transform: translateY(-2px);
+}
+
+.nav-btn.nav-active::before {
+  display: none;
 }
