@@ -1,4 +1,5 @@
-body, html {
+body,
+html {
   height: 100%;
   margin: 0;
   display: flex;
@@ -6,7 +7,7 @@ body, html {
   justify-content: center;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   padding: 20px 0;
-  padding-top: 100px; 
+  padding-top: 100px;
 }
 
 /* ===== Background Blur Image ===== */
@@ -16,7 +17,8 @@ body, html {
   background-position: center;
   background-repeat: no-repeat;
   position: fixed;
-  inset: 0; /* replaces top/left/right/bottom: 0 */
+  inset: 0;
+  /* replaces top/left/right/bottom: 0 */
   z-index: -1;
   filter: blur(8px);
 }
@@ -31,18 +33,21 @@ body, html {
   border-radius: 10px;
   text-align: left;
   box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.3);
-  margin-top: 120px; /* ✅ Push below fixed header */
+  margin-top: 120px;
+  /* ✅ Push below fixed header */
   min-width: 120px;
   max-width: 900px;
   max-width: 95vw;
   max-height: 90vh;
   overflow-y: auto;
-  z-index: 1; /* ✅ Stack above background */
+  margin-bottom: 30px;
+  z-index: 1;
+  /* ✅ Stack above background */
 }
 
 .login-container h1 {
   margin: 0 0 30px 0;
-  color: #89343B;
+  color: #F8C400;
   font-size: 32px;
   font-weight: 700;
   text-align: center;
@@ -59,10 +64,11 @@ body, html {
 
 /* ===== Labels ===== */
 .field-label {
-  color: #89343B;
+  color: #F8C400;
   font-size: 16px;
   font-weight: 600;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
+  margin-top: 10px;
   display: block;
   text-align: left;
 }
@@ -121,6 +127,7 @@ body, html {
   grid-template-columns: 1fr 1fr;
   gap: 16px;
   margin-top: 8px;
+  margin-bottom: 80px;
 }
 
 .single-input {
@@ -239,6 +246,17 @@ body, html {
   text-align: center;
 }
 
+.register-link {
+  color: #F8C400;
+  cursor: pointer;
+}
+
+.register-link :hover {
+  font-weight: bold;
+  text-decoration: underline;
+  transition: 0.5s;
+}
+
 /* ===== Mobile Responsive Adjustments ===== */
 @media (max-width: 768px) {
   .login-container {
@@ -278,7 +296,9 @@ body, html {
 }
 
 @media (max-width: 480px) {
-  body, html {
+
+  body,
+  html {
     padding: 10px 0;
   }
 
