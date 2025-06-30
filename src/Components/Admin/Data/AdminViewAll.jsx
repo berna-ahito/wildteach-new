@@ -38,7 +38,6 @@ export default function AdminViewAll({ title = "All Announcements" }) {
   return (
     <div className="Page">
       <div className="manage-users-header">
-        <h2>{title}</h2>
       </div>
 
       <div className="admin-manage-table">
