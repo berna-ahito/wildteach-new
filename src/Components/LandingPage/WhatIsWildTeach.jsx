@@ -1,7 +1,10 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { FaUserFriends, FaMoneyBillWave, FaUniversity } from "react-icons/fa";
 
 export default function WhatIsWildTeach() {
+  const navigate = useNavigate(); // ✅ Add navigate
+
   return (
     <div className="wildteach-fullscreen">
       <div className="wildteach-content">
@@ -24,17 +27,20 @@ export default function WhatIsWildTeach() {
             </p>
           </div>
 
-            <div className="wildteach-description">
-              <p>At WildTeach, learning feels less like a chore and more like a team effort. 
-                We match you with fellow students who truly get the subject, 
-                so you can ask questions, learn faster, and feel supported every step of the way.</p>
-                
-              <p className="highlight-text">
-                Whether you're getting help or giving it, everything happens right on campus making learning easier, 
-                more meaningful, and even more fun!
-                </p>
-            </div>
+          <div className="wildteach-description">
+            <p>
+              At WildTeach, learning feels less like a chore and more like a
+              team effort. We match you with fellow students who truly get the
+              subject, so you can ask questions, learn faster, and feel
+              supported every step of the way.
+            </p>
 
+            <p className="highlight-text">
+              Whether you're getting help or giving it, everything happens right
+              on campus making learning easier, more meaningful, and even more
+              fun!
+            </p>
+          </div>
 
           <div className="features-showcase">
             <div className="feature-card">
@@ -63,7 +69,7 @@ export default function WhatIsWildTeach() {
           <div className="cta-section">
             <h2 className="cta-title">Join the Movement Today!</h2>
             <p className="cta-subtitle">Start Your Learning Journey</p>
-            <button className="cta-btn">
+            <button className="cta-btn" onClick={() => navigate("/login")}>
               <span>BE PART OF IT</span>
               <div className="btn-shine"></div>
             </button>
