@@ -1,22 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "../../Pages/Styles/LandingHeader.css";
 
-export default function LandingHeader({ activePage, setActivePage }) {
+export default function LandingHeader() {
+  const navigate = useNavigate();
   const pages = ["Home", "What is WildTeach?", "About Us", "Contact Us"];
+  const [activePage, setActivePage] = useState("Home");
+
+  const handleNavigate = (page) => {
+    setActivePage(page);
+    navigate("/", { state: { scrollTo: page } });
+  };
 
   return (
     <header className="landing-header">
-      <div className="landing-logo">WILDTEACH</div>
-      <nav className="landing-nav">
+      <div className="brand-zone">
+        <div className="logo-badge">
+          <div className="logo-inner">W</div>
+        </div>
+        <div className="brand-title">
+          <span className="wild-text">WILD</span>
+          <span className="teach-text">TEACH</span>
+          <div className="brand-underline"></div>
+        </div>
+      </div>
+
+      <nav className="navigation-bar">
         {pages.map((page) => (
-          <a
+          <button
             key={page}
-            href="#"
-            onClick={() => setActivePage && setActivePage(page)}
-            className={activePage === page ? "active" : ""}
+            onClick={() => handleNavigate(page)}
+            className={`nav-btn ${activePage === page ? "nav-active" : ""}`}
           >
-            {page}
-          </a>
+            <span>{page}</span>
+          </button>
         ))}
       </nav>
     </header>

@@ -8,6 +8,7 @@ import RegisterPage from './Pages/RegisterPage';
 import TutorDashboard from './Pages/TutorPage/TutorDashboard';
 import Sessions from './Pages/TutorPage/Sessions';
 import ProfileTutor from './Pages/TutorPage/Profile';
+import TutorSettings from './Pages/TutorPage/Settings';
 
 
 // Admin pages
@@ -15,7 +16,7 @@ import AdminDashboard from './Pages/AdminPage/AdminDashboard';
 import ManageUsers from './Pages/AdminPage/ManageUsers';
 import SessionManage from './Pages/AdminPage/SessionManage';
 import Announcements from './Pages/AdminPage/Announcements';
-import Settings from './Pages/AdminPage/Settings';
+import AdminSettings from './Pages/AdminPage/Settings';
 
 // Tutee pages
 import TuteeDashboard from './Pages/TuteePage/TuteeDashboard';
@@ -45,7 +46,7 @@ function App() {
         <Route path="/admin/manageUsers" element={<ManageUsers />} />
         <Route path="/admin/sessionManage" element={<SessionManage />} />
         <Route path="/admin/announcements" element={<Announcements />} />
-        <Route path="/admin/settings" element={<Settings />} />
+        <Route path="/admin/settings" element={<AdminSettings />} />
 
         {/* Tutee Routes */}
         <Route path="/tuteeDashboard" element={<TuteeDashboard />} />
@@ -62,6 +63,8 @@ function App() {
         <Route path="/tutor/home" element={<TutorDashboard />} />
         <Route path="/tutor/manageSessions" element={<Sessions />} />
         <Route path="/tutor/profile" element={<ProfileTutor />} />
+        <Route path="/tutor/settings" element={<TutorSettings />} />
+
 
       </Routes>
     </Router>

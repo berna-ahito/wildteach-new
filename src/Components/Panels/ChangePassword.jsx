@@ -1,21 +1,23 @@
 import React, { useState } from "react";
-import InputCards from "../Shared/InputCards"; // Make sure path is correct
+import InputCards from "../Shared/InputCards";
+import UserCredentials from "../Shared/Data/UserCredentials";
 import "../../Pages/Styles/Admin.css";
 
-export default function ChangePassword() {
-  const [email, setEmail] = useState("admin@example.com");
+export default function ChangePassword({ role = "admin" }) {
+  const [email, setEmail] = useState(""); // let UserCredentials handle fallback
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     if (newPassword !== confirmPassword) {
       alert("New passwords do not match.");
       return;
     }
 
-    alert("Password changed successfully!");
+    alert(`${role} password changed successfully!`);
     setCurrentPassword("");
     setNewPassword("");
     setConfirmPassword("");
@@ -24,14 +26,8 @@ export default function ChangePassword() {
   return (
     <InputCards title="Change Password">
       <form onSubmit={handleSubmit} className="settings-section">
-        <input
-          className="toggle-btn-settings"
-          type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          placeholder="Admin Email"
-          disabled
-        />
+        <UserCredentials role={role} email={email} setEmail={setEmail} />
+
         <input
           className="toggle-btn-settings"
           type="password"
@@ -56,7 +52,11 @@ export default function ChangePassword() {
           placeholder="Confirm New Password"
           required
         />
-        <button type="submit" className="toggle-btn active" style={{ alignSelf: "center" }}>
+        <button
+          type="submit"
+          className="toggle-btn active"
+          style={{ alignSelf: "center" }}
+        >
           Update Password
         </button>
       </form>
