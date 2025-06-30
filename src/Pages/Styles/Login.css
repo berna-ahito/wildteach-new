@@ -245,3 +245,25 @@ html {
     font-size: 14px;
   }
 }
+
+.highlight-red {
+  color: #7a3034;
+  font-weight: 800;
+}
+
+.highlight-gold {
+  color: #F8C400;
+  font-weight: 800;
+}
+
+.clickable {
+  color: #89343B;
+  text-decoration: underline;
+  cursor: pointer;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.clickable:hover {
+  color: #F8C400;
+}

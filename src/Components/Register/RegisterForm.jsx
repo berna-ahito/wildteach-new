@@ -55,20 +55,25 @@ export default function RegisterForm() {
 
   return (
     <div className="login-container register-container">
-      <h1>Create an Account</h1>
+      <h1>
+        <span className="highlight-red">Create</span>{" "}
+        <span className="highlight-gold">Account</span>
+      </h1>
 
       <form onSubmit={handleSubmit}>
         {/* Full Name */}
-        <label className="field-label">Full Name</label>
-        <div className="triple-input">
-          <input name="lastName" placeholder="Last Name" value={formData.lastName} onChange={handleChange} required />
-          <input name="firstName" placeholder="First Name" value={formData.firstName} onChange={handleChange} required />
-          <input name="middleName" placeholder="Middle Name (Optional)" value={formData.middleName} onChange={handleChange} />
+        <div className="form-section">
+          <label className="field-label">Full Name</label>
+          <div className="triple-input">
+            <input name="lastName" placeholder="Last Name" value={formData.lastName} onChange={handleChange} required />
+            <input name="firstName" placeholder="First Name" value={formData.firstName} onChange={handleChange} required />
+            <input name="middleName" placeholder="Middle Name (Optional)" value={formData.middleName} onChange={handleChange} />
+          </div>
         </div>
 
-        {/* Birthdate and Gender */}
-        <label className="field-label">Birth Date</label>
-        <div className="birth-gender-row">
+        {/* Birth Date */}
+        <div className="form-section">
+          <label className="field-label">Birth Date</label>
           <div className="birth-inputs">
             <select name="birthMonth" value={formData.birthMonth} onChange={handleChange} required>
               <option value="">Month</option>
@@ -92,52 +97,63 @@ export default function RegisterForm() {
               })}
             </select>
           </div>
+        </div>
 
-          <div className="gender-section">
-            <label className="field-label">Gender</label>
-            <select name="gender" value={formData.gender} onChange={handleChange} required>
-              <option value="">Select</option>
-              <option>Male</option>
-              <option>Female</option>
-              <option>Other</option>
-            </select>
-          </div>
+        {/* Gender */}
+        <div className="form-section">
+          <label className="field-label">Gender</label>
+          <select name="gender" value={formData.gender} onChange={handleChange} required>
+            <option value="">Select</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
         </div>
 
         {/* Contact Info */}
-        <label className="field-label">Contact Info</label>
-        <div className="double-input">
-          <input type="email" name="email" placeholder="you@example.com" value={formData.email} onChange={handleChange} required />
-          <input name="contactNumber" placeholder="63+ xxx xxx xxxx" value={formData.contactNumber} onChange={handleChange} required />
+        <div className="form-section">
+          <label className="field-label">Contact Info</label>
+          <div className="double-input">
+            <input type="email" name="email" placeholder="you@example.com" value={formData.email} onChange={handleChange} required />
+            <input name="contactNumber" placeholder="63+ xxx xxx xxxx" value={formData.contactNumber} onChange={handleChange} required />
+          </div>
         </div>
 
         {/* Address */}
-        <label className="field-label">Address</label>
-        <div className="triple-input">
-          <input name="town" placeholder="Town" value={formData.town} onChange={handleChange} required />
-          <input name="barangay" placeholder="Barangay" value={formData.barangay} onChange={handleChange} required />
-          <input name="houseNumber" placeholder="House No." value={formData.houseNumber} onChange={handleChange} required />
+        <div className="form-section">
+          <label className="field-label">Address</label>
+          <div className="triple-input">
+            <input name="town" placeholder="Town" value={formData.town} onChange={handleChange} required />
+            <input name="barangay" placeholder="Barangay" value={formData.barangay} onChange={handleChange} required />
+            <input name="houseNumber" placeholder="House No." value={formData.houseNumber} onChange={handleChange} required />
+          </div>
         </div>
 
-        {/* Role and Year Level */}
-        <label className="field-label">Role and Year</label>
-        <div className="role-year-row">
-          <select name="role" value={formData.role} onChange={handleChange} required>
-            <option value="">Select Role</option>
-            <option value="Tutee">Tutee</option>
-            <option value="Tutor">Tutor</option>
-          </select>
-          <input name="yearLevel" placeholder="e.g. 1" value={formData.yearLevel} onChange={handleChange} required />
+        {/* Role and Year */}
+        <div className="form-section">
+          <label className="field-label">Role and Year</label>
+          <div className="role-year-row">
+            <select name="role" value={formData.role} onChange={handleChange} required>
+              <option value="">Select Role</option>
+              <option value="Tutee">Tutee</option>
+              <option value="Tutor">Tutor</option>
+            </select>
+            <input name="yearLevel" placeholder="e.g. 1" value={formData.yearLevel} onChange={handleChange} required />
+          </div>
         </div>
 
         {/* Passwords */}
-        <label className="field-label">Password</label>
-        <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} required />
+        <div className="form-section">
+          <label className="field-label">Password</label>
+          <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} required />
+        </div>
 
-        <label className="field-label">Confirm Password</label>
-        <input type="password" name="confirmPassword" placeholder="Confirm Password" value={formData.confirmPassword} onChange={handleChange} required />
+        <div className="form-section">
+          <label className="field-label">Confirm Password</label>
+          <input type="password" name="confirmPassword" placeholder="Confirm Password" value={formData.confirmPassword} onChange={handleChange} required />
+        </div>
 
-        {/* Error */}
+        {/* Error Message */}
         {error && <div className="error-message">{error}</div>}
 
         <button type="submit">Register</button>

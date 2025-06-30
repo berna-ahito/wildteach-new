@@ -34,7 +34,9 @@ export default function LoginForm({ setIsLoggedIn }) {
 
   return (
     <main className="login-container">
-      <h1>Welcome Back</h1>
+      <h1>
+  <span className="highlight-red">Welcome</span> <span className="highlight-gold">Back</span>
+</h1>
       {error && <p className="error-message" role="alert">{error}</p>}
 
       <form onSubmit={handleLogin} className="login-form">
