@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../Pages/Styles/LandingHeader.css";
 
 export default function LandingHeader() {
   const navigate = useNavigate();
   const pages = ["Home", "What is WildTeach?", "About Us", "Contact Us"];
+  const [activePage, setActivePage] = useState("Home");
 
   const handleNavigate = (page) => {
+    setActivePage(page);
     navigate("/", { state: { scrollTo: page } });
   };
 
@@ -25,7 +27,11 @@ export default function LandingHeader() {
 
       <nav className="navigation-bar">
         {pages.map((page) => (
-          <button key={page} onClick={() => handleNavigate(page)} className="nav-btn">
+          <button
+            key={page}
+            onClick={() => handleNavigate(page)}
+            className={`nav-btn ${activePage === page ? "nav-active" : ""}`}
+          >
             <span>{page}</span>
           </button>
         ))}
