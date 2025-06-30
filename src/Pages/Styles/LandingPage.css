@@ -1,4 +1,3 @@
-/* Global Container */
 .landing-container {
   position: relative;
   min-height: 100vh;
@@ -97,12 +96,12 @@
 .content-box {
   position: relative;
   z-index: 2;
-  padding: 40px 30px;       /* ← Inner spacing of the white box */
+  padding: 40px 30px;       
   max-width: 1100px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 60px;                /* ← Space between image and text */
+  gap: 60px;                
   background-color: white;
   border: 3px solid gold;
   border-radius: 25px;
