@@ -16,7 +16,7 @@ import AdminDashboard from './Pages/AdminPage/AdminDashboard';
 import ManageUsers from './Pages/AdminPage/ManageUsers';
 import SessionManage from './Pages/AdminPage/SessionManage';
 import Announcements from './Pages/AdminPage/Announcements';
-import AdminSettings from './Pages/AdminPage/Settings';
+import AdminSettings from './Pages/AdminPage/AdminSettings';
 
 // Tutee pages
 import TuteeDashboard from './Pages/TuteePage/TuteeDashboard';
