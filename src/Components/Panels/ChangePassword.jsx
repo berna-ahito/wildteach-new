@@ -1,15 +1,16 @@
 import React, { useState } from "react";
+import axios from "axios";
 import InputCards from "../Shared/InputCards";
 import UserCredentials from "../Shared/Data/UserCredentials";
 import "../../Pages/Styles/Admin.css";
 
-export default function ChangePassword({ role = "admin" }) {
-  const [email, setEmail] = useState(""); // let UserCredentials handle fallback
+export default function ChangePassword({ role = "admin", userId }) {
+  const [email, setEmail] = useState("");
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (newPassword !== confirmPassword) {
@@ -17,10 +18,29 @@ export default function ChangePassword({ role = "admin" }) {
       return;
     }
 
-    alert(`${role} password changed successfully!`);
-    setCurrentPassword("");
-    setNewPassword("");
-    setConfirmPassword("");
+    try {
+      if (role === "admin") {
+        // ✅ Admin uses /admin/updateAdmin/{id}
+        await axios.put(`http://localhost:8080/admin/updateAdmin/${userId}`, {
+          password: newPassword,
+        });
+      } else {
+        // ✅ Tutee and Tutor use student endpoint with DTO
+        await axios.put("http://localhost:8080/student/updatePassword", {
+          studentId: userId,
+          oldPassword: currentPassword,
+          newPassword: newPassword,
+        });
+      }
+
+      alert("✅ Password updated successfully!");
+      setCurrentPassword("");
+      setNewPassword("");
+      setConfirmPassword("");
+    } catch (err) {
+      console.error("❌ Password update failed:", err.response?.data || err.message);
+      alert("Password update failed. Please check your input.");
+    }
   };
 
   return (
