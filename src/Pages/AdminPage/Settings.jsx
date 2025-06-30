@@ -20,7 +20,7 @@ export default function Settings() {
       </div>
 
       <div className = "forms">
-        <ChangePassword />
+        <ChangePassword role="admin"/>
       </div>
 
     </DashboardLayout>
