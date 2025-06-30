@@ -6,88 +6,62 @@ html {
   align-items: center;
   justify-content: center;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  padding: 20px 0;
-  padding-top: 100px;
+  padding: 100px 0 20px;
 }
 
-/* ===== Background Blur Image ===== */
 .bg-image {
   background-image: url('../../assets/images/bgLogin.jpg');
   background-size: cover;
   background-position: center;
-  background-repeat: no-repeat;
   position: fixed;
   inset: 0;
-  /* replaces top/left/right/bottom: 0 */
   z-index: -1;
   filter: blur(8px);
 }
 
-/* ===== Shared Form Container (Login & Register) ===== */
+/* Login Page */
 .login-container {
-  position: relative;
   background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(25px);
   border: 3px solid #F8C400;
-  padding: 40px;
-  border-radius: 10px;
+  padding: 48px 36px;
+  border-radius: 20px;
   text-align: left;
-  box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.3);
-  margin-top: 120px;
-  /* ✅ Push below fixed header */
-  min-width: 120px;
-  max-width: 900px;
-  max-width: 95vw;
-  max-height: 90vh;
-  overflow-y: auto;
-  margin-bottom: 30px;
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+  width: 100%;
+  max-width: 700px;
+  min-width: 500px;
+  margin: 10vh auto 40px auto;
   z-index: 1;
-  /* ✅ Stack above background */
 }
 
 .login-container h1 {
-  margin: 0 0 30px 0;
   color: #F8C400;
-  font-size: 32px;
-  font-weight: 700;
+  font-size: 30px;
+  font-weight: 800;
   text-align: center;
+  margin-bottom: 24px;
 }
-
-/* ===== Form Section Blocks ===== */
-.form-section {
-  margin-bottom: 30px;
-}
-
-.form-section:last-of-type {
-  margin-bottom: 30px;
-}
-
-/* ===== Labels ===== */
 .field-label {
   color: #F8C400;
-  font-size: 16px;
   font-weight: 600;
-  margin-bottom: 10px;
-  margin-top: 10px;
+  font-size: 16px;
+  margin: 10px 0;
   display: block;
-  text-align: left;
 }
 
-/* ===== Inputs, Selects, Textareas ===== */
 .login-container input,
 .login-container select,
 .login-container textarea {
   width: 100%;
   padding: 14px 16px;
-  margin: 0;
   border: 2px solid rgba(137, 52, 59, 0.2);
   border-radius: 10px;
   font-size: 15px;
-  color: #333;
   background: rgba(255, 255, 255, 0.85);
-  box-sizing: border-box;
   transition: all 0.3s ease;
   font-family: inherit;
+  color: #333;
 }
 
 .login-container input:focus,
@@ -102,11 +76,6 @@ html {
 .login-container input::placeholder,
 .login-container textarea::placeholder {
   color: #888;
-  opacity: 0.9;
-}
-
-.login-container select {
-  color: #333;
 }
 
 .login-container select option {
@@ -114,82 +83,6 @@ html {
   background: white;
 }
 
-/* ===== Form Layout Grids ===== */
-.triple-input {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 16px;
-  margin-top: 8px;
-}
-
-.double-input {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  margin-top: 8px;
-  margin-bottom: 80px;
-}
-
-.single-input {
-  margin-top: 8px;
-}
-
-/* ===== Birth Date & Gender Row ===== */
-.birth-gender-row {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 20px;
-  align-items: end;
-}
-
-.birth-section {
-  display: flex;
-  flex-direction: column;
-}
-
-.birth-inputs {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 12px;
-  margin-top: 8px;
-}
-
-.gender-section {
-  display: flex;
-  flex-direction: column;
-}
-
-.gender-section select {
-  margin-top: 8px;
-}
-
-/* ===== Role & Year Level Row ===== */
-.role-year-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-}
-
-.role-section,
-.year-section {
-  display: flex;
-  flex-direction: column;
-}
-
-.role-section select,
-.year-section input {
-  margin-top: 8px;
-}
-
-/* ===== Textarea ===== */
-.login-container textarea {
-  resize: vertical;
-  min-height: 80px;
-  font-family: inherit;
-  line-height: 1.4;
-}
-
-/* ===== Submit Button ===== */
 .login-container button {
   background: #89343B;
   color: #F8C400;
@@ -200,8 +93,8 @@ html {
   border-radius: 12px;
   cursor: pointer;
   margin: 30px auto 15px auto;
-  transition: all 0.3s ease;
   display: block;
+  transition: all 0.3s ease;
   text-transform: uppercase;
   letter-spacing: 0.5px;
 }
@@ -217,47 +110,87 @@ html {
   transform: translateY(0);
 }
 
-/* ===== Link Below Form ===== */
 .login-container a {
-  text-decoration: none;
   color: #89343B;
   font-size: 15px;
-  margin-top: 15px;
-  display: block;
   text-align: center;
-  text-decoration-line: underline;
-  transition: color 0.3s ease;
+  text-decoration: underline;
+  display: block;
+  margin-top: 15px;
   font-weight: 500;
+  transition: color 0.3s ease;
 }
 
 .login-container a:hover {
   color: #F8C400;
 }
 
-/* ===== Error Messages ===== */
 .error-message {
-  color: #ff4757 !important;
+  color: #ff4757;
   background: rgba(255, 255, 255, 0.95);
   padding: 12px 16px;
   border-radius: 8px;
   margin: 15px 0;
-  font-weight: 600;
   border-left: 4px solid #ff4757;
   text-align: center;
 }
 
-.register-link {
-  color: #F8C400;
-  cursor: pointer;
+/* Register Page */
+.register-container {
+  max-width: 800px;
+  padding: 48px 40px;
+  margin-top: 35vw;
 }
 
-.register-link :hover {
-  font-weight: bold;
-  text-decoration: underline;
-  transition: 0.5s;
+/* Layout Blocks */
+.triple-input,
+.double-input,
+.birth-inputs,
+.birth-gender-row,
+.role-year-row {
+  display: grid;
+  gap: 16px;
+  margin-top: 8px;
 }
 
-/* ===== Mobile Responsive Adjustments ===== */
+.triple-input {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.double-input {
+  grid-template-columns: 1fr 1fr;
+  margin-bottom: 80px;
+}
+
+.birth-gender-row {
+  grid-template-columns: 2fr 1fr;
+  align-items: end;
+}
+
+.birth-inputs {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.gender-section,
+.birth-section,
+.role-section,
+.year-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.gender-section select,
+.role-section select,
+.year-section input {
+  margin-top: 8px;
+}
+
+.login-container textarea {
+  resize: vertical;
+  min-height: 80px;
+  line-height: 1.4;
+}
+
 @media (max-width: 768px) {
   .login-container {
     width: 95vw;
@@ -269,34 +202,20 @@ html {
     font-size: 28px;
   }
 
-  .triple-input {
+  .triple-input,
+  .double-input,
+  .birth-gender-row,
+  .role-year-row {
     grid-template-columns: 1fr;
     gap: 12px;
-  }
-
-  .double-input {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-
-  .birth-gender-row {
-    grid-template-columns: 1fr;
-    gap: 15px;
   }
 
   .birth-inputs {
-    grid-template-columns: 1fr 1fr 1fr;
     gap: 8px;
-  }
-
-  .role-year-row {
-    grid-template-columns: 1fr;
-    gap: 15px;
   }
 }
 
 @media (max-width: 480px) {
-
   body,
   html {
     padding: 10px 0;
@@ -308,7 +227,6 @@ html {
 
   .login-container h1 {
     font-size: 24px;
-    margin-bottom: 25px;
   }
 
   .birth-inputs {
