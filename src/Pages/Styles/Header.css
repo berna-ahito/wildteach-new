@@ -13,7 +13,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 40px;
+  margin-right: 50px;
+  padding: 20px 40px;
 }
 
 /* Left section (logo + title) */
@@ -34,7 +35,7 @@
   justify-content: center;
   font-weight: bold;
   font-size: 18px;
-  margin-left: 60px;
+  margin-left: 10px;
 }
 
 .logo-circle-text {
