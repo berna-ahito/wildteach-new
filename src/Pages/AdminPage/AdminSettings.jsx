@@ -8,9 +8,11 @@ import "../../Pages/Styles/Admin.css";
 export default function Settings() {
   const user = JSON.parse(localStorage.getItem("user"));
 
-  // Fallbacks in case user is not logged in
   const role = user?.role || "student";
   const userId = role === "admin" ? user?.admin_id : user?.student_id;
+  const email = user?.email || "";
+  console.log("🧠 Loaded user from localStorage:", user);
+
 
   return (
     <DashboardLayout title="Settings" role={role}>
@@ -25,9 +27,11 @@ export default function Settings() {
       </div>
 
       <div className="forms">
-        {/* ✅ Pass userId and role */}
-        <ChangePassword role={role} userId={userId} />
+        {/* ✅ Now includes email prop */}
+        <ChangePassword role={role} userId={userId} email={email} />
       </div>
     </DashboardLayout>
   );
 }
+
+

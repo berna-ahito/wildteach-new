@@ -4,8 +4,7 @@ import InputCards from "../Shared/InputCards";
 import UserCredentials from "../Shared/Data/UserCredentials";
 import "../../Pages/Styles/Admin.css";
 
-export default function ChangePassword({ role = "admin", userId }) {
-  const [email, setEmail] = useState("");
+export default function ChangePassword({ role = "admin", userId, email }) {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -20,12 +19,17 @@ export default function ChangePassword({ role = "admin", userId }) {
 
     try {
       if (role === "admin") {
-        // ✅ Admin uses /admin/updateAdmin/{id}
+        // ✅ Step 1: Get current admin data
+        const res = await axios.get(`http://localhost:8080/admin/getAdmin/${userId}`);
+        const currentAdmin = res.data;
+
+        // ✅ Step 2: Update with existing fields + new password
         await axios.put(`http://localhost:8080/admin/updateAdmin/${userId}`, {
+          ...currentAdmin,
           password: newPassword,
         });
       } else {
-        // ✅ Tutee and Tutor use student endpoint with DTO
+        // ✅ Tutee or Tutor: Provide current & new password
         await axios.put("http://localhost:8080/student/updatePassword", {
           studentId: userId,
           oldPassword: currentPassword,
@@ -33,29 +37,32 @@ export default function ChangePassword({ role = "admin", userId }) {
         });
       }
 
-      alert("✅ Password updated successfully!");
+      alert(`✅ Password for ${email} updated successfully!`);
       setCurrentPassword("");
       setNewPassword("");
       setConfirmPassword("");
     } catch (err) {
       console.error("❌ Password update failed:", err.response?.data || err.message);
-      alert("Password update failed. Please check your input.");
+      alert(err.response?.data || "Password update failed. Please check your input.");
     }
   };
 
   return (
     <InputCards title="Change Password">
       <form onSubmit={handleSubmit} className="settings-section">
-        <UserCredentials role={role} email={email} setEmail={setEmail} />
+        <UserCredentials role={role} email={email} />
 
-        <input
-          className="toggle-btn-settings"
-          type="password"
-          value={currentPassword}
-          onChange={(e) => setCurrentPassword(e.target.value)}
-          placeholder="Current Password"
-          required
-        />
+        {role !== "admin" && (
+          <input
+            className="toggle-btn-settings"
+            type="password"
+            value={currentPassword}
+            onChange={(e) => setCurrentPassword(e.target.value)}
+            placeholder="Current Password"
+            required
+          />
+        )}
+
         <input
           className="toggle-btn-settings"
           type="password"
