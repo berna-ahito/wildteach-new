@@ -14,6 +14,7 @@ export default function Header({ title }) {
           </div>
           <Typography variant="h6" className="navbar-title">{title}</Typography>
         </div>
+        
 
         <div className="navbar-right-group">
           <div className="navbar-center">
