@@ -4,7 +4,9 @@ import { useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
 import { Typography } from '@mui/material';
 import 'react-datepicker/dist/react-datepicker.css';
-import useBookingData from '../../Tutee/Data/useBookingData';
+import useBookingData from '../Data/useBookingData';
+import '../../../Pages/Styles/TuteePage.css';
+
 
 export default function BookingFormPanel({ tutorId }) {
   const navigate = useNavigate();
@@ -54,35 +56,41 @@ export default function BookingFormPanel({ tutorId }) {
   if (!tutor) return <Typography>Loading tutor information...</Typography>;
 
   return (
-    <div className="booking-form-box">
-      <div className="booking-heading">
-        <h2>
-          Book a Session with {tutor.student?.first_name} {tutor.student?.last_name}
-        </h2>
-      </div>
+    <div className="booking-form-card">
+      <h2 className="form-title">
+        Book a Session with {tutor.student?.first_name} {tutor.student?.last_name}
+      </h2>
 
-      <form onSubmit={handleBookingSubmit}>
-        <label>Subject</label>
-        <input
-          type="text"
-          className="subject-input"
-          value={subject}
-          onChange={(e) => setSubject(e.target.value)}
-          required
-        />
+      <form onSubmit={handleBookingSubmit} className="booking-form">
+        <div className="form-group">
+          <label htmlFor="subject">Subject</label>
+          <input
+            type="text"
+            id="subject"
+            className="input-field"
+            value={subject}
+            onChange={(e) => setSubject(e.target.value)}
+            required
+          />
+        </div>
 
-        <label>Select Date & Time</label>
-        <DatePicker
-          selected={sessionDateTime}
-          onChange={(date) => setSessionDateTime(date)}
-          showTimeSelect
-          timeFormat="h:mm aa"
-          timeIntervals={30}
-          dateFormat="MMMM d, yyyy h:mm aa"
-        />
+        <div className="form-group" >
+          <label htmlFor="sessionDateTime">Select Date & Time</label>
+          <DatePicker
+            selected={sessionDateTime}
+            onChange={(date) => setSessionDateTime(date)}
+            showTimeSelect
+            timeFormat="h:mm aa"
+            timeIntervals={30}
+            dateFormat="MMMM d, yyyy h:mm aa"
+            className="input-field"
+          />
+        </div>
 
         <div className="form-actions">
-          <button type="submit" className="confirm-book-button">Confirm Booking</button>
+          <button type="submit" className="confirm-book-button">
+            Confirm Booking
+          </button>
         </div>
       </form>
     </div>

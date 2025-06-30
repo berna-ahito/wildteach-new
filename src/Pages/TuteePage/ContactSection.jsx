@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Header from "../../Components/Shared/Header";
 import Sidebar from "../../Components/Shared/Sidebar";
 import menuTutee from "../../RoutesConfig/MenuTutee";
-import bgImage from '../../assets/images/bgLanding.jpg'; // ✅ Ensure this path is correct
+import bgImage from '../../assets/images/bgLanding.jpg'; 
 import '../../Pages/Styles/TuteePage.css';
 
 export default function ContactSection() {

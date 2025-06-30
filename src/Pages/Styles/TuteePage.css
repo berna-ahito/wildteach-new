@@ -643,17 +643,23 @@ ul {
   flex-wrap: wrap;
   gap: 24px;
   justify-content: center;
+  align-items: stretch; /* Makes all cards equal height */
 }
 
+
 .find-tutor-card {
-  width: calc(33.333% - 16px); /* 3 per row with spacing */
+  flex: 1 1 300px; /* Allow wrapping but maintain min width */
+  min-width: 300px;
+  max-width: 100%;
   padding: 24px;
   background: #fffaf8;
   border-radius: 14px;
   border-top: 4px solid #89343B;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
   box-sizing: border-box;
+  overflow: hidden;
 }
+
 
 @media (max-width: 1024px) {
   .find-tutor-card {
@@ -689,7 +695,9 @@ ul {
   align-items: flex-start;
   flex-wrap: wrap;
   gap: 20px;
+  word-break: break-word;
 }
+
 
 .tutor-details-text {
   flex: 1;
@@ -700,7 +708,9 @@ ul {
   margin-bottom: 8px;
   font-size: 15px;
   color: #5f3a3a;
+  word-wrap: break-word;
 }
+
 
 .action-buttons {
   display: flex;
@@ -1020,3 +1030,168 @@ input:checked + .slider:before {
   background-color: #dc3545;
   color: white;
 }
+
+/* ────────────────────────────────
+   BookingFormPanel 
+   ──────────────────────────────── */
+
+.booking-form-card {
+  background-color: white;
+  border-radius: 16px;
+  padding: 30px 40px;
+  max-width: 600px;
+  margin: 0 auto;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.form-title {
+  text-align: center;
+  color: #89343B;
+  margin-bottom: 25px;
+  font-size: 1.8rem;
+}
+
+.booking-form .form-group {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.booking-form label {
+  margin-bottom: 8px;
+  font-weight: bold;
+  color: #5b2121;
+}
+
+.input-field {
+  padding: 12px 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.form-actions {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.confirm-book-button {
+  background-color: #89343B;
+  color: #F8C400;
+  padding: 12px 30px;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 26px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.confirm-book-button:hover {
+  background-color: #F8C400;
+  color: #89343B;
+}
+
+
+.booking-header-container {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.booking-title {
+  font-size: 2.4rem;
+  color: #89343B;
+  font-weight: bold;
+}
+
+.booking-card-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+  padding: 0 20px;
+}
+
+.booking-card {
+  background-color: white;
+  border-radius: 15px;
+  padding: 30px;
+  width: 100%;
+  max-width: 700px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* ────────────────────────────────
+   SettingsPanel Styling
+   ──────────────────────────────── */
+.settings-panel {
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  max-width: 700px;
+  margin: 0 auto;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin-top: -80px;
+}
+
+.settings-panel textarea {
+  width: 100%;
+  padding: 10px 15px;
+  margin-top: 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.settings-heading {
+  font-size: 2rem;
+  color: #89343B;
+  margin-bottom: 20px;
+}
+
+.settings-section {
+  margin-bottom: 30px;
+}
+
+.settings-section h3 {
+  font-size: 1.2rem;
+  color: #5b2121;
+  margin-bottom: 10px;
+}
+
+.toggle-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.save-button {
+  background: #89343B;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.save-button:hover {
+  background-color: #F8C400;
+  color: #89343B;
+}
+
+/* Add full-width styling for inputs and selects */
+.settings-panel input[type="text"],
+.settings-panel input[type="email"],
+.settings-panel input[type="number"],
+.settings-panel select {
+  width: 100%;
+  padding: 10px 15px;
+  margin-top: 6px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
