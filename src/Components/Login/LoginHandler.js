@@ -44,7 +44,7 @@ export async function loginUser(email, password) {
 
     const data = await res.json();
     const studentId = data.student_id;
-    const role = data.role?.toLowerCase(); // "tutee" or "tutor"
+    const role = data.role?.toLowerCase();
 
     console.log("[Login] Student login successful:", data);
     console.log("[Login] Role from response:", role);
@@ -54,10 +54,10 @@ export async function loginUser(email, password) {
       role,
       student_id: studentId,
       name: data.name ?? "",
-      email: data.email || email, // ✅ fallback to login form input
+      email: data.email || email,
     };
 
-    // ✅ If tutor, fetch tutor ID
+    // ✅ If tutor, fetch tutor ID and store separately
     if (role === "tutor") {
       const checkTutor = await fetch(`http://localhost:8080/student/hasTutorProfile/${studentId}`);
       if (checkTutor.ok) {
@@ -65,6 +65,7 @@ export async function loginUser(email, password) {
         console.log("[Login] Tutor profile check result:", tutorCheck);
         if (tutorCheck.tutor_id) {
           userData.tutor_id = tutorCheck.tutor_id;
+          localStorage.setItem("tutor_id", tutorCheck.tutor_id.toString()); // ✅ Save tutor_id directly
         }
       }
     }
