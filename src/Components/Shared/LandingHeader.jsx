@@ -1,8 +1,14 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import "../../Pages/Styles/LandingHeader.css";
 
-export default function LandingHeader({ activePage, setActivePage }) {
+export default function LandingHeader() {
+  const navigate = useNavigate();
   const pages = ["Home", "What is WildTeach?", "About Us", "Contact Us"];
+
+  const handleNavigate = (page) => {
+    navigate("/", { state: { scrollTo: page } });
+  };
 
   return (
     <header className="landing-header">
@@ -16,14 +22,10 @@ export default function LandingHeader({ activePage, setActivePage }) {
           <div className="brand-underline"></div>
         </div>
       </div>
-      
+
       <nav className="navigation-bar">
         {pages.map((page) => (
-          <button
-            key={page}
-            onClick={() => setActivePage && setActivePage(page)}
-            className={`nav-btn ${activePage === page ? "nav-active" : ""}`}
-          >
+          <button key={page} onClick={() => handleNavigate(page)} className="nav-btn">
             <span>{page}</span>
           </button>
         ))}

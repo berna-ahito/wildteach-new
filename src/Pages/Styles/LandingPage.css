@@ -1,10 +1,7 @@
 /* Global Container */
 .landing-container {
   position: relative;
-  min-height: 100vh;
   width: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
   font-family: 'Segoe UI', sans-serif;
   color: #5b2121;
 }
@@ -12,12 +9,10 @@
 .landing-switch {
   position: relative;
   width: 100%;
-  min-height: 100vh;
-  margin-top: 300px;
   overflow-x: hidden;
 }
 
-/* Navbar */
+
 .navbar,
 .navigation {
   position: fixed;
@@ -77,7 +72,6 @@
 /* Home Section */
 .home-section {
   position: relative;
-  min-height: 100vh;
   overflow: hidden;
 }
 
@@ -185,11 +179,10 @@
   box-shadow: none;
 }
 
-/* WildTeach Section */
 .wildteach-fullscreen {
   position: relative;
   min-height: 100vh;
-  width: 100vw;
+  width: 99.2vw;
   margin: 0;
   padding: 200px 20px 30px;
   background: linear-gradient(135deg, #89343B 0%, #5b2121 50%, #3d1f1f 100%);
@@ -205,7 +198,7 @@
   z-index: 2;
   width: 100%;
   max-width: 1200px;
-  padding: 300px 30px 30px;
+  padding: 0px 30px 30px;
   color: white;
 }
 
