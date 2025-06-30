@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import axios from "axios";
 import Card from "../../Shared/Card";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -12,13 +13,29 @@ export default function AdminAddAnnounce({ onAdd }) {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (title.trim() && content.trim()) {
-      if (onAdd) onAdd({ title, content });
-      setTitle("");
-      setContent("");
-      setOpen(false);
+      try {
+        const response = await axios.post("http://localhost:8080/announcement/addAnnounce", {
+          title: title,
+          message: content,
+          created_at: new Date().toISOString(),
+          admin: {
+            admin_id: 1 // Replace with dynamic admin_id if needed
+          }
+        });
+
+        if (response.status === 200 || response.status === 201) {
+          if (onAdd) onAdd(); // ✅ refresh announcements
+          setTitle("");
+          setContent("");
+          setOpen(false);
+        }
+      } catch (error) {
+        console.error("Error adding announcement:", error);
+        alert("Failed to add announcement. Please try again.");
+      }
     }
   };
 
