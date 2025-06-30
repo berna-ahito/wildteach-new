@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
 import LandingPage from './Pages/LandingPage';
 import LoginPage from './Pages/LoginPage';
 import RegisterPage from './Pages/RegisterPage';
@@ -9,7 +10,6 @@ import TutorDashboard from './Pages/TutorPage/TutorDashboard';
 import Sessions from './Pages/TutorPage/Sessions';
 import ProfileTutor from './Pages/TutorPage/Profile';
 import TutorSettings from './Pages/TutorPage/Settings';
-
 
 // Admin pages
 import AdminDashboard from './Pages/AdminPage/AdminDashboard';
@@ -28,16 +28,20 @@ import ContactSection from './Pages/TuteePage/ContactSection';
 import AboutSection from './Pages/TuteePage/AboutSection';
 import SettingsTutee from './Pages/TuteePage/SettingsTutee';
 
-
-
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <Router>
       <Routes>
-        {/* Public Routes */}
-        <Route path="/" element={<LandingPage />} />
+        {/* Public Landing Routes with Sections */}
+        <Route path="/" element={<LandingPage section="home" />} />
+        <Route path="/home" element={<LandingPage section="home" />} />
+        <Route path="/what-is-wildteach" element={<LandingPage section="what-is-wildteach" />} />
+        <Route path="/about-us" element={<LandingPage section="about-us" />} />
+        <Route path="/contact-us" element={<LandingPage section="contact-us" />} />
+        
+        {/* Auth */}
         <Route path="/login" element={<LoginPage setIsLoggedIn={setIsLoggedIn} />} />
         <Route path="/register" element={<RegisterPage />} />
 
@@ -55,7 +59,7 @@ function App() {
         <Route path="/tutee/findTutor" element={<FindTutor />} />
         <Route path="/book-tutor/:tutorId" element={<BookingPage />} />
         <Route path="/tutee/contact-us" element={<ContactSection />} />
-       <Route path="/tutee/about-us" element={<AboutSection />} />
+        <Route path="/tutee/about-us" element={<AboutSection />} />
         <Route path="/tutee/settings-tutee" element={<SettingsTutee />} />
 
         {/* Tutor Routes */}
@@ -64,8 +68,6 @@ function App() {
         <Route path="/tutor/manageSessions" element={<Sessions />} />
         <Route path="/tutor/profile" element={<ProfileTutor />} />
         <Route path="/tutor/settings" element={<TutorSettings />} />
-
-
       </Routes>
     </Router>
   );

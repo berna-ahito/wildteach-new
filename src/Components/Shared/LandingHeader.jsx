@@ -1,20 +1,27 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import "../../Pages/Styles/LandingHeader.css";
 
 export default function LandingHeader() {
   const navigate = useNavigate();
-  const pages = ["Home", "What is WildTeach?", "About Us", "Contact Us"];
-  const [activePage, setActivePage] = useState("Home");
+  const location = useLocation();
 
-  const handleNavigate = (page) => {
-    setActivePage(page);
-    navigate("/", { state: { scrollTo: page } });
-  };
+  const pages = [
+    { name: "Home", path: "/home" },
+    { name: "What is WildTeach?", path: "/what-is-wildteach" },
+    { name: "About Us", path: "/about-us" },
+    { name: "Contact Us", path: "/contact-us" },
+  ];
+
+  const currentPath = location.pathname;
 
   return (
     <header className="landing-header">
-      <div className="brand-zone">
+      <div
+        className="brand-zone"
+        onClick={() => navigate("/home")}
+        style={{ cursor: "pointer" }}
+      >
         <div className="logo-badge">
           <div className="logo-inner">W</div>
         </div>
@@ -28,11 +35,11 @@ export default function LandingHeader() {
       <nav className="navigation-bar">
         {pages.map((page) => (
           <button
-            key={page}
-            onClick={() => handleNavigate(page)}
-            className={`nav-btn ${activePage === page ? "nav-active" : ""}`}
+            key={page.name}
+            onClick={() => navigate(page.path)}
+            className={`nav-btn ${currentPath === page.path ? "nav-active" : ""}`}
           >
-            <span>{page}</span>
+            <span>{page.name}</span>
           </button>
         ))}
       </nav>
