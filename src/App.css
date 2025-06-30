@@ -1,11 +1,9 @@
-/* Ensure consistent sizing across elements */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-/* Lock down scrolling */
 html,
 body,
 #root {
@@ -14,6 +12,6 @@ body,
   width: 100%;
   height: auto;
   min-height: 100vh;
-  overflow-x: clip; /* ✅ STRONGER than hidden */
+  overflow-x: clip; 
   overflow-y: auto;
 }
