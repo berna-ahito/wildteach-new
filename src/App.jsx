@@ -17,6 +17,7 @@ import ManageUsers from './Pages/AdminPage/ManageUsers';
 import SessionManage from './Pages/AdminPage/SessionManage';
 import Announcements from './Pages/AdminPage/Announcements';
 import AdminSettings from './Pages/AdminPage/AdminSettings';
+import AdminRecentAll from './Components/Admin/Data/AdminRecentAll';
 
 // Tutee pages
 import TuteeDashboard from './Pages/TuteePage/TuteeDashboard';
@@ -47,6 +48,7 @@ function App() {
 
         {/* Admin Routes */}
         <Route path="/adminDashboard" element={<AdminDashboard />} />
+        <Route path="/admin/recent" element={<AdminRecentAll />} />
         <Route path="/admin/manageUsers" element={<ManageUsers />} />
         <Route path="/admin/sessionManage" element={<SessionManage />} />
         <Route path="/admin/announcements" element={<Announcements />} />
