@@ -1,8 +1,13 @@
 // src/Components/Tutee/Panels/FindTutorPanel.jsx
-import React from 'react';
-import TextField from '@mui/material/TextField';
+import React from "react";
+import TextField from "@mui/material/TextField";
 
-export default function FindTutorPanel({ searchTerm, setSearchTerm, tutors, navigate }) {
+export default function FindTutorPanel({
+  searchTerm,
+  setSearchTerm,
+  tutors,
+  navigate,
+}) {
   return (
     <div>
       <div className="find-tutor-container">
@@ -30,16 +35,29 @@ export default function FindTutorPanel({ searchTerm, setSearchTerm, tutors, navi
 
                 <div className="tutor-details-row">
                   <div className="tutor-details-text">
-                    <div className="tutor-subject">Subjects: {tutor.subjects}</div>
-                    <div className="tutor-subject">Rate per Hour: {tutor.rate}</div>
-                    <div className="tutor-subject">Availability: {tutor.availability}</div>
+                    <div className="tutor-subject">
+                      Subjects: {tutor.subjects}
+                    </div>
+                    <div className="tutor-subject">
+                      Rate per Hour: {tutor.rate}
+                    </div>
+                    <div className="tutor-subject">
+                      Availability: {tutor.availability}
+                    </div>
                   </div>
 
                   <div className="action-buttons">
                     <button className="profile-button">View Profile</button>
                     <button
                       className="book-button"
-                      onClick={() => navigate(`/book-tutor/${tutor.id}`)}
+                      onClick={() => {
+                        if (tutor.tutor_id) {
+                          navigate(`/book-tutor/${tutor.tutor_id}`);
+                        } else {
+                          alert("Tutor profile is incomplete.");
+                          console.error("Missing tutor_id for:", tutor);
+                        }
+                      }}
                     >
                       Book Now
                     </button>
@@ -48,7 +66,9 @@ export default function FindTutorPanel({ searchTerm, setSearchTerm, tutors, navi
               </div>
             ))}
             {tutors.length === 0 && (
-              <p style={{ textAlign: 'center', marginTop: '20px' }}>No tutors found.</p>
+              <p style={{ textAlign: "center", marginTop: "20px" }}>
+                No tutors found.
+              </p>
             )}
           </div>
         </div>

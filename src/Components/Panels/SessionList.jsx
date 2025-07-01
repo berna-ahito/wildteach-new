@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
-import Card from "../Shared/Card"; 
-import '../../Pages/Styles/TutorPage.css';
+import React, { useState } from "react";
+import Card from "../Shared/Card";
+import "../../Pages/Styles/TutorPage.css";
 
 export default function SessionList({ sessions }) {
   const [editingIndex, setEditingIndex] = useState(null);
   const [editedSessions, setEditedSessions] = useState([...sessions]);
+  const [selectedYear, setSelectedYear] = useState("All");
+  const [selectedMonth, setSelectedMonth] = useState("All");
 
   const handleEditClick = (index) => {
     setEditingIndex(index);
@@ -26,118 +28,158 @@ export default function SessionList({ sessions }) {
     setEditingIndex(null);
   };
 
+  // ✅ Apply filters
+  const filteredSessions = editedSessions.filter((s) => {
+    const matchYear = selectedYear === "All" || s.year === selectedYear;
+    const matchMonth = selectedMonth === "All" || s.month === selectedMonth;
+    return matchYear && matchMonth;
+  });
+
   return (
     <div className="sessions-container">
       <h2 className="section-title">Manage Sessions</h2>
 
+      {/* ✅ Filters */}
       <div className="filter-bar">
-        <select className="filter-select">
-          <option>Select year</option>
-          <option>2025</option>
-          <option>2024</option>
+        <select
+          className="filter-select"
+          value={selectedYear}
+          onChange={(e) => setSelectedYear(e.target.value)}
+        >
+          <option value="All">All years</option>
+          {[...new Set(sessions.map((s) => s.year))].map((year) => (
+            <option key={year} value={year}>
+              {year}
+            </option>
+          ))}
         </select>
 
-        <select className="filter-select">
-          <option>Select month</option>
-          <option>January</option>
-          <option>February</option>
-          <option>March</option>
-          <option>April</option>
-          <option>May</option>
-          <option>June</option>
-          <option>July</option>
+        <select
+          className="filter-select"
+          value={selectedMonth}
+          onChange={(e) => setSelectedMonth(e.target.value)}
+        >
+          <option value="All">All months</option>
+          {[...new Set(sessions.map((s) => s.month))].map((month) => (
+            <option key={month} value={month}>
+              {month}
+            </option>
+          ))}
         </select>
       </div>
 
+      {/* ✅ Session Cards */}
       <div className="session-cards-grid">
-        {editedSessions.map((s, i) => {
-          const isEditing = i === editingIndex;
-          return (
-            <Card key={i} className="session-card">
-              <h3 className="card-title">
-                Student Name:{" "}
-                {isEditing ? (
-                  <input
-                    value={s.name}
-                    onChange={(e) => handleChange(i, 'name', e.target.value)}
-                  />
-                ) : (
-                  s.name
-                )}
-              </h3>
-              <p>
-                Subject:{" "}
-                {isEditing ? (
-                  <input
-                    value={s.subject}
-                    onChange={(e) => handleChange(i, 'subject', e.target.value)}
-                  />
-                ) : (
-                  s.subject
-                )}
-              </p>
-              <p>
-                Date:{" "}
-                {isEditing ? (
-                  <input
-                    type="date"
-                    value={s.date}
-                    onChange={(e) => handleChange(i, 'date', e.target.value)}
-                  />
-                ) : (
-                  s.date
-                )}
-              </p>
-              <p>
-                Duration:{" "}
-                {isEditing ? (
-                  <input
-                    value={s.duration}
-                    onChange={(e) => handleChange(i, 'duration', e.target.value)}
-                  />
-                ) : (
-                  s.duration
-                )}
-              </p>
-              <p>
-                Month:{" "}
-                {isEditing ? (
-                  <input
-                    value={s.month}
-                    onChange={(e) => handleChange(i, 'month', e.target.value)}
-                  />
-                ) : (
-                  s.month
-                )}
-              </p>
-              <p>
-                Year:{" "}
-                {isEditing ? (
-                  <input
-                    value={s.year}
-                    onChange={(e) => handleChange(i, 'year', e.target.value)}
-                  />
-                ) : (
-                  s.year
-                )}
-              </p>
+        {filteredSessions.length === 0 ? (
+          <p style={{ gridColumn: "1 / -1", textAlign: "center" }}>
+            No sessions found.
+          </p>
+        ) : (
+          filteredSessions.map((s, i) => {
+            const isEditing = i === editingIndex;
+            return (
+              <Card key={i} className="session-card">
+                <h3 className="card-title">
+                  Student Name:{" "}
+                  {isEditing ? (
+                    <input
+                      value={s.name}
+                      onChange={(e) => handleChange(i, "name", e.target.value)}
+                    />
+                  ) : (
+                    s.name
+                  )}
+                </h3>
+                <p>
+                  Subject:{" "}
+                  {isEditing ? (
+                    <input
+                      value={s.subject}
+                      onChange={(e) =>
+                        handleChange(i, "subject", e.target.value)
+                      }
+                    />
+                  ) : (
+                    s.subject
+                  )}
+                </p>
+                <p>
+                  Date:{" "}
+                  {isEditing ? (
+                    <input
+                      type="date"
+                      value={s.date}
+                      onChange={(e) => handleChange(i, "date", e.target.value)}
+                    />
+                  ) : (
+                    s.date
+                  )}
+                </p>
+                <p>
+                  Duration:{" "}
+                  {isEditing ? (
+                    <input
+                      value={s.duration}
+                      onChange={(e) =>
+                        handleChange(i, "duration", e.target.value)
+                      }
+                    />
+                  ) : (
+                    s.duration
+                  )}
+                </p>
+                <p>
+                  Month:{" "}
+                  {isEditing ? (
+                    <input
+                      value={s.month}
+                      onChange={(e) => handleChange(i, "month", e.target.value)}
+                    />
+                  ) : (
+                    s.month
+                  )}
+                </p>
+                <p>
+                  Year:{" "}
+                  {isEditing ? (
+                    <input
+                      value={s.year}
+                      onChange={(e) => handleChange(i, "year", e.target.value)}
+                    />
+                  ) : (
+                    s.year
+                  )}
+                </p>
 
-              <div className="card-actions">
-                {isEditing ? (
-                  <>
-                    <button className="btn-edit" onClick={handleSave}>Save</button>
-                    <button className="btn-cancel" onClick={handleCancelClick}>Cancel</button>
-                  </>
-                ) : (
-                  <>
-                    <button className="btn-edit" onClick={() => handleEditClick(i)}>Edit</button>
-                    <button className="btn-cancel">Delete</button>
-                  </>
-                )}
-              </div>
-            </Card>
-          );
-        })}
+                <div className="card-actions">
+                  {isEditing ? (
+                    <>
+                      <button className="btn-edit" onClick={handleSave}>
+                        Save
+                      </button>
+                      <button
+                        className="btn-cancel"
+                        onClick={handleCancelClick}
+                      >
+                        Cancel
+                      </button>
+                    </>
+                  ) : (
+                    <>
+                      <button
+                        className="btn-edit"
+                        onClick={() => handleEditClick(i)}
+                      >
+                        Edit
+                      </button>
+                      <button className="btn-cancel">Delete</button>
+                    </>
+                  )}
+                </div>
+              </Card>
+            );
+          })
+        )}
       </div>
 
       <div className="pagination">
