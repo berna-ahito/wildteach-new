@@ -6,12 +6,14 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
+import ToastNotification from "../../Panels/ToastNotification"; // ✅ import toast
 import "../../../Pages/Styles/Admin.css";
 
 export default function AdminAddAnnounce({ onAdd }) {
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [toast, setToast] = useState(null); // ✅ Toast state
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,20 +29,40 @@ export default function AdminAddAnnounce({ onAdd }) {
         });
 
         if (response.status === 200 || response.status === 201) {
-          if (onAdd) onAdd(); // ✅ refresh announcements
+          if (onAdd) onAdd();
           setTitle("");
           setContent("");
           setOpen(false);
+
+          // Add a slight delay before showing toast
+          setTimeout(() => {
+            setToast({
+              type: "success",
+              message: "Announcement added successfully!",
+            });
+          }, 300); // allow dialog to close before showing toast
         }
+
       } catch (error) {
         console.error("Error adding announcement:", error);
-        alert("Failed to add announcement. Please try again.");
+        setToast({
+          type: "error",
+          message: "Failed to add announcement. Please try again.",
+        });
       }
     }
   };
 
   return (
     <>
+      {toast && (
+        <ToastNotification
+          type={toast.type}
+          message={toast.message}
+          onClose={() => setToast(null)}
+        />
+      )}
+
       <Card
         title="Create New"
         content="+"

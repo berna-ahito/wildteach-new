@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { registerUser } from "./RegisterHandler";
-
+import LoadingScreen from "../Panels/LoadingScreen"
 export default function RegisterForm() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const [formData, setFormData] = useState({
     lastName: "", firstName: "", middleName: "",
@@ -12,7 +13,7 @@ export default function RegisterForm() {
     gender: "", town: "", barangay: "", houseNumber: "",
     email: "", contactNumber: "", yearLevel: "",
     password: "", confirmPassword: "", role: "",
-    course: "" // Added course field
+    course: ""
   });
 
   const handleChange = (e) =>
@@ -27,6 +28,8 @@ export default function RegisterForm() {
       return;
     }
 
+    setIsLoading(true); // ✅ Show loading screen
+
     const birth_date = `${formData.birthYear}-${formData.birthMonth.padStart(2, '0')}-${formData.birthDay.padStart(2, '0')}`;
     const payload = {
       last_name: formData.lastName,
@@ -38,7 +41,7 @@ export default function RegisterForm() {
       contact_number: formData.contactNumber,
       address: `${formData.houseNumber}, ${formData.barangay}, ${formData.town}`,
       username: formData.email.split("@")[0],
-      course: formData.course, // Use selected course
+      course: formData.course,
       year_level: parseInt(formData.yearLevel),
       profileImage: "default.jpg",
       role: formData.role,
@@ -48,133 +51,148 @@ export default function RegisterForm() {
 
     try {
       const result = await registerUser(payload);
-      result.success ? navigate("/login") : setError(result.error);
+
+      // ✅ Optional short delay before hiding loading screen
+      setTimeout(() => {
+        setIsLoading(false);
+
+        if (result.success) {
+          navigate("/login");
+        } else {
+          setError(result.error);
+        }
+      }, 300);
     } catch {
-      setError("Something went wrong. Please try again.");
+      setTimeout(() => {
+        setIsLoading(false);
+        setError("Something went wrong. Please try again.");
+      }, 300);
     }
   };
 
   return (
-    <div className="login-container register-container">
-      <h1>
-        <span className="highlight-red">Create</span>{" "}
-        <span className="highlight-gold">Account</span>
-      </h1>
+    <>
+      {isLoading && <LoadingScreen />}
+      <div className="login-container register-container">
+        <h1>
+          <span className="highlight-red">Create</span>{" "}
+          <span className="highlight-gold">Account</span>
+        </h1>
 
-      <form onSubmit={handleSubmit}>
-        {/* Full Name */}
-        <div className="form-section">
-          <label className="field-label">Full Name</label>
-          <div className="triple-input">
-            <input name="lastName" placeholder="Last Name" value={formData.lastName} onChange={handleChange} required />
-            <input name="firstName" placeholder="First Name" value={formData.firstName} onChange={handleChange} required />
-            <input name="middleName" placeholder="Middle Name (Optional)" value={formData.middleName} onChange={handleChange} />
+        <form onSubmit={handleSubmit}>
+          {/* Full Name */}
+          <div className="form-section">
+            <label className="field-label">Full Name</label>
+            <div className="triple-input">
+              <input name="lastName" placeholder="Last Name" value={formData.lastName} onChange={handleChange} required />
+              <input name="firstName" placeholder="First Name" value={formData.firstName} onChange={handleChange} required />
+              <input name="middleName" placeholder="Middle Name (Optional)" value={formData.middleName} onChange={handleChange} />
+            </div>
           </div>
-        </div>
 
-        {/* Birth Date */}
-        <div className="form-section">
-          <label className="field-label">Birth Date</label>
-          <div className="birth-inputs">
-            <select name="birthMonth" value={formData.birthMonth} onChange={handleChange} required>
-              <option value="">Month</option>
-              {[...Array(12)].map((_, i) => {
-                const month = `${i + 1}`.padStart(2, "0");
-                return <option key={month} value={month}>{month}</option>;
-              })}
+          {/* Birth Date */}
+          <div className="form-section">
+            <label className="field-label">Birth Date</label>
+            <div className="birth-inputs">
+              <select name="birthMonth" value={formData.birthMonth} onChange={handleChange} required>
+                <option value="">Month</option>
+                {[...Array(12)].map((_, i) => {
+                  const month = `${i + 1}`.padStart(2, "0");
+                  return <option key={month} value={month}>{month}</option>;
+                })}
+              </select>
+              <select name="birthDay" value={formData.birthDay} onChange={handleChange} required>
+                <option value="">Day</option>
+                {[...Array(31)].map((_, i) => {
+                  const day = `${i + 1}`.padStart(2, "0");
+                  return <option key={day} value={day}>{day}</option>;
+                })}
+              </select>
+              <select name="birthYear" value={formData.birthYear} onChange={handleChange} required>
+                <option value="">Year</option>
+                {Array.from({ length: 30 }, (_, i) => {
+                  const year = new Date().getFullYear() - i;
+                  return <option key={year} value={year}>{year}</option>;
+                })}
+              </select>
+            </div>
+          </div>
+
+          {/* Gender */}
+          <div className="form-section">
+            <label className="field-label">Gender</label>
+            <select name="gender" value={formData.gender} onChange={handleChange} required>
+              <option value="">Select</option>
+              <option>Male</option>
+              <option>Female</option>
+              <option>Other</option>
             </select>
-            <select name="birthDay" value={formData.birthDay} onChange={handleChange} required>
-              <option value="">Day</option>
-              {[...Array(31)].map((_, i) => {
-                const day = `${i + 1}`.padStart(2, "0");
-                return <option key={day} value={day}>{day}</option>;
-              })}
-            </select>
-            <select name="birthYear" value={formData.birthYear} onChange={handleChange} required>
-              <option value="">Year</option>
-              {Array.from({ length: 30 }, (_, i) => {
-                const year = new Date().getFullYear() - i;
-                return <option key={year} value={year}>{year}</option>;
-              })}
-            </select>
           </div>
-        </div>
 
-        {/* Gender */}
-        <div className="form-section">
-          <label className="field-label">Gender</label>
-          <select name="gender" value={formData.gender} onChange={handleChange} required>
-            <option value="">Select</option>
-            <option>Male</option>
-            <option>Female</option>
-            <option>Other</option>
-          </select>
-        </div>
-
-        {/* Contact Info */}
-        <div className="form-section">
-          <label className="field-label">Contact Info</label>
-          <div className="double-input">
-            <input type="email" name="email" placeholder="you@example.com" value={formData.email} onChange={handleChange} required />
-            <input name="contactNumber" placeholder="63+ xxx xxx xxxx" value={formData.contactNumber} onChange={handleChange} required />
+          {/* Contact Info */}
+          <div className="form-section">
+            <label className="field-label">Contact Info</label>
+            <div className="double-input">
+              <input type="email" name="email" placeholder="you@example.com" value={formData.email} onChange={handleChange} required />
+              <input name="contactNumber" placeholder="63+ xxx xxx xxxx" value={formData.contactNumber} onChange={handleChange} required />
+            </div>
           </div>
-        </div>
 
-        {/* Address */}
-        <div className="form-section">
-          <label className="field-label">Address</label>
-          <div className="triple-input">
-            <input name="town" placeholder="Town" value={formData.town} onChange={handleChange} required />
-            <input name="barangay" placeholder="Barangay" value={formData.barangay} onChange={handleChange} required />
-            <input name="houseNumber" placeholder="House No." value={formData.houseNumber} onChange={handleChange} required />
+          {/* Address */}
+          <div className="form-section">
+            <label className="field-label">Address</label>
+            <div className="triple-input">
+              <input name="town" placeholder="Town" value={formData.town} onChange={handleChange} required />
+              <input name="barangay" placeholder="Barangay" value={formData.barangay} onChange={handleChange} required />
+              <input name="houseNumber" placeholder="House No." value={formData.houseNumber} onChange={handleChange} required />
+            </div>
           </div>
-        </div>
 
-        {/* Course */}
-        <div className="form-section">
-          <label className="field-label">Course</label>
-          <input
-            type="text"
-            name="course"
-            placeholder="e.g. BSCS"
-            value={formData.course}
-            onChange={handleChange}
-            required
-          />
-        </div>
-
-
-        {/* Role and Year */}
-        <div className="form-section">
-          <label className="field-label">Role and Year</label>
-          <div className="role-year-row">
-            <select name="role" value={formData.role} onChange={handleChange} required>
-              <option value="">Select Role</option>
-              <option value="Tutee">Tutee</option>
-              <option value="Tutor">Tutor</option>
-            </select>
-            <input name="yearLevel" placeholder="e.g. 1" value={formData.yearLevel} onChange={handleChange} required />
+          {/* Course */}
+          <div className="form-section">
+            <label className="field-label">Course</label>
+            <input
+              type="text"
+              name="course"
+              placeholder="e.g. BSCS"
+              value={formData.course}
+              onChange={handleChange}
+              required
+            />
           </div>
-        </div>
 
-        {/* Passwords */}
-        <div className="form-section">
-          <label className="field-label">Password</label>
-          <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} required />
-        </div>
+          {/* Role and Year */}
+          <div className="form-section">
+            <label className="field-label">Role and Year</label>
+            <div className="role-year-row">
+              <select name="role" value={formData.role} onChange={handleChange} required>
+                <option value="">Select Role</option>
+                <option value="Tutee">Tutee</option>
+                <option value="Tutor">Tutor</option>
+              </select>
+              <input name="yearLevel" placeholder="e.g. 1" value={formData.yearLevel} onChange={handleChange} required />
+            </div>
+          </div>
 
-        <div className="form-section">
-          <label className="field-label">Confirm Password</label>
-          <input type="password" name="confirmPassword" placeholder="Confirm Password" value={formData.confirmPassword} onChange={handleChange} required />
-        </div>
+          {/* Passwords */}
+          <div className="form-section">
+            <label className="field-label">Password</label>
+            <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} required />
+          </div>
 
-        {/* Error Message */}
-        {error && <div className="error-message">{error}</div>}
+          <div className="form-section">
+            <label className="field-label">Confirm Password</label>
+            <input type="password" name="confirmPassword" placeholder="Confirm Password" value={formData.confirmPassword} onChange={handleChange} required />
+          </div>
 
-        <button type="submit">Register</button>
-      </form>
+          {/* Error Message */}
+          {error && <div className="error-message">{error}</div>}
 
-      <a href="/login">Already have an account?</a>
-    </div>
+          <button type="submit">Register</button>
+        </form>
+
+        <a href="/login">Already have an account?</a>
+      </div>
+    </>
   );
 }

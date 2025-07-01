@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import DashboardLayout from "../../Components/Layout/DashboardLayout";
 import AdminSystemAnnouncement from "../../Components/Admin/Data/AdminSystemAnnouncement";
 import AdminAddAnnounce from "../../Components/Admin/Data/AdminAddAnnounce";
-import CampaignIcon from "@mui/icons-material/Campaign"; // Optional icon
+import CampaignIcon from "@mui/icons-material/Campaign";
 import "../../Pages/Styles/Admin.css";
 
 export default function Announcement() {
+  const [refreshKey, setRefreshKey] = useState(0); // 🔁 Refresh trigger
+
+  const handleAdd = () => {
+    setRefreshKey(prev => prev + 1); // Change key to force refresh
+  };
+
   return (
     <DashboardLayout title="Announcements" role="admin">
       <div className="greeting-section">
@@ -19,8 +25,8 @@ export default function Announcement() {
       </div>
 
       <div className="dashboard-panels">
-        <AdminSystemAnnouncement />
-        <AdminAddAnnounce />
+        <AdminSystemAnnouncement key={refreshKey} />
+        <AdminAddAnnounce onAdd={handleAdd} />
       </div>
     </DashboardLayout>
   );
