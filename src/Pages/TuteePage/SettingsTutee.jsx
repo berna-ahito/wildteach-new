@@ -1,31 +1,26 @@
-// import SettingsTuteePanel from '../../Components/Tutee/Panels/SettingsTuteePanel';
-
-// export default function SettingsTutee() {
-//   return <SettingsTuteePanel />;
-// }
-
-
-import React from 'react';
-import Sidebar from '../../Components/Shared/Sidebar';
-import Header from '../../Components/Shared/Header';
-import menuTutee from '../../RoutesConfig/MenuTutee';
-import { useNavigate } from 'react-router-dom';
-import SettingsTuteePanel from '../../Components/Tutee/Panels/SettingsTuteePanel';
-import '../../Pages/Styles/TuteePage.css';
+import React from "react";
+import DashboardLayout from "../../Components/Layout/DashboardLayout";
+import ChangePassword from "../../Components/Panels/ChangePassword";
+import GroupIcon from "@mui/icons-material/Settings"; 
+import "../../Pages/Styles/TutorPage.css"; 
+import "../../Pages/Styles/TuteePage.css";
 
 export default function SettingsTutee() {
-  const navigate = useNavigate();
-  const menuItems = menuTutee(navigate);
-
   return (
-    <div className="tutee-dashboard bright-theme">
-      <Sidebar menuItems={menuItems} />
-      <div className="tutee-content">
-        <Header title="WILDTEACH" />
-        <div className="settings-container">
-          <SettingsTuteePanel />
+    <DashboardLayout title="Settings" role="tutee">
+      <div className="greeting-section">
+        <div className="greeting-avatar">
+          <GroupIcon fontSize="large" />
+        </div>
+        <div>
+          <h1>Settings Panel</h1>
+          <p>Manage your credentials and preferences here</p>
         </div>
       </div>
-    </div>
+
+      <div className="forms">
+        <ChangePassword role="tutee"/>
+      </div>
+    </DashboardLayout>
   );
 }

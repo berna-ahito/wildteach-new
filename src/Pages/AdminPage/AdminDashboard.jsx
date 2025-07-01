@@ -23,7 +23,7 @@ export default function AdminDashboard() {
         </div>
       </div>
 
-     
+
       <AdminStatData />
       <div className="dashboard-panels">
         <AdminRecentActivity />

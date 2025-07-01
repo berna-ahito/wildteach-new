@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { FaUserFriends, FaMoneyBillWave, FaUniversity } from "react-icons/fa";
 import FeatureCard from "../Shared/LandingPage/FeatureCard";
 
+
 export default function WhatIsWildTeach() {
   const navigate = useNavigate();
 
