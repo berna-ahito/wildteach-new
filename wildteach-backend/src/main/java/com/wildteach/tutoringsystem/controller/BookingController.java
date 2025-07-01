@@ -71,4 +71,11 @@ public class BookingController {
     public List<bookingEntity> getBookingsByTutor(@PathVariable Long tutorId) {
         return bookingService.getBookingsByTutor(tutorId);
     }
+
+    // ADDED - to get bookings by student
+    @GetMapping("/student/{studentId}")
+    public List<bookingEntity> getBookingsByStudent(@PathVariable Long studentId) {
+        return bookingService.getBookingsByStudent(studentId);
+    }
+
 }

@@ -57,7 +57,7 @@ export default function BookingFormPanel() {
 
       console.log("✅ Booking success:", responseText);
       alert("Booking successful!");
-      navigate("/tutee/mybookings");
+      navigate("/tuteeDashboard"); // ✅ Navigate to dashboard on success
     } catch (err) {
       console.error("Booking error:", err);
       alert("Booking failed. Please try again.");
