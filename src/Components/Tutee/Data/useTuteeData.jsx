@@ -1,31 +1,109 @@
+// import { useState, useEffect } from 'react';
+
+// export default function useTuteeData(studentId) {
+//   const [bookings, setBookings] = useState([]);
+//   const [announcements, setAnnouncements] = useState([]);
+
+//   useEffect(() => {
+//     const fetchBookings = async () => {
+//       try {
+//         const res = await fetch(`http://localhost:8080/booking/student/${studentId}`);
+//         const data = await res.json();
+
+//         const formatted = data.map((booking) => {
+//           const tutor = booking.tutor?.student;
+// a
+//           return {
+//             id: booking.bookingId,
+//             tutorName: tutor
+//               ? `${tutor.first_name} ${tutor.last_name}`
+//               : "Unknown Tutor",
+//             subject: booking.subject,
+//             date: new Date(booking.sessionDateTime).toLocaleString('en-PH', {
+//               weekday: 'short',
+//               month: 'short',
+//               day: 'numeric',
+//               year: 'numeric',
+//               hour: 'numeric',
+//               minute: '2-digit',
+
+//             }),
+//             status: booking.status,
+//           };
+//         });
+
+//         setBookings(formatted);
+//       } catch (err) {
+//         console.error("Error fetching student bookings:", err);
+//       }
+//     };
+
+//     if (studentId) {
+//       fetchBookings();
+//     }
+//   }, [studentId]);
+
+
+
+//   useEffect(() => {
+//     setAnnouncements([]);
+//   }, []);
+
+//   return { bookings, announcements };
+// }
+
+
+
 import { useState, useEffect } from 'react';
 
-const mockBookings = [
-  {
-    id: 1,
-    tutor: 'John Doe',
-    subject: 'IM2',
-    date: 'June 25, 2025, 10:00 AM',
-    status: 'Confirmed',
-  },
-  {
-    id: 2,
-    tutor: 'Jane Smith',
-    subject: 'Physics',
-    date: 'June 26, 2025, 2:00 PM',
-    status: 'Pending',
-  },
-];
-
-export default function useTuteeData() {
+export default function useTuteeData(studentId) {
   const [bookings, setBookings] = useState([]);
   const [announcements, setAnnouncements] = useState([]);
 
   useEffect(() => {
-    setTimeout(() => {
-      setBookings(mockBookings);
-      setAnnouncements(mockAnnouncements);
-    }, 300); 
+    const fetchBookings = async () => {
+      try {
+        const res = await fetch(`http://localhost:8080/booking/student/${studentId}`);
+        const data = await res.json();
+
+        const formatted = data.map((booking) => {
+          const tutor = booking.tutor?.student;
+
+          // ✅ Adjust UTC to Philippine Time (UTC+8)
+          const localDateTime = new Date(new Date(booking.sessionDateTime).getTime() + 8 * 60 * 60 * 1000);
+
+          return {
+            id: booking.bookingId,
+            tutorName: tutor
+              ? `${tutor.first_name} ${tutor.last_name}`
+              : "Unknown Tutor",
+            subject: booking.subject,
+            date: localDateTime.toLocaleString('en-PH', {
+              weekday: 'short',
+              month: 'short',
+              day: 'numeric',
+              year: 'numeric',
+              hour: 'numeric',
+              minute: '2-digit',
+              hour12: true,
+            }),
+            status: booking.status,
+          };
+        });
+
+        setBookings(formatted);
+      } catch (err) {
+        console.error("Error fetching student bookings:", err);
+      }
+    };
+
+    if (studentId) {
+      fetchBookings();
+    }
+  }, [studentId]);
+
+  useEffect(() => {
+    setAnnouncements([]);
   }, []);
 
   return { bookings, announcements };

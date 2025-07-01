@@ -1,8 +1,8 @@
 package com.wildteach.tutoringsystem.service;
 
-import com.wildteach.tutoringsystem.entity.bookingEntity;
-
 import java.util.List;
+
+import com.wildteach.tutoringsystem.entity.bookingEntity;
 
 public interface bookingService {
 
@@ -19,4 +19,7 @@ public interface bookingService {
     long getActiveSessionsCount();
 
     List<bookingEntity> getBookingsByTutor(Long tutorId); // ✅ added
+    
+    List<bookingEntity> getBookingsByStudent(Long studentId); // ✅ added - to get bookings by student
+
 }
