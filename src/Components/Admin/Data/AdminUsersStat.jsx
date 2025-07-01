@@ -35,8 +35,6 @@ export default function AdminStatData() {
   const stats = [
     { label: 'Active Tutors', value: activeTutors, icon: GroupIcon, color: 'orange' },
     { label: 'Active Students', value: activeStudents, icon: SchoolIcon, color: 'purple' },
-    { label: 'Active Sessions', value: 5, icon: PlayCircleOutlineIcon, color: 'yellow' },
-    { label: 'Total Revenue', value: '₱25,000', icon: MonetizationOnIcon, color: 'green' }
   ];
 
   return <StatCards stats={stats} />;

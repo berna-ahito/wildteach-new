@@ -14,9 +14,8 @@ export default function RegisterForm() {
     password: "", confirmPassword: "", role: ""
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -28,7 +27,6 @@ export default function RegisterForm() {
     }
 
     const birth_date = `${formData.birthYear}-${formData.birthMonth.padStart(2, '0')}-${formData.birthDay.padStart(2, '0')}`;
-
     const payload = {
       last_name: formData.lastName,
       first_name: formData.firstName,
@@ -47,26 +45,23 @@ export default function RegisterForm() {
       is_active: true
     };
 
-    console.log("Submitting payload:", payload);
-
     try {
       const result = await registerUser(payload);
-      if (result.success) {
-        navigate("/login");
-      } else {
-        setError(result.error);
-      }
-    } catch (err) {
-      console.error("Registration error:", err);
+      result.success ? navigate("/login") : setError(result.error);
+    } catch {
       setError("Something went wrong. Please try again.");
     }
   };
 
   return (
-    <div className="login-container">
-      <h1>Create an Account</h1>
+    <div className="login-container register-container">
+      <h1>
+        <span className="highlight-red">Create</span>{" "}
+        <span className="highlight-gold">Account</span>
+      </h1>
+
       <form onSubmit={handleSubmit}>
-        {/* Name */}
+        {/* Full Name */}
         <div className="form-section">
           <label className="field-label">Full Name</label>
           <div className="triple-input">
@@ -76,58 +71,51 @@ export default function RegisterForm() {
           </div>
         </div>
 
-        {/* Birthdate + Gender */}
+        {/* Birth Date */}
         <div className="form-section">
-          <div className="birth-gender-row">
-            <div className="birth-section">
-              <label className="field-label">Birth Date</label>
-              <div className="birth-inputs">
-                <select name="birthMonth" value={formData.birthMonth} onChange={handleChange} required>
-                  <option value="">Month</option>
-                  {[...Array(12)].map((_, i) => {
-                    const month = (i + 1).toString().padStart(2, "0");
-                    return <option key={month} value={month}>{month}</option>;
-                  })}
-                </select>
-                <select name="birthDay" value={formData.birthDay} onChange={handleChange} required>
-                  <option value="">Day</option>
-                  {[...Array(31)].map((_, i) => {
-                    const day = (i + 1).toString().padStart(2, "0");
-                    return <option key={day} value={day}>{day}</option>;
-                  })}
-                </select>
-                <select name="birthYear" value={formData.birthYear} onChange={handleChange} required>
-                  <option value="">Year</option>
-                  {Array.from({ length: 30 }, (_, i) => {
-                    const year = new Date().getFullYear() - i;
-                    return <option key={year} value={year}>{year}</option>;
-                  })}
-                </select>
-              </div>
-            </div>
-            <div className="gender-section">
-              <label className="field-label">Gender</label>
-              <select name="gender" value={formData.gender} onChange={handleChange} required>
-                <option value="">Select</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-              </select>
-            </div>
+          <label className="field-label">Birth Date</label>
+          <div className="birth-inputs">
+            <select name="birthMonth" value={formData.birthMonth} onChange={handleChange} required>
+              <option value="">Month</option>
+              {[...Array(12)].map((_, i) => {
+                const month = `${i + 1}`.padStart(2, "0");
+                return <option key={month} value={month}>{month}</option>;
+              })}
+            </select>
+            <select name="birthDay" value={formData.birthDay} onChange={handleChange} required>
+              <option value="">Day</option>
+              {[...Array(31)].map((_, i) => {
+                const day = `${i + 1}`.padStart(2, "0");
+                return <option key={day} value={day}>{day}</option>;
+              })}
+            </select>
+            <select name="birthYear" value={formData.birthYear} onChange={handleChange} required>
+              <option value="">Year</option>
+              {Array.from({ length: 30 }, (_, i) => {
+                const year = new Date().getFullYear() - i;
+                return <option key={year} value={year}>{year}</option>;
+              })}
+            </select>
           </div>
         </div>
 
-        {/* Email + Contact */}
+        {/* Gender */}
         <div className="form-section">
+          <label className="field-label">Gender</label>
+          <select name="gender" value={formData.gender} onChange={handleChange} required>
+            <option value="">Select</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+        </div>
+
+        {/* Contact Info */}
+        <div className="form-section">
+          <label className="field-label">Contact Info</label>
           <div className="double-input">
-            <div>
-              <label className="field-label">Email</label>
-              <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="you@example.com" required />
-            </div>
-            <div>
-              <label className="field-label">Contact Number</label>
-              <input name="contactNumber" value={formData.contactNumber} onChange={handleChange} placeholder="63+ xxx xxx xxxx" required />
-            </div>
+            <input type="email" name="email" placeholder="you@example.com" value={formData.email} onChange={handleChange} required />
+            <input name="contactNumber" placeholder="63+ xxx xxx xxxx" value={formData.contactNumber} onChange={handleChange} required />
           </div>
         </div>
 
@@ -137,41 +125,35 @@ export default function RegisterForm() {
           <div className="triple-input">
             <input name="town" placeholder="Town" value={formData.town} onChange={handleChange} required />
             <input name="barangay" placeholder="Barangay" value={formData.barangay} onChange={handleChange} required />
-            <input name="houseNumber" placeholder="House Number" value={formData.houseNumber} onChange={handleChange} required />
+            <input name="houseNumber" placeholder="House No." value={formData.houseNumber} onChange={handleChange} required />
           </div>
         </div>
 
-        {/* Role + Year */}
+        {/* Role and Year */}
         <div className="form-section">
+          <label className="field-label">Role and Year</label>
           <div className="role-year-row">
-            <div className="role-section">
-              <label className="field-label">Role</label>
-              <select name="role" value={formData.role} onChange={handleChange} required>
-                <option value="">Select Role</option>
-                <option value="Tutee">Tutee</option>
-                <option value="Tutor">Tutor</option>
-              </select>
-            </div>
-            <div className="year-section">
-              <label className="field-label">Year Level</label>
-              <input name="yearLevel" placeholder="e.g. 1" value={formData.yearLevel} onChange={handleChange} required />
-            </div>
+            <select name="role" value={formData.role} onChange={handleChange} required>
+              <option value="">Select Role</option>
+              <option value="Tutee">Tutee</option>
+              <option value="Tutor">Tutor</option>
+            </select>
+            <input name="yearLevel" placeholder="e.g. 1" value={formData.yearLevel} onChange={handleChange} required />
           </div>
         </div>
 
-        {/* Password */}
+        {/* Passwords */}
         <div className="form-section">
           <label className="field-label">Password</label>
-          <input type="password" name="password" value={formData.password} onChange={handleChange} placeholder="Password" required />
+          <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} required />
         </div>
 
-        {/* Confirm Password */}
         <div className="form-section">
           <label className="field-label">Confirm Password</label>
-          <input type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} placeholder="Confirm Password" required />
+          <input type="password" name="confirmPassword" placeholder="Confirm Password" value={formData.confirmPassword} onChange={handleChange} required />
         </div>
 
-        {/* Error message */}
+        {/* Error Message */}
         {error && <div className="error-message">{error}</div>}
 
         <button type="submit">Register</button>
