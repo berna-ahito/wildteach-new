@@ -1,0 +1,69 @@
+/* Backdrop like a modal */
+.loading-dialog-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+/* Dialog box appearance */
+.loading-dialog {
+    background: white;
+    border-radius: 16px;
+    padding: 40px 30px;
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Logo badge (spinning) */
+.logo-badge {
+    position: relative;
+    width: 55px;
+    height: 55px;
+    background: conic-gradient(from 45deg, #e8b547, #7a3034, #e8b547, #7a3034, #e8b547);
+    border-radius: 50%;
+    padding: 3px;
+}
+
+.logo-inner {
+    width: 100%;
+    height: 100%;
+    background: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    font-size: 24px;
+    color: #7a3034;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Spinning animation */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.spin {
+    animation: spin 1.2s linear infinite;
+}
+
+/* Optional text */
+.loading-text {
+    margin-top: 12px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    color: #7a3034;
+    font-size: 16px;
+}
