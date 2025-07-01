@@ -4,6 +4,9 @@ import ChangePassword from "../../Components/Panels/ChangePassword";
 import GroupIcon from "@mui/icons-material/Settings";
 import "../../Pages/Styles/TutorPage.css";
 import "../../Pages/Styles/Admin.css";
+import ChangeEmail from '../../Components/Panels/ChangeEmail';
+import AdminAddNewAdmin from "../../Components/Admin/Data/AdminAddNewAdmin";
+import AdminDeleteAccount from "../../Components/Admin/Data/AdminDeleteAccount";
 
 export default function Settings() {
   const user = JSON.parse(localStorage.getItem("user"));
@@ -28,7 +31,12 @@ export default function Settings() {
 
       <div className="forms">
         {/* ✅ Now includes email prop */}
+        <ChangeEmail role= {role} userId={userId} email={email}/>
         <ChangePassword role={role} userId={userId} email={email} />
+        <div className = "forms-buttons">
+           <AdminAddNewAdmin />
+           <AdminDeleteAccount/>
+        </div>
       </div>
     </DashboardLayout>
   );
