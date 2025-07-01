@@ -11,6 +11,7 @@ export default function SessionManage() {
     <div>
       <DashboardLayout title="Session Management" role="admin">
         <div className='Page'>
+         
           <AdminSessionData />
           <AdminSessionTable bookings={bookings} />
         </div>
