@@ -1,90 +1,77 @@
-// src/Components/Tutee/Panels/BookingFormPanel.jsx
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import DatePicker from 'react-datepicker';
-import { Typography } from '@mui/material';
+import { useParams } from 'react-router-dom';
 import 'react-datepicker/dist/react-datepicker.css';
 import useBookingData from '../Data/useBookingData';
-import '../../../Pages/Styles/TuteePage.css';
 
-export default function BookingFormPanel({ tutorId }) {
-  const navigate = useNavigate();
-  const studentId = localStorage.getItem('student_id');
-
+export default function BookingFormPanel() {
+  const { tutorId } = useParams();
   const {
-    tutor,
     subject,
     setSubject,
     sessionDateTime,
     setSessionDateTime,
+    tutor,
   } = useBookingData(tutorId);
 
-  const handleBookingSubmit = (e) => {
+  const handleBookingSubmit = async (e) => {
     e.preventDefault();
 
-    if (!studentId || !tutorId || !tutor) {
-      alert('Missing required information. Make sure tutor is loaded.');
+    const studentId = localStorage.getItem('student_id');
+    if (!studentId || !tutorId) {
+      alert('Missing student or tutor information.');
       return;
     }
 
-    const bookingPayload = {
+    const payload = {
       student: { student_id: parseInt(studentId) },
-      tutor: { tutor_id: tutor.tutor_id },
+      tutor: { tutor_id: parseInt(tutorId) },
       subject,
       sessionDateTime,
       status: 'Pending',
     };
 
-    fetch('http://localhost:8080/booking/add', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(bookingPayload),
-    })
-      .then(async (res) => {
-        const data = await res.json().catch(() => ({}));
-        if (res.ok) {
-          alert('Booking successful!');
-          navigate('/tuteeDashboard');
-        } else {
-          alert(`Booking failed: ${res.status} - ${data.message || 'Unknown error'}`);
-        }
-      })
-      .catch((err) => console.error('Booking error:', err));
+    try {
+      const res = await fetch('http://localhost:8080/booking/add', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      if (!res.ok) throw new Error('Booking failed');
+      alert('Booking successfully submitted!');
+    } catch (err) {
+      console.error('Booking error:', err);
+      alert('Booking failed. Please try again.');
+    }
   };
 
-  if (!tutor) return <Typography>Loading tutor information...</Typography>;
-
   return (
-    <div className="booking-form-card">
-      <h2 className="form-title">
-        Book a Session with {tutor.student?.first_name} {tutor.student?.last_name}
-      </h2>
+    <div className="booking-form-box">
+      <div className="booking-heading">
+        <h2>Book a Session with <span className="mock-name">{tutor?.student?.first_name} {tutor?.student?.last_name}</span></h2>
+      </div>
 
-      <form onSubmit={handleBookingSubmit} className="booking-form">
-        <div className="form-group">
-          <label htmlFor="subject">Subject</label>
-          <input
-            type="text"
-            id="subject"
-            className="input-field"
-            value={subject}
-            onChange={(e) => setSubject(e.target.value)}
-            required
-          />
-        </div>
+      <form onSubmit={handleBookingSubmit}>
+        <label>Subject</label>
+        <input
+          type="text"
+          className="subject-input"
+          value={subject}
+          onChange={(e) => setSubject(e.target.value)}
+          placeholder="Enter subject"
+          required
+        />
 
-        <div className="form-group" >
-          <label htmlFor="sessionDateTime">Select Date & Time</label>
-          <DatePicker
-            selected={sessionDateTime}
-            onChange={(date) => setSessionDateTime(date)}
-            showTimeSelect
-            timeFormat="h:mm aa"
-            timeIntervals={30}
-            dateFormat="MMMM d, yyyy h:mm aa"
-            className="input-field"
-          />
-        </div>
+        <label>Select Date & Time</label>
+        <DatePicker
+          selected={sessionDateTime}
+          onChange={(date) => setSessionDateTime(date)}
+          showTimeSelect
+          timeFormat="h:mm aa"
+          timeIntervals={30}
+          dateFormat="MMMM d, yyyy h:mm aa"
+        />
 
         <div className="form-actions">
           <button type="submit" className="confirm-book-button">

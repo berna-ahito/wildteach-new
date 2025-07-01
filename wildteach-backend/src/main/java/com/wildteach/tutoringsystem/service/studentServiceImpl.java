@@ -20,7 +20,6 @@ public class studentServiceImpl implements studentService {
         return tutorService.findByStudent(studentId);
     }
 
-
     @Override
     public studentEntity saveStudent(studentEntity student) {
         return studentRepository.save(student);
@@ -42,53 +41,51 @@ public class studentServiceImpl implements studentService {
         if (existingStudent == null) {
             return null;
         }
-    
+
         if (updatedDetails.getFirst_name() != null)
             existingStudent.setFirst_name(updatedDetails.getFirst_name());
-    
+
         if (updatedDetails.getLast_name() != null)
             existingStudent.setLast_name(updatedDetails.getLast_name());
-    
+
         if (updatedDetails.getMiddle_name() != null)
             existingStudent.setMiddle_name(updatedDetails.getMiddle_name());
-    
+
         if (updatedDetails.getBirth_date() != null)
             existingStudent.setBirth_date(updatedDetails.getBirth_date());
-    
+
         if (updatedDetails.getGender() != null)
             existingStudent.setGender(updatedDetails.getGender());
-    
+
         if (updatedDetails.getEmail() != null)
             existingStudent.setEmail(updatedDetails.getEmail());
-    
+
         if (updatedDetails.getContact_number() != null)
             existingStudent.setContact_number(updatedDetails.getContact_number());
-    
+
         if (updatedDetails.getAddress() != null)
             existingStudent.setAddress(updatedDetails.getAddress());
-    
+
         if (updatedDetails.getUsername() != null)
             existingStudent.setUsername(updatedDetails.getUsername());
-    
+
         if (updatedDetails.getCourse() != null)
             existingStudent.setCourse(updatedDetails.getCourse());
-    
+
         if (updatedDetails.getYear_level() != null)
             existingStudent.setYear_level(updatedDetails.getYear_level());
-    
+
         if (updatedDetails.getProfileImage() != null)
             existingStudent.setProfileImage(updatedDetails.getProfileImage());
-    
+
         if (updatedDetails.getRole() != null)
             existingStudent.setRole(updatedDetails.getRole());
-    
+
         if (updatedDetails.getPassword() != null)
             existingStudent.setPassword(updatedDetails.getPassword());
-    
+
         return studentRepository.save(existingStudent);
     }
-    
-    
 
     @Override
     public boolean deleteStudent(Long id) {
@@ -105,7 +102,6 @@ public class studentServiceImpl implements studentService {
         return student != null && student.getPassword().equals(password); // Remove role check
     }
 
-
     @Override
     public long countActiveStudents() {
         return studentRepository.countByRole(studentEntity.Role.Tutee);
@@ -115,16 +111,21 @@ public class studentServiceImpl implements studentService {
     public boolean updateStudentPassword(Long studentId, String oldPassword, String newPassword) {
         studentEntity student = studentRepository.findById(studentId).orElse(null);
         if (student == null || !student.getPassword().equals(oldPassword)) {
-            return false;  
+            return false;
         }
-        student.setPassword(newPassword);  
+        student.setPassword(newPassword);
         studentRepository.save(student);
-        return true; 
+        return true;
     }
+
     @Override
     public studentEntity findByEmail(String email) {
         return studentRepository.findByEmail(email);
     }
-    
-    
+
+    @Override
+    public List<studentEntity> getAllTutors() {
+        return studentRepository.findAllTutors();
+    }
+
 }

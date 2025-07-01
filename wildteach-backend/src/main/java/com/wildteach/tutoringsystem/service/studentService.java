@@ -25,4 +25,5 @@ public interface studentService {
 
 	tutorEntity getTutorByStudentId(Long studentId);
 
+	List<studentEntity> getAllTutors();
 }

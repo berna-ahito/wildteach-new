@@ -8,7 +8,8 @@ import WavingHandIcon from '@mui/icons-material/WavingHand';
 
 export default function TutorDashboard() {
   const navigate = useNavigate();
-  const firstName = localStorage.getItem('first_name') || 'Tutor'; // ✅ Optional personalization
+  const user = JSON.parse(localStorage.getItem("user"))
+  const firstName = user?.name?.split(" ")[0] || "Tutor";
 
   return (
     <DashboardLayout title="WILDTEACH" role="tutor">
@@ -25,7 +26,7 @@ export default function TutorDashboard() {
       <TutorStatData />
       <div className="dashboard-panels">
         <TutorScheduleData />
-        <TutorRecentActivity /> {/* ✅ Now showing live activity */}
+        <TutorRecentActivity /> 
       </div>
     </DashboardLayout>
   );
