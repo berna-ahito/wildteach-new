@@ -42,6 +42,7 @@ html {
   text-align: center;
   margin-bottom: 24px;
 }
+
 .field-label {
   color: #F8C400;
   font-weight: 600;
@@ -216,6 +217,7 @@ html {
 }
 
 @media (max-width: 480px) {
+
   body,
   html {
     padding: 10px 0;
@@ -254,6 +256,11 @@ html {
 .highlight-gold {
   color: #F8C400;
   font-weight: 800;
+}
+
+.register-link {
+  display: flex;
+  justify-content: center;
 }
 
 .clickable {

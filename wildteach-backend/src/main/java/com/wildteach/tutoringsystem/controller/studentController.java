@@ -16,7 +16,7 @@ import com.wildteach.tutoringsystem.service.studentService;
 
 @RestController
 @RequestMapping("/student")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class studentController {
 
     @Autowired
