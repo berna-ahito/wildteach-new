@@ -13,6 +13,7 @@ export async function loginUser(email, password) {
 
     if (adminRes.ok) {
       const data = await adminRes.json();
+      const studentId = data.student_id;
       console.log("[Login] Admin login successful:", data);
 
       const userData = {
@@ -23,6 +24,7 @@ export async function loginUser(email, password) {
         email: data.email,
       };
 
+      localStorage.setItem("student_id", studentId.toString());
       localStorage.setItem("user", JSON.stringify(userData));
       return "admin";
     }
@@ -46,8 +48,7 @@ export async function loginUser(email, password) {
     const studentId = data.student_id;
     const role = data.role?.toLowerCase();
 
-    console.log("[Login] Student login successful:", data);
-    console.log("[Login] Role from response:", role);
+    localStorage.setItem("student_id", studentId.toString()); // ✅ ← PLACE IT HERE
 
     const userData = {
       isLoggedIn: true,
@@ -57,7 +58,6 @@ export async function loginUser(email, password) {
       email: data.email || email,
     };
 
-    // ✅ If tutor, fetch tutor ID and store separately
     if (role === "tutor") {
       const checkTutor = await fetch(`http://localhost:8080/student/hasTutorProfile/${studentId}`);
       if (checkTutor.ok) {

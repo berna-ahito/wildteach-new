@@ -8,8 +8,8 @@ export default function useFindTutorData() {
     const fetchTutors = async () => {
       try {
         const [studentsRes, tutorRes] = await Promise.all([
-          fetch("http://localhost:8080/student/tutorAccounts"), // All students with role=Tutor
-          fetch("http://localhost:8080/tutor/all") // All tutorEntity profiles
+          fetch("http://localhost:8080/student/tutorAccounts"), 
+          fetch("http://localhost:8080/tutor/all")
         ]);
 
         const students = await studentsRes.json();
@@ -22,6 +22,7 @@ export default function useFindTutorData() {
 
           return {
             id: student.student_id,
+            tutor_id: tutorProfile?.tutor_id || null,
             name: `${student.first_name} ${student.last_name}`,
             status: tutorProfile?.approvalStatus || "Pending",
             subjects: tutorProfile?.subjects_offered || "N/A",
