@@ -23,7 +23,7 @@ export default function BookingPage() {
 
         <div className="booking-card-wrapper">
           <div className="booking-card">
-            <BookingFormPanel tutorId={tutorId} />
+            <BookingFormPanel />
           </div>
         </div>
       </div>

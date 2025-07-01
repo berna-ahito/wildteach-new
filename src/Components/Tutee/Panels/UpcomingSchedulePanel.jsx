@@ -1,13 +1,15 @@
 import React from 'react';
 import { Typography, Button, Paper } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import useTuteeData from '../Data/useTuteeData';
 
 export default function UpcomingSchedulePanel() {
   const { bookings } = useTuteeData();
+  const navigate = useNavigate();
 
   return (
-    <div className="tutee-panel-card">
-      <div className="tutee-panel-header">
+    <div className="panel-card">
+      <div className="panel-header">
         <h3>📅 Upcoming Tutoring Schedule</h3>
       </div>
 
@@ -28,7 +30,22 @@ export default function UpcomingSchedulePanel() {
                   {booking.status}
                 </span>
               </Typography>
-              <Button className="tutee-view-button">View</Button>
+
+              <Button
+                variant="contained"
+                sx={{
+                  backgroundColor: '#6d2a30', // Change this to your desired color
+                  color: 'white',
+                  borderRadius: '10px',
+                  '&:hover': {
+                    backgroundColor: '#F8C400' // darker shade for hover
+                  }
+                }}
+                onClick={() => navigate('/tutee/my-bookings')}
+              >
+                View
+              </Button>
+
             </Paper>
           ))
         )}

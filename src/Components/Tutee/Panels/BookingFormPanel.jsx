@@ -7,7 +7,6 @@ import 'react-datepicker/dist/react-datepicker.css';
 import useBookingData from '../Data/useBookingData';
 import '../../../Pages/Styles/TuteePage.css';
 
-
 export default function BookingFormPanel({ tutorId }) {
   const navigate = useNavigate();
   const studentId = localStorage.getItem('student_id');

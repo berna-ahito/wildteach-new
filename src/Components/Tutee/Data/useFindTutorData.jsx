@@ -22,3 +22,45 @@ export default function useFindTutorData() {
     filteredTutors
   };
 }
+
+
+//MODIFIED CODE | 06-30-25
+//Modified version of useFindTutorData.js to fetch data from the tutor
+// import { useState, useEffect } from 'react';
+
+// export default function useFindTutorData() {
+//   const [searchTerm, setSearchTerm] = useState('');
+//   const [tutors, setTutors] = useState([]);
+
+//   useEffect(() => {
+//     fetch('http://localhost:8080/tutor/all')
+//       .then((res) => res.json())
+//       .then((data) => {
+//         const formattedTutors = data.map((tutor) => ({
+//           id: tutor.tutor_id,
+//           name: `${tutor.student?.first_name} ${tutor.student?.last_name}`,
+//           status: tutor.status || 'Active',
+//           subjects: tutor.subjects || 'N/A',
+//           rate: `₱${tutor.hourly_rate || '0'}`,
+//           availability: tutor.availability || 'Not set',
+//         }));
+//         setTutors(formattedTutors);
+//       })
+//       .catch((err) => {
+//         console.error('Error fetching tutors:', err);
+//         setTutors([]);
+//       });
+//   }, []);
+
+//   const filteredTutors = tutors.filter((tutor) =>
+//     tutor.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+//     tutor.subjects.toLowerCase().includes(searchTerm.toLowerCase())
+//   );
+
+//   return {
+//     searchTerm,
+//     setSearchTerm,
+//     filteredTutors
+//   };
+// }
+

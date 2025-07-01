@@ -1,6 +1,7 @@
 import React from "react";
 import { FaUserFriends, FaMoneyBillWave, FaUniversity } from "react-icons/fa";
 
+
 export default function WhatIsWildTeach() {
   return (
     <div className="wildteach-fullscreen">
