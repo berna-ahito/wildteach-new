@@ -11,7 +11,8 @@ export default function RegisterForm() {
     birthMonth: "", birthDay: "", birthYear: "",
     gender: "", town: "", barangay: "", houseNumber: "",
     email: "", contactNumber: "", yearLevel: "",
-    password: "", confirmPassword: "", role: ""
+    password: "", confirmPassword: "", role: "",
+    course: "" // Added course field
   });
 
   const handleChange = (e) =>
@@ -37,7 +38,7 @@ export default function RegisterForm() {
       contact_number: formData.contactNumber,
       address: `${formData.houseNumber}, ${formData.barangay}, ${formData.town}`,
       username: formData.email.split("@")[0],
-      course: "BSCS",
+      course: formData.course, // Use selected course
       year_level: parseInt(formData.yearLevel),
       profileImage: "default.jpg",
       role: formData.role,
@@ -128,6 +129,20 @@ export default function RegisterForm() {
             <input name="houseNumber" placeholder="House No." value={formData.houseNumber} onChange={handleChange} required />
           </div>
         </div>
+
+        {/* Course */}
+        <div className="form-section">
+          <label className="field-label">Course</label>
+          <input
+            type="text"
+            name="course"
+            placeholder="e.g. BSCS"
+            value={formData.course}
+            onChange={handleChange}
+            required
+          />
+        </div>
+
 
         {/* Role and Year */}
         <div className="form-section">
