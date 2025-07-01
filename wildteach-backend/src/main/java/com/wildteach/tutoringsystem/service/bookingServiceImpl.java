@@ -21,30 +21,28 @@ public class bookingServiceImpl implements bookingService {
     @Autowired
     private tutorRepository tutorRepository;
 
-
     @Override
     public bookingEntity saveBooking(bookingEntity booking) {
-    // Attach student if present
-    if (booking.getStudent() != null && booking.getStudent().getStudent_id() != null) {
-        studentEntity student = studentRepository.findById(booking.getStudent().getStudent_id())
-            .orElseThrow(() -> new RuntimeException("Student not found"));
-        booking.setStudent(student);
-    } else {
-        throw new RuntimeException("Student ID is required");
+        // Attach student if present
+        if (booking.getStudent() != null && booking.getStudent().getStudent_id() != null) {
+            studentEntity student = studentRepository.findById(booking.getStudent().getStudent_id())
+                    .orElseThrow(() -> new RuntimeException("Student not found"));
+            booking.setStudent(student);
+        } else {
+            throw new RuntimeException("Student ID is required");
+        }
+
+        // Attach tutor if present
+        if (booking.getTutor() != null && booking.getTutor().getTutor_id() != null) {
+            tutorEntity tutor = tutorRepository.findById(booking.getTutor().getTutor_id())
+                    .orElseThrow(() -> new RuntimeException("Tutor not found"));
+            booking.setTutor(tutor);
+        } else {
+            throw new RuntimeException("Tutor ID is required");
+        }
+
+        return bookingRepository.save(booking);
     }
-
-    // Attach tutor if present
-    if (booking.getTutor() != null && booking.getTutor().getTutor_id() != null) {
-        tutorEntity tutor = tutorRepository.findById(booking.getTutor().getTutor_id())
-            .orElseThrow(() -> new RuntimeException("Tutor not found"));
-        booking.setTutor(tutor);
-    } else {
-        throw new RuntimeException("Tutor ID is required");
-    }
-
-    return bookingRepository.save(booking);
-}
-
 
     @Override
     public List<bookingEntity> getAllBookings() {
@@ -92,7 +90,8 @@ public class bookingServiceImpl implements bookingService {
         return bookingRepository.countByStatus("Scheduled");
     }
 
-    
-    
-
+    @Override
+    public List<bookingEntity> getBookingsByTutor(Long tutorId) {
+        return bookingRepository.findByTutorId(tutorId);
+    }
 }

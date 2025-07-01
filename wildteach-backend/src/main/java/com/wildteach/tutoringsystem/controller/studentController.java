@@ -117,4 +117,10 @@ public class studentController {
             return ResponseEntity.status(400).body("Current password is incorrect");
         }
     }
+
+    @GetMapping("/tutorAccounts")
+    public List<studentEntity> getAllTutorAccounts() {
+        return studentService.getAllTutors();
+    }
+
 }
