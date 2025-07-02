@@ -6,7 +6,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import ToastNotification from "../../Panels/ToastNotification"; // ✅ import toast
+import ToastNotification from "../../Panels/ToastNotification"; 
 import "../../../Pages/Styles/Admin.css";
 
 export default function AdminAddAnnounce({ onAdd }) {
@@ -20,7 +20,7 @@ export default function AdminAddAnnounce({ onAdd }) {
     if (title.trim() && content.trim()) {
       try {
         const response = await axios.post("http://localhost:8080/announcement/addAnnounce", {
-          title: title,
+          title: title, 
           message: content,
           created_at: new Date().toISOString(),
           admin: {
