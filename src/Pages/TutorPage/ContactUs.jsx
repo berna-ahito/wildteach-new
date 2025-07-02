@@ -4,10 +4,8 @@ export default function ContactUs() {
   return (
     <>
       <DashboardLayout>
+          <ContactSection />
       </DashboardLayout>
-              <ContactSection />
-
     </>
-   
   );
 }

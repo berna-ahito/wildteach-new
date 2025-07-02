@@ -4,7 +4,7 @@ import Sidebar from "../../Components/Shared/Sidebar";
 import { useNavigate } from "react-router-dom";
 import ProfileInfo from "../../Components/Panels/ProfileInfo";
 import PersonalInfo from "../../Components/Panels/PersonalInfo";
-import AddressInfo from "../../Components/Panels/AddressInfo";
+// import AddressInfo from "../../Components/Panels/AddressInfo";
 import DashboardLayout from "../../Components/Layout/DashboardLayout";
 import "../../Pages/Styles/TutorPage.css"; // ✅ using same styling
 
