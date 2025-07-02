@@ -17,28 +17,33 @@ export default function LoginForm({ setIsLoggedIn }) {
 
     try {
       const role = await loginUser(email, password);
+      console.log("[LoginForm] Final role after login:", role);
 
-      setTimeout(() => {
-        setIsLoggedIn(true);
-        setIsLoading(false);
+      setIsLoggedIn(true);
+      setIsLoading(false);
 
-        switch (role) {
-          case "admin":
-            navigate("/adminDashboard");
-            break;
-          case "tutor":
-            navigate("/tutorDashboard");
-            break;
-          default:
-            navigate("/tuteeDashboard");
-            break;
-        }
-      }, 300);
+      if (!role) {
+        throw new Error("Login failed: no role returned.");
+      }
+
+      switch (role) {
+        case "admin":
+          console.log("[LoginForm] Navigating to /adminDashboard");
+          navigate("/adminDashboard");
+          break;
+        case "tutor":
+          console.log("[LoginForm] Navigating to /tutorDashboard");
+          navigate("/tutorDashboard");
+          break;
+        default:
+          console.log("[LoginForm] Navigating to /tuteeDashboard");
+          navigate("/tuteeDashboard");
+          break;
+      }
     } catch (err) {
-      setTimeout(() => {
-        setIsLoading(false);
-        setError(err.message || "Login failed.");
-      }, 300);
+      console.error("[LoginForm] Login error:", err);
+      setIsLoading(false);
+      setError(err.message || "Login failed.");
     }
   };
 

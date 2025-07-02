@@ -9,10 +9,20 @@ export default function Header({ title }) {
     <AppBar position="fixed" color="default" elevation={1} className="custom-header">
       <Toolbar className="header-toolbar">
         <div className="navbar-left">
-          <div className="navbar-logo-circle">
-            <span className="logo-circle-text">W</span>
+          <div
+            className="brand-zone"
+            onClick={() => navigate("/home")}
+            style={{ cursor: "pointer" }}
+          >
+            <div className="logo-badge">
+              <div className="logo-inner">W</div>
+            </div>
+            <div className="brand-title">
+              <span className="wild-text">WILD</span>
+              <span className="teach-text">TEACH</span>
+              <div className="brand-underline"></div>
+            </div>
           </div>
-          <Typography variant="h6" className="navbar-title">{title}</Typography>
         </div>
         
 

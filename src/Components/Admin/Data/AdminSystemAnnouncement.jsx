@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Announcement from "../../Panels/Announcement";
 
-export default function AdminSystemAnnouncement() {
+export default function AdminSystemAnnouncement({ refreshTrigger, onRefresh }) {
   const [announcements, setAnnouncements] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
+    setLoading(true);
     axios
       .get("http://localhost:8080/announcement/getAllAnnounce")
       .then((response) => {
@@ -28,10 +29,10 @@ export default function AdminSystemAnnouncement() {
         setError("Failed to load announcements.");
         setLoading(false);
       });
-  }, []);
+  }, [refreshTrigger]);
 
   if (loading) return <p>Loading announcements...</p>;
   if (error) return <p>{error}</p>;
 
-  return <Announcement announcements={announcements} />;
+  return <Announcement announcements={announcements} onRefresh={onRefresh} />;
 }

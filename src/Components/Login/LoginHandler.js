@@ -13,20 +13,18 @@ export async function loginUser(email, password) {
 
     if (adminRes.ok) {
       const data = await adminRes.json();
-      const studentId = data.student_id;
       console.log("[Login] Admin login successful:", data);
 
       const userData = {
         isLoggedIn: true,
-        role: "admin",
+        role: data.role?.toLowerCase() || "admin",
         admin_id: data.admin_id,
         name: data.name,
         email: data.email,
       };
 
-      localStorage.setItem("student_id", studentId.toString());
       localStorage.setItem("user", JSON.stringify(userData));
-      return "admin";
+      return userData.role;
     }
   } catch (e) {
     console.error("[Login] Admin login error:", e);
@@ -48,8 +46,6 @@ export async function loginUser(email, password) {
     const studentId = data.student_id;
     const role = data.role?.toLowerCase();
 
-    localStorage.setItem("student_id", studentId.toString()); // ✅ ← PLACE IT HERE
-
     const userData = {
       isLoggedIn: true,
       role,
@@ -58,6 +54,8 @@ export async function loginUser(email, password) {
       email: data.email || email,
     };
 
+    localStorage.setItem("student_id", studentId.toString());
+
     if (role === "tutor") {
       const checkTutor = await fetch(`http://localhost:8080/student/hasTutorProfile/${studentId}`);
       if (checkTutor.ok) {
@@ -65,7 +63,7 @@ export async function loginUser(email, password) {
         console.log("[Login] Tutor profile check result:", tutorCheck);
         if (tutorCheck.tutor_id) {
           userData.tutor_id = tutorCheck.tutor_id;
-          localStorage.setItem("tutor_id", tutorCheck.tutor_id.toString()); // ✅ Save tutor_id directly
+          localStorage.setItem("tutor_id", tutorCheck.tutor_id.toString());
         }
       }
     }

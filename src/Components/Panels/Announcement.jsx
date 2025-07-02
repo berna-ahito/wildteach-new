@@ -4,7 +4,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import AdminViewAll from '../Admin/Data/AdminViewAll'; // Adjust path if needed
 import '../../Pages/Styles/Admin.css'; // For consistent admin styling
 
-export default function Announcement({ announcements = [] }) {
+export default function Announcement({ announcements = [], onRefresh }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -44,7 +44,7 @@ export default function Announcement({ announcements = [] }) {
           </IconButton>
         </DialogTitle>
         <DialogContent>
-          <AdminViewAll title="System Announcements" items={announcements} />
+          <AdminViewAll title="System Announcements" onRefresh={onRefresh} />
         </DialogContent>
       </Dialog>
     </div>
