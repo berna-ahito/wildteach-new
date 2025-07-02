@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import Card from "../Shared/Card";
 import TutorPayment from "../Tutor/Data/TutorPayment";
-import "../../Pages/Styles/TutorPage.css";
+import "../../Pages/Styles/TutorPage/TutorSessions.css";
+import "../../Pages/Styles/TutorPage/TutorGlobals.css";
 
 export default function SessionList({ sessions, onDelete, onRefresh }) {
   const [editingIndex, setEditingIndex] = useState(null);
@@ -13,7 +14,7 @@ export default function SessionList({ sessions, onDelete, onRefresh }) {
   const [selectedBookingId, setSelectedBookingId] = useState(null);
 
   useEffect(() => {
-      console.log("🧾 Updated sessions received by SessionList:", sessions);
+    console.log("🧾 Updated sessions received by SessionList:", sessions);
 
     setEditedSessions([...sessions]);
   }, [sessions]);
@@ -217,7 +218,10 @@ export default function SessionList({ sessions, onDelete, onRefresh }) {
                       <button className="btn-edit" onClick={handleSave}>
                         Save
                       </button>
-                      <button className="btn-cancel" onClick={handleCancelClick}>
+                      <button
+                        className="btn-cancel"
+                        onClick={handleCancelClick}
+                      >
                         Cancel
                       </button>
                     </>
@@ -265,7 +269,7 @@ export default function SessionList({ sessions, onDelete, onRefresh }) {
         onClose={() => setPayDialogOpen(false)}
         bookingId={selectedBookingId}
         onSuccess={() => {
-              console.log("🔁 Payment recorded — refreshing sessions");
+          console.log("🔁 Payment recorded — refreshing sessions");
 
           alert("✅ Payment recorded successfully!");
           setPayDialogOpen(false);

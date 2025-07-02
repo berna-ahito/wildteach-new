@@ -1,5 +1,5 @@
 import React from "react";
-import "../../../Pages/Styles/LandingPage.css";
+import "../../../Pages/Styles/LandingPage/AboutSection.css";
 
 export default function TeamMemberCard({ imageSrc, name, role }) {
   return (

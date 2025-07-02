@@ -1,0 +1,12 @@
+.landing-container {
+  position: relative;
+  width: 100%;
+  font-family: 'Segoe UI', sans-serif;
+  color: #5b2121;
+}
+
+.landing-switch {
+  position: relative;
+  width: 100%;
+  overflow-x: hidden;
+}

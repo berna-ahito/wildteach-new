@@ -4,7 +4,8 @@ import ProfileInfo from "../../Components/Panels/ProfileInfo";
 import PersonalInfo from "../../Components/Panels/PersonalInfo";
 import SkillsSubjects from "../../Components/Panels/SkillsSubjects";
 import DashboardLayout from "../../Components/Layout/DashboardLayout";
-import "../../Pages/Styles/TutorPage.css";
+import "../../Pages/Styles/TutorPage/TutorProfile.css";
+import "../../Pages/Styles/TutorPage/TutorGlobals.css";
 import useTutorProfile from "../../Components/Tutor/Data/TutorProfileData";
 
 export default function Profile() {

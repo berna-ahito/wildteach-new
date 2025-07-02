@@ -1,7 +1,14 @@
 import React from "react";
-import "../../../Pages/Styles/LandingPage.css";
+import "../../../Pages/Styles/LandingPage/WhatIsWildTeach.css";
 
-export default function SectionHeader({ badge, title, highlight, subtitle, align = "center", layout = "vertical" }) {
+export default function SectionHeader({
+  badge,
+  title,
+  highlight,
+  subtitle,
+  align = "center",
+  layout = "vertical",
+}) {
   return (
     <div className={`section-header ${align} ${layout}`}>
       {badge && <div className="section-badge">{badge}</div>}

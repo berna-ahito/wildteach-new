@@ -2,8 +2,9 @@ import React from "react";
 import DashboardLayout from "../../Components/Layout/DashboardLayout";
 import ChangePassword from "../../Components/Panels/ChangePassword";
 import GroupIcon from "@mui/icons-material/Settings";
-import "../../Pages/Styles/TutorPage.css";
-import "../../Pages/Styles/Admin.css";
+import "../../Pages/Styles/TutorPage/TutorDashboard.css";
+import "../../Pages/Styles/TutorPage/TutorSettings.css";
+import "../../Pages/Styles/TutorPage/TutorGlobals.css";
 
 export default function Settings() {
   const rawUser = localStorage.getItem("user");

@@ -1,11 +1,13 @@
-import React from 'react';
-import { Box } from '@mui/material';
-import Header from '../../Components/Shared/Header';
-import Sidebar from '../../Components/Shared/Sidebar';
-import { useNavigate } from 'react-router-dom';
-import menuTutee from '../../RoutesConfig/MenuTutee';
-import MyBookingsPanel from '../../Components/Tutee/Panels/MyBookingsPanel';
-import '../Styles/TuteePage.css';
+import React from "react";
+import { Box } from "@mui/material";
+import Header from "../../Components/Shared/Header";
+import Sidebar from "../../Components/Shared/Sidebar";
+import { useNavigate } from "react-router-dom";
+import menuTutee from "../../RoutesConfig/MenuTutee";
+import MyBookingsPanel from "../../Components/Tutee/Panels/MyBookingsPanel";
+import "../../Pages/Styles/TuteePage/TuteeGlobals.css";
+import "../../Pages/Styles/TuteePage/TuteeDashboard.css";
+import "../../Pages/Styles/TuteePage/TuteeBooking.css";
 
 export default function MyBookings() {
   const navigate = useNavigate();
