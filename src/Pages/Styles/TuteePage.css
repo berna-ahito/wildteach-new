@@ -2,8 +2,8 @@
 body,
 input,
 button {
-  font-family: 'Poppins', sans-serif;
-  color: #34251F;
+  font-family: "Poppins", sans-serif;
+  color: #34251f;
 }
 
 /* Layout Container */
@@ -27,7 +27,7 @@ button {
   margin-bottom: 30px;
   padding: 20px 30px;
   background-color: white;
-  border-top: 4px solid #89343B;
+  border-top: 4px solid #89343b;
   border-radius: 18px;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
 }
@@ -35,7 +35,7 @@ button {
 .tutee-greeting-section h1 {
   font-size: 28px;
   font-weight: 700;
-  color: #89343B;
+  color: #89343b;
   margin-bottom: 6px;
 }
 
@@ -44,7 +44,6 @@ button {
   font-size: 16px;
   margin: 0;
 }
-
 
 /* Stat Grid */
 .tutee-stat-grid {
@@ -58,7 +57,7 @@ button {
   background: #fff;
   border-radius: 14px;
   padding: 24px;
-  border-top: 4px solid #89343B;
+  border-top: 4px solid #89343b;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
@@ -75,7 +74,7 @@ button {
 
 .tutee-stat-icon {
   font-size: 28px;
-  color: #89343B;
+  color: #89343b;
 }
 
 .tutee-stat-card h3 {
@@ -114,7 +113,6 @@ button {
   gap: 8px;
 }
 
-
 .tutee-dashboard-panels {
   display: grid;
   grid-template-columns: 2fr 1fr;
@@ -138,7 +136,7 @@ button {
 
 .tutee-panel-header h3 {
   font-size: 16px;
-  color: #89343B;
+  color: #89343b;
   margin: 0;
 }
 
@@ -202,8 +200,8 @@ button {
 /* Buttons */
 .tutee-add-btn,
 .tutee-seeall-btn,
-.tutee-join-btn{
-  background: #89343B;
+.tutee-join-btn {
+  background: #89343b;
   border: none;
   padding: 6px 12px;
   border-radius: 8px;
@@ -211,7 +209,6 @@ button {
   cursor: pointer;
   transition: background 0.2s ease;
   margin-top: 10px;
-
 }
 /* .tutee-view-button {
   margin-top: 10px;
@@ -219,7 +216,6 @@ button {
   border-radius: 8px;
   color: black;
 } */
-
 
 .tutee-add-btn:hover,
 .tutee-seeall-btn:hover,
@@ -233,7 +229,7 @@ button {
   width: 34px;
   height: 34px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #89343B, #F8C400);
+  background: linear-gradient(135deg, #89343b, #f8c400);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -287,7 +283,7 @@ button {
 .tutee-booking-card .card-title {
   font-weight: 600;
   font-size: 16px;
-  color: #89343B;
+  color: #89343b;
 }
 
 .tutee-booking-card .tutee-status {
@@ -301,7 +297,7 @@ button {
 
 .tutee-view-button {
   margin-top: 8px;
-  background-color: #89343B;
+  background-color: #89343b;
   color: white;
   padding: 6px 12px;
   font-size: 13px;
@@ -317,8 +313,6 @@ button {
   background-color: #6d2a30;
 }
 
-
-
 /* Pagination */
 .pagination {
   margin-top: 24px;
@@ -331,7 +325,7 @@ button {
   padding: 6px 14px;
   border: none;
   border-radius: 6px;
-  background-color: #89343B;
+  background-color: #89343b;
   color: white;
   font-weight: 600;
   cursor: pointer;
@@ -340,14 +334,14 @@ button {
 
 .page-btn.active,
 .page-btn:hover {
-  background-color: #F8C400;
-  color: #89343B;
+  background-color: #f8c400;
+  color: #89343b;
 }
 
 /* Profile Page */
 .profile-container {
   padding: 24px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   background-color: #fffaf5;
 }
 
@@ -364,7 +358,7 @@ button {
   border: 1px solid #ccc;
   margin-bottom: 20px;
   padding: 20px;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .profile-header {
@@ -447,8 +441,6 @@ ul {
   }
 }
 
-
-
 /* ────────────────────────────────
    MyBookings section (UI-only)
    ──────────────────────────────── */
@@ -461,7 +453,7 @@ ul {
   padding: 32px;
   background-color: #fffaf8;
   border-radius: 14px;
-  border-top: 4px solid #89343B;
+  border-top: 4px solid #89343b;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
 }
 
@@ -526,7 +518,7 @@ ul {
   background: #fff;
   border-radius: 14px;
   padding: 24px;
-  border-top: 4px solid #89343B;
+  border-top: 4px solid #89343b;
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
   min-height: 180px;
@@ -543,7 +535,7 @@ ul {
 .booking-card-hover .MuiTypography-h6 {
   font-size: 18px;
   font-weight: bold;
-  color: #89343B;
+  color: #89343b;
   margin-bottom: 8px;
 }
 
@@ -565,7 +557,6 @@ ul {
   color: #1976d2;
 }
 
-
 /* ────────────────────────────────
    FindTutor Page
    ──────────────────────────────── */
@@ -578,7 +569,7 @@ ul {
 
 .find-tutor-container h1 {
   font-size: 30px;
-  color: #89343B;
+  color: #89343b;
   margin-top: -30px;
 }
 
@@ -596,7 +587,6 @@ ul {
   align-items: stretch; /* Makes all cards equal height */
 }
 
-
 .find-tutor-card {
   flex: 1 1 300px; /* Allow wrapping but maintain min width */
   min-width: 300px;
@@ -604,12 +594,11 @@ ul {
   padding: 24px;
   background: #fffaf8;
   border-radius: 14px;
-  border-top: 4px solid #89343B;
+  border-top: 4px solid #89343b;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
   box-sizing: border-box;
   overflow: hidden;
 }
-
 
 @media (max-width: 1024px) {
   .find-tutor-card {
@@ -648,7 +637,6 @@ ul {
   word-break: break-word;
 }
 
-
 .tutor-details-text {
   flex: 1;
   min-width: 200px;
@@ -660,7 +648,6 @@ ul {
   color: #5f3a3a;
   word-wrap: break-word;
 }
-
 
 .action-buttons {
   display: flex;
@@ -688,7 +675,7 @@ ul {
 }
 
 .book-button {
-  background-color: #89343B;
+  background-color: #89343b;
   color: white;
 }
 
@@ -703,7 +690,6 @@ ul {
   color: #572a2a;
   border-radius: 20px;
 }
-
 
 /* ────────────────────────────────
    BookingPage Styling
@@ -732,7 +718,7 @@ ul {
 
 .booking-heading h2 {
   font-size: 24px;
-  color: #89343B;
+  color: #89343b;
   font-weight: bold;
   margin-bottom: 8px;
 }
@@ -753,15 +739,15 @@ ul {
   border: 1px solid #ddd;
   border-radius: 8px;
   margin-bottom: 16px;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 14px;
-  color: #34251F;
+  color: #34251f;
 }
 
 .booking-form-box input:focus,
 .booking-form-box .react-datepicker-wrapper:focus-within {
   outline: none;
-  border-color: #89343B;
+  border-color: #89343b;
   box-shadow: 0 0 0 2px rgba(137, 52, 59, 0.1);
 }
 
@@ -773,7 +759,7 @@ ul {
 
 /* Confirm button */
 .confirm-book-button {
-  background-color: #89343B;
+  background-color: #89343b;
   color: white;
   padding: 10px 20px;
   border: none;
@@ -793,82 +779,241 @@ ul {
   justify-content: flex-end;
 }
 
-/* Contact Section Background */
-.contact-background {
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
+/* ────────────────────────────────
+   About Us Styling
+   ──────────────────────────────── */
+
+.about-fullscreen {
+  position: fixed; 
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
+  overflow: auto;
+  z-index: 100;
+}
+
+.about-content {
+  width: 100%;
+  max-width: 85vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8vh;
+  color: #fff;
+}
+
+.about-header {
+  text-align: center;
+  max-width: 60vw;
+}
+
+.about-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  text-shadow: 3px 3px 12px rgba(0, 0, 0, 0.5);
+  margin: 2vh 0;
+}
+
+.about-subtitle {
+  font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+  color: #e8e8e8;
+  opacity: 0.9;
+  line-height: 1.6;
+  margin-top: 2vh;
+}
+
+/* Team Members */
+.team-showcase {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20vw, 1fr));
+  gap: 6vw;
+  width: 100%;
+  max-width: 75vw;
+}
+
+.team-member {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 2vw;
+  padding: 3vh 2vw;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
 }
 
-/* Transparent overlay so sidebar + header show */
-.contact-overlay {
-  background-color: rgba(255, 255, 255, 0.65); /* Optional: semi-white overlay */
-  width: 100%;
-  height: 120%;
-  display: flex;
+.team-member::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #e6b84d, #f8c400);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-/* Contact card layout */
-.contact-card {
-  background-color: rgba(255, 255, 255, 0.95);
-  padding: 40px;
-  border-radius: 16px;
-  max-width: 600px;
-  margin: 60px auto;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+.team-member:hover::before {
+  opacity: 1;
+}
+
+.team-member:hover {
+  transform: translateY(-1vh);
+  background: rgba(230, 184, 77, 0.12);
+  border-color: rgba(230, 184, 77, 0.3);
+  box-shadow: 0 2vh 5vh rgba(0, 0, 0, 0.25);
+}
+
+/* Profile Image Styling */
+.member-image {
+  width: 12vw;
+  height: 12vw;
+  min-width: 120px;
+  min-height: 120px;
+  max-width: 180px;
+  max-height: 180px;
+  margin: 0 auto 3vh;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #e6b84d;
+  box-shadow: 0 1vh 3vh rgba(230, 184, 77, 0.3);
+}
+
+.member-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.team-member:hover .member-image img {
+  transform: scale(1.1);
+}
+
+.team-member h3 {
+  font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 1vh;
+}
+
+.team-member p {
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  color: #e6b84d;
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+/* Mission Statement */
+.mission-section {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 2vw;
+  padding: 5vh 4vw;
+  max-width: 70vw;
   text-align: center;
 }
 
-/* Title */
-.contact-title {
-  color: #89343B;
-  font-size: 2.5rem;
-  margin-bottom: 20px;
+.mission-section h2 {
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  font-weight: 700;
+  color: #e6b84d;
+  margin-bottom: 3vh;
+  text-shadow: 0 0 20px rgba(230, 184, 77, 0.4);
 }
 
-/* Description */
-.contact-description {
-  color: #3d2b2b;
-  font-size: 1.2rem;
-  margin-bottom: 30px;
+.mission-section p {
+  font-size: clamp(1.1rem, 2.2vw, 1.3rem);
+  color: #f0f0f0;
+  line-height: 1.7;
+  opacity: 0.95;
 }
 
-/* Button */
-.contact-button {
-  background-color: #89343B;
-  color: #F8C400;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 30px;
-  font-weight: bold;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+/* Responsive */
+@media (max-width: 768px) {
+  .about-fullscreen {
+    padding: 15vh 5vw 10vh;
+  }
+
+  .about-content {
+    max-width: 90vw;
+    gap: 6vh;
+  }
+
+  .about-header {
+    max-width: 85vw;
+  }
+
+  .team-showcase {
+    grid-template-columns: 1fr;
+    gap: 4vh;
+    max-width: 85vw;
+  }
+
+  .member-image {
+    width: 30vw;
+    height: 30vw;
+    min-width: 100px;
+    min-height: 100px;
+    max-width: 150px;
+    max-height: 150px;
+  }
+
+  .mission-section {
+    max-width: 85vw;
+    padding: 4vh 5vw;
+  }
 }
 
-.contact-button:hover {
-  background-color: #6d2a30;
-  transform: scale(1.05);
+/* ────────────────────────────────
+   Contact Us Styling
+   ──────────────────────────────── */
+/* Ensure no default padding on content */
+.tutee-content.no-padding {
+  padding: 0 !important;
+  margin: 0;
+  height: 100vh;
+  overflow-y: auto;
+  margin-bottom: -90px;
 }
 
+.tutee-contact-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.contact-fullscreen {
+  position: fixed;
+  top: 64px; /* header height */
+  left: 0;
+  width: 100vw;
+  height: calc(100vh - 64px);
+  z-index: 100;
+  overflow-y: auto;
+  background: linear-gradient(135deg, #89343B, #5b2121 50%, #3d1f1f);
+}
+
+/* ────────────────────────────────
+   Settings Styling
+   ──────────────────────────────── */
 
 .settings-tutee {
   font-size: 28px;
   margin: 20px;
   font-weight: bold;
-  color: #89343B;
+  color: #89343b;
 }
 
-.middle-section, .lower-section {
+.middle-section,
+.lower-section {
   padding: 20px;
   margin: 10px 20px;
   background: #fff;
   border-radius: 12px;
-  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
 }
 
 .section-header h3,
@@ -890,14 +1035,19 @@ ul {
   width: 50px;
   height: 25px;
 }
-.switch input { display: none; }
+.switch input {
+  display: none;
+}
 .slider {
   position: absolute;
   cursor: pointer;
   background-color: #ccc;
   border-radius: 25px;
-  top: 0; left: 0; right: 0; bottom: 0;
-  transition: .4s;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  transition: 0.4s;
 }
 .slider:before {
   position: absolute;
@@ -908,10 +1058,10 @@ ul {
   background-color: white;
   bottom: 3px;
   left: 3px;
-  transition: .4s;
+  transition: 0.4s;
 }
 input:checked + .slider {
-  background-color: #F8C400;
+  background-color: #f8c400;
 }
 input:checked + .slider:before {
   transform: translateX(24px);
@@ -920,21 +1070,21 @@ input:checked + .slider:before {
 .day-button {
   padding: 6px 10px;
   margin: 5px;
-  border: 1px solid #89343B;
+  border: 1px solid #89343b;
   background-color: white;
-  color: #89343B;
+  color: #89343b;
   border-radius: 8px;
   cursor: pointer;
 }
 .day-button.active {
-  background-color: #89343B;
+  background-color: #89343b;
   color: white;
 }
 
 .edit-button {
   margin: 20px auto;
   padding: 10px 20px;
-  background-color: #F8C400;
+  background-color: #f8c400;
   color: white;
   border: none;
   border-radius: 8px;
@@ -944,7 +1094,10 @@ input:checked + .slider:before {
 
 .modal-overlay {
   position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   background: rgba(0, 0, 0, 0.4);
   display: flex;
   justify-content: center;
@@ -956,7 +1109,7 @@ input:checked + .slider:before {
   padding: 30px;
   border-radius: 12px;
   text-align: center;
-  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
 }
 
 .modal-buttons {
@@ -996,7 +1149,7 @@ input:checked + .slider:before {
 
 .form-title {
   text-align: center;
-  color: #89343B;
+  color: #89343b;
   margin-bottom: 25px;
   font-size: 1.8rem;
 }
@@ -1026,8 +1179,8 @@ input:checked + .slider:before {
 }
 
 .confirm-book-button {
-  background-color: #89343B;
-  color: #F8C400;
+  background-color: #89343b;
+  color: #f8c400;
   padding: 12px 30px;
   font-size: 1.1rem;
   border: none;
@@ -1038,10 +1191,9 @@ input:checked + .slider:before {
 }
 
 .confirm-book-button:hover {
-  background-color: #F8C400;
-  color: #89343B;
+  background-color: #f8c400;
+  color: #89343b;
 }
-
 
 .booking-header-container {
   text-align: center;
@@ -1050,7 +1202,7 @@ input:checked + .slider:before {
 
 .booking-title {
   font-size: 2.4rem;
-  color: #89343B;
+  color: #89343b;
   font-weight: bold;
 }
 
@@ -1079,7 +1231,7 @@ input:checked + .slider:before {
   border-radius: 12px;
   max-width: 700px;
   margin: 0 auto;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   margin-top: -80px;
 }
 
@@ -1096,7 +1248,7 @@ input:checked + .slider:before {
 
 .settings-heading {
   font-size: 2rem;
-  color: #89343B;
+  color: #89343b;
   margin-bottom: 20px;
 }
 
@@ -1117,7 +1269,7 @@ input:checked + .slider:before {
 }
 
 .save-button {
-  background: #89343B;
+  background: #89343b;
   color: white;
   border: none;
   padding: 10px 25px;
@@ -1127,8 +1279,8 @@ input:checked + .slider:before {
 }
 
 .save-button:hover {
-  background-color: #F8C400;
-  color: #89343B;
+  background-color: #f8c400;
+  color: #89343b;
 }
 
 /* Add full-width styling for inputs and selects */
@@ -1144,4 +1296,3 @@ input:checked + .slider:before {
   font-size: 1rem;
   box-sizing: border-box;
 }
-

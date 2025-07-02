@@ -20,6 +20,18 @@ export default function MyBookingsPanel() {
     filteredBookings,
   } = useMyBookingsData();
 
+  const years = ['All', ...new Set(
+    filteredBookings.map((b) =>
+      new Date(new Date(b.sessionDateTime).getTime() + 8 * 60 * 60 * 1000).getFullYear().toString()
+    )
+  )];
+
+  const months = ['All', ...new Set(
+    filteredBookings.map((b) =>
+      new Date(new Date(b.sessionDateTime).getTime() + 8 * 60 * 60 * 1000).toLocaleString('default', { month: 'long' })
+    )
+  )];
+
   return (
     <Container maxWidth="lg" className="my-bookings-wrapper">
       <Paper elevation={6} className="my-bookings-container">
@@ -54,7 +66,8 @@ export default function MyBookingsPanel() {
         {/* Booking Cards */}
         <Grid container spacing={3} justifyContent="center">
           {filteredBookings.map((b, idx) => {
-            const d = new Date(b.sessionDateTime);
+            // const d = new Date(b.sessionDateTime);
+            const d = new Date(new Date(b.sessionDateTime).getTime() + 8 * 60 * 60 * 1000); // ✅ +8 offset
             const dd = d.toLocaleDateString();
             const tt = d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 
