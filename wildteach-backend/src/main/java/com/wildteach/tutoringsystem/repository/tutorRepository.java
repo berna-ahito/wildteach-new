@@ -10,4 +10,7 @@ public interface tutorRepository extends JpaRepository<tutorEntity, Long> {
 
     @Query("SELECT t FROM tutorEntity t WHERE t.student.student_id = :studentId")
     tutorEntity findByStudentId(@Param("studentId") Long studentId);
+
+    @Query("SELECT t FROM tutorEntity t WHERE t.student.student_id = :studentId")
+    tutorEntity findByStudentStudentId(@Param("studentId") Long studentId);
 }

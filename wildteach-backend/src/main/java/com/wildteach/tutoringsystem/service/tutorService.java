@@ -18,8 +18,10 @@ public interface tutorService {
     boolean authenticateTutor(String email, String password);
 
     int countActiveTutors();
-    boolean updateTutorPassword(Long tutor_id, String currentPassword, String newPassword);
-    tutorEntity saveTutorWithStudentId(Long studentId, tutorEntity tutorData);
-    tutorEntity findByStudent(Long studentId);  
 
+    boolean updateTutorPassword(Long tutor_id, String currentPassword, String newPassword);
+
+    tutorEntity saveTutorWithStudentId(Long studentId, tutorEntity tutorData);
+
+    tutorEntity findByStudent(Long studentId);
 }
