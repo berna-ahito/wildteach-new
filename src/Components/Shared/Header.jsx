@@ -1,11 +1,10 @@
-import React from 'react';
-import { AppBar, Toolbar, Badge, InputBase } from '@mui/material';
-import NotificationsIcon from '@mui/icons-material/Notifications';
-import SearchIcon from '@mui/icons-material/Search';
-import { useNavigate, useLocation } from 'react-router-dom';
+import React from "react";
+import { AppBar, Toolbar, Badge, InputBase } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+import { useNavigate, useLocation } from "react-router-dom";
 import "../../Pages/Styles/Header.css";
 
-export default function Header({ title }) {
+export default function Header() {
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -36,13 +35,17 @@ export default function Header({ title }) {
   };
 
   return (
-    <AppBar position="fixed" color="default" elevation={1} className="custom-header">
+    <AppBar
+      position="fixed"
+      color="default"
+      elevation={1}
+      className="custom-header"
+    >
       <Toolbar className="header-toolbar" onClick={handleToolbarClick}>
         <div className="navbar-left">
           <div
             className="brand-zone"
             onClick={handleToolbarClick}
-
             style={{ cursor: "pointer" }}
           >
             <div className="logo-badge">
@@ -62,14 +65,8 @@ export default function Header({ title }) {
             <InputBase
               placeholder="Search students, subjects..."
               className="search-input"
-              inputProps={{ 'aria-label': 'search' }}
+              inputProps={{ "aria-label": "search" }}
             />
-          </div>
-
-          <div className="navbar-right">
-            <Badge badgeContent={3} color="secondary">
-              <NotificationsIcon className="notif-icon" />
-            </Badge>
           </div>
         </div>
       </Toolbar>

@@ -17,12 +17,20 @@ export default function TutorScheduleData() {
         const data = await res.json();
         console.log("[Schedule] Today’s sessions:", data);
 
-        const formatted = data.map((item) => ({
-          time: formatTime(item.session_time),
-          student: formatStudentName(item.student_name),
-          subject: item.subject || "Unknown",
-          status: item.status?.toLowerCase() || "pending",
-        }));
+        const formatted = data.map((item) => {
+          const rawTime = item.session_time;
+          const formattedTime = formatTime(rawTime);
+
+          console.log("[Schedule] Raw session time:", rawTime);
+          console.log("[Schedule] Formatted local time:", formattedTime);
+
+          return {
+            time: formattedTime,
+            student: formatStudentName(item.student_name),
+            subject: item.subject || "Unknown",
+            status: item.status?.toLowerCase() || "pending",
+          };
+        });
 
         setSchedule(formatted);
       } catch (err) {
@@ -39,8 +47,12 @@ export default function TutorScheduleData() {
   }, [tutorId]);
 
   const formatTime = (isoString) => {
-    const date = new Date(isoString);
-    return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+    const local = new Date(isoString);
+    return local.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: true,
+    });
   };
 
   const formatStudentName = (fullName) => {

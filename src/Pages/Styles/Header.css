@@ -4,9 +4,10 @@
   left: 0;
   width: 100vw;
   background-color: white;
-  border-bottom: 3px solid #f8c40033;
+  border-bottom: 2.5px solid transparent;
+  border-image: linear-gradient(90deg, #e8b547, #7a3034, #e8b547) 1;
   z-index: 1200;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 10px 40px rgba(232, 181, 71, 0.12);
 }
 
 .header-toolbar {
@@ -79,14 +80,5 @@
 }
 
 .navbar-icon {
-  color: #89343b;
-}
-
-.navbar-right {
-  margin: 0;
-}
-
-.notif-icon {
-  font-size: 24px;
   color: #89343b;
 }
