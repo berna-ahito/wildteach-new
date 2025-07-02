@@ -1,15 +1,14 @@
-// AdminDashboard.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import DashboardLayout from '../../Components/Layout/DashboardLayout';
 import AdminStatData from '../../Components/Admin/Data/AdminStatData';
 import AdminRecentActivity from '../../Components/Admin/Data/AdminRecentActivity';
-import { useNavigate } from 'react-router-dom';  
 import GroupIcon from '@mui/icons-material/Group';
-import "../Styles/TutorPage.css";
 import AdminSystemAnnouncement from '../../Components/Admin/Data/AdminSystemAnnouncement';
 
 export default function AdminDashboard() {
-  const navigate = useNavigate();
+  const [refreshKey, setRefreshKey] = useState(0);
+
+  const handleRefresh = () => setRefreshKey(prev => prev + 1);
 
   return (
     <DashboardLayout title="WILDTEACH" role="admin">
@@ -23,11 +22,13 @@ export default function AdminDashboard() {
         </div>
       </div>
 
-
       <AdminStatData />
       <div className="dashboard-panels">
         <AdminRecentActivity />
-        <AdminSystemAnnouncement />
+        <AdminSystemAnnouncement
+          refreshTrigger={refreshKey}
+          onRefresh={handleRefresh} 
+        />
       </div>
     </DashboardLayout>
   );

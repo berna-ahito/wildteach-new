@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import axios from "axios";
 import Card from "../../Shared/Card";
@@ -6,52 +7,65 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
+import ToastNotification from "../../Panels/ToastNotification"; // ✅ import toast
 import "../../../Pages/Styles/Admin.css";
 
-export default function AdminAddNewAdmin({ onAdd }) {
+export default function AdminAddAnnounce({ onAdd }) {
   const [open, setOpen] = useState(false);
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    password: ""
-  });
-  const [error, setError] = useState("");
-
-  const handleChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const [title, setTitle] = useState("");
+  const [content, setContent] = useState("");
+  const [toast, setToast] = useState(null); // ✅ Toast state
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
+    if (title.trim() && content.trim()) {
+      try {
+        const response = await axios.post("http://localhost:8080/announcement/addAnnounce", {
+          title: title,
+          message: content,
+          created_at: new Date().toISOString(),
+          admin: {
+            admin_id: 1 // Replace with dynamic admin_id if needed
+          }
+        });
 
-    if (!formData.name || !formData.email || !formData.password) {
-      setError("All fields are required.");
-      return;
-    }
+        if (response.status === 200 || response.status === 201) {
+          if (onAdd) onAdd();
+          setTitle("");
+          setContent("");
+          setOpen(false);
 
-    try {
-      const response = await axios.post("http://localhost:8080/admin/addAdmin", {
-        name: formData.name,
-        email: formData.email,
-        password: formData.password,
-        role: "admin"
-      });
+          // Add a slight delay before showing toast
+          setTimeout(() => {
+            setToast({
+              type: "success",
+              message: "Announcement added successfully!",
+            });
+          }, 300); // allow dialog to close before showing toast
+        }
 
-      if (response.status === 200 || response.status === 201) {
-        if (onAdd) onAdd(); // Refresh admin list if needed
-        setFormData({ name: "", email: "", password: "" });
-        setOpen(false);
+      } catch (error) {
+        console.error("Error adding announcement:", error);
+        setToast({
+          type: "error",
+          message: "Failed to add announcement. Please try again.",
+        });
       }
-    } catch (err) {
-      console.error("Failed to add admin:", err);
-      setError("Failed to add admin. Please try again.");
     }
   };
 
   return (
     <>
+      {toast && (
+        <ToastNotification
+          type={toast.type}
+          message={toast.message}
+          onClose={() => setToast(null)}
+        />
+      )}
+
       <Card
-        title="Add New Admin"
+        title="Create New"
         content="+"
         className="stat-card add-announcement-card"
         onClick={() => setOpen(true)}
@@ -59,7 +73,7 @@ export default function AdminAddNewAdmin({ onAdd }) {
 
       <Dialog open={open} onClose={() => setOpen(false)} maxWidth="sm" fullWidth>
         <DialogTitle>
-          <span className="page-title">Add New Admin</span>
+          <span className="page-title">Add Announcement</span>
           <IconButton
             onClick={() => setOpen(false)}
             sx={{ position: "absolute", right: 8, top: 8 }}
@@ -72,36 +86,22 @@ export default function AdminAddNewAdmin({ onAdd }) {
           <form onSubmit={handleSubmit} className="add-form">
             <input
               type="text"
-              name="name"
-              placeholder="Full Name"
-              value={formData.name}
-              onChange={handleChange}
+              placeholder="Title"
+              value={title}
+              onChange={(e) => setTitle(e.target.value)}
               className="toggle-btn"
               required
             />
-            <input
-              type="email"
-              name="email"
-              placeholder="Email"
-              value={formData.email}
-              onChange={handleChange}
+            <textarea
+              placeholder="Content"
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
               className="toggle-btn"
+              rows={4}
               required
             />
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={formData.password}
-              onChange={handleChange}
-              className="toggle-btn"
-              required
-            />
-
-            {error && <div className="error-message">{error}</div>}
-
             <button type="submit" className="toggle-btn active submit-btn">
-              Add Admin
+              Add
             </button>
           </form>
         </DialogContent>

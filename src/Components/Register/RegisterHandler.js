@@ -9,27 +9,26 @@ export async function registerUser(payload) {
   };
 
   try {
-    // 1. Register the student
     const response = await fetch("http://localhost:8080/student/add", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(transformedData),
     });
 
-    const studentId = await response.text(); // 👈 Parse plain number (not JSON)
+    const studentId = await response.text();
 
     if (!response.ok) {
       return { success: false, error: "Student registration failed." };
     }
 
-    // 2. Add tutor profile if role is Tutor
     if (transformedData.role === "Tutor") {
       const tutorPayload = {
         student_id: Number(studentId),
         approval_status: "Pending",
         availability: "[]",
-        subjects_offered: "",
-        rate_per_hour: 0,
+        subjects_offered: payload.subjects || "",
+        skills: payload.skills || "",
+        rate_per_hour: 0
       };
 
       const tutorRes = await fetch("http://localhost:8080/tutor/add", {
@@ -48,6 +47,7 @@ export async function registerUser(payload) {
 
     return { success: true };
   } catch (error) {
+    console.error("[Register Error]", error);
     return { success: false, error: "Network error or server is down." };
   }
 }

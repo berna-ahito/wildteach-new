@@ -3,10 +3,16 @@ import axios from "axios";
 import "../../../Pages/Styles/Admin.css";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
+import ToastNotification from "../../Panels/ToastNotification";
+import DeleteDialog from "../../Panels/DeleteDialog";
 
-export default function AdminViewAll({ title = "All Announcements" }) {
+export default function AdminViewAll({ title = "All Announcements", onRefresh }) {
   const [announcementList, setAnnouncementList] = useState([]);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [toast, setToast] = useState({ message: "", type: "" });
 
+  // Fetch announcements
   useEffect(() => {
     axios
       .get("http://localhost:8080/announcement/getAllAnnounce")
@@ -16,30 +22,49 @@ export default function AdminViewAll({ title = "All Announcements" }) {
       })
       .catch((error) => {
         console.error("Failed to load announcements:", error);
-        alert("Could not load announcements.");
+        setToast({ message: "Could not load announcements.", type: "error" });
       });
   }, []);
 
-  const handleDelete = async (id) => {
-    if (window.confirm("Are you sure you want to delete this announcement?")) {
-      try {
-        await axios.delete(`http://localhost:8080/announcement/delete/${id}`);
-        const updatedList = announcementList.filter(
-          (item) => item.announcement_id !== id
-        );
-        setAnnouncementList(updatedList);
-      } catch (error) {
-        console.error("Failed to delete announcement:", error);
-        alert("Error deleting announcement. Please try again.");
+  // Open confirmation dialog
+  const handleOpenDialog = (item) => {
+    setSelectedItem(item);
+    setOpenDialog(true);
+  };
+
+  // Confirm delete
+  const handleConfirmDelete = async () => {
+    try {
+      await axios.delete(`http://localhost:8080/announcement/delete/${selectedItem.announcement_id}`);
+      const updatedList = announcementList.filter(
+        (item) => item.announcement_id !== selectedItem.announcement_id
+      );
+      setAnnouncementList(updatedList);
+      setToast({ message: "Announcement deleted successfully.", type: "success" });
+
+      // 🔁 Trigger parent to refresh dashboard/preview list
+      if (onRefresh) {
+        onRefresh();
       }
+    } catch (error) {
+      console.error("Failed to delete announcement:", error);
+      setToast({ message: "Error deleting announcement. Please try again.", type: "error" });
+    } finally {
+      setOpenDialog(false);
+      setSelectedItem(null);
     }
   };
 
+  // Auto-hide toast
+  useEffect(() => {
+    if (toast.message) {
+      const timer = setTimeout(() => setToast({ message: "", type: "" }), 4000);
+      return () => clearTimeout(timer);
+    }
+  }, [toast]);
+
   return (
     <div className="Page">
-      <div className="manage-users-header">
-      </div>
-
       <div className="admin-manage-table">
         {announcementList.length > 0 ? (
           <div style={{ overflowX: "auto" }}>
@@ -57,10 +82,7 @@ export default function AdminViewAll({ title = "All Announcements" }) {
                     <td style={{ padding: "12px" }}>{item.title}</td>
                     <td style={{ padding: "12px" }}>{item.message}</td>
                     <td style={{ padding: "12px" }}>
-                      <IconButton
-                        color="error"
-                        onClick={() => handleDelete(item.announcement_id)}
-                      >
+                      <IconButton color="error" onClick={() => handleOpenDialog(item)}>
                         <DeleteIcon />
                       </IconButton>
                     </td>
@@ -73,6 +95,19 @@ export default function AdminViewAll({ title = "All Announcements" }) {
           <p style={{ padding: "16px" }}>No announcements to display.</p>
         )}
       </div>
+
+      {/* Delete confirmation dialog */}
+      <DeleteDialog
+        open={openDialog}
+        onClose={() => setOpenDialog(false)}
+        onConfirm={handleConfirmDelete}
+        itemTitle={selectedItem?.title}
+      />
+
+      {/* Toast Notification */}
+      {toast.message && (
+        <ToastNotification message={toast.message} type={toast.type} />
+      )}
     </div>
   );
 }

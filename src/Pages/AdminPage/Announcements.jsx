@@ -8,8 +8,8 @@ import "../../Pages/Styles/Admin.css";
 export default function Announcement() {
   const [refreshKey, setRefreshKey] = useState(0); // 🔁 Refresh trigger
 
-  const handleAdd = () => {
-    setRefreshKey(prev => prev + 1); // Change key to force refresh
+  const handleRefresh = () => {
+    setRefreshKey((prev) => prev + 1);
   };
 
   return (
@@ -25,8 +25,12 @@ export default function Announcement() {
       </div>
 
       <div className="dashboard-panels">
-        <AdminSystemAnnouncement key={refreshKey} />
-        <AdminAddAnnounce onAdd={handleAdd} />
+        <AdminSystemAnnouncement
+          key={refreshKey}
+          refreshTrigger={refreshKey}
+          onRefresh={handleRefresh} // ✅ So deletion also refreshes the top 4
+        />
+        <AdminAddAnnounce onAdd={handleRefresh} />
       </div>
     </DashboardLayout>
   );

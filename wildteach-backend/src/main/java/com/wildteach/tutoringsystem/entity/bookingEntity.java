@@ -37,7 +37,17 @@ public class bookingEntity {
     @Column(name = "status")
     private String status;
 
-    // Getters and Setters
+    @Column(name = "duration")
+    private Integer duration;
+
+    public Integer getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Integer duration) {
+        this.duration = duration;
+    }
+
     public Long getBookingId() {
         return bookingId;
     }

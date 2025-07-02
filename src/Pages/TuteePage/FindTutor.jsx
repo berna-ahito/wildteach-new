@@ -1,11 +1,11 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import Header from '../../Components/Shared/Header';
-import Sidebar from '../../Components/Shared/Sidebar';
-import menuTutee from '../../RoutesConfig/MenuTutee';
-import useFindTutorData from '../../Components/Tutee/Data/useFindTutorData';
-import FindTutorPanel from '../../Components/Tutee/Panels/FindTutorPanel';
-import '../Styles/TuteePage.css';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import Header from "../../Components/Shared/Header";
+import Sidebar from "../../Components/Shared/Sidebar";
+import menuTutee from "../../RoutesConfig/MenuTutee";
+import useFindTutorData from "../../Components/Tutee/Data/useFindTutorData";
+import FindTutorPanel from "../../Components/Tutee/Panels/FindTutorPanel";
+import "../Styles/TuteePage.css";
 
 export default function FindTutor() {
   const navigate = useNavigate();

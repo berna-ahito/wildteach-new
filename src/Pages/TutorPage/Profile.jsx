@@ -1,28 +1,18 @@
 import React from "react";
-import menuTutor from "../../RoutesConfig/MenuTutor";
 import Sidebar from "../../Components/Shared/Sidebar";
-import { useNavigate } from "react-router-dom";
 import ProfileInfo from "../../Components/Panels/ProfileInfo";
 import PersonalInfo from "../../Components/Panels/PersonalInfo";
 import SkillsSubjects from "../../Components/Panels/SkillsSubjects";
-import AddressInfo from "../../Components/Panels/AddressInfo";
 import DashboardLayout from "../../Components/Layout/DashboardLayout";
 import "../../Pages/Styles/TutorPage.css";
+import useTutorProfile from "../../Components/Tutor/Data/TutorProfileData";
 
 export default function Profile() {
-  const navigate = useNavigate();
-  const profile = {
-    fullname: "Berna Ahito",
-    email: "berna@cit.edu",
-    dob: "April 04, 2001",
-    address: "Cebu City",
-    phone: "09123456789",
-    subjects: ["Subject 1", "Subject 2"],
-    skills: ["Skill 1", "Skill 2"],
-    city: "Cebu City",
-    province: "Cebu Province",
-    home_address: "1234 Mabolo, Cebu",
-  };
+  const userId = localStorage.getItem("student_id");
+  const { profile, loading } = useTutorProfile(userId);
+
+  if (loading) return <p>Loading...</p>;
+  if (!profile) return <p>Profile not found.</p>;
 
   return (
     <DashboardLayout title="Profile" role="tutor">
@@ -31,7 +21,6 @@ export default function Profile() {
         <ProfileInfo profile={profile} />
         <PersonalInfo profile={profile} />
         <SkillsSubjects profile={profile} />
-        <AddressInfo profile={profile} />
       </div>
     </DashboardLayout>
   );

@@ -1,16 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Card from "../Shared/Card";
 import "../../Pages/Styles/TutorPage.css";
 
-export default function SessionList({ sessions }) {
+export default function SessionList({ sessions, onDelete }) {
   const [editingIndex, setEditingIndex] = useState(null);
-  const [editedSessions, setEditedSessions] = useState([...sessions]);
+  const [editedSessions, setEditedSessions] = useState([]);
   const [selectedYear, setSelectedYear] = useState("All");
   const [selectedMonth, setSelectedMonth] = useState("All");
+  const [deletingId, setDeletingId] = useState(null);
 
-  const handleEditClick = (index) => {
-    setEditingIndex(index);
-  };
+  // 🔧 Keep sessions in sync with parent updates (e.g. after delete)
+  useEffect(() => {
+    setEditedSessions([...sessions]);
+  }, [sessions]);
+
+  const handleEditClick = (index) => setEditingIndex(index);
 
   const handleCancelClick = () => {
     setEditedSessions([...sessions]);
@@ -23,12 +27,66 @@ export default function SessionList({ sessions }) {
     setEditedSessions(updated);
   };
 
-  const handleSave = () => {
-    console.log("Saved:", editedSessions[editingIndex]);
-    setEditingIndex(null);
+  const handleSave = async () => {
+    const updatedSession = editedSessions[editingIndex];
+    const bookingId = updatedSession.booking_id;
+
+    try {
+      const res = await fetch(
+        `http://localhost:8080/booking/update/${bookingId}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            bookingId,
+            subject: updatedSession.subject,
+            sessionDateTime: new Date(updatedSession.date).toISOString(),
+            duration: parseInt(updatedSession.duration),
+            status: "Pending", // or keep original
+            student: { student_id: updatedSession.student_id || 2 }, // Fallback or real ID
+            tutor: { tutor_id: updatedSession.tutor_id || 4 }, // Fallback or real ID
+          }),
+        }
+      );
+
+      if (!res.ok) throw new Error("Failed to update session");
+
+      alert("✅ Session updated!");
+      setEditingIndex(null);
+    } catch (err) {
+      console.error("❌ Update error:", err);
+      alert("Failed to update session.");
+    }
   };
 
-  // ✅ Apply filters
+  const handleDelete = async (bookingId) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this session?"
+    );
+    if (!confirmDelete) return;
+
+    setDeletingId(bookingId);
+
+    try {
+      const res = await fetch(
+        `http://localhost:8080/booking/delete/${bookingId}`,
+        {
+          method: "DELETE",
+        }
+      );
+
+      if (res.ok) {
+        onDelete(bookingId);
+      } else {
+        alert("Failed to delete session.");
+      }
+    } catch {
+      alert("Error deleting session.");
+    } finally {
+      setDeletingId(null);
+    }
+  };
+
   const filteredSessions = editedSessions.filter((s) => {
     const matchYear = selectedYear === "All" || s.year === selectedYear;
     const matchMonth = selectedMonth === "All" || s.month === selectedMonth;
@@ -39,7 +97,7 @@ export default function SessionList({ sessions }) {
     <div className="sessions-container">
       <h2 className="section-title">Manage Sessions</h2>
 
-      {/* ✅ Filters */}
+      {/* Filters */}
       <div className="filter-bar">
         <select
           className="filter-select"
@@ -68,7 +126,7 @@ export default function SessionList({ sessions }) {
         </select>
       </div>
 
-      {/* ✅ Session Cards */}
+      {/* Session Cards */}
       <div className="session-cards-grid">
         {filteredSessions.length === 0 ? (
           <p style={{ gridColumn: "1 / -1", textAlign: "center" }}>
@@ -78,18 +136,8 @@ export default function SessionList({ sessions }) {
           filteredSessions.map((s, i) => {
             const isEditing = i === editingIndex;
             return (
-              <Card key={i} className="session-card">
-                <h3 className="card-title">
-                  Student Name:{" "}
-                  {isEditing ? (
-                    <input
-                      value={s.name}
-                      onChange={(e) => handleChange(i, "name", e.target.value)}
-                    />
-                  ) : (
-                    s.name
-                  )}
-                </h3>
+              <Card key={s.booking_id} className="session-card">
+                <h3 className="card-title">Student Name: {s.name}</h3>
                 <p>
                   Subject:{" "}
                   {isEditing ? (
@@ -172,7 +220,12 @@ export default function SessionList({ sessions }) {
                       >
                         Edit
                       </button>
-                      <button className="btn-cancel">Delete</button>
+                      <button
+                        onClick={() => handleDelete(s.booking_id)}
+                        disabled={deletingId === s.booking_id}
+                      >
+                        {deletingId === s.booking_id ? "Deleting..." : "Delete"}
+                      </button>
                     </>
                   )}
                 </div>
@@ -182,6 +235,7 @@ export default function SessionList({ sessions }) {
         )}
       </div>
 
+      {/* Pagination */}
       <div className="pagination">
         <button className="page-btn active">1</button>
         <button className="page-btn">2</button>
