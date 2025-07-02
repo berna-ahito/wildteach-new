@@ -2,15 +2,13 @@ import React, { useState } from "react";
 import Card from "../Shared/Card";
 import "../../Pages/Styles/TutorPage.css";
 
-export default function SessionList({ sessions }) {
+export default function SessionList({ sessions, onDelete }) {
   const [editingIndex, setEditingIndex] = useState(null);
   const [editedSessions, setEditedSessions] = useState([...sessions]);
   const [selectedYear, setSelectedYear] = useState("All");
   const [selectedMonth, setSelectedMonth] = useState("All");
 
-  const handleEditClick = (index) => {
-    setEditingIndex(index);
-  };
+  const handleEditClick = (index) => setEditingIndex(index);
 
   const handleCancelClick = () => {
     setEditedSessions([...sessions]);
@@ -28,7 +26,27 @@ export default function SessionList({ sessions }) {
     setEditingIndex(null);
   };
 
-  // ✅ Apply filters
+  const handleDelete = async (bookingId) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this session?"
+    );
+    if (!confirmDelete) return;
+
+    try {
+      const res = await fetch(
+        `http://localhost:8080/booking/delete/${bookingId}`,
+        { method: "DELETE" }
+      );
+      if (res.ok) {
+        onDelete(bookingId);
+      } else {
+        alert("Failed to delete session.");
+      }
+    } catch {
+      alert("Error deleting session.");
+    }
+  };
+
   const filteredSessions = editedSessions.filter((s) => {
     const matchYear = selectedYear === "All" || s.year === selectedYear;
     const matchMonth = selectedMonth === "All" || s.month === selectedMonth;
@@ -39,7 +57,7 @@ export default function SessionList({ sessions }) {
     <div className="sessions-container">
       <h2 className="section-title">Manage Sessions</h2>
 
-      {/* ✅ Filters */}
+      {/* Filters */}
       <div className="filter-bar">
         <select
           className="filter-select"
@@ -68,7 +86,7 @@ export default function SessionList({ sessions }) {
         </select>
       </div>
 
-      {/* ✅ Session Cards */}
+      {/* Session Cards */}
       <div className="session-cards-grid">
         {filteredSessions.length === 0 ? (
           <p style={{ gridColumn: "1 / -1", textAlign: "center" }}>
@@ -78,7 +96,7 @@ export default function SessionList({ sessions }) {
           filteredSessions.map((s, i) => {
             const isEditing = i === editingIndex;
             return (
-              <Card key={i} className="session-card">
+              <Card key={s.booking_id} className="session-card">
                 <h3 className="card-title">
                   Student Name:{" "}
                   {isEditing ? (
@@ -151,6 +169,7 @@ export default function SessionList({ sessions }) {
                   )}
                 </p>
 
+                {/* Actions */}
                 <div className="card-actions">
                   {isEditing ? (
                     <>
@@ -172,7 +191,9 @@ export default function SessionList({ sessions }) {
                       >
                         Edit
                       </button>
-                      <button className="btn-cancel">Delete</button>
+                      <button onClick={() => handleDelete(s.booking_id)}>
+                        Delete
+                      </button>
                     </>
                   )}
                 </div>
@@ -182,6 +203,7 @@ export default function SessionList({ sessions }) {
         )}
       </div>
 
+      {/* Pagination placeholder */}
       <div className="pagination">
         <button className="page-btn active">1</button>
         <button className="page-btn">2</button>

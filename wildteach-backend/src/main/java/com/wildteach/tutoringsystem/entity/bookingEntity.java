@@ -37,7 +37,6 @@ public class bookingEntity {
     @Column(name = "status")
     private String status;
 
-    // Getters and Setters
     public Long getBookingId() {
         return bookingId;
     }

@@ -53,7 +53,6 @@ public class tutorServiceImpl implements tutorService {
         return null;
     }
 
-
     @Override
     public void deleteTutor(Long id) {
         tutorRepository.deleteById(id);
@@ -71,30 +70,33 @@ public class tutorServiceImpl implements tutorService {
         // Count tutors who are 'Approved'
         return (int) tutorRepository.countByApprovalStatus(tutorEntity.ApprovalStatus.Approved);
     }
+
     @Override
     public boolean updateTutorPassword(Long tutor_id, String currentPassword, String newPassword) {
-    tutorEntity tutor = tutorRepository.findById(tutor_id).orElse(null);
+        tutorEntity tutor = tutorRepository.findById(tutor_id).orElse(null);
 
-    if (tutor != null) {
-        studentEntity student = tutor.getStudent();
-        if (student != null && student.getPassword().equals(currentPassword)) {
-            student.setPassword(newPassword);
-            // Save through student repository if needed, or cascade from tutor
-            tutorRepository.save(tutor); // Assumes cascade is set up
-            return true;
+        if (tutor != null) {
+            studentEntity student = tutor.getStudent();
+            if (student != null && student.getPassword().equals(currentPassword)) {
+                student.setPassword(newPassword);
+                // Save through student repository if needed, or cascade from tutor
+                tutorRepository.save(tutor); // Assumes cascade is set up
+                return true;
+            }
         }
+
+        return false;
     }
 
-    return false;
-    }
     @Override
     public tutorEntity saveTutorWithStudentId(Long studentId, tutorEntity tutorData) {
         studentEntity student = studentRepository.findById(studentId)
-            .orElseThrow(() -> new RuntimeException("Student not found with ID: " + studentId));
-    
+                .orElseThrow(() -> new RuntimeException("Student not found with ID: " + studentId));
+
         tutorData.setStudent(student);
         return tutorRepository.save(tutorData);
     }
+
     @Override
     public tutorEntity findByStudent(Long studentId) {
         return tutorRepository.findByStudentId(studentId);

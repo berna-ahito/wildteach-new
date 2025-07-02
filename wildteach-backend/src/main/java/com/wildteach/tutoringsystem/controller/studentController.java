@@ -3,11 +3,13 @@ package com.wildteach.tutoringsystem.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.nio.file.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.wildteach.tutoringsystem.dto.updatePasswordDTO;
 import com.wildteach.tutoringsystem.entity.studentEntity;
@@ -121,6 +123,37 @@ public class studentController {
     @GetMapping("/tutorAccounts")
     public List<studentEntity> getAllTutorAccounts() {
         return studentService.getAllTutors();
+    }
+
+    @PostMapping("/upload-profile/{id}")
+    public ResponseEntity<?> uploadProfileImage(
+            @PathVariable Long id,
+            @RequestParam("file") MultipartFile file) {
+        try {
+            if (file == null || file.isEmpty() || file.getOriginalFilename() == null) {
+                return ResponseEntity.status(400).body("Invalid file");
+            }
+
+            String uploadDir = "../uploads/profile/";
+            String fileName = "student_" + id + "_" +
+                    file.getOriginalFilename().replaceAll("[^a-zA-Z0-9\\.\\-_]", "_");
+
+            Path uploadPath = Paths.get(uploadDir);
+            if (!Files.exists(uploadPath)) {
+                Files.createDirectories(uploadPath);
+            }
+
+            Path filePath = uploadPath.resolve(fileName);
+            Files.copy(file.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+
+            studentEntity student = studentService.getStudentById(id);
+            student.setProfileImage(fileName);
+            studentService.saveStudent(student);
+
+            return ResponseEntity.ok("Profile image uploaded.");
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("Upload failed: " + e.getMessage());
+        }
     }
 
 }
