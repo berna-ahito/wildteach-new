@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import DatePicker from "react-datepicker";
-import { useParams, useNavigate } from "react-router-dom"; // ✅ Added useNavigate
+import { useParams, useNavigate } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
 import useBookingData from "../Data/useBookingData";
 
 export default function BookingFormPanel() {
   const { tutorId } = useParams();
-  const navigate = useNavigate(); // ✅ Initialize navigate
+  const navigate = useNavigate();
 
   const { subject, setSubject, sessionDateTime, setSessionDateTime, tutor } =
     useBookingData(tutorId);
+
+  const [duration, setDuration] = useState(60); // ✅ default to 1 hour
 
   const handleBookingSubmit = async (e) => {
     e.preventDefault();
@@ -18,15 +20,13 @@ export default function BookingFormPanel() {
     const resolvedTutorId = parseInt(tutor?.tutor_id || tutor?.id || 0);
     const formattedDate = new Date(sessionDateTime).toISOString();
 
-    console.log("🧾 Booking Debug", {
-      studentId,
-      resolvedTutorId,
-      subject,
-      formattedDate,
-      tutor,
-    });
-
-    if (!studentId || !resolvedTutorId || !subject || !formattedDate) {
+    if (
+      !studentId ||
+      !resolvedTutorId ||
+      !subject ||
+      !formattedDate ||
+      !duration
+    ) {
       alert("Missing booking info.");
       return;
     }
@@ -36,10 +36,9 @@ export default function BookingFormPanel() {
       tutor: { tutor_id: resolvedTutorId },
       subject,
       sessionDateTime: formattedDate,
+      duration, // ✅ new field
       status: "Pending",
     };
-
-    console.log("📤 Booking Payload", JSON.stringify(payload, null, 2));
 
     try {
       const res = await fetch("http://localhost:8080/booking/add", {
@@ -48,16 +47,14 @@ export default function BookingFormPanel() {
         body: JSON.stringify(payload),
       });
 
-      const responseText = await res.text(); // ✅ Read plain text response
-
+      const responseText = await res.text();
       if (!res.ok) {
         console.error("Server returned:", res.status, responseText);
         throw new Error("Booking failed");
       }
 
-      console.log("✅ Booking success:", responseText);
       alert("Booking successful!");
-      navigate("/tuteeDashboard"); // ✅ Navigate to dashboard on success
+      navigate("/tuteeDashboard");
     } catch (err) {
       console.error("Booking error:", err);
       alert("Booking failed. Please try again.");
@@ -78,7 +75,7 @@ export default function BookingFormPanel() {
       <form onSubmit={handleBookingSubmit}>
         <label>Subject</label>
         <input
-          type="text" // ✅ fixed typo here
+          type="text"
           className="subject-input"
           value={subject}
           onChange={(e) => setSubject(e.target.value)}
@@ -95,6 +92,17 @@ export default function BookingFormPanel() {
           timeIntervals={30}
           dateFormat="MMMM d, yyyy h:mm aa"
         />
+
+        <label>Duration</label>
+        <select
+          value={duration}
+          onChange={(e) => setDuration(parseInt(e.target.value))}
+          required
+        >
+          <option value={30}>30 minutes</option>
+          <option value={60}>1 hour</option>
+          <option value={90}>1.5 hours</option>
+        </select>
 
         <div className="form-actions">
           <button type="submit" className="confirm-book-button">

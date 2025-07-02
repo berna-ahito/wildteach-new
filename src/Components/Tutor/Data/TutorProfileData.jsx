@@ -36,10 +36,9 @@ export default function useTutorProfile(studentId) {
 
           // From tutor_entity
           tutor_id: tutor?.tutor_id || null,
-          subjects: tutor?.subjects_offered
-            ? tutor.subjects_offered.split(",")
-            : [],
-          skills: tutor?.skills ? tutor.skills.split(",") : [],
+          availability: tutor?.availability || "",
+          rate_per_hour: tutor?.rate_per_hour || "",
+          subjects_offered: tutor?.subjects_offered || "",
         };
 
         setProfile(fullProfile);

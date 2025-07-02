@@ -41,6 +41,7 @@ export default function TutorSessionData() {
 
   const handleDelete = (deletedId) => {
     setSessions((prev) => prev.filter((s) => s.booking_id !== deletedId));
+    alert("✅ Session deleted successfully!");
   };
 
   if (loading) return <p>Loading sessions...</p>;
