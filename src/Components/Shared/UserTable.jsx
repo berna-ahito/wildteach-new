@@ -5,8 +5,8 @@ import {
 } from '@mui/material';
 import '../../Pages/Styles/Admin.css';
 
-export default function UserTable({ data = [] }) {
-  const [view, setView] = useState("Tutee"); // 👈 for toggle buttons
+export default function UserTable({ data = [], onToggleStatus }) {
+  const [view, setView] = useState("Tutee");
   const [tableData, setTableData] = useState([]);
 
   useEffect(() => {
@@ -16,21 +16,21 @@ export default function UserTable({ data = [] }) {
       return;
     }
 
-    console.log("🔎 Incoming Data to Table:", data);
-    console.log("🔍 Role Filter:", view);
-
     const filtered = data.filter(user =>
       user.role?.toLowerCase() === view.toLowerCase()
     );
-
-    console.log("🧪 Filtered Data:", filtered);
     setTableData(filtered);
   }, [data, view]);
 
-  const toggleStatus = (index) => {
-    const updated = [...tableData];
-    updated[index].status = updated[index].status === 'Active' ? 'Inactive' : 'Active';
-    setTableData(updated);
+  const handleToggleStatus = async (user, index) => {
+    const newStatus = user.status === 'Active' ? 'Inactive' : 'Active';
+    const success = await onToggleStatus(user.student_id, newStatus === 'Active');
+
+    if (success) {
+      const updated = [...tableData];
+      updated[index].status = newStatus;
+      setTableData(updated);
+    }
   };
 
   return (
@@ -51,21 +51,10 @@ export default function UserTable({ data = [] }) {
         </button>
       </div>
 
-      <TableContainer
-        component={Paper}
-        sx={{
-          borderRadius: '16px',
-          boxShadow: '0 8px 20px rgba(0, 0, 0, 0.05)',
-          backgroundColor: '#fffdfb',
-          border: '1px solid #f5eee9',
-          maxHeight: '60vh',
-          overflow: 'auto',
-          marginTop: '20px'
-        }}
-      >
+      <TableContainer component={Paper} sx={{ borderRadius: '16px', maxHeight: '60vh', marginTop: '20px' }}>
         <Table stickyHeader>
           <TableHead>
-            <TableRow sx={{ backgroundColor: '#f5eee9' }}>
+            <TableRow>
               <TableCell className="custom-header">Name</TableCell>
               <TableCell className="custom-header">Course</TableCell>
               <TableCell className="custom-header">Phone Number</TableCell>
@@ -76,14 +65,7 @@ export default function UserTable({ data = [] }) {
           <TableBody>
             {tableData.length > 0 ? (
               tableData.map((user, index) => (
-                <TableRow
-                  key={user.student_id || index}
-                  sx={{
-                    '&:hover': {
-                      backgroundColor: '#fff8f6',
-                    },
-                  }}
-                >
+                <TableRow key={user.student_id || index}>
                   <TableCell>{user.studentName}</TableCell>
                   <TableCell>{user.course}</TableCell>
                   <TableCell>{user.phoneNumber}</TableCell>
@@ -93,7 +75,7 @@ export default function UserTable({ data = [] }) {
                       className={`status-btn ${user.status === 'Active' ? 'active' : 'inactive'}`}
                       variant="contained"
                       size="small"
-                      onClick={() => toggleStatus(index)}
+                      onClick={() => handleToggleStatus(user, index)}
                     >
                       {user.status}
                     </Button>

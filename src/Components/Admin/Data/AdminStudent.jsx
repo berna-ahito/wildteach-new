@@ -8,6 +8,10 @@ export default function AdminStudent() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    fetchStudents();
+  }, []);
+
+  const fetchStudents = () => {
     axios.get('http://localhost:8080/student/all')
       .then((res) => {
         const formatted = res.data.map((s) => {
@@ -18,6 +22,7 @@ export default function AdminStudent() {
             course: s.course || "N/A",
             phoneNumber: s.contact_number || "N/A",
             email: s.email || "N/A",
+            is_active: s.is_active,
             status: s.is_active ? "Active" : "Inactive",
             role: role.charAt(0).toUpperCase() + role.slice(1).toLowerCase()
           };
@@ -29,14 +34,24 @@ export default function AdminStudent() {
         console.error('❌ Error fetching students:', err);
         setLoading(false);
       });
-  }, []);
+  };
+
+  const handleToggleStatus = async (studentId, newIsActive) => {
+    try {
+      await axios.put(`http://localhost:8080/student/updateStatus/${studentId}?is_active=${newIsActive}`);
+      return true;
+    } catch (err) {
+      console.error('Failed to update student status:', err);
+      return false;
+    }
+  };
 
   if (loading) return <div className="p-6">Loading students...</div>;
   if (students.length === 0) return <div className="p-6 text-red-500">No students found.</div>;
 
   return (
     <div className="p-6">
-      <UserTable data={students} />
+      <UserTable data={students} onToggleStatus={handleToggleStatus} />
     </div>
   );
 }

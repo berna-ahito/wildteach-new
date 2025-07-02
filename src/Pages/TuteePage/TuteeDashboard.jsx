@@ -66,7 +66,7 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import DashboardLayout from '../../Components/Layout/DashboardLayout';
 import UpcomingSchedulePanel from '../../Components/Tutee/Panels/UpcomingSchedulePanel';
-import AdminSystemAnnouncement from '../../Components/Admin/Data/AdminSystemAnnouncement';
+import Announcement from '../../Components/Panels/Announcement';
 import WavingHandIcon from '@mui/icons-material/WavingHand';
 
 import '../Styles/TutorPage.css';
@@ -104,7 +104,7 @@ export default function TuteeDashboard() {
 
       <div className="dashboard-panels">
         <UpcomingSchedulePanel />
-        <AdminSystemAnnouncement />
+        <Announcement />
       </div>
     </DashboardLayout>
   );

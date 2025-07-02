@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import ContactInput from "../Shared/LandingPage/ContactInput";
 import SectionHeader from "../Shared/LandingPage/SectionHeader";
+import ToastNotification from "../Panels/ToastNotification"; // ✅ optional toast
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
@@ -10,12 +11,35 @@ export default function ContactSection() {
     message: "",
   });
 
+  const [toast, setToast] = useState({ message: "", type: "" });
+
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
+
+    try {
+      const res = await fetch("http://localhost:8080/contact/send", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) throw new Error("Failed to send message");
+
+      const result = await res.text(); // or res.json() if backend returns JSON
+      console.log("✅ Message sent:", result);
+
+      setToast({ message: "✅ Message sent successfully!", type: "success" });
+
+      setFormData({ name: "", email: "", subject: "", message: "" });
+    } catch (err) {
+      console.error("❌ Error sending message:", err);
+      setToast({ message: "❌ Failed to send message.", type: "error" });
+    }
   };
 
   return (
@@ -70,6 +94,15 @@ export default function ContactSection() {
           </div>
         </div>
       </div>
+
+      {/* ✅ Toast Notification */}
+      {toast.message && (
+        <ToastNotification
+          type={toast.type}
+          message={toast.message}
+          onClose={() => setToast({ message: "", type: "" })}
+        />
+      )}
     </div>
   );
 }

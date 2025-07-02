@@ -81,22 +81,28 @@ public class studentController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> loginStudent(@RequestBody studentEntity student) {
-        boolean isAuthenticated = studentService.authenticateStudent(student.getEmail(), student.getPassword());
-        if (!isAuthenticated) {
-            return ResponseEntity.status(401).body(Map.of("message", "Invalid email or password"));
-        }
-
-        studentEntity foundStudent = studentService.findByEmail(student.getEmail());
-
-        Map<String, Object> response = new HashMap<>();
-        response.put("message", "Login successful");
-        response.put("student_id", foundStudent.getStudent_id());
-        response.put("role", foundStudent.getRole());
-        response.put("name", foundStudent.getFirst_name() + " " + foundStudent.getLast_name());
-
-        return ResponseEntity.ok(response);
+public ResponseEntity<?> loginStudent(@RequestBody studentEntity student) {
+    boolean isAuthenticated = studentService.authenticateStudent(student.getEmail(), student.getPassword());
+    if (!isAuthenticated) {
+        return ResponseEntity.status(401).body(Map.of("message", "Invalid email or password"));
     }
+
+    studentEntity foundStudent = studentService.findByEmail(student.getEmail());
+
+    if (!foundStudent.getIs_active()) {
+        return ResponseEntity.status(403).body(Map.of("message", "Account is deactivated."));
+    }
+
+    Map<String, Object> response = new HashMap<>();
+    response.put("message", "Login successful");
+    response.put("student_id", foundStudent.getStudent_id());
+    response.put("role", foundStudent.getRole());
+    response.put("name", foundStudent.getFirst_name() + " " + foundStudent.getLast_name());
+    response.put("email", foundStudent.getEmail());
+
+    return ResponseEntity.ok(response);
+}
+
 
     @PutMapping("/updatePassword")
     public ResponseEntity<String> updateStudentPassword(
@@ -124,6 +130,18 @@ public class studentController {
     public List<studentEntity> getAllTutorAccounts() {
         return studentService.getAllTutors();
     }
+    @PutMapping("/updateStatus/{id}")
+    public ResponseEntity<?> updateStudentStatus(@PathVariable Long id, @RequestParam boolean is_active) {
+        studentEntity student = studentService.getStudentById(id);
+        if (student == null) {
+            return ResponseEntity.status(404).body("Student not found");
+        }
+
+        student.setIs_active(is_active);
+        studentService.saveStudent(student); // Or updateStudent if you have validation
+        return ResponseEntity.ok("Student status updated");
+    }
+
 
     @PostMapping("/upload-profile/{id}")
     public ResponseEntity<?> uploadProfileImage(

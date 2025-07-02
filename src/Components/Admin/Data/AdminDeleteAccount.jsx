@@ -6,12 +6,17 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
+import ToastNotification from "../../Panels/ToastNotification";
+import DeleteDialog from "../../Panels/DeleteDialog";
 import "../../../Pages/Styles/Admin.css";
 
 export default function AdminDeleteAccount({ onDelete }) {
   const [open, setOpen] = useState(false);
   const [adminList, setAdminList] = useState([]);
   const [selectedAdminId, setSelectedAdminId] = useState("");
+  const [selectedAdminName, setSelectedAdminName] = useState("");
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [toast, setToast] = useState(null);
 
   useEffect(() => {
     fetchAdmins();
@@ -23,28 +28,43 @@ export default function AdminDeleteAccount({ onDelete }) {
       setAdminList(response.data);
     } catch (error) {
       console.error("Failed to fetch admins:", error);
+      setToast({ type: "error", message: "Failed to load admin list." });
     }
   };
 
-  const handleDelete = async (e) => {
+  const handlePromptDelete = (e) => {
     e.preventDefault();
-    if (!selectedAdminId) return;
+    const selectedAdmin = adminList.find(a => a.admin_id === parseInt(selectedAdminId));
+    setSelectedAdminName(selectedAdmin?.name || "this admin");
+    setConfirmOpen(true); // ✅ Open confirmation dialog
+  };
 
+  const handleConfirmDelete = async () => {
     try {
       await axios.delete(`http://localhost:8080/admin/deleteAdmin/${selectedAdminId}`);
-      alert("✅ Admin account deleted successfully!");
+      setToast({ type: "success", message: "Admin account deleted successfully!" });
       setSelectedAdminId("");
+      setSelectedAdminName("");
+      setConfirmOpen(false);
       setOpen(false);
-      if (onDelete) onDelete(); // Refresh parent if needed
-      fetchAdmins(); // Refresh admin list
+      if (onDelete) onDelete();
+      fetchAdmins(); // refresh list
     } catch (error) {
       console.error("❌ Failed to delete admin:", error);
-      alert("Failed to delete admin.");
+      setToast({ type: "error", message: "Failed to delete admin. Please try again." });
     }
   };
 
   return (
     <>
+      {toast && (
+        <ToastNotification
+          type={toast.type}
+          message={toast.message}
+          onClose={() => setToast(null)}
+        />
+      )}
+
       <Card
         title="Delete Admin"
         content="-"
@@ -64,7 +84,7 @@ export default function AdminDeleteAccount({ onDelete }) {
         </DialogTitle>
 
         <DialogContent>
-          <form onSubmit={handleDelete} className="add-form">
+          <form onSubmit={handlePromptDelete} className="add-form">
             <select
               className="toggle-btn"
               value={selectedAdminId}
@@ -78,12 +98,24 @@ export default function AdminDeleteAccount({ onDelete }) {
                 </option>
               ))}
             </select>
-            <button type="submit" className="toggle-btn active submit-btn" style={{ backgroundColor: "#d32f2f" }}>
+            <button
+              type="submit"
+              className="toggle-btn active submit-btn"
+              style={{ backgroundColor: "#d32f2f" }}
+            >
               Delete
             </button>
           </form>
         </DialogContent>
       </Dialog>
+
+      {/* ✅ Confirm Delete Dialog */}
+      <DeleteDialog
+        open={confirmOpen}
+        onClose={() => setConfirmOpen(false)}
+        onConfirm={handleConfirmDelete}
+        itemTitle={selectedAdminName}
+      />
     </>
   );
 }

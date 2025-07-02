@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import ToastNotification from "../Panels/ToastNotification"; // ✅ Toast import
 
 export default function ProfileInfo({ profile }) {
   const [editMode, setEditMode] = useState(false);
   const [imageFile, setImageFile] = useState(null);
+  const [toast, setToast] = useState({ message: "", type: "" });
   const [preview, setPreview] = useState(
     profile.profileImage
       ? `/uploads/profile/${profile.profileImage}?t=${Date.now()}`
@@ -13,7 +15,7 @@ export default function ProfileInfo({ profile }) {
     const file = e.target.files[0];
     if (!file) return;
     setImageFile(file);
-    setPreview(URL.createObjectURL(file)); // Show temporary preview before saving
+    setPreview(URL.createObjectURL(file));
   };
 
   const handleUpload = async () => {
@@ -36,14 +38,12 @@ export default function ProfileInfo({ profile }) {
 
       if (!res.ok) throw new Error("Upload failed");
 
-      alert("Profile image updated!");
+      setToast({ message: "Profile image updated!", type: "success" });
       setEditMode(false);
-
-      // Update preview to final saved image
       setPreview(`/uploads/profile/${finalFileName}?t=${Date.now()}`);
     } catch (err) {
       console.error(err);
-      alert("Upload error");
+      setToast({ message: "Upload error", type: "error" });
     }
   };
 
@@ -71,6 +71,15 @@ export default function ProfileInfo({ profile }) {
             Save
           </button>
         </div>
+      )}
+
+      {/* ✅ Toast */}
+      {toast.message && (
+        <ToastNotification
+          type={toast.type}
+          message={toast.message}
+          onClose={() => setToast({ message: "", type: "" })}
+        />
       )}
     </div>
   );

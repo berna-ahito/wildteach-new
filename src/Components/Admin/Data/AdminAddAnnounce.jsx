@@ -16,42 +16,54 @@ export default function AdminAddAnnounce({ onAdd }) {
   const [toast, setToast] = useState(null); // ✅ Toast state
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    if (title.trim() && content.trim()) {
-      try {
-        const response = await axios.post("http://localhost:8080/announcement/addAnnounce", {
-          title: title, 
-          message: content,
-          created_at: new Date().toISOString(),
-          admin: {
-            admin_id: 1 // Replace with dynamic admin_id if needed
-          }
-        });
+  e.preventDefault();
 
-        if (response.status === 200 || response.status === 201) {
-          if (onAdd) onAdd();
-          setTitle("");
-          setContent("");
-          setOpen(false);
+  const user = JSON.parse(localStorage.getItem("user")); // 👈 Get admin from localStorage
+  const adminId = user?.admin_id;
 
-          // Add a slight delay before showing toast
-          setTimeout(() => {
-            setToast({
-              type: "success",
-              message: "Announcement added successfully!",
-            });
-          }, 300); // allow dialog to close before showing toast
+  if (!adminId) {
+    setToast({
+      type: "error",
+      message: "Admin ID not found. Please re-login.",
+    });
+    return;
+  }
+
+  if (title.trim() && content.trim()) {
+    try {
+      const response = await axios.post("http://localhost:8080/announcement/addAnnounce", {
+        title: title,
+        message: content,
+        created_at: new Date().toISOString(), // 👈 ISO format
+        admin: {
+          admin_id: adminId // 👈 Full object with just ID
         }
+      });
 
-      } catch (error) {
-        console.error("Error adding announcement:", error);
-        setToast({
-          type: "error",
-          message: "Failed to add announcement. Please try again.",
-        });
+      if (response.status === 200 || response.status === 201) {
+        if (onAdd) onAdd();
+        setTitle("");
+        setContent("");
+        setOpen(false);
+
+        setTimeout(() => {
+          setToast({
+            type: "success",
+            message: "Announcement added successfully!",
+          });
+        }, 300);
       }
+
+    } catch (error) {
+      console.error("Error adding announcement:", error);
+      setToast({
+        type: "error",
+        message: "Failed to add announcement. Please try again.",
+      });
     }
-  };
+  }
+};
+
 
   return (
     <>
