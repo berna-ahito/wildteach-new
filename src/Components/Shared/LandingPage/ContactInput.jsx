@@ -1,7 +1,14 @@
 import React from "react";
-import "../../../Pages/Styles/LandingPage.css";
+import "../../../Pages/Styles/LandingPage/ContactSection.css";
 
-export default function ContactInput({ type = "text", name, placeholder, value, onChange, isTextarea }) {
+export default function ContactInput({
+  type = "text",
+  name,
+  placeholder,
+  value,
+  onChange,
+  isTextarea,
+}) {
   return (
     <div className="form-group">
       {isTextarea ? (

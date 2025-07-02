@@ -4,7 +4,9 @@ import Header from "../../Components/Shared/Header";
 import Sidebar from "../../Components/Shared/Sidebar";
 import menuTutee from "../../RoutesConfig/MenuTutee";
 import BookingFormPanel from "../../Components/Tutee/Panels/BookingFormPanel";
-import "../Styles/TuteePage.css";
+import "../../Pages/Styles/TuteePage/TuteeGlobals.css";
+import "../../Pages/Styles/TuteePage/TuteeDashboard.css";
+import "../../Pages/Styles/TuteePage/TuteeBooking.css";
 
 export default function BookingPage() {
   const navigate = useNavigate();

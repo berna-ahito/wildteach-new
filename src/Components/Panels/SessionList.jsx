@@ -3,7 +3,8 @@ import Card from "../Shared/Card";
 import TutorPayment from "../Tutor/Data/TutorPayment";
 import ToastNotification from "../Panels/ToastNotification";
 import DeleteDialog from "../Panels/DeleteDialog";
-import "../../Pages/Styles/TutorPage.css";
+import "../../Pages/Styles/TutorPage/TutorSessions.css";
+import "../../Pages/Styles/TutorPage/TutorGlobals.css";
 
 export default function SessionList({ sessions, onDelete, onRefresh }) {
   const [editingIndex, setEditingIndex] = useState(null);
@@ -18,6 +19,7 @@ export default function SessionList({ sessions, onDelete, onRefresh }) {
   const [toast, setToast] = useState({ message: "", type: "" });
 
   useEffect(() => {
+    console.log("🧾 Updated sessions received by SessionList:", sessions);
     setEditedSessions([...sessions]);
   }, [sessions]);
 

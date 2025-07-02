@@ -1,5 +1,5 @@
 import React from "react";
-import "../../../Pages/Styles/LandingPage.css";
+import "../../../Pages/Styles/LandingPage/WhatIsWildTeach.css";
 
 export default function FeatureCard({ icon, title, description }) {
   return (

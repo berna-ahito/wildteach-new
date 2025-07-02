@@ -5,7 +5,9 @@ import Sidebar from "../../Components/Shared/Sidebar";
 import menuTutee from "../../RoutesConfig/MenuTutee";
 import useFindTutorData from "../../Components/Tutee/Data/useFindTutorData";
 import FindTutorPanel from "../../Components/Tutee/Panels/FindTutorPanel";
-import "../Styles/TuteePage.css";
+import "../../Pages/Styles/TuteePage/TuteeGlobals.css";
+import "../../Pages/Styles/TuteePage/TuteeDashboard.css";
+import "../../Pages/Styles/TuteePage/TuteeFindTutor.css";
 
 export default function FindTutor() {
   const navigate = useNavigate();

@@ -1,0 +1,134 @@
+.find-tutor-container {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.find-tutor-container h1 {
+  font-size: 30px;
+  color: #89343b;
+  margin-top: -30px;
+}
+
+.tutor-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 0 24px;
+}
+
+.all-tutors-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  align-items: stretch;
+}
+
+/* Tutor Card */
+.find-tutor-card {
+  flex: 1 1 300px;
+  min-width: 300px;
+  max-width: 100%;
+  padding: 24px;
+  background: #fffaf8;
+  border-radius: 14px;
+  border-top: 4px solid #89343b;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+/* Responsive Tutor Card */
+@media (max-width: 1024px) {
+  .find-tutor-card {
+    width: calc(50% - 16px);
+  }
+}
+
+@media (max-width: 600px) {
+  .find-tutor-card {
+    width: 100%;
+  }
+}
+
+/* Tutor Info Layout */
+.tutor-info {
+  margin-bottom: 16px;
+}
+
+.tutor-name {
+  display: block;
+  font-weight: bold;
+  font-size: 20px;
+  color: #572a2a;
+}
+
+.tutor-role {
+  font-size: 14px;
+  color: #8b5e5e;
+}
+
+.tutor-details-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 20px;
+  word-break: break-word;
+}
+
+.tutor-details-text {
+  flex: 1;
+  min-width: 200px;
+}
+
+.tutor-subject {
+  margin-bottom: 8px;
+  font-size: 15px;
+  color: #5f3a3a;
+  word-wrap: break-word;
+}
+
+/* Buttons */
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.profile-button,
+.book-button {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.profile-button {
+  background-color: #c4a29c;
+  color: white;
+}
+
+.profile-button:hover {
+  background-color: #a47b73;
+}
+
+.book-button {
+  background-color: #89343b;
+  color: white;
+}
+
+.book-button:hover {
+  background-color: #6f2b30;
+}
+
+/* Search Bar */
+.search-bar {
+  max-width: 400px;
+  margin: 20px auto;
+  display: block;
+  color: #572a2a;
+  border-radius: 20px;
+}

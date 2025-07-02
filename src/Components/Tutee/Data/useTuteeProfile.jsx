@@ -1,66 +1,47 @@
-// import { useState, useEffect } from "react";
-// import { supabase } from "../../../config/supabaseClient";
-
-// export default function useTuteeProfile(userId) {
-//   const [profile, setProfile] = useState(null);
-//   const [loading, setLoading] = useState(true);
-
-//   useEffect(() => {
-//     if (!userId) return;
-
-//     async function fetchProfile() {
-//       const { data, error } = await supabase
-//         .from("profiles") // Change this to your actual TUTEE table name if different
-//         .select("*")
-//         .eq("id", userId)
-//         .single();
-
-//       if (error) {
-//         console.error("Tutee profile fetch failed:", error.message);
-//         setProfile(null);
-//       } else {
-//         setProfile(data);
-//       }
-
-//       setLoading(false);
-//     }
-
-//     fetchProfile();
-//   }, [userId]);
-
-//   return { profile, loading };
-// }
-
-
 import { useState, useEffect } from "react";
-import { supabase } from "../../../config/supabaseClient";
 
-export default function useTuteeProfile(userId) {
+export default function useTuteeProfile(studentId) {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (!userId) return;
+    if (!studentId) return;
 
-    async function fetchProfile() {
-      const { data, error } = await supabase
-        .from("tutees") // make sure this matches your actual table
-        .select("*")
-        .eq("student_id", userId) // make sure column matches
-        .single();
+    const fetchProfile = async () => {
+      try {
+        const res = await fetch(
+          `http://localhost:8080/student/getById/${studentId}`
+        );
+        if (!res.ok) throw new Error("Failed to fetch student");
 
-      if (error) {
-        console.error("Tutee profile fetch failed:", error.message);
+        const data = await res.json();
+
+        const profile = {
+          student_id: data.student_id,
+          first_name: data.first_name,
+          last_name: data.last_name,
+          fullname: `${data.first_name} ${data.last_name}`,
+          email: data.email,
+          phone: data.contact_number,
+          dob: data.birth_date,
+          address: data.address,
+          city: data.city,
+          province: data.province,
+          home_address: data.address,
+          profileImage: data.profileImage || "default.jpg",
+        };
+
+        setProfile(profile);
+      } catch (err) {
+        console.error("[Tutee Profile] Fetch error:", err);
         setProfile(null);
-      } else {
-        setProfile(data);
+      } finally {
+        setLoading(false);
       }
-
-      setLoading(false);
-    }
+    };
 
     fetchProfile();
-  }, [userId]);
+  }, [studentId]);
 
   return { profile, loading };
 }

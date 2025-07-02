@@ -1,0 +1,96 @@
+.sessions-container {
+  padding: 20px 40px;
+}
+
+.section-title {
+  font-size: 26px;
+  color: #89343B;
+  margin-bottom: 20px;
+}
+
+.filter-bar {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 30px;
+}
+
+.filter-select {
+  padding: 10px 16px;
+  border-radius: 8px;
+  border: 2px solid #f8c40066;
+  background-color: #fff8e1;
+  font-weight: 600;
+  color: #89343B;
+  outline: none;
+}
+
+.session-cards-grid {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+.session-card {
+  background-color: white;
+  border: 2px solid #f8c40044;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.card-title {
+  font-weight: bold;
+  font-size: 18px;
+  color: #89343B;
+  margin-bottom: 10px;
+}
+
+.card-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.btn-edit,
+.btn-cancel {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.btn-edit {
+  background-color: #f8c400;
+  color: #89343B;
+}
+
+.btn-cancel {
+  background-color: #89343B;
+  color: white;
+}
+
+.pagination {
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.page-btn {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  background-color: #89343B;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.page-btn.active,
+.page-btn:hover {
+  background-color: #F8C400;
+  color: #89343B;
+}

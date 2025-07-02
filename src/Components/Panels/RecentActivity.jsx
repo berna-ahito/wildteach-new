@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import { Dialog, DialogTitle, DialogContent, IconButton } from '@mui/material';
-import CloseIcon from '@mui/icons-material/Close';
-import ViewAll from './ViewAll'; // ✅ reuse existing component
+import React, { useState } from "react";
+import { Dialog, DialogTitle, DialogContent, IconButton } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+import ViewAll from "./ViewAll";
+import "../../Pages/Styles/TutorPage/TutorDashboard.css";
 
-export default function RecentActivity({ recent, role = 'tutor' }) {
+export default function RecentActivity({ recent, role = "tutor" }) {
   const [open, setOpen] = useState(false);
 
   const handleDelete = (id) => {
@@ -11,15 +12,18 @@ export default function RecentActivity({ recent, role = 'tutor' }) {
   };
 
   // ✅ Filter out "New tutor registered" activity if role is tutor
-  const filteredRecent = role === 'tutor'
-    ? recent.filter((r) => r.content !== 'New tutor registered')
-    : recent;
+  const filteredRecent =
+    role === "tutor"
+      ? recent.filter((r) => r.content !== "New tutor registered")
+      : recent;
 
   return (
     <div className="panel-card">
       <div className="panel-header">
         <h3>Recent Activity</h3>
-        <button className="seeall-btn" onClick={() => setOpen(true)}>View All</button>
+        <button className="seeall-btn" onClick={() => setOpen(true)}>
+          View All
+        </button>
       </div>
 
       <ul>
@@ -41,18 +45,27 @@ export default function RecentActivity({ recent, role = 'tutor' }) {
       </ul>
 
       {/* 💬 View All Dialog */}
-      <Dialog open={open} onClose={() => setOpen(false)} fullWidth maxWidth="md">
+      <Dialog
+        open={open}
+        onClose={() => setOpen(false)}
+        fullWidth
+        maxWidth="md"
+      >
         <DialogTitle>
           Recent Activity
           <IconButton
             onClick={() => setOpen(false)}
-            sx={{ position: 'absolute', right: 8, top: 8 }}
+            sx={{ position: "absolute", right: 8, top: 8 }}
           >
             <CloseIcon />
           </IconButton>
         </DialogTitle>
         <DialogContent>
-          <ViewAll data={filteredRecent} type="activity" handleDelete={handleDelete} />
+          <ViewAll
+            data={filteredRecent}
+            type="activity"
+            handleDelete={handleDelete}
+          />
         </DialogContent>
       </Dialog>
     </div>

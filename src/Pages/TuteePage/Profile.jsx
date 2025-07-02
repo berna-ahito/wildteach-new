@@ -1,35 +1,28 @@
 import React from "react";
-import menuTutee from "../../RoutesConfig/MenuTutee";
-import Sidebar from "../../Components/Shared/Sidebar";
-import { useNavigate } from "react-router-dom";
+import TuteeDashboardLayout from "../../Components/Layout/TuteeDashboardLayout";
 import ProfileInfo from "../../Components/Panels/ProfileInfo";
 import PersonalInfo from "../../Components/Panels/PersonalInfo";
 // import AddressInfo from "../../Components/Panels/AddressInfo";
-import DashboardLayout from "../../Components/Layout/DashboardLayout";
-import "../../Pages/Styles/TutorPage.css"; // ✅ using same styling
+import useTuteeProfile from "../../Components/Tutee/Data/useTuteeProfile";
+
+import "../../Pages/Styles/TuteePage/TuteeGlobals.css";
+import "../../Pages/Styles/TuteePage/TuteeProfile.css";
 
 export default function Profile() {
-  const navigate = useNavigate();
-  const profile = {
-    fullname: "Tutee Name",
-    email: "tutee@email.com",
-    dob: "May 10, 2004",
-    address: "Davao City",
-    phone: "09987654321",
-    city: "Davao City",
-    province: "Davao del Sur",
-    home_address: "456 Matina, Davao",
-  };
+  const studentId = localStorage.getItem("student_id");
+  const { profile, loading } = useTuteeProfile(studentId);
+
+  if (loading) return <p>Loading...</p>;
+  if (!profile) return <p>Profile not found.</p>;
 
   return (
-    <DashboardLayout title="Profile" role="tutee">
+    <TuteeDashboardLayout title="Profile">
       <div className="profile-container">
         <h2 className="profile-title">Profile</h2>
         <ProfileInfo profile={profile} />
         <PersonalInfo profile={profile} />
-        {/* ❌ Omit SkillsSubjects */}
-        <AddressInfo profile={profile} />
+        {/* <AddressInfo profile={profile} /> */}
       </div>
-    </DashboardLayout>
+    </TuteeDashboardLayout>
   );
 }

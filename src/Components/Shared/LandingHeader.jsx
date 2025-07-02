@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import "../../Pages/Styles/LandingHeader.css";
+import "../../Pages/Styles/LandingPage/LandingHeader.css";
 
 export default function LandingHeader() {
   const navigate = useNavigate();
@@ -37,7 +37,9 @@ export default function LandingHeader() {
           <button
             key={page.name}
             onClick={() => navigate(page.path)}
-            className={`nav-btn ${currentPath === page.path ? "nav-active" : ""}`}
+            className={`nav-btn ${
+              currentPath === page.path ? "nav-active" : ""
+            }`}
           >
             <span>{page.name}</span>
           </button>
