@@ -18,7 +18,7 @@ export default function Announcement({ announcements = [], onRefresh }) {
         {announcements.length > 0 ? (
           announcements.slice(0, 4).map((a, i) => (
             <li key={i} className="panel-item">
-              <div className="avatar-circle">{a.title[0]}</div>
+              <div className="avatar-circle">{a.title?.[0] || '?'}</div>
               <div className="info">
                 <strong>{a.title}</strong> • {a.content}
               </div>

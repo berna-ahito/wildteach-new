@@ -9,6 +9,7 @@ import com.wildteach.tutoringsystem.entity.bookingEntity;
 import com.wildteach.tutoringsystem.entity.studentEntity;
 import com.wildteach.tutoringsystem.entity.tutorEntity;
 import com.wildteach.tutoringsystem.repository.bookingRepository;
+import com.wildteach.tutoringsystem.repository.paymentRepository;
 import com.wildteach.tutoringsystem.repository.studentRepository;
 import com.wildteach.tutoringsystem.repository.tutorRepository;
 
@@ -17,10 +18,29 @@ public class bookingServiceImpl implements bookingService {
 
     @Autowired
     private bookingRepository bookingRepository;
+
     @Autowired
     private studentRepository studentRepository;
+
     @Autowired
     private tutorRepository tutorRepository;
+
+    @Autowired
+    private paymentRepository paymentRepository;
+
+    @Override
+    public boolean deleteBooking(Long bookingId) {
+        if (!bookingRepository.existsById(bookingId)) {
+            return false;
+        }
+
+        // Delete all payments linked to this booking
+        paymentRepository.deleteAll(paymentRepository.findAllByBooking_BookingId(bookingId));
+
+        // Now delete the booking
+        bookingRepository.deleteById(bookingId);
+        return true;
+    }
 
     @Override
     public bookingEntity saveBooking(bookingEntity booking) {
@@ -71,17 +91,7 @@ public class bookingServiceImpl implements bookingService {
             booking.setDuration(bookingDetails.getDuration());
             return bookingRepository.save(booking);
         }
-
         return null;
-    }
-
-    @Override
-    public boolean deleteBooking(Long id) {
-        if (bookingRepository.existsById(id)) {
-            bookingRepository.deleteById(id);
-            return true;
-        }
-        return false;
     }
 
     @Override
@@ -94,10 +104,8 @@ public class bookingServiceImpl implements bookingService {
         return bookingRepository.findByTutorId(tutorId);
     }
 
-    // ADDED - to get bookings by student
     @Override
     public List<bookingEntity> getBookingsByStudent(Long studentId) {
         return bookingRepository.findByStudentId(studentId);
     }
-
 }

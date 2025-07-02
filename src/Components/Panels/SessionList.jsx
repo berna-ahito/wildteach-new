@@ -1,21 +1,24 @@
 import React, { useState, useEffect } from "react";
 import Card from "../Shared/Card";
+import TutorPayment from "../Tutor/Data/TutorPayment";
 import "../../Pages/Styles/TutorPage.css";
 
-export default function SessionList({ sessions, onDelete }) {
+export default function SessionList({ sessions, onDelete, onRefresh }) {
   const [editingIndex, setEditingIndex] = useState(null);
   const [editedSessions, setEditedSessions] = useState([]);
   const [selectedYear, setSelectedYear] = useState("All");
   const [selectedMonth, setSelectedMonth] = useState("All");
   const [deletingId, setDeletingId] = useState(null);
+  const [payDialogOpen, setPayDialogOpen] = useState(false);
+  const [selectedBookingId, setSelectedBookingId] = useState(null);
 
-  // 🔧 Keep sessions in sync with parent updates (e.g. after delete)
   useEffect(() => {
+      console.log("🧾 Updated sessions received by SessionList:", sessions);
+
     setEditedSessions([...sessions]);
   }, [sessions]);
 
   const handleEditClick = (index) => setEditingIndex(index);
-
   const handleCancelClick = () => {
     setEditedSessions([...sessions]);
     setEditingIndex(null);
@@ -42,9 +45,9 @@ export default function SessionList({ sessions, onDelete }) {
             subject: updatedSession.subject,
             sessionDateTime: new Date(updatedSession.date).toISOString(),
             duration: parseInt(updatedSession.duration),
-            status: "Pending", // or keep original
-            student: { student_id: updatedSession.student_id || 2 }, // Fallback or real ID
-            tutor: { tutor_id: updatedSession.tutor_id || 4 }, // Fallback or real ID
+            status: "Pending",
+            student: { student_id: updatedSession.student_id || 2 },
+            tutor: { tutor_id: updatedSession.tutor_id || 4 },
           }),
         }
       );
@@ -97,7 +100,6 @@ export default function SessionList({ sessions, onDelete }) {
     <div className="sessions-container">
       <h2 className="section-title">Manage Sessions</h2>
 
-      {/* Filters */}
       <div className="filter-bar">
         <select
           className="filter-select"
@@ -126,7 +128,6 @@ export default function SessionList({ sessions, onDelete }) {
         </select>
       </div>
 
-      {/* Session Cards */}
       <div className="session-cards-grid">
         {filteredSessions.length === 0 ? (
           <p style={{ gridColumn: "1 / -1", textAlign: "center" }}>
@@ -198,6 +199,17 @@ export default function SessionList({ sessions, onDelete }) {
                     s.year
                   )}
                 </p>
+                <p>
+                  Payment Status:{" "}
+                  <span
+                    style={{
+                      color: s.isPaid ? "green" : "red",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    {s.isPaid ? "Paid" : "Not Yet Paid"}
+                  </span>
+                </p>
 
                 <div className="card-actions">
                   {isEditing ? (
@@ -205,10 +217,7 @@ export default function SessionList({ sessions, onDelete }) {
                       <button className="btn-edit" onClick={handleSave}>
                         Save
                       </button>
-                      <button
-                        className="btn-cancel"
-                        onClick={handleCancelClick}
-                      >
+                      <button className="btn-cancel" onClick={handleCancelClick}>
                         Cancel
                       </button>
                     </>
@@ -219,6 +228,17 @@ export default function SessionList({ sessions, onDelete }) {
                         onClick={() => handleEditClick(i)}
                       >
                         Edit
+                      </button>
+                      <button
+                        className="btn-edit"
+                        onClick={() => {
+                          setSelectedBookingId(s.booking_id);
+                          setPayDialogOpen(true);
+                        }}
+                        disabled={s.isPaid}
+                        style={{ opacity: s.isPaid ? 0.6 : 1 }}
+                      >
+                        {s.isPaid ? "Paid" : "Pay"}
                       </button>
                       <button
                         onClick={() => handleDelete(s.booking_id)}
@@ -235,11 +255,23 @@ export default function SessionList({ sessions, onDelete }) {
         )}
       </div>
 
-      {/* Pagination */}
       <div className="pagination">
         <button className="page-btn active">1</button>
         <button className="page-btn">2</button>
       </div>
+
+      <TutorPayment
+        open={payDialogOpen}
+        onClose={() => setPayDialogOpen(false)}
+        bookingId={selectedBookingId}
+        onSuccess={() => {
+              console.log("🔁 Payment recorded — refreshing sessions");
+
+          alert("✅ Payment recorded successfully!");
+          setPayDialogOpen(false);
+          onRefresh?.(); // 🟢 refresh the sessions after payment
+        }}
+      />
     </div>
   );
 }

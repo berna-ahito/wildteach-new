@@ -12,7 +12,6 @@ export default function AdminStatData() {
   const [activeSessions, setActiveSessions] = useState(0);
 
   useEffect(() => {
-    // Fetch students for active tutors and tutees
     axios.get('http://localhost:8080/student/all')
       .then(res => {
         const allUsers = res.data || [];
@@ -32,7 +31,6 @@ export default function AdminStatData() {
         console.error("❌ Error fetching user data for stats:", err);
       });
 
-    // Fetch bookings for active sessions
     axios.get('http://localhost:8080/booking/all')
       .then(res => {
         const allBookings = res.data || [];

@@ -18,7 +18,7 @@ public class paymentEntity {
     private Long payment_id;
 
     @ManyToOne
-    @JoinColumn(name = "booking_id", nullable = false, unique = true)
+    @JoinColumn(name = "booking_id", nullable = false)
     private bookingEntity booking;
     private double amount;
     @Enumerated(EnumType.STRING)
