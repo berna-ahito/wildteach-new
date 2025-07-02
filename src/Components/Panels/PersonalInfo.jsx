@@ -1,7 +1,10 @@
 import React, { useState } from "react";
+import ToastNotification from "../Panels/ToastNotification";
 
 export default function PersonalInfo({ profile }) {
   const [editMode, setEditMode] = useState(false);
+  const [toast, setToast] = useState({ message: "", type: "" });
+
   const [formData, setFormData] = useState({
     first_name: profile.first_name,
     last_name: profile.last_name,
@@ -37,11 +40,11 @@ export default function PersonalInfo({ profile }) {
 
       if (!res.ok) throw new Error("Failed to update");
 
-      alert("Profile updated successfully!");
+      setToast({ message: "Profile updated successfully!", type: "success" });
       setEditMode(false);
     } catch (err) {
       console.error("Update error:", err);
-      alert("Failed to update profile.");
+      setToast({ message: "Failed to update profile.", type: "error" });
     }
   };
 
@@ -119,6 +122,15 @@ export default function PersonalInfo({ profile }) {
             Save Changes
           </button>
         </div>
+      )}
+
+      {/* ✅ Toast Notification */}
+      {toast.message && (
+        <ToastNotification
+          type={toast.type}
+          message={toast.message}
+          onClose={() => setToast({ message: "", type: "" })}
+        />
       )}
     </div>
   );

@@ -1,7 +1,9 @@
 import React, { useState } from "react";
+import ToastNotification from "../Panels/ToastNotification"; // ✅ Toast import
 
 const SkillsSubjects = ({ profile }) => {
   const [editMode, setEditMode] = useState(false);
+  const [toast, setToast] = useState({ message: "", type: "" }); // ✅ Toast state
   const [formData, setFormData] = useState({
     subjects: profile.subjects_offered || "",
     availability: profile.availability || "",
@@ -29,11 +31,11 @@ const SkillsSubjects = ({ profile }) => {
 
       if (!res.ok) throw new Error("Failed to update");
 
-      alert("✅ Teaching profile updated successfully!");
+      setToast({ message: "Teaching profile updated successfully!", type: "success" });
       setEditMode(false);
     } catch (err) {
       console.error("Error:", err);
-      alert("Update failed.");
+      setToast({ message: "Update failed.", type: "error" });
     }
   };
 
@@ -47,7 +49,6 @@ const SkillsSubjects = ({ profile }) => {
       </div>
 
       <div className="info-grid">
-        {/* Subjects */}
         <div>
           <strong>Subjects:</strong>{" "}
           {editMode ? (
@@ -65,7 +66,6 @@ const SkillsSubjects = ({ profile }) => {
           )}
         </div>
 
-        {/* Availability */}
         <div>
           <strong>Availability:</strong>{" "}
           {editMode ? (
@@ -79,7 +79,6 @@ const SkillsSubjects = ({ profile }) => {
           )}
         </div>
 
-        {/* Rate */}
         <div>
           <strong>Rate per Hour (₱):</strong>{" "}
           {editMode ? (
@@ -101,6 +100,15 @@ const SkillsSubjects = ({ profile }) => {
             Save
           </button>
         </div>
+      )}
+
+      {/* ✅ Toast */}
+      {toast.message && (
+        <ToastNotification
+          type={toast.type}
+          message={toast.message}
+          onClose={() => setToast({ message: "", type: "" })}
+        />
       )}
     </div>
   );

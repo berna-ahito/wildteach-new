@@ -3,10 +3,12 @@ import DatePicker from "react-datepicker";
 import { useParams, useNavigate } from "react-router-dom";
 import "react-datepicker/dist/react-datepicker.css";
 import useBookingData from "../Data/useBookingData";
+import ToastNotification from "../../Panels/ToastNotification";
 
 export default function BookingFormPanel() {
   const { tutorId } = useParams();
   const navigate = useNavigate();
+  const [toast, setToast] = useState({ message: "", type: "" });
 
   const { subject, setSubject, sessionDateTime, setSessionDateTime, tutor } =
     useBookingData(tutorId);
@@ -27,7 +29,7 @@ export default function BookingFormPanel() {
       !formattedDate ||
       !duration
     ) {
-      alert("Missing booking info.");
+      setToast({ message: "Missing booking information.", type: "error" });
       return;
     }
 
@@ -36,7 +38,7 @@ export default function BookingFormPanel() {
       tutor: { tutor_id: resolvedTutorId },
       subject,
       sessionDateTime: formattedDate,
-      duration, // ✅ new field
+      duration,
       status: "Pending",
     };
 
@@ -53,11 +55,14 @@ export default function BookingFormPanel() {
         throw new Error("Booking failed");
       }
 
-      alert("Booking successful!");
-      navigate("/tuteeDashboard");
+      setToast({ message: "Booking successful!", type: "success" });
+
+      setTimeout(() => {
+        navigate("/tuteeDashboard");
+      }, 1200);
     } catch (err) {
       console.error("Booking error:", err);
-      alert("Booking failed. Please try again.");
+      setToast({ message: "Booking failed. Please try again.", type: "error" });
     }
   };
 
@@ -110,6 +115,15 @@ export default function BookingFormPanel() {
           </button>
         </div>
       </form>
+
+      {/* ✅ Toast Notification */}
+      {toast.message && (
+        <ToastNotification
+          type={toast.type}
+          message={toast.message}
+          onClose={() => setToast({ message: "", type: "" })}
+        />
+      )}
     </div>
   );
 }

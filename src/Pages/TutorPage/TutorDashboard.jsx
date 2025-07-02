@@ -4,6 +4,8 @@ import DashboardLayout from "../../Components/Layout/DashboardLayout";
 import TutorStatData from "../../Components/Tutor/Data/TutorStatData";
 import TutorScheduleData from "../../Components/Tutor/Data/TutorScheduleData";
 import TutorRecentActivity from "../../Components/Tutor/Data/TutorRecentActivity";
+import Announcement from '../../Components/Panels/Announcement';
+
 import WavingHandIcon from "@mui/icons-material/WavingHand";
 
 export default function TutorDashboard() {
@@ -24,10 +26,13 @@ export default function TutorDashboard() {
       </header>
 
       <TutorStatData />
+     
       <div className="dashboard-panels">
+         
         <TutorScheduleData />
         <TutorRecentActivity />
       </div>
+      
     </DashboardLayout>
   );
 }
