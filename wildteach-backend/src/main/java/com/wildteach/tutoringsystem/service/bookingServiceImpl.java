@@ -42,6 +42,10 @@ public class bookingServiceImpl implements bookingService {
             throw new RuntimeException("Tutor ID is required");
         }
 
+        if (booking.getDuration() == null) {
+            booking.setDuration(60);
+        }
+
         return bookingRepository.save(booking);
     }
 
@@ -59,21 +63,15 @@ public class bookingServiceImpl implements bookingService {
     public bookingEntity updateBooking(Long id, bookingEntity bookingDetails) {
         bookingEntity booking = bookingRepository.findById(id).orElse(null);
         if (booking != null) {
-
-            // // Fetch student and tutor from DB by ID
-            // studentEntity student = studentRepository.findById(
-            // bookingDetails.getStudent().getStudent_id()).orElse(null);
-            //
-            // tutorEntity tutor = tutorRepository.findById(
-            // bookingDetails.getTutor().getTutor_id()).orElse(null);
-
             booking.setStudent(bookingDetails.getStudent());
             booking.setTutor(bookingDetails.getTutor());
             booking.setSubject(bookingDetails.getSubject());
             booking.setSessionDateTime(bookingDetails.getSessionDateTime());
             booking.setStatus(bookingDetails.getStatus());
+            booking.setDuration(bookingDetails.getDuration());
             return bookingRepository.save(booking);
         }
+
         return null;
     }
 
@@ -96,7 +94,7 @@ public class bookingServiceImpl implements bookingService {
         return bookingRepository.findByTutorId(tutorId);
     }
 
-    //ADDED - to get bookings by student
+    // ADDED - to get bookings by student
     @Override
     public List<bookingEntity> getBookingsByStudent(Long studentId) {
         return bookingRepository.findByStudentId(studentId);

@@ -1,6 +1,9 @@
 package com.wildteach.tutoringsystem.controller;
 
 import java.util.List;
+import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -79,6 +82,29 @@ public class BookingController {
     @GetMapping("/student/{studentId}")
     public List<bookingEntity> getBookingsByStudent(@PathVariable Long studentId) {
         return bookingService.getBookingsByStudent(studentId);
+    }
+
+    @GetMapping("/sessions/tutor/today/{tutorId}")
+    public List<Map<String, Object>> getTodaySessions(@PathVariable Long tutorId) {
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime startOfDay = now.toLocalDate().atStartOfDay();
+        LocalDateTime endOfDay = now.toLocalDate().atTime(23, 59, 59);
+
+        List<bookingEntity> all = bookingService.getBookingsByTutor(tutorId);
+
+        return all.stream()
+                .filter(b -> b.getSessionDateTime() != null &&
+                        !b.getSessionDateTime().isBefore(startOfDay) &&
+                        !b.getSessionDateTime().isAfter(endOfDay))
+                .map(b -> {
+                    Map<String, Object> map = new HashMap<>();
+                    map.put("session_time", b.getSessionDateTime());
+                    map.put("student_name", b.getStudent().getFirst_name() + " " + b.getStudent().getLast_name());
+                    map.put("subject", b.getSubject());
+                    map.put("status", b.getStatus());
+                    return map;
+                })
+                .toList();
     }
 
 }

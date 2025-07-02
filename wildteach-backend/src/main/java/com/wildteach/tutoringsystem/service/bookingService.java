@@ -18,7 +18,7 @@ public interface bookingService {
 
     long getActiveSessionsCount();
 
-    List<bookingEntity> getBookingsByTutor(Long tutorId); // ✅ KEEP THIS
+    List<bookingEntity> getBookingsByTutor(Long tutorId);
 
-    List<bookingEntity> getBookingsByStudent(Long studentId); // ✅ ADD THIS
+    List<bookingEntity> getBookingsByStudent(Long studentId);
 }

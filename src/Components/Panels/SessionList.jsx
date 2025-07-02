@@ -1,12 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Card from "../Shared/Card";
 import "../../Pages/Styles/TutorPage.css";
 
 export default function SessionList({ sessions, onDelete }) {
   const [editingIndex, setEditingIndex] = useState(null);
-  const [editedSessions, setEditedSessions] = useState([...sessions]);
+  const [editedSessions, setEditedSessions] = useState([]);
   const [selectedYear, setSelectedYear] = useState("All");
   const [selectedMonth, setSelectedMonth] = useState("All");
+  const [deletingId, setDeletingId] = useState(null);
+
+  // 🔧 Keep sessions in sync with parent updates (e.g. after delete)
+  useEffect(() => {
+    setEditedSessions([...sessions]);
+  }, [sessions]);
 
   const handleEditClick = (index) => setEditingIndex(index);
 
@@ -21,9 +27,36 @@ export default function SessionList({ sessions, onDelete }) {
     setEditedSessions(updated);
   };
 
-  const handleSave = () => {
-    console.log("Saved:", editedSessions[editingIndex]);
-    setEditingIndex(null);
+  const handleSave = async () => {
+    const updatedSession = editedSessions[editingIndex];
+    const bookingId = updatedSession.booking_id;
+
+    try {
+      const res = await fetch(
+        `http://localhost:8080/booking/update/${bookingId}`,
+        {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            bookingId,
+            subject: updatedSession.subject,
+            sessionDateTime: new Date(updatedSession.date).toISOString(),
+            duration: parseInt(updatedSession.duration),
+            status: "Pending", // or keep original
+            student: { student_id: updatedSession.student_id || 2 }, // Fallback or real ID
+            tutor: { tutor_id: updatedSession.tutor_id || 4 }, // Fallback or real ID
+          }),
+        }
+      );
+
+      if (!res.ok) throw new Error("Failed to update session");
+
+      alert("✅ Session updated!");
+      setEditingIndex(null);
+    } catch (err) {
+      console.error("❌ Update error:", err);
+      alert("Failed to update session.");
+    }
   };
 
   const handleDelete = async (bookingId) => {
@@ -32,11 +65,16 @@ export default function SessionList({ sessions, onDelete }) {
     );
     if (!confirmDelete) return;
 
+    setDeletingId(bookingId);
+
     try {
       const res = await fetch(
         `http://localhost:8080/booking/delete/${bookingId}`,
-        { method: "DELETE" }
+        {
+          method: "DELETE",
+        }
       );
+
       if (res.ok) {
         onDelete(bookingId);
       } else {
@@ -44,6 +82,8 @@ export default function SessionList({ sessions, onDelete }) {
       }
     } catch {
       alert("Error deleting session.");
+    } finally {
+      setDeletingId(null);
     }
   };
 
@@ -97,17 +137,7 @@ export default function SessionList({ sessions, onDelete }) {
             const isEditing = i === editingIndex;
             return (
               <Card key={s.booking_id} className="session-card">
-                <h3 className="card-title">
-                  Student Name:{" "}
-                  {isEditing ? (
-                    <input
-                      value={s.name}
-                      onChange={(e) => handleChange(i, "name", e.target.value)}
-                    />
-                  ) : (
-                    s.name
-                  )}
-                </h3>
+                <h3 className="card-title">Student Name: {s.name}</h3>
                 <p>
                   Subject:{" "}
                   {isEditing ? (
@@ -169,7 +199,6 @@ export default function SessionList({ sessions, onDelete }) {
                   )}
                 </p>
 
-                {/* Actions */}
                 <div className="card-actions">
                   {isEditing ? (
                     <>
@@ -191,8 +220,11 @@ export default function SessionList({ sessions, onDelete }) {
                       >
                         Edit
                       </button>
-                      <button onClick={() => handleDelete(s.booking_id)}>
-                        Delete
+                      <button
+                        onClick={() => handleDelete(s.booking_id)}
+                        disabled={deletingId === s.booking_id}
+                      >
+                        {deletingId === s.booking_id ? "Deleting..." : "Delete"}
                       </button>
                     </>
                   )}
@@ -203,7 +235,7 @@ export default function SessionList({ sessions, onDelete }) {
         )}
       </div>
 
-      {/* Pagination placeholder */}
+      {/* Pagination */}
       <div className="pagination">
         <button className="page-btn active">1</button>
         <button className="page-btn">2</button>
