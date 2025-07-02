@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import '../../Pages/Styles/LoadingScreen.css'
+import "../../Pages/Styles/LoadingScreen.css";
 export default function LoadingScreen() {
   const [show, setShow] = useState(true);
 

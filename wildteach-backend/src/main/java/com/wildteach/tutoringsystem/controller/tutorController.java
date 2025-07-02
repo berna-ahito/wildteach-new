@@ -121,4 +121,13 @@ public class tutorController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/byStudentId/{studentId}")
+    public ResponseEntity<tutorEntity> getTutorByStudentId(@PathVariable Long studentId) {
+        tutorEntity tutor = tutorService.findByStudent(studentId);
+        if (tutor == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(tutor);
+    }
+
 }
