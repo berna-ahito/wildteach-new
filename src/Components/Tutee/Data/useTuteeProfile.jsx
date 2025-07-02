@@ -1,28 +1,66 @@
-import { useState } from 'react';
+// import { useState, useEffect } from "react";
+// import { supabase } from "../../../config/supabaseClient";
 
-export default function useTuteeProfile() {
-  const [editPersonal, setEditPersonal] = useState(false);
-  const [editSecurity, setEditSecurity] = useState(false);
+// export default function useTuteeProfile(userId) {
+//   const [profile, setProfile] = useState(null);
+//   const [loading, setLoading] = useState(true);
 
-  const [profile, setProfile] = useState({
-    dob: '2001-05-20',
-    phone: '09123456789',
-    address: '123 Main St, Metro Manila',
-    currentPassword: '',
-    newPassword: '',
-    confirmPassword: ''
-  });
+//   useEffect(() => {
+//     if (!userId) return;
 
-  const handleChange = (field) => (e) => {
-    setProfile({ ...profile, [field]: e.target.value });
-  };
+//     async function fetchProfile() {
+//       const { data, error } = await supabase
+//         .from("profiles") // Change this to your actual TUTEE table name if different
+//         .select("*")
+//         .eq("id", userId)
+//         .single();
 
-  return {
-    profile,
-    editPersonal,
-    setEditPersonal,
-    editSecurity,
-    setEditSecurity,
-    handleChange
-  };
+//       if (error) {
+//         console.error("Tutee profile fetch failed:", error.message);
+//         setProfile(null);
+//       } else {
+//         setProfile(data);
+//       }
+
+//       setLoading(false);
+//     }
+
+//     fetchProfile();
+//   }, [userId]);
+
+//   return { profile, loading };
+// }
+
+
+import { useState, useEffect } from "react";
+import { supabase } from "../../../config/supabaseClient";
+
+export default function useTuteeProfile(userId) {
+  const [profile, setProfile] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (!userId) return;
+
+    async function fetchProfile() {
+      const { data, error } = await supabase
+        .from("tutees") // make sure this matches your actual table
+        .select("*")
+        .eq("student_id", userId) // make sure column matches
+        .single();
+
+      if (error) {
+        console.error("Tutee profile fetch failed:", error.message);
+        setProfile(null);
+      } else {
+        setProfile(data);
+      }
+
+      setLoading(false);
+    }
+
+    fetchProfile();
+  }, [userId]);
+
+  return { profile, loading };
 }
