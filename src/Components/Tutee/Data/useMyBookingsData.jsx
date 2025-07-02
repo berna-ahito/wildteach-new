@@ -26,7 +26,9 @@ export default function useMyBookingsData() {
   }, []);
 
   const filteredBookings = bookings.filter((b) => {
-    const date = new Date(b.sessionDateTime);
+    // const date = new Date(b.sessionDateTime);
+    const date = new Date(new Date(b.sessionDateTime).getTime() + 8 * 60 * 60 * 1000); // ✅ Apply +8hr offset
+
     const year = date.getFullYear().toString();
     const month = date.toLocaleString('default', { month: 'long' });
     const matchYear = selectedYear === 'All' || selectedYear === year;
