@@ -2,17 +2,19 @@ import React, { useState } from "react";
 import axios from "axios";
 import InputCards from "../Shared/InputCards";
 import UserCredentials from "../Shared/Data/UserCredentials";
+import ToastNotification from "../Panels/ToastNotification"; // ✅ Toast
 import "../../Pages/Styles/Admin.css";
 
 export default function ChangeEmail({ role = "admin", userId, email }) {
   const [newEmail, setNewEmail] = useState("");
   const [confirmEmail, setConfirmEmail] = useState("");
+  const [toast, setToast] = useState(null); // ✅ Toast state
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (newEmail !== confirmEmail) {
-      alert("Emails do not match.");
+      setToast({ type: "error", message: "Emails do not match." });
       return;
     }
 
@@ -35,48 +37,59 @@ export default function ChangeEmail({ role = "admin", userId, email }) {
         });
       }
 
-      // Update localStorage
+      // ✅ Update localStorage
       const updatedUser = { ...JSON.parse(localStorage.getItem("user")), email: newEmail };
       localStorage.setItem("user", JSON.stringify(updatedUser));
 
-      alert(`✅ Email updated to ${newEmail} successfully!`);
+      setToast({ type: "success", message: `Email updated to ${newEmail} successfully!` });
       setNewEmail("");
       setConfirmEmail("");
     } catch (err) {
       console.error("❌ Email update failed:", err.response?.data || err.message);
-      alert(err.response?.data || "Email update failed. Please try again.");
+      const msg = err.response?.data || "Email update failed. Please try again.";
+      setToast({ type: "error", message: msg });
     }
   };
 
   return (
-    <InputCards title="Change Email">
-      <form onSubmit={handleSubmit} className="settings-section">
-        <UserCredentials role={role} email={email} />
+    <>
+      {toast && (
+        <ToastNotification
+          type={toast.type}
+          message={toast.message}
+          onClose={() => setToast(null)}
+        />
+      )}
 
-        <input
-          className="toggle-btn-settings"
-          type="email"
-          value={newEmail}
-          onChange={(e) => setNewEmail(e.target.value)}
-          placeholder="New Email"
-          required
-        />
-        <input
-          className="toggle-btn-settings"
-          type="email"
-          value={confirmEmail}
-          onChange={(e) => setConfirmEmail(e.target.value)}
-          placeholder="Confirm New Email"
-          required
-        />
-        <button
-          type="submit"
-          className="toggle-btn active"
-          style={{ alignSelf: "center" }}
-        >
-          Update Email
-        </button>
-      </form>
-    </InputCards>
+      <InputCards title="Change Email">
+        <form onSubmit={handleSubmit} className="settings-section">
+          <UserCredentials role={role} email={email} />
+
+          <input
+            className="toggle-btn-settings"
+            type="email"
+            value={newEmail}
+            onChange={(e) => setNewEmail(e.target.value)}
+            placeholder="New Email"
+            required
+          />
+          <input
+            className="toggle-btn-settings"
+            type="email"
+            value={confirmEmail}
+            onChange={(e) => setConfirmEmail(e.target.value)}
+            placeholder="Confirm New Email"
+            required
+          />
+          <button
+            type="submit"
+            className="toggle-btn active"
+            style={{ alignSelf: "center" }}
+          >
+            Update Email
+          </button>
+        </form>
+      </InputCards>
+    </>
   );
 }

@@ -8,7 +8,7 @@ const menuTutor = (navigate) => [
   },
   { text: "Manage Sessions", onClick: () => navigate('/tutor/manageSessions') },
   { text: "Profile", onClick: () => navigate('/tutor/profile') },
-  { text: "Contact Us", onClick: () => navigate('/tutor/contactUs') },
+  { text: "Contact Us", onClick: () => navigate('/tutor/contact-us') },
   { text: "Settings", onClick: () => navigate('/tutor/settings') },
   { text: "Logout" }
 ];

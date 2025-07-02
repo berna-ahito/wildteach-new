@@ -10,6 +10,7 @@ import TutorDashboard from './Pages/TutorPage/TutorDashboard';
 import Sessions from './Pages/TutorPage/Sessions';
 import ProfileTutor from './Pages/TutorPage/Profile';
 import TutorSettings from './Pages/TutorPage/Settings';
+import ContactUs from './Pages/TutorPage/ContactUs';
 
 // Admin pages
 import AdminDashboard from './Pages/AdminPage/AdminDashboard';
@@ -70,6 +71,8 @@ function App() {
         <Route path="/tutor/manageSessions" element={<Sessions />} />
         <Route path="/tutor/profile" element={<ProfileTutor />} />
         <Route path="/tutor/settings" element={<TutorSettings />} />
+        <Route path="/tutor/contact-us" element={<ContactUs />} />
+        
       </Routes>
     </Router>
   );

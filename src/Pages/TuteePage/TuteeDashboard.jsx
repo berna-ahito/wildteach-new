@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import DashboardLayout from "../../Components/Layout/DashboardLayout";
 import UpcomingSchedulePanel from "../../Components/Tutee/Panels/UpcomingSchedulePanel";
-import AdminSystemAnnouncement from "../../Components/Admin/Data/AdminSystemAnnouncement";
+import Announcement from "../../Components/Panels/Announcement";
 import WavingHandIcon from "@mui/icons-material/WavingHand";
+
 import "../../Pages/Styles/TutorPage/TutorDashboard.css";
 import "../../Pages/Styles/TutorPage/TutorGlobals.css";
 
@@ -10,7 +12,6 @@ export default function TuteeDashboard() {
   const [studentName, setStudentName] = useState("");
   const studentId = localStorage.getItem("student_id");
 
-  // 🔁 Fetch student first_name
   useEffect(() => {
     if (!studentId) return;
 
@@ -38,7 +39,7 @@ export default function TuteeDashboard() {
 
       <div className="dashboard-panels">
         <UpcomingSchedulePanel />
-        <AdminSystemAnnouncement />
+        <Announcement />
       </div>
     </DashboardLayout>
   );

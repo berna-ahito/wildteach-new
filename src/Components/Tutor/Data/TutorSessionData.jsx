@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from "react";
 import SessionList from "../../Panels/SessionList";
+import ToastNotification from "../../Panels/ToastNotification";
 
 export default function TutorSessionData() {
   const [sessions, setSessions] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [toast, setToast] = useState({ message: "", type: "" });
   const tutorId = localStorage.getItem("tutor_id");
 
   const fetchSessions = async () => {
@@ -62,16 +64,27 @@ export default function TutorSessionData() {
 
   const handleDelete = (deletedId) => {
     setSessions((prev) => prev.filter((s) => s.booking_id !== deletedId));
-    alert("✅ Session deleted successfully!");
+    setToast({ message: "Session deleted successfully!", type: "success" });
   };
 
   if (loading) return <p>Loading sessions...</p>;
 
   return (
-    <SessionList
-      sessions={sessions}
-      onDelete={handleDelete}
-      onRefresh={fetchSessions}
-    />
+    <>
+      <SessionList
+        sessions={sessions}
+        onDelete={handleDelete}
+        onRefresh={fetchSessions}
+        setToast={setToast} // ✅ pass toast setter
+      />
+
+      {toast.message && (
+        <ToastNotification
+          type={toast.type}
+          message={toast.message}
+          onClose={() => setToast({ message: "", type: "" })}
+        />
+      )}
+    </>
   );
 }
