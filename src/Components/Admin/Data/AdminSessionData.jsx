@@ -21,7 +21,7 @@ export default function AdminSessionData() {
         );
 
         const active = validBookings.filter(b =>
-          b.status?.toUpperCase() === 'ACCEPTED'
+          b.status?.toUpperCase() === 'ACCEPTED' || b.status?.toUpperCase() === 'SCHEDULED'
         ).length;
 
         const pending = validBookings.filter(b =>

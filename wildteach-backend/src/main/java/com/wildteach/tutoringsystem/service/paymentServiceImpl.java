@@ -24,17 +24,17 @@ public class paymentServiceImpl implements paymentService {
     public paymentEntity savePayment(paymentEntity payment) {
         if (payment.getBooking() != null) {
             Optional<bookingEntity> bookingOptional = bookingRepository.findById(payment.getBooking().getBookingId());
-            if (bookingOptional.isPresent()) {
-                // Check if a payment already exists for this booking
 
-                // If exists, find and update it instead of creating a new one
-                Optional<paymentEntity> existingPayment = paymentRepository
-                        .findByBooking_BookingId(payment.getBooking().getBookingId());
-                if (existingPayment.isPresent()) {
-                    paymentEntity existingPaymentEntity = existingPayment.get();
-                    existingPaymentEntity.setAmount(payment.getAmount());
-                    existingPaymentEntity.setStatus(payment.getStatus());
-                    return paymentRepository.save(existingPaymentEntity);
+            if (bookingOptional.isPresent()) {
+                List<paymentEntity> existingPayments = paymentRepository
+                        .findAllByBooking_BookingId(payment.getBooking().getBookingId());
+
+                if (!existingPayments.isEmpty()) {
+                    // Update the first existing payment (or adjust logic as needed)
+                    paymentEntity existing = existingPayments.get(0);
+                    existing.setAmount(payment.getAmount());
+                    existing.setStatus(payment.getStatus());
+                    return paymentRepository.save(existing);
                 }
 
                 // No existing payment found, create a new one
@@ -48,6 +48,7 @@ public class paymentServiceImpl implements paymentService {
             throw new IllegalArgumentException("Booking must not be null.");
         }
     }
+
 
     @Override
     public List<paymentEntity> getAllPayments() {

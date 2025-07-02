@@ -94,5 +94,14 @@ public class paymentController {
         double total = paymentService.getTotalCompletedPaymentsByTutor(tutorId);
         return ResponseEntity.ok(total);
     }
+    @GetMapping("/byBookingId/{bookingId}")
+public ResponseEntity<List<paymentEntity>> getPaymentsByBookingId(@PathVariable Long bookingId) {
+    List<paymentEntity> payments = paymentRepository.findAllByBooking_BookingId(bookingId);
+    if (payments.isEmpty()) {
+        return ResponseEntity.notFound().build();
+    }
+    return ResponseEntity.ok(payments);
+}
+
 
 }
