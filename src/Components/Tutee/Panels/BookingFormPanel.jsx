@@ -11,14 +11,16 @@ export default function BookingFormPanel() {
   const { subject, setSubject, sessionDateTime, setSessionDateTime, tutor } =
     useBookingData(tutorId);
 
-  const [duration, setDuration] = useState(60); // ✅ default to 1 hour
+  const [duration, setDuration] = useState(60); //defaul 1 hour
 
   const handleBookingSubmit = async (e) => {
     e.preventDefault();
 
     const studentId = parseInt(localStorage.getItem("student_id"));
     const resolvedTutorId = parseInt(tutor?.tutor_id || tutor?.id || 0);
-    const formattedDate = new Date(sessionDateTime).toISOString();
+    const formattedDate = sessionDateTime
+      .toLocaleString("sv-SE")
+      .replace(" ", "T");
 
     if (
       !studentId ||
@@ -36,7 +38,7 @@ export default function BookingFormPanel() {
       tutor: { tutor_id: resolvedTutorId },
       subject,
       sessionDateTime: formattedDate,
-      duration, // ✅ new field
+      duration,
       status: "Pending",
     };
 
