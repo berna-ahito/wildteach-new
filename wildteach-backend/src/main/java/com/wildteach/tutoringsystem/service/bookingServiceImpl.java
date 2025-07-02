@@ -1,6 +1,7 @@
 package com.wildteach.tutoringsystem.service;
 
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -94,4 +95,11 @@ public class bookingServiceImpl implements bookingService {
     public List<bookingEntity> getBookingsByTutor(Long tutorId) {
         return bookingRepository.findByTutorId(tutorId);
     }
+
+    //ADDED - to get bookings by student
+    @Override
+    public List<bookingEntity> getBookingsByStudent(Long studentId) {
+        return bookingRepository.findByStudentId(studentId);
+    }
+
 }
