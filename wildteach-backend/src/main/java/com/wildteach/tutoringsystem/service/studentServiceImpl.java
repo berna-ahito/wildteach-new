@@ -127,5 +127,11 @@ public class studentServiceImpl implements studentService {
     public List<studentEntity> getAllTutors() {
         return studentRepository.findAllTutors();
     }
+    @Override   
+    public boolean emailExists(String email) {
+        return studentRepository.findByEmail(email) != null;
+    }
+
+
 
 }

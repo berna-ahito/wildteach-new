@@ -1,11 +1,15 @@
 import React, { useState } from "react";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { registerUser } from "./RegisterHandler";
-import LoadingScreen from "../Panels/LoadingScreen"
+import LoadingScreen from "../Panels/LoadingScreen";
+
 export default function RegisterForm() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   const [formData, setFormData] = useState({
     lastName: "", firstName: "", middleName: "",
@@ -28,7 +32,7 @@ export default function RegisterForm() {
       return;
     }
 
-    setIsLoading(true); // ✅ Show loading screen
+    setIsLoading(true);
 
     const birth_date = `${formData.birthYear}-${formData.birthMonth.padStart(2, '0')}-${formData.birthDay.padStart(2, '0')}`;
     const payload = {
@@ -52,10 +56,8 @@ export default function RegisterForm() {
     try {
       const result = await registerUser(payload);
 
-      // ✅ Optional short delay before hiding loading screen
       setTimeout(() => {
         setIsLoading(false);
-
         if (result.success) {
           navigate("/login");
         } else {
@@ -151,14 +153,7 @@ export default function RegisterForm() {
           {/* Course */}
           <div className="form-section">
             <label className="field-label">Course</label>
-            <input
-              type="text"
-              name="course"
-              placeholder="e.g. BSCS"
-              value={formData.course}
-              onChange={handleChange}
-              required
-            />
+            <input type="text" name="course" placeholder="e.g. BSCS" value={formData.course} onChange={handleChange} required />
           </div>
 
           {/* Role and Year */}
@@ -174,15 +169,48 @@ export default function RegisterForm() {
             </div>
           </div>
 
-          {/* Passwords */}
+          {/* Password */}
           <div className="form-section">
             <label className="field-label">Password</label>
-            <input type="password" name="password" placeholder="Password" value={formData.password} onChange={handleChange} required />
+            <div className="password-input-wrapper">
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                placeholder="Password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+              />
+              <button
+                type="button"
+                className="eye-toggle"
+                onClick={() => setShowPassword((prev) => !prev)}
+              >
+                {showPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
+            </div>
           </div>
 
+          {/* Confirm Password */}
           <div className="form-section">
             <label className="field-label">Confirm Password</label>
-            <input type="password" name="confirmPassword" placeholder="Confirm Password" value={formData.confirmPassword} onChange={handleChange} required />
+            <div className="password-input-wrapper">
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                name="confirmPassword"
+                placeholder="Confirm Password"
+                value={formData.confirmPassword}
+                onChange={handleChange}
+                required
+              />
+              <button
+                type="button"
+                className="eye-toggle"
+                onClick={() => setShowConfirmPassword((prev) => !prev)}
+              >
+                {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+              </button>
+            </div>
           </div>
 
           {/* Error Message */}

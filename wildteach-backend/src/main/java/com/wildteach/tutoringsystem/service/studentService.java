@@ -26,4 +26,6 @@ public interface studentService {
 	tutorEntity getTutorByStudentId(Long studentId);
 
 	List<studentEntity> getAllTutors();
+	public boolean emailExists(String email);
+
 }
