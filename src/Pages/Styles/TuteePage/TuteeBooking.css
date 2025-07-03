@@ -1,74 +1,117 @@
+/* Wraps entire booking page */
 .booking-page-container {
   display: flex;
   justify-content: center;
-  margin-top: 20px;
-  padding: 20px;
+  align-items: flex-start;
+  padding: 40px 20px;
+  background-color: #fffaf8;
 }
 
+/* Main Booking Form Container */
 .booking-form-box {
   width: 100%;
   max-width: 600px;
-  background: white;
-  padding: 32px;
+  background: #ffffff;
+  padding: 36px;
   border-radius: 18px;
   border-top: 4px solid #e4b81a;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
+/* Header styles */
 .booking-heading {
   margin-bottom: 24px;
+  text-align: center;
 }
 
 .booking-heading h2 {
-  font-size: 24px;
-  color: #89343b;
-  font-weight: bold;
+  font-size: 26px;
+  color: #f8c400;
+  font-weight: 700;
   margin-bottom: 8px;
 }
 
+.booking-title{
+  color: white;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.mock-name {
+  color: #5f3a3a;
+}
+
+/* Label styling */
 .booking-form-box label {
   display: block;
-  font-size: 14px;
+  font-size: 15px;
   margin-bottom: 6px;
   color: #5b2121;
   font-weight: 600;
 }
 
+/* Input and datepicker styling */
+/* Input and select styling (leave datepicker wrapper out) */
 .booking-form-box input,
-.booking-form-box .react-datepicker-wrapper {
+.booking-form-box select {
   width: 100%;
-  padding: 10px 12px;
+  padding: 12px 14px;
   border: 1px solid #ddd;
   border-radius: 8px;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
   font-family: "Poppins", sans-serif;
   font-size: 14px;
   color: #34251f;
+  background-color: #fdfdfd;
 }
 
 .booking-form-box input:focus,
-.booking-form-box .react-datepicker-wrapper:focus-within {
+.booking-form-box select:focus {
   outline: none;
   border-color: #89343b;
-  box-shadow: 0 0 0 2px rgba(137, 52, 59, 0.1);
+  box-shadow: 0 0 0 2px rgba(137, 52, 59, 0.15);
 }
 
+/* Remove the outer border from datepicker wrapper */
+.booking-form-box .react-datepicker-wrapper {
+  width: 100%;
+  margin-bottom: 20px;
+  border: none;
+  padding: 0;
+}
+
+/* Style the actual date input */
 .react-datepicker__input-container input {
   width: 100%;
-  border: none;
-  outline: none;
+  padding: 12px 14px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  color: #34251f;
+  background-color: #fdfdfd;
 }
 
+.react-datepicker__input-container input:focus {
+  outline: none;
+  border-color: #89343b;
+  box-shadow: 0 0 0 2px rgba(137, 52, 59, 0.15);
+}
+
+
+/* Submit button */
 .confirm-book-button {
   background-color: #89343b;
   color: #f8c400;
-  padding: 12px 30px;
-  font-size: 1.1rem;
+  padding: 12px 28px;
+  font-size: 1rem;
   border: none;
   border-radius: 26px;
   font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  display: inline-block;
+  width: 100%;
 }
 
 .confirm-book-button:hover {
@@ -76,30 +119,23 @@
   color: #89343b;
 }
 
-
-.booking-header-container {
-  text-align: center;
-  margin-top: 30px;
+/* Toast container (optional layout improvement) */
+.toast-notification {
+  margin-top: 20px;
 }
 
-.booking-title {
-  font-size: 2.4rem;
-  color: #89343b;
-  font-weight: bold;
-}
+/* Responsive */
+@media (max-width: 600px) {
+  .booking-form-box {
+    padding: 24px;
+  }
 
-.booking-card-wrapper {
-  display: flex;
-  justify-content: center;
-  margin-top: 30px;
-  padding: 0 20px;
-}
+  .booking-heading h2 {
+    font-size: 22px;
+  }
 
-.booking-card {
-  background-color: white;
-  border-radius: 15px;
-  padding: 30px;
-  width: 100%;
-  max-width: 700px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  .confirm-book-button {
+    font-size: 0.95rem;
+    padding: 10px 24px;
+  }
 }

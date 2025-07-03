@@ -108,7 +108,9 @@ export default function BookingFormPanel() {
         >
           <option value={30}>30 minutes</option>
           <option value={60}>1 hour</option>
-          <option value={90}>1.5 hours</option>
+          <option value={90}>2 hours</option>
+          <option value={90}>3 hours</option>
+
         </select>
 
         <div className="form-actions">

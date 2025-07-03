@@ -1,31 +1,43 @@
+/* Main card container (formerly profile-container) */
 .profile-container {
-  padding: 24px;
+  max-width: 900px;
+  margin: 0 auto;
+  background-color: #fff;
+  border-radius: 16px;
+  border-top: 6px solid #f8c400;; /* ✅ colored top border */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  padding: 32px;
   font-family: "Poppins", sans-serif;
-  background-color: #fffaf5;
+  margin-top: 32px;
 }
 
+/* Page title inside card */
 .profile-title {
-  font-size: 24px;
+  font-size: 30px;
   font-weight: bold;
   color: #8d2f2f;
-  margin-bottom: 20px;
+  margin-bottom: 24px;
+  text-align: center;
 }
 
+/* Inner card sections (optional if you break it into subcards) */
 .profile-card {
-  background: white;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  margin-bottom: 20px;
+  background: #fdfdfd;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+  margin-bottom: 24px;
   padding: 20px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
+/* Profile header section */
 .profile-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 16px;
 }
 
+/* Avatar + name section */
 .avatar-section {
   display: flex;
   align-items: center;
@@ -36,32 +48,57 @@
   width: 64px;
   height: 64px;
   border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #e4b81a;
 }
 
+/* Edit button */
 .edit-btn {
   background-color: #8d2f2f;
   color: white;
   border: none;
-  padding: 6px 14px;
-  border-radius: 6px;
+  padding: 8px 16px;
+  border-radius: 8px;
   cursor: pointer;
   font-weight: 500;
-  transition: background 0.2s ease;
+  transition: background 0.25s ease;
 }
 
 .edit-btn:hover {
   background-color: #a34242;
 }
 
+/* Section headers */
 .section-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 10px;
+  font-size: 18px;
+  color: #572a2a;
+  font-weight: 600;
 }
 
+/* Grid layout for fields */
 .info-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 12px 24px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .profile-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .edit-btn {
+    align-self: flex-end;
+  }
 }
