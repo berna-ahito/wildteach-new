@@ -41,7 +41,7 @@ export default function Header() {
       elevation={1}
       className="custom-header"
     >
-      <Toolbar className="header-toolbar" onClick={handleToolbarClick}>
+      <Toolbar className="header-toolbar">
         <div className="navbar-left">
           <div
             className="brand-zone"

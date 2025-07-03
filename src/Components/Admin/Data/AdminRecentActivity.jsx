@@ -14,7 +14,7 @@ export default function AdminRecentActivity() {
         ]);
 
         const recentTutors = (tutorsRes.data || [])
-          .slice(-3) // Get latest 3
+          .slice(-3)
           .map(tutor => {
             const student = tutor.student || {};
             return {

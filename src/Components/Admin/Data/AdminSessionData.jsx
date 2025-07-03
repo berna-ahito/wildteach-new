@@ -38,9 +38,9 @@ export default function AdminSessionData() {
   }, []);
 
   const stats = [
-    { label: 'Active Sessions', value: activeSessions, icon: PlayCircleOutlineIcon, color: 'yellow' },
-    { label: 'Pending Sessions', value: pendingSessions, icon: HourglassEmptyIcon, color: 'orange' },
-    { label: 'Total Sessions', value: totalSessions, icon: EventNoteIcon, color: 'blue' }
+    { label: 'Active Sessions', value: activeSessions, icon: <PlayCircleOutlineIcon />, color: 'yellow' },
+    { label: 'Pending Sessions', value: pendingSessions, icon: <HourglassEmptyIcon />, color: 'orange' },
+    { label: 'Total Sessions', value: totalSessions, icon: <EventNoteIcon />, color: 'blue' }
   ];
 
   return <StatCards stats={stats} />;

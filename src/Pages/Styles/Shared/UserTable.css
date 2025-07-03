@@ -1,0 +1,102 @@
+/* UserTable.css */
+
+.user-table-container {
+  border-radius: 16px;
+  max-height: 60vh;
+  min-width: 1000px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  overflow: auto;
+  background-color: #fffaf5;
+}
+
+.custom-headerTable {
+  background-color: #89343B !important;
+  color: white !important;
+  font-weight: bold;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.MuiTableCell-root {
+  font-family: 'Poppins', sans-serif;
+  font-size: 14px;
+  color: #3d1f1f;
+}
+
+.MuiTableRow-root:hover {
+  background-color: rgba(255, 224, 178, 0.3);
+}
+
+.status {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 500;
+  text-transform: capitalize;
+  font-family: 'Poppins', sans-serif;
+  letter-spacing: 0.4px;
+  text-align: center;
+  min-width: 80px;
+}
+
+.status.active {
+  background-color: #2a6b31 !important;
+  color: #f0fff4;
+}
+
+.status.inactive {
+  background-color: #a52f2f !important;
+  color: #fef2f2;
+}
+
+.status.confirmed {
+  background: #fff3c4;
+  color: #a67c00;
+}
+
+.status.pending {
+  background: #ffd6d6;
+  color: #c62828;
+}
+
+.status.completed {
+  background: #b9fbc0;
+  color: #1b5e20;
+}
+
+.status.upcoming {
+  background: #d0f2f2;
+  color: #00796b;
+}
+.status.new {
+  background: #d0eaff;
+  color: #1e88e5;
+}
+
+.status.accepted {
+  background: #e0f7fa;
+  color: #00796b;
+}
+
+.toggle-btn {
+  background-color: #6d2a30;
+  color: white;
+  border: 1px solid #e4b81a;
+  padding: 6px 12px;
+  margin-right: 8px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+
+.p-4 {
+  padding: 1.5rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
