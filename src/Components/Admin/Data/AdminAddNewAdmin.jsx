@@ -6,8 +6,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import "../../../Pages/Styles/Admin.css";
-
+import "../../../Pages/Styles/Admin/Admin.css"; 
 export default function AdminAddNewAdmin({ onAdd }) {
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({

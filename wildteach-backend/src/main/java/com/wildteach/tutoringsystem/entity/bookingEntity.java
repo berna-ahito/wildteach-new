@@ -1,15 +1,9 @@
 package com.wildteach.tutoringsystem.entity;
 
 import java.time.LocalDateTime;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "Booking")
@@ -31,6 +25,7 @@ public class bookingEntity {
     @Column(name = "subject")
     private String subject;
 
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
     @Column(name = "session_date_time")
     private LocalDateTime sessionDateTime;
 
@@ -40,14 +35,7 @@ public class bookingEntity {
     @Column(name = "duration")
     private Integer duration;
 
-    public Integer getDuration() {
-        return duration;
-    }
-
-    public void setDuration(Integer duration) {
-        this.duration = duration;
-    }
-
+    // Getters & Setters
     public Long getBookingId() {
         return bookingId;
     }
@@ -94,5 +82,13 @@ public class bookingEntity {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public Integer getDuration() {
+        return duration;
+    }
+
+    public void setDuration(Integer duration) {
+        this.duration = duration;
     }
 }

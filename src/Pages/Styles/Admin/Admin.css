@@ -22,20 +22,6 @@
 }
 
 
-.toggle-btn {
-  background-color: #fffaf5;
-  color: #89343B;
-  border: 1px solid #f5eee9;
-  font-weight: 600;
-  font-family: 'Poppins', sans-serif;
-  font-size: 14px;
-  padding: 8px 24px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-  text-transform: none;
-}
-
 .toggle-btn-settings {
   background-color: #fffaf5;
   color: #89343B;
@@ -109,7 +95,6 @@
 
 
 
-/* Form inside Dialog */
 .add-form {
   display: flex;
   flex-direction: column;
@@ -158,7 +143,9 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
-  margin-top: 20px;
   margin-bottom: 10px;
   align-items: flex-start;
+}
+.forms-buttons.announce {
+  margin-right: 3000vw;
 }

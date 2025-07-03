@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "../../../Pages/Styles/Admin.css";
+import "../../../Pages/Styles/Admin/Admin.css"; 
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import DeleteDialog from "../../Panels/DeleteDialog";

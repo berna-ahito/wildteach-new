@@ -13,24 +13,24 @@ export default function BookingFormPanel() {
   const { subject, setSubject, sessionDateTime, setSessionDateTime, tutor } =
     useBookingData(tutorId);
 
-  const [duration, setDuration] = useState(60); //defaul 1 hour
+  const [duration, setDuration] = useState(60); // default 1 hour
+
+  // Format as 'yyyy-MM-ddTHH:mm:ss' for LocalDateTime (no time zone)
+  const formatDateOnly = (date) => {
+    const pad = (n) => n.toString().padStart(2, "0");
+    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}:00`;
+  };
 
   const handleBookingSubmit = async (e) => {
     e.preventDefault();
 
     const studentId = parseInt(localStorage.getItem("student_id"));
     const resolvedTutorId = parseInt(tutor?.tutor_id || tutor?.id || 0);
-    const formattedDate = sessionDateTime
-      .toLocaleString("sv-SE")
-      .replace(" ", "T");
+    const formattedDate = formatDateOnly(sessionDateTime);
 
-    if (
-      !studentId ||
-      !resolvedTutorId ||
-      !subject ||
-      !formattedDate ||
-      !duration
-    ) {
+    console.log("📦 Final LocalDateTime to backend:", formattedDate);
+
+    if (!studentId || !resolvedTutorId || !subject || !formattedDate || !duration) {
       setToast({ message: "Missing booking information.", type: "error" });
       return;
     }
@@ -53,17 +53,14 @@ export default function BookingFormPanel() {
 
       const responseText = await res.text();
       if (!res.ok) {
-        console.error("Server returned:", res.status, responseText);
+        console.error("❌ Server returned:", res.status, responseText);
         throw new Error("Booking failed");
       }
 
       setToast({ message: "Booking successful!", type: "success" });
-
-      setTimeout(() => {
-        navigate("/tuteeDashboard");
-      }, 1200);
+      setTimeout(() => navigate("/tuteeDashboard"), 1200);
     } catch (err) {
-      console.error("Booking error:", err);
+      console.error("❌ Booking error:", err);
       setToast({ message: "Booking failed. Please try again.", type: "error" });
     }
   };
@@ -93,7 +90,17 @@ export default function BookingFormPanel() {
         <label>Select Date & Time</label>
         <DatePicker
           selected={sessionDateTime}
-          onChange={(date) => setSessionDateTime(date)}
+          onChange={(date) => {
+            setSessionDateTime(date);
+
+            // 🐞 DEBUGGER
+            console.log("🕵️ Booking Debugger:");
+            console.log("▶️ Raw Date object:", date);
+            console.log("📆 Local time:", date.toString());
+            console.log("🌐 UTC time:", date.toUTCString());
+            console.log("🧾 ISO format:", date.toISOString());
+            console.log("✅ Formatted to send to backend:", formatDateOnly(date));
+          }}
           showTimeSelect
           timeFormat="h:mm aa"
           timeIntervals={30}
@@ -118,7 +125,6 @@ export default function BookingFormPanel() {
         </div>
       </form>
 
-      {/* ✅ Toast Notification */}
       {toast.message && (
         <ToastNotification
           type={toast.type}

@@ -69,8 +69,7 @@ export default function useTuteeData(studentId) {
         const formatted = data.map((booking) => {
           const tutor = booking.tutor?.student;
 
-          // ✅ Adjust UTC to Philippine Time (UTC+8)
-          const localDateTime = new Date(new Date(booking.sessionDateTime).getTime() + 8 * 60 * 60 * 1000);
+          const localDateTime = new Date(new Date(booking.sessionDateTime).getTime());
 
           return {
             id: booking.bookingId,

@@ -26,13 +26,19 @@ export default function useMyBookingsData() {
   }, []);
 
   const filteredBookings = bookings.filter((b) => {
-    // const date = new Date(b.sessionDateTime);
-    const date = new Date(new Date(b.sessionDateTime).getTime() + 8 * 60 * 60 * 1000); // ✅ Apply +8hr offset
+    const [yr, mo, dy, hr, min, sec] = b.sessionDateTime
+      .replace("T", " ") // Convert "T" to space if present
+      .split(/[- :]/)
+      .map(Number);
 
-    const year = date.getFullYear().toString();
-    const month = date.toLocaleString('default', { month: 'long' });
-    const matchYear = selectedYear === 'All' || selectedYear === year;
-    const matchMonth = selectedMonth === 'All' || selectedMonth === month;
+    const date = new Date(yr, mo - 1, dy, hr, min, sec);
+
+    const bookingYear = date.getFullYear().toString();
+    const bookingMonth = date.toLocaleString('default', { month: 'long' });
+
+    const matchYear = selectedYear === 'All' || selectedYear === bookingYear;
+    const matchMonth = selectedMonth === 'All' || selectedMonth === bookingMonth;
+
     return matchYear && matchMonth;
   });
 

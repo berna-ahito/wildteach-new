@@ -2,13 +2,12 @@ import React, { useState } from "react";
 import axios from "axios";
 import InputCards from "../Shared/InputCards";
 import UserCredentials from "../Shared/Data/UserCredentials";
-import ToastNotification from "../Panels/ToastNotification"; // ✅ Toast
-import "../../Pages/Styles/Admin.css";
-
+import ToastNotification from "../Panels/ToastNotification"; 
+import "../../Pages/Styles/Admin/Admin.css"; 
 export default function ChangeEmail({ role = "admin", userId, email }) {
   const [newEmail, setNewEmail] = useState("");
   const [confirmEmail, setConfirmEmail] = useState("");
-  const [toast, setToast] = useState(null); // ✅ Toast state
+  const [toast, setToast] = useState(null); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();

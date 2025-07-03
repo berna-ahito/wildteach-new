@@ -8,7 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import AddIcon from "@mui/icons-material/Add";
 import ToastNotification from "../../Panels/ToastNotification"; 
-import "../../../Pages/Styles/Admin.css";
+import "../../../Pages/Styles/Admin/Admin.css"; 
 import "../../../Pages/Styles/Admin/SystemAnnouncement.css"; // Import custom styles for Admin Add Announcement
 
 export default function AdminAddAnnounce({ onAdd }) {
