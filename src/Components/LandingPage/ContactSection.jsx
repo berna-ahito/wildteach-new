@@ -95,7 +95,6 @@ export default function ContactSection() {
         </div>
       </div>
 
-      {/* ✅ Toast Notification */}
       {toast.message && (
         <ToastNotification
           type={toast.type}

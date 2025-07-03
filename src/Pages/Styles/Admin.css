@@ -67,6 +67,11 @@
   background-color: #F8C400;
   color: #89343B;
 }
+.toggle-btn.active:hover {
+  background-color: #89343B;
+  color:#F8C400;
+  transform: 0.5s;
+}
 
 .admin-manage-table {
   margin-top: 20px;
@@ -97,49 +102,12 @@
 }
 
 
-.status-btn {
-  font-family: 'Poppins', sans-serif;
-  font-weight: 600;
-  font-size: 12px;
-  padding: 4px 10px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  text-transform: none;
-  transition: background-color 0.2s ease;
-}
 
-.status-btn.active {
-  background-color: #4CAF50 !important;
-  color: #ffffff !important;
-}
 
-.status-btn.inactive {
-  background-color: #89343B !important;
-  color: #ffffff !important;
-}
 
-.status-btn.pending {
-  background-color: #fff3c4 !important;
-  color: #a67c00 !important;
-}
 
-/* Add Announcement + Card Styling */
-.add-announcement-card {
-  width: 220px;
-  height: 150px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 48px;
-  font-weight: bold;
-  background-color: #fffaf5;
-  border: 1px dashed #f5eee9;
-  cursor: pointer;
-  border-radius: 12px;
-  color: #89343B;
-  transition: background-color 0.2s ease;
-}
+
+
 
 /* Form inside Dialog */
 .add-form {

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Dialog, DialogTitle, DialogContent, IconButton } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import AdminViewAll from '../Admin/Data/AdminViewAll'; // Adjust path if needed
-import '../../Pages/Styles/Admin.css'; // For consistent admin styling
 
 export default function Announcement({ announcements = [], onRefresh }) {
   const [open, setOpen] = useState(false);
@@ -22,7 +21,7 @@ export default function Announcement({ announcements = [], onRefresh }) {
               <div className="info">
                 <strong>{a.title}</strong> • {a.content}
               </div>
-              <span className="status confirmed">New</span>
+              <span className="status new">New</span>
             </li>
           ))
         ) : (

@@ -3,7 +3,7 @@ import UserTable from '../../Shared/UserTable';
 import axios from 'axios';
 import '../../../Pages/Styles/Admin.css';
 
-export default function AdminStudent() {
+export default function AdminStudent({ onRefresh }) {
   const [students, setStudents] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -39,6 +39,9 @@ export default function AdminStudent() {
   const handleToggleStatus = async (studentId, newIsActive) => {
     try {
       await axios.put(`http://localhost:8080/student/updateStatus/${studentId}?is_active=${newIsActive}`);
+      
+      if (onRefresh) onRefresh(); // ✅ Trigger refresh of stat cards
+      fetchStudents();            // ✅ Refresh table too
       return true;
     } catch (err) {
       console.error('Failed to update student status:', err);
@@ -51,7 +54,11 @@ export default function AdminStudent() {
 
   return (
     <div className="p-6">
-      <UserTable data={students} onToggleStatus={handleToggleStatus} />
+      <UserTable
+        data={students}
+        onToggleStatus={handleToggleStatus}
+        onRefresh={onRefresh} // ✅ Pass it down
+      />
     </div>
   );
 }

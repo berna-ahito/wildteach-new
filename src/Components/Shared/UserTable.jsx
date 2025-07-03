@@ -3,9 +3,11 @@ import {
   Table, TableBody, TableCell, TableContainer,
   TableHead, TableRow, Paper, Button
 } from '@mui/material';
-import '../../Pages/Styles/Admin.css';
+import '../../Pages/Styles/Shared/CommonComponents.css';
+import '../../Pages/Styles/Shared/UserTable.css'; 
 
-export default function UserTable({ data = [], onToggleStatus }) {
+
+export default function UserTable({ data = [], onToggleStatus,onRefresh }) {
   const [view, setView] = useState("Tutee");
   const [tableData, setTableData] = useState([]);
 
@@ -30,7 +32,9 @@ export default function UserTable({ data = [], onToggleStatus }) {
       const updated = [...tableData];
       updated[index].status = newStatus;
       setTableData(updated);
+      if (onRefresh) onRefresh(); // ✅ trigger stat refresh
     }
+
   };
 
   return (
@@ -51,15 +55,15 @@ export default function UserTable({ data = [], onToggleStatus }) {
         </button>
       </div>
 
-      <TableContainer component={Paper} sx={{ borderRadius: '16px', maxHeight: '60vh', marginTop: '20px' }}>
+    <TableContainer component={Paper} className="user-table-container">
         <Table stickyHeader>
           <TableHead>
             <TableRow>
-              <TableCell className="custom-header">Name</TableCell>
-              <TableCell className="custom-header">Course</TableCell>
-              <TableCell className="custom-header">Phone Number</TableCell>
-              <TableCell className="custom-header">Email</TableCell>
-              <TableCell className="custom-header">Status</TableCell>
+              <TableCell className="custom-headerTable">Name</TableCell>
+              <TableCell className="custom-headerTable">Course</TableCell>
+              <TableCell className="custom-headerTable">Phone Number</TableCell>
+              <TableCell className="custom-headerTable">Email</TableCell>
+              <TableCell className="custom-headerTable">Status</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -72,7 +76,7 @@ export default function UserTable({ data = [], onToggleStatus }) {
                   <TableCell>{user.email}</TableCell>
                   <TableCell>
                     <Button
-                      className={`status-btn ${user.status === 'Active' ? 'active' : 'inactive'}`}
+                      className={`status ${user.status === 'Active' ? 'active' : 'inactive'}`}
                       variant="contained"
                       size="small"
                       onClick={() => handleToggleStatus(user, index)}

@@ -6,8 +6,10 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
+import AddIcon from "@mui/icons-material/Add";
 import ToastNotification from "../../Panels/ToastNotification"; 
 import "../../../Pages/Styles/Admin.css";
+import "../../../Pages/Styles/Admin/SystemAnnouncement.css"; // Import custom styles for Admin Add Announcement
 
 export default function AdminAddAnnounce({ onAdd }) {
   const [open, setOpen] = useState(false);
@@ -77,8 +79,8 @@ export default function AdminAddAnnounce({ onAdd }) {
 
       <Card
         title="Create New"
-        content="+"
-        className="stat-card add-announcement-card"
+         content={<AddIcon style={{ fontSize: 48 }} />}
+        className="add-announcement-card"
         onClick={() => setOpen(true)}
       />
 
@@ -100,14 +102,14 @@ export default function AdminAddAnnounce({ onAdd }) {
               placeholder="Title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="toggle-btn"
+              className="input-announce"
               required
             />
             <textarea
               placeholder="Content"
               value={content}
               onChange={(e) => setContent(e.target.value)}
-              className="toggle-btn"
+              className="input-announce"
               rows={4}
               required
             />

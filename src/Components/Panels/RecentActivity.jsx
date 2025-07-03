@@ -31,11 +31,16 @@ export default function RecentActivity({ recent, role = "tutor" }) {
           filteredRecent.slice(0, 3).map((r, i) => (
             <li key={i} className="panel-item">
               <div className="avatar-circle">{r.avatar}</div>
-              <div className="info">
-                <strong>{r.name}</strong> • {r.subject || r.content} • {r.time}
+              <div className="activity-details">
+                <div className="info">
+                  <strong>{r.name}</strong> • {r.subject || r.content} • {r.time}
+                </div>
+                <span className={`status ${r.status}`}>
+                  {r.status?.charAt(0).toUpperCase() + r.status?.slice(1)}
+                </span>
               </div>
-              <span className={`status ${r.status}`}>{r.status}</span>
             </li>
+
           ))
         ) : (
           <li className="panel-item">
