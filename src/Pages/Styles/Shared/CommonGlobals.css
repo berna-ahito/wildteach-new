@@ -1,0 +1,71 @@
+/* CommonGlobals.css — shared across all dashboards and pages */
+
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Fullscreen layout base */
+html,
+body {
+  height: 100%;
+  width: 100%;
+  font-family: "Poppins", sans-serif;
+  color: #34251f;
+  overflow-x: hidden;
+  background: none; /* Remove default background */
+}
+
+/* Apply WildTeach red theme background only to dashboard pages */
+body.red-theme {
+  background: linear-gradient(135deg, #89343B, #5b2121 50%, #3d1f1f);
+}
+
+/* Buttons (base style) */
+button {
+  font-family: "Poppins", sans-serif;
+  color: #34251f;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Inputs inherit font and color */
+input,
+textarea,
+select {
+  font-family: "Poppins", sans-serif;
+  color: #34251f;
+}
+
+/* Default list padding cleanup */
+ul {
+  margin: 4px 0 0 16px;
+}
+
+/* Pagination (shared) */
+.pagination {
+  margin-top: 24px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.page-btn {
+  padding: 6px 14px;
+  border: none;
+  border-radius: 6px;
+  background-color: #89343b;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.page-btn.active,
+.page-btn:hover {
+  background-color: #f8c400;
+  color: #89343b;
+}

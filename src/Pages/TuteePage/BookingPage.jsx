@@ -1,11 +1,11 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import Header from "../../Components/Shared/Header";
-import Sidebar from "../../Components/Shared/Sidebar";
+import DashboardLayout from "../../Components/Layout/DashboardLayout";
 import menuTutee from "../../RoutesConfig/MenuTutee";
 import BookingFormPanel from "../../Components/Tutee/Panels/BookingFormPanel";
+
 import "../../Pages/Styles/TuteePage/TuteeGlobals.css";
-import "../../Pages/Styles/TuteePage/TuteeDashboard.css";
+import "../../Pages/Styles/shared/CommonComponents.css";
 import "../../Pages/Styles/TuteePage/TuteeBooking.css";
 
 export default function BookingPage() {
@@ -13,21 +13,16 @@ export default function BookingPage() {
   const menuItems = menuTutee(navigate);
 
   return (
-    <div className="tutee-dashboard bright-theme">
-      <Sidebar menuItems={menuItems} />
-      <div className="tutee-content">
-        <Header title="WILDTEACH" />
+    <DashboardLayout title="WILDTEACH" role="tutee" menuItems={menuItems}>
+      <div className="booking-header-container">
+        <h1 className="booking-title">Request a Session</h1>
+      </div>
 
-        <div className="booking-header-container">
-          <h1 className="booking-title">Request a Session</h1>
-        </div>
-
-        <div className="booking-card-wrapper">
-          <div className="booking-card">
-            <BookingFormPanel />
-          </div>
+      <div className="booking-card-wrapper">
+        <div className="booking-card">
+          <BookingFormPanel />
         </div>
       </div>
-    </div>
+    </DashboardLayout>
   );
 }

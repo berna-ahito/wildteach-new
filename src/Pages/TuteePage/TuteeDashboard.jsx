@@ -3,14 +3,17 @@ import { useNavigate } from "react-router-dom";
 import DashboardLayout from "../../Components/Layout/DashboardLayout";
 import UpcomingSchedulePanel from "../../Components/Tutee/Panels/UpcomingSchedulePanel";
 import Announcement from "../../Components/Panels/Announcement";
+import SectionHeader from "../../Components/Shared/LandingPage/SectionHeader";
+import menuTutee from "../../RoutesConfig/MenuTutee";
 import WavingHandIcon from "@mui/icons-material/WavingHand";
 
-import "../../Pages/Styles/TutorPage/TutorDashboard.css";
-import "../../Pages/Styles/TutorPage/TutorGlobals.css";
+import "../../Pages/Styles/shared/CommonGlobals.css";
+import "../../Pages/Styles/shared/CommonComponents.css";
 
 export default function TuteeDashboard() {
   const [studentName, setStudentName] = useState("");
   const studentId = localStorage.getItem("student_id");
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!studentId) return;
@@ -26,20 +29,28 @@ export default function TuteeDashboard() {
   }, [studentId]);
 
   return (
-    <DashboardLayout title="WILDTEACH" role="tutee">
-      <div className="greeting-section">
-        <div className="greeting-avatar">
-          <WavingHandIcon fontSize="large" />
-        </div>
-        <div>
-          <h1>Hello, {studentName || "Student"}!</h1>
-          <p>Welcome back to your learning journey!</p>
-        </div>
-      </div>
+    <DashboardLayout
+      title="WILDTEACH"
+      role="tutee"
+      menuItems={menuTutee(navigate)}
+    >
+      <div className="tutee-dashboard-section">
+        <SectionHeader
+          badge={<WavingHandIcon style={{ marginRight: 6 }} />}
+          title="Hello,"
+          highlight={studentName || "Student"}
+          subtitle="Welcome back to your learning journey!"
+          layout="vertical"
+        />
 
-      <div className="dashboard-panels">
-        <UpcomingSchedulePanel />
-        <Announcement />
+        <div className="dashboard-panels">
+          <div className="glass-card">
+            <UpcomingSchedulePanel />
+          </div>
+          <div className="glass-card">
+            <Announcement />
+          </div>
+        </div>
       </div>
     </DashboardLayout>
   );

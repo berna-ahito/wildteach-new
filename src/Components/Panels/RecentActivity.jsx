@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Dialog, DialogTitle, DialogContent, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import ViewAll from "./ViewAll";
-import "../../Pages/Styles/TutorPage/TutorDashboard.css";
+import "../../Pages/Styles/shared/CommonComponents.css";
 
 export default function RecentActivity({ recent, role = "tutor" }) {
   const [open, setOpen] = useState(false);
