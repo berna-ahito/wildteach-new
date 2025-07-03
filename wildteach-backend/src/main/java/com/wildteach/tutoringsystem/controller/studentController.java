@@ -173,5 +173,11 @@ public ResponseEntity<?> loginStudent(@RequestBody studentEntity student) {
             return ResponseEntity.status(500).body("Upload failed: " + e.getMessage());
         }
     }
+    @GetMapping("/existsByEmail")
+    public ResponseEntity<Map<String, Boolean>> checkEmailExists(@RequestParam String email) {
+        boolean exists = studentService.emailExists(email);
+        return ResponseEntity.ok(Map.of("exists", exists));
+    }
+
 
 }
