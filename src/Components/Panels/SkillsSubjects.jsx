@@ -31,7 +31,10 @@ const SkillsSubjects = ({ profile }) => {
 
       if (!res.ok) throw new Error("Failed to update");
 
-      setToast({ message: "Teaching profile updated successfully!", type: "success" });
+      setToast({
+        message: "Teaching profile updated successfully!",
+        type: "success",
+      });
       setEditMode(false);
     } catch (err) {
       console.error("Error:", err);
@@ -40,7 +43,7 @@ const SkillsSubjects = ({ profile }) => {
   };
 
   return (
-    <div className="profile-card">
+    <div className="glass-card">
       <div className="section-header">
         <h4>Teaching Profile</h4>
         <button className="edit-btn" onClick={() => setEditMode(!editMode)}>

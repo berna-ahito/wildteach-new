@@ -21,11 +21,16 @@ export default function TutorSessionData() {
         data.map(async (s) => {
           let isPaid = false;
           try {
-            const payRes = await fetch(`http://localhost:8080/payment/byBookingId/${s.bookingId}`);
+            const payRes = await fetch(
+              `http://localhost:8080/payment/byBookingId/${s.bookingId}`
+            );
             if (payRes.ok) {
               const payments = await payRes.json();
               isPaid = payments.some((p) => p.status === "Completed");
-              console.log(`💰 Booking ${s.bookingId} has completed payment:`, isPaid);
+              console.log(
+                `💰 Booking ${s.bookingId} has completed payment:`,
+                isPaid
+              );
             } else {
               console.warn(`⚠️ No payments found for booking ${s.bookingId}`);
             }
@@ -48,7 +53,10 @@ export default function TutorSessionData() {
         })
       );
 
-      console.log("✅ Final session list with payment flags:", withPaymentStatus);
+      console.log(
+        "✅ Final session list with payment flags:",
+        withPaymentStatus
+      );
       setSessions(withPaymentStatus);
     } catch (err) {
       console.error("[Sessions] Error loading:", err);
@@ -70,12 +78,12 @@ export default function TutorSessionData() {
   if (loading) return <p>Loading sessions...</p>;
 
   return (
-    <>
+    <div className="glass-card">
       <SessionList
         sessions={sessions}
         onDelete={handleDelete}
         onRefresh={fetchSessions}
-        setToast={setToast} // ✅ pass toast setter
+        setToast={setToast}
       />
 
       {toast.message && (
@@ -85,6 +93,6 @@ export default function TutorSessionData() {
           onClose={() => setToast({ message: "", type: "" })}
         />
       )}
-    </>
+    </div>
   );
 }

@@ -6,14 +6,12 @@ import "../../Pages/Styles/shared/CommonComponents.css";
 import "../../Pages/Styles/TutorPage/TutorGlobals.css";
 import "../../Pages/Styles/TuteePage/TuteeGlobals.css";
 
-// role: "tutor" or "tutee"
 export default function DashboardLayout({
   title,
   children,
   role = "tutor",
   menuItems,
 }) {
-  // ✅ Apply red background only on dashboard pages
   useEffect(() => {
     document.body.classList.add("red-theme");
     return () => {

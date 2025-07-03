@@ -48,7 +48,7 @@ export default function ProfileInfo({ profile }) {
   };
 
   return (
-    <div className="profile-card">
+    <div className="glass-card">
       <div className="profile-header">
         <div className="avatar-section">
           <img src={preview} alt="Avatar" className="avatar" />
