@@ -8,7 +8,6 @@ import PersonalInfo from "../../Components/Panels/PersonalInfo";
 import useTuteeProfile from "../../Components/Tutee/Data/useTuteeProfile";
 
 import "../../Pages/Styles/TuteePage/TuteeGlobals.css";
-// import "../../Pages/Styles/TuteePage/TuteeProfile.css";
 
 export default function Profile() {
   const studentId = localStorage.getItem("student_id");
