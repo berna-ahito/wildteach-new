@@ -1,25 +1,17 @@
 package com.wildteach.tutoringsystem.controller;
 
-import java.util.List;
-import java.time.Instant;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.wildteach.tutoringsystem.entity.bookingEntity;
 import com.wildteach.tutoringsystem.service.bookingService;
@@ -28,6 +20,8 @@ import com.wildteach.tutoringsystem.service.bookingService;
 @RequestMapping("/booking")
 @CrossOrigin
 public class BookingController {
+
+    private static final ZoneId MANILA = ZoneId.of("Asia/Manila");
 
     @Autowired
     private bookingService bookingService;
@@ -49,8 +43,10 @@ public class BookingController {
     }
 
     @PutMapping("/update/{id}")
-    public ResponseEntity<bookingEntity> updateBooking(@PathVariable Long id,
-            @RequestBody bookingEntity bookingDetails) {
+    public ResponseEntity<bookingEntity> updateBooking(
+            @PathVariable Long id,
+            @RequestBody bookingEntity bookingDetails
+    ) {
         bookingEntity updatedBooking = bookingService.updateBooking(id, bookingDetails);
         if (updatedBooking != null) {
             return ResponseEntity.ok(updatedBooking);
@@ -61,8 +57,6 @@ public class BookingController {
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<String> deleteBooking(@PathVariable Long id) {
-        System.out.println("Deleting booking ID: " + id); // optional debug log
-
         boolean success = bookingService.deleteBooking(id);
         if (success) {
             return ResponseEntity.ok("Booking deleted");
@@ -81,33 +75,32 @@ public class BookingController {
         return bookingService.getBookingsByTutor(tutorId);
     }
 
-    // ADDED - to get bookings by student
     @GetMapping("/student/{studentId}")
     public List<bookingEntity> getBookingsByStudent(@PathVariable Long studentId) {
         return bookingService.getBookingsByStudent(studentId);
     }
 
     @GetMapping("/sessions/tutor/today/{tutorId}")
-    public List<Map<String, Object>> getTodaySessions(@PathVariable Long tutorId) {
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime startOfDay = now.toLocalDate().atStartOfDay();
-        LocalDateTime endOfDay = now.toLocalDate().atTime(23, 59, 59);
+public List<Map<String, Object>> getTodaySessions(@PathVariable Long tutorId) {
+    LocalDate today = LocalDate.now(MANILA);
+    LocalDateTime start = today.atStartOfDay();
+    LocalDateTime end = today.atTime(23, 59, 59);
 
-        List<bookingEntity> all = bookingService.getBookingsByTutor(tutorId);
-
-        return all.stream()
-                .filter(b -> b.getSessionDateTime() != null &&
-                        !b.getSessionDateTime().isBefore(startOfDay) &&
-                        !b.getSessionDateTime().isAfter(endOfDay))
-                .map(b -> {
-                    Map<String, Object> map = new HashMap<>();
-                    map.put("session_time", b.getSessionDateTime());
-                    map.put("student_name", b.getStudent().getFirst_name() + " " + b.getStudent().getLast_name());
-                    map.put("subject", b.getSubject());
-                    map.put("status", b.getStatus());
-                    return map;
-                })
-                .toList();
-    }
+    return bookingService.getBookingsByTutor(tutorId).stream()
+        .filter(b -> {
+            LocalDateTime dt = b.getSessionDateTime();
+            return dt != null && !dt.isBefore(start) && !dt.isAfter(end);
+        })
+        .map(b -> {
+            Map<String, Object> map = new HashMap<>();
+            map.put("session_time", b.getSessionDateTime());
+            map.put("student_name", 
+                b.getStudent().getFirst_name() + " " + b.getStudent().getLast_name());
+            map.put("subject", b.getSubject());
+            map.put("status", b.getStatus());
+            return map;
+        })
+        .toList();
+}
 
 }

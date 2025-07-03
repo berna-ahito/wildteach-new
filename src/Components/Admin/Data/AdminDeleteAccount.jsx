@@ -8,7 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import ToastNotification from "../../Panels/ToastNotification";
 import DeleteDialog from "../../Panels/DeleteDialog";
-import "../../../Pages/Styles/Admin.css";
+import "../../../Pages/Styles/Admin/Admin.css"; 
 
 export default function AdminDeleteAccount({ onDelete }) {
   const [open, setOpen] = useState(false);

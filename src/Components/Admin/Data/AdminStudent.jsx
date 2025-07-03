@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import UserTable from '../../Shared/UserTable';
 import axios from 'axios';
-import '../../../Pages/Styles/Admin.css';
+import "../../../Pages/Styles/Admin/Admin.css"; 
 
 export default function AdminStudent({ onRefresh }) {
   const [students, setStudents] = useState([]);

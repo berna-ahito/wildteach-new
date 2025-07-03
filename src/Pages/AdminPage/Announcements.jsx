@@ -36,20 +36,19 @@ export default function Announcement() {
           />
 
           <div className="dashboard-panels">
-            <div className="glass-card"  style={{ minWidth: "50vw" }}>
+            <div className="glass-card"  style={{ minWidth: "45vw" }}>
               <AdminSystemAnnouncement
                 key={refreshKey}
                 refreshTrigger={refreshKey}
                 onRefresh={handleRefresh}
               />
             </div>
-            <div className="glass-card statcard-wrapper" style={{ marginLeft: "12vw" }}>
-            <AdminAddAnnounce onAdd={handleRefresh} />
-           </div>
+            <div className="forms-buttons announce">
+              <AdminAddAnnounce onAdd={handleRefresh} />
+            </div>
           </div>
-
-          
-        </div>
+            
+          </div>
       </div>
     </DashboardLayout>
 

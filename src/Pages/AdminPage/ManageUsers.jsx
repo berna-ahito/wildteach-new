@@ -6,7 +6,7 @@ import SectionHeader from "../../Components/Shared/LandingPage/SectionHeader";
 import { useNavigate } from "react-router-dom";
 import adminMenu from "../../RoutesConfig/menuAdmin";
 
-import "../../Pages/Styles/Admin.css";
+import "../../Pages/Styles/Admin/Admin.css"; 
 
 export default function ManageUsers() {
   const navigate = useNavigate();

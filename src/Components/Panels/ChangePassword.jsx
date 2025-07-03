@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import axios from "axios";
 import InputCards from "../Shared/InputCards";
 import UserCredentials from "../Shared/Data/UserCredentials";
-import ToastNotification from "../Panels/ToastNotification"; // ✅ Import toast
-import "../../Pages/Styles/Admin.css";
+import ToastNotification from "../Panels/ToastNotification"; 
+import "../../Pages/Styles/Admin/Admin.css"; 
 
 export default function ChangePassword({ role = "admin", userId, email }) {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [toast, setToast] = useState(null); // ✅ Toast state
+  const [toast, setToast] = useState(null); 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
