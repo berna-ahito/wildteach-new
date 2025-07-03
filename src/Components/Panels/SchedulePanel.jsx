@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "../../Pages/Styles/TutorPage/TutorDashboard.css";
+import "../../Pages/Styles/shared/CommonComponents.css";
 
 export default function SchedulePanel({ schedule }) {
   const navigate = useNavigate();

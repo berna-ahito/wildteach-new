@@ -1,17 +1,19 @@
-import React from 'react';
-import Card from "../../Components/Shared/Card"; 
+// StatCards.jsx – Displays stat cards with icons and values
 
-export default function StatCards({ stats }) {
+import React from "react";
+import "../../Pages/Styles/shared/CommonComponents.css";
+
+export default function StatCards({ stats = [] }) {
   return (
-    <div className="stat-grid">
-      {stats.map((item, index) => (
-        <Card
-          key={index}
-          icon={item.icon?<item.icon className="stat-icon" /> : null}
-          className={`stat-card ${item.color}`}
-          title={item.label}
-          content={item.value}
-        />
+    <div className="statcards-grid">
+      {stats.map(({ label, value, icon, color }, index) => (
+        <div key={index} className={`statcard statcard-${color}`}>
+          <div className="statcard-icon">{icon}</div>
+          <div className="statcard-details">
+            <h4>{label}</h4>
+            <p>{value}</p>
+          </div>
+        </div>
       ))}
     </div>
   );

@@ -49,25 +49,25 @@ export default function TutorStatData() {
     {
       label: "Students",
       value: activeStudents,
-      icon: GroupIcon,
+      icon: <GroupIcon className="statcard-icon statcard-orange" />,
       color: "orange",
     },
     {
       label: "Earnings",
       value: "₱1250",
-      icon: MonetizationOnIcon,
+      icon: <MonetizationOnIcon className="statcard-icon statcard-purple" />,
       color: "purple",
-    }, // Placeholder
+    },
     {
       label: "Pending",
       value: pendingSessions,
-      icon: HourglassBottomIcon,
+      icon: <HourglassBottomIcon className="statcard-icon statcard-yellow" />,
       color: "yellow",
     },
     {
       label: "Sessions",
       value: totalSessions,
-      icon: CheckCircleIcon,
+      icon: <CheckCircleIcon className="statcard-icon statcard-green" />,
       color: "green",
     },
   ];

@@ -1,65 +1,7 @@
-// import React from 'react';
-// import { Typography, Button, Paper } from '@mui/material';
-// import { useNavigate } from 'react-router-dom';
-// import useTuteeData from '../Data/useTuteeData';
-
-// export default function UpcomingSchedulePanel() {
-//   const { bookings } = useTuteeData();
-//   const navigate = useNavigate();
-
-//   return (
-//     <div className="panel-card">
-//       <div className="panel-header">
-//         <h3>📅 Upcoming Tutoring Schedule</h3>
-//       </div>
-
-//       <div className="tutee-card-row">
-//         {bookings?.length === 0 ? (
-//           <Typography variant="body2">No upcoming bookings.</Typography>
-//         ) : (
-//           bookings.map((booking) => (
-//             <Paper className="tutee-booking-card" elevation={3} key={booking.id}>
-//               <Typography variant="h6" className="card-title">
-//                 {booking.tutor}
-//               </Typography>
-//               <Typography>Subject: {booking.subject}</Typography>
-//               <Typography>Date: {booking.date}</Typography>
-//               <Typography>
-//                 Status:{' '}
-//                 <span className={`tutee-status ${booking.status.toLowerCase()}`}>
-//                   {booking.status}
-//                 </span>
-//               </Typography>
-
-//               <Button
-//                 variant="contained"
-//                 sx={{
-//                   backgroundColor: '#6d2a30', // Change this to your desired color
-//                   color: 'white',
-//                   borderRadius: '10px',
-//                   '&:hover': {
-//                     backgroundColor: '#F8C400' // darker shade for hover
-//                   }
-//                 }}
-//                 onClick={() => navigate('/tutee/my-bookings')}
-//               >
-//                 View
-//               </Button>
-
-//             </Paper>
-//           ))
-//         )}
-//       </div>
-//     </div>
-//   );
-// }
-
-//WORKING CODE | 07-01-25
-// src/Components/Tutee/Panels/UpcomingSchedulePanel.jsx
-import React from 'react';
-import { Typography, Button, Paper } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import useTuteeData from '../Data/useTuteeData';
+import React from "react";
+import { Typography, Button, Paper } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import useTuteeData from "../Data/useTuteeData";
 
 export default function UpcomingSchedulePanel() {
   const studentId = localStorage.getItem("student_id");
@@ -77,15 +19,21 @@ export default function UpcomingSchedulePanel() {
           <Typography variant="body2">No upcoming bookings.</Typography>
         ) : (
           bookings.map((booking) => (
-            <Paper className="tutee-booking-card" elevation={3} key={booking.id}>
+            <Paper
+              className="tutee-booking-card"
+              elevation={3}
+              key={booking.id}
+            >
               <Typography variant="h6" className="card-title">
                 {booking.tutorName}
               </Typography>
               <Typography>Subject: {booking.subject}</Typography>
               <Typography>Date: {booking.date}</Typography>
               <Typography>
-                Status:{' '}
-                <span className={`tutee-status ${booking.status.toLowerCase()}`}>
+                Status:{" "}
+                <span
+                  className={`tutee-status ${booking.status.toLowerCase()}`}
+                >
                   {booking.status}
                 </span>
               </Typography>
@@ -93,14 +41,14 @@ export default function UpcomingSchedulePanel() {
               <Button
                 variant="contained"
                 sx={{
-                  backgroundColor: '#6d2a30',
-                  color: 'white',
-                  borderRadius: '10px',
-                  '&:hover': {
-                    backgroundColor: '#F8C400'
-                  }
+                  backgroundColor: "#6d2a30",
+                  color: "white",
+                  borderRadius: "10px",
+                  "&:hover": {
+                    backgroundColor: "#F8C400",
+                  },
                 }}
-                onClick={() => navigate('/tutee/my-bookings')}
+                onClick={() => navigate("/tutee/my-bookings")}
               >
                 View
               </Button>
@@ -111,6 +59,3 @@ export default function UpcomingSchedulePanel() {
     </div>
   );
 }
-
-
-

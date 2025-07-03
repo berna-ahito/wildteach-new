@@ -15,7 +15,7 @@
 /* Dialog box appearance */
 .loading-dialog {
     background: white;
-    border-radius: 16px;
+    border-radius: 20px;
     padding: 40px 30px;
     text-align: center;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);

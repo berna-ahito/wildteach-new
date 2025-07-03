@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import menuTutee from "../../RoutesConfig/MenuTutee";
 import MyBookingsPanel from "../../Components/Tutee/Panels/MyBookingsPanel";
 import "../../Pages/Styles/TuteePage/TuteeGlobals.css";
-import "../../Pages/Styles/TuteePage/TuteeDashboard.css";
+import "../../Pages/Styles/shared/CommonComponents.css";
 import "../../Pages/Styles/TuteePage/TuteeBooking.css";
 
 export default function MyBookings() {
