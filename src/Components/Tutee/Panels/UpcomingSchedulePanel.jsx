@@ -14,17 +14,17 @@ export default function UpcomingSchedulePanel() {
         <h3>📅 Upcoming Tutoring Schedule</h3>
       </div>
 
-      <div className="tutee-card-row">
+      <div className="panel-item">
         {bookings?.length === 0 ? (
           <Typography variant="body2">No upcoming bookings.</Typography>
         ) : (
           bookings.map((booking) => (
             <Paper
-              className="tutee-booking-card"
+              className="panel-card"
               elevation={3}
               key={booking.id}
             >
-              <Typography variant="h6" className="card-title">
+              <Typography variant="h5" className="card-title">
                 {booking.tutorName}
               </Typography>
               <Typography>Subject: {booking.subject}</Typography>

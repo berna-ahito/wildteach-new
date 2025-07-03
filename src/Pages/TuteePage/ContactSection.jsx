@@ -5,6 +5,8 @@ import Sidebar from "../../Components/Shared/Sidebar";
 import menuTutee from "../../RoutesConfig/MenuTutee";
 import ContactSection from "../../Components/LandingPage/ContactSection"; // <-- reuse this
 
+import "../../Pages/Styles/TuteePage/TuteeContact.css";
+
 export default function Contact() {
   const navigate = useNavigate();
   const menuItems = menuTutee(navigate);

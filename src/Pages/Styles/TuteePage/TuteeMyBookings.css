@@ -1,0 +1,86 @@
+/* Main container box */
+.my-bookings-container {
+  padding: 36px;
+  border-radius: 18px;
+  /* background-color: white; */
+  border-top: 5px solid #89343b;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+/* Filter container */
+/* .filter-container {
+  margin-bottom: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+} */
+
+.filter-container .MuiSelect-root {
+  min-width: 120px;
+}
+
+/* Clear button */
+.clear-filter-btn {
+  background-color: #89343b;
+  color: #f8c400;
+  border: none;
+  padding: 10px 20px;
+  font-weight: bold;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.clear-filter-btn:hover {
+  background-color: #f8c400;
+  color: #89343b;
+}
+
+/* Individual booking card */
+.my-booking-card {
+  padding: 24px;
+  border-radius: 14px;
+  background-color: #fdfcfc;
+  border-left: 4px solid #e4b81a;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.my-booking-card:hover {
+  transform: translateY(-4px);
+}
+
+/* Status styling */
+.tutee-status {
+  font-weight: bold;
+  margin-left: 6px;
+}
+
+.tutee-status.pending {
+  color: #e4b81a;
+}
+
+.tutee-status.approved {
+  color: #4caf50;
+}
+
+.tutee-status.rejected {
+  color: #f44336;
+}
+
+/* Responsive tweaks */
+@media (max-width: 600px) {
+  .my-bookings-container {
+    padding: 24px;
+  }
+
+  .filter-container {
+    gap: 12px;
+  }
+
+  .clear-filter-btn {
+    width: 100%;
+    text-align: center;
+  }
+}
