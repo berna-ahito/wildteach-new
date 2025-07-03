@@ -14,7 +14,7 @@ export default function UpcomingSchedulePanel() {
         <h3>📅 Upcoming Tutoring Schedule</h3>
       </div>
 
-      <div className="panel-item">
+      <div className="panel-item content">
         {bookings?.length === 0 ? (
           <Typography variant="body2">No upcoming bookings.</Typography>
         ) : (
