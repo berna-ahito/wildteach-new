@@ -104,32 +104,8 @@
 
 
 
-/* Add Announcement + Card Styling */
-.add-announcement-card {
-  width: 240px;
-  height: 160px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-weight: 600;
-  background-color: #fffdfb;
-  border: 2px dashed #e0cfc9;
-  color: #89343B;
-  border-radius: 16px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-  padding: 16px;
-  text-align: center;
-}
 
-.add-announcement-card:hover {
-  background-color: #fff4ef;
-  border-color: #d9b9b9;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  transform: translateY(-2px);
-}
+
 
 
 
