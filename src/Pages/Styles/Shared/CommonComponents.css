@@ -20,7 +20,7 @@
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 20px;
   min-width: 5vw;
-  padding: 24px;
+  padding: 20px;
   backdrop-filter: blur(10px);
   transition: all 0.3s ease;
   position: relative;
@@ -59,12 +59,13 @@
   gap: 24px;
   flex-wrap: wrap;
   padding: 32px 24px;
-  margin-bottom: 30px;
-  min-width: 3vw;
-  max-width: 1400px;
+  margin-top: 40px;
+  margin-bottom: 35px;
+  max-width: 65%;
+  width: 100%;
   margin-inline: auto;
-  padding-inline: 24px;
 }
+
 
 .statcards-grid {
   display: grid;
@@ -216,32 +217,66 @@
 }
 
 /* profile section */
-.profile-container {
-  padding: 24px;
-  font-family: "Poppins", sans-serif;
-  background-color: #fffaf5;
-}
-
-.profile-title {
-  font-size: 24px;
+.profile-page-title {
+  font-size: 28px;
   font-weight: bold;
-  color: #8d2f2f;
-  margin-bottom: 20px;
+  color: #fff;
+  padding-left: 100px;
+  padding-top: 30px;
+  margin-bottom: 10px;
 }
 
-.profile-card {
-  background: white;
-  border-radius: 10px;
-  border: 1px solid #ccc;
-  margin-bottom: 20px;
-  padding: 20px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+.profile-title-inside {
+  font-size: 30px;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 12px;
+  margin-left: 6px;
+  margin-top: 5%;
 }
 
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: 1100px;
+  padding: 32px;
+  margin: 0 auto;
+}
+
+.profile-info {
+  width: 100%;
+}
+
+.profile-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+@media (max-width: 768px) {
+  .profile-columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* === Card Styling === */
+.profile-card,
+.profile-info,
+.personal-info,
+.skills-info {
+  background: #fff7ef;
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* === Profile Header (Avatar + Name + Email) === */
 .profile-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 20px;
 }
 
 .avatar-section {
@@ -251,22 +286,116 @@
 }
 
 .avatar {
-  width: 64px;
-  height: 64px;
+  width: 72px;
+  height: 72px;
   border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #F8C400;
+}
+
+.stars {
+  font-size: 16px;
+  color: #F8C400;
+  margin-top: 4px;
 }
 
 .section-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 10px;
+  margin-bottom: 14px;
+}
+
+.section-header h4 {
+  font-size: 18px;
+  font-weight: 600;
+  color: #8d2f2f;
 }
 
 .info-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px 24px;
+  gap: 16px 24px;
+  margin-top: 10px;
+}
+
+.info-grid p,
+.info-grid div {
+  font-size: 15px;
+  color: #333;
+}
+
+.info-grid strong {
+  color: #8d2f2f;
+}
+
+.info-grid input {
+  padding: 8px 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  width: 100%;
+  margin-top: 6px;
+  background-color: #fffaf5;
+  color: #333;
+}
+
+.upload-form {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.upload-form input[type="file"] {
+  font-size: 14px;
+}
+
+.edit-btn,
+.save-btn {
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 8px 16px;
+  transition: background-color 0.2s ease;
+}
+
+.edit-btn {
+  background-color: #8d2f2f;
+  color: white;
+}
+
+.edit-btn:hover {
+  background-color: #a34242;
+}
+
+.save-btn {
+  background-color: #F8C400;
+  color: #8d2f2f;
+}
+
+.save-btn:hover {
+  background-color: #e6b900;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+ul {
+  margin: 6px 0 0 16px;
+  padding-left: 0;
+  list-style-type: disc;
+}
+
+ul li {
+  margin-bottom: 4px;
+  font-size: 14px;
 }
 
 .dashboard-container {
@@ -298,7 +427,7 @@
   background: linear-gradient(90deg, #89343B, #F8C400);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text; /* ✅ standard fallback */
-  color: transparent;     /* ✅ safety net for non-webkit browsers */
+  background-clip: text; 
+  color: transparent;     
 }
 

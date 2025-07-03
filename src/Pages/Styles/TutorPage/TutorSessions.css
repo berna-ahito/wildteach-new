@@ -1,5 +1,8 @@
 .sessions-container {
   padding: 20px 40px;
+  max-width: 1200px; /* ✅ Ensures enough width for horizontal layout */
+  width: 100%;
+  margin: 0 auto;
 }
 
 .section-title {
@@ -12,6 +15,7 @@
   display: flex;
   gap: 16px;
   margin-bottom: 30px;
+  flex-wrap: wrap;
 }
 
 .filter-select {
@@ -24,18 +28,39 @@
   outline: none;
 }
 
+/* ✅ Updated grid for responsiveness */
 .session-cards-grid {
   display: grid;
   gap: 20px;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  justify-content: center;
+  width: 100%;
+}
+
+/* ✅ Optional media queries for stronger control */
+@media (min-width: 768px) {
+  .session-cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .session-cards-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .session-card {
-  background-color: white;
+  background-color: #fff7ef;
   border: 2px solid #f8c40044;
   border-radius: 12px;
   padding: 20px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.session-card:hover {
+  transform: translateY(-4px);
 }
 
 .card-title {
@@ -49,6 +74,7 @@
   display: flex;
   gap: 10px;
   margin-top: 12px;
+  flex-wrap: wrap;
 }
 
 .btn-edit,

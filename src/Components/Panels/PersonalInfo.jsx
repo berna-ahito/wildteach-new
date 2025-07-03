@@ -49,7 +49,7 @@ export default function PersonalInfo({ profile }) {
   };
 
   return (
-    <div className="profile-card">
+    <div className="glass-card">
       <div className="section-header">
         <h4>Personal Information</h4>
         <button className="edit-btn" onClick={() => setEditMode(!editMode)}>
