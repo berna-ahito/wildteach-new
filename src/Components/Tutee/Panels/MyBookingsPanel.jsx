@@ -67,7 +67,7 @@ export default function MyBookingsPanel() {
         <Grid container spacing={3} justifyContent="center">
           {filteredBookings.map((b, idx) => {
             // const d = new Date(b.sessionDateTime);
-            const d = new Date(new Date(b.sessionDateTime).getTime() + 8 * 60 * 60 * 1000); // ✅ +8 offset
+            const d = new Date(new Date(b.sessionDateTime).getTime() + 8 * 60 * 60 * 1000); 
             const dd = d.toLocaleDateString();
             const tt = d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
 

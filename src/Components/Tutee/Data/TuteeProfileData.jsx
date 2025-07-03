@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export default function useTutorProfile(studentId) {
+export default function useTuteeProfile(studentId) {
   const [profile, setProfile] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -9,16 +9,10 @@ export default function useTutorProfile(studentId) {
 
     const fetchProfile = async () => {
       try {
-        const studentRes = await fetch(
-          `http://localhost:8080/student/getById/${studentId}`
-        );
-        if (!studentRes.ok) throw new Error("Failed to fetch student");
+        const res = await fetch(`http://localhost:8080/student/getById/${studentId}`);
+        if (!res.ok) throw new Error("Failed to fetch tutee profile");
 
-        const student = await studentRes.json();
-        const tutorRes = await fetch(
-          `http://localhost:8080/tutor/byStudentId/${studentId}`
-        );
-        const tutor = tutorRes.ok ? await tutorRes.json() : null;
+        const student = await res.json();
 
         const fullProfile = {
           student_id: student.student_id,
@@ -33,17 +27,11 @@ export default function useTutorProfile(studentId) {
           province: student.province,
           home_address: student.address,
           profileImage: student.profileImage || "default.jpg",
-
-          // From tutor_entity
-          tutor_id: tutor?.tutor_id || null,
-          availability: tutor?.availability || "",
-          rate_per_hour: tutor?.rate_per_hour || "",
-          subjects_offered: tutor?.subjects_offered || "",
         };
 
         setProfile(fullProfile);
       } catch (err) {
-        console.error("[Profile] Fetch error:", err);
+        console.error("[TuteeProfile] Error fetching profile:", err);
         setProfile(null);
       } finally {
         setLoading(false);

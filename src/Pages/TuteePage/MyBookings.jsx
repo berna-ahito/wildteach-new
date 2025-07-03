@@ -12,12 +12,12 @@ export default function MyBookings() {
   const menuItems = menuTutee(navigate);
 
   return (
-    <Box className="tutee-dashboard bright-theme">
+    <div className="tutee-dashboard bright-theme">
       <Sidebar menuItems={menuItems} />
-      <Box className="tutee-content">
+      < div className="tutee-content">
         <Header title="WILDTEACH" />
         <MyBookingsPanel />
-      </Box>
-    </Box>
+      </div>
+    </div>
   );
 }
