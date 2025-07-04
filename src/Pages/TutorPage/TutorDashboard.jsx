@@ -22,7 +22,6 @@ export default function TutorDashboard({ setIsLoggedIn, setUserRole }) {
       setUserRole={setUserRole}
     >
       <div className="tutor-dashboard-section">
-        {/* White central container */}
         <div className="dashboard-container">
           <SectionHeader
             badge="WELCOME BACK"
@@ -32,12 +31,10 @@ export default function TutorDashboard({ setIsLoggedIn, setUserRole }) {
             layout="vertical"
           />
 
-          {/* Stat cards */}
           <div className="glass-card statcard-wrapper">
             <TutorStatData />
           </div>
 
-          {/* Grid block */}
           <div className="dashboard-panels">
             <div className="glass-card">
               <TutorScheduleData />

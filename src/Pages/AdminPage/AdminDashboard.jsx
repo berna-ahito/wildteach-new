@@ -31,12 +31,10 @@ export default function AdminDashboard({ setIsLoggedIn, setUserRole }) {
             layout="vertical"
           />
 
-          {/* Stat cards */}
           <div className="glass-card statcard-wrapper">
             <AdminStatData />
           </div>
 
-          {/* Grid block */}
           <div className="dashboard-panels">
             <div className="glass-card">
               <AdminRecentActivity />
