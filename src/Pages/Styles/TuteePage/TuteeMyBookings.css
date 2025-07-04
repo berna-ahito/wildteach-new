@@ -2,6 +2,7 @@
 
 .my-bookings-wrapper {
   padding: 40px 20px;
+  margin-top: 15%;
 }
 
 .my-bookings-container {
@@ -11,8 +12,8 @@
   backdrop-filter: blur(12px);
   border-top: 5px solid #89343b;
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
-  max-width: 860px;
-  margin: 0 auto;
+  max-width: 800px;
+  margin-top: 50px;
 }
 
 .my-bookings-section-title {

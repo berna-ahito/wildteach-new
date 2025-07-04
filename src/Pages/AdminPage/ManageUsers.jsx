@@ -6,13 +6,13 @@ import SectionHeader from "../../Components/Shared/LandingPage/SectionHeader";
 import { useNavigate } from "react-router-dom";
 import adminMenu from "../../RoutesConfig/menuAdmin";
 
-import "../../Pages/Styles/Admin/Admin.css"; 
+import "../../Pages/Styles/Admin/Admin.css";
 
 export default function ManageUsers() {
   const navigate = useNavigate();
   const [refreshKey, setRefreshKey] = useState(0);
 
-  const refreshStats = () => setRefreshKey(prev => prev + 1);
+  const refreshStats = () => setRefreshKey((prev) => prev + 1);
 
   return (
     <DashboardLayout
@@ -20,7 +20,7 @@ export default function ManageUsers() {
       role="admin"
       menuItems={adminMenu(navigate)}
     >
-      <div className="admin-dashboard-section" style ={{ marginTop: "30vw" }}>
+      <div className="admin-dashboard-section" style={{ marginTop: "40vw" }}>
         <SectionHeader
           badge="ADMIN PANEL"
           title="Manage"
@@ -29,10 +29,16 @@ export default function ManageUsers() {
           layout="vertical"
         />
 
-        <div className="glass-card statcard-wrapper">
+        <div
+          className="glass-card statcard-wrapper"
+          style={{ minWidth: "50vw" }}
+        >
           <AdminUsersStat refreshTrigger={refreshKey} />
         </div>
-        <div className="glass-card statcard-wrapper">
+        <div
+          className="glass-card statcard-wrapper"
+          style={{ minWidth: "65vw" }}
+        >
           <AdminStudent onRefresh={refreshStats} />
         </div>
       </div>

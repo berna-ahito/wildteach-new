@@ -1,4 +1,3 @@
-import React, { useState } from "react";
 import DashboardLayout from "../../Components/Layout/DashboardLayout";
 import AdminSessionData from "../../Components/Admin/Data/AdminSessionData";
 import AdminSessionTable from "../../Components/Admin/Data/AdminSessionTable";
@@ -19,7 +18,7 @@ export default function SessionManage() {
       role="admin"
       menuItems={adminMenu(navigate)}
     >
-      <div className="admin-dashboard-section" style={{ marginTop: "5vw" }}>
+      <div className="admin-dashboard-section" style={{ marginTop: "40vw" }}>
         <SectionHeader
           badge="ADMIN PANEL"
           title="Manage"
@@ -31,7 +30,10 @@ export default function SessionManage() {
         <div className="glass-card statcard-wrapper">
           <AdminSessionData />
         </div>
-        <div className="glass-card statcard-wrapper">
+        <div
+          className="glass-card statcard-wrapper"
+          style={{ minWidth: "55vw", minHeight: "40vw" }}
+        >
           <AdminSessionTable bookings={bookings} />
         </div>
       </div>
