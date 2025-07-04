@@ -17,9 +17,9 @@ export default function Profile() {
 
   return (
     <DashboardLayout title="Profile" role="tutor">
-      <div className="glass-card">
-        <div className="profile-container">
-          <h2 className="profile-title-inside">Profile</h2> {/* moved inside */}
+      <div className="glass-card" style={{ marginTop: "20%" }}>
+        <div className="profile-container" style={{ marginTop: "-40px" }}>
+          <h2 className="profile-title-inside">Profile</h2>
           <div className="profile-info">
             <ProfileInfo profile={profile} />
           </div>

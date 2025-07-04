@@ -19,7 +19,6 @@ export default function SessionList({ sessions, onDelete, onRefresh }) {
   const [toast, setToast] = useState({ message: "", type: "" });
 
   useEffect(() => {
-    console.log("🧾 Updated sessions received by SessionList:", sessions);
     setEditedSessions([...sessions]);
   }, [sessions]);
 
@@ -48,8 +47,8 @@ export default function SessionList({ sessions, onDelete, onRefresh }) {
           body: JSON.stringify({
             bookingId,
             subject: updatedSession.subject,
-            sessionDateTime: new Date(updatedSession.date).toISOString(),
-            duration: parseInt(updatedSession.duration),
+            sessionTime: new Date(updatedSession.date).toISOString(),
+            duration: parseFloat(updatedSession.duration),
             status: "Pending",
             student: { student_id: updatedSession.student_id || 2 },
             tutor: { tutor_id: updatedSession.tutor_id || 4 },
@@ -113,7 +112,7 @@ export default function SessionList({ sessions, onDelete, onRefresh }) {
 
   return (
     <div className="sessions-container">
-      <h2 className="section-title">
+      <h2 className="section-title" style={{ marginTop: "-100px" }}>
         Manage <span className="highlight-gold">Sessions</span>
       </h2>
 
@@ -182,16 +181,21 @@ export default function SessionList({ sessions, onDelete, onRefresh }) {
                   )}
                 </p>
                 <p>
-                  Duration:{" "}
+                  Duration (in hours):{" "}
                   {isEditing ? (
                     <input
+                      type="number"
+                      min={0.5}
+                      step={0.5}
                       value={s.duration}
                       onChange={(e) =>
-                        handleChange(i, "duration", e.target.value)
+                        handleChange(i, "duration", parseFloat(e.target.value))
                       }
+                      placeholder="Enter duration in hours"
+                      required
                     />
                   ) : (
-                    s.duration
+                    `${s.duration} hour${s.duration === 1 ? "" : "s"}`
                   )}
                 </p>
                 <p>

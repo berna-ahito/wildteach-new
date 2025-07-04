@@ -49,7 +49,7 @@ export default function Announcement({ announcements = [], onRefresh }) {
           </IconButton>
         </DialogTitle>
         <DialogContent>
-          <AdminViewAll title="System Announcements" onRefresh={onRefresh} />
+          <AdminViewAll title="" onRefresh={onRefresh} />
         </DialogContent>
       </Dialog>
     </div>

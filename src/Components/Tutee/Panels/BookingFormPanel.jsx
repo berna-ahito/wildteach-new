@@ -13,7 +13,7 @@ export default function BookingFormPanel() {
   const { subject, setSubject, sessionDateTime, setSessionDateTime, tutor } =
     useBookingData(tutorId);
 
-  const [duration, setDuration] = useState(60);
+  const [duration, setDuration] = useState();
 
   const formatDateOnly = (date) => {
     const pad = (n) => n.toString().padStart(2, "0");
@@ -116,17 +116,16 @@ export default function BookingFormPanel() {
           dateFormat="MMMM d, yyyy h:mm aa"
         />
 
-        <label>Duration</label>
-        <select
+        <label>Duration (in hours)</label>
+        <input
+          type="number"
+          min={0.5}
+          step={0.5}
           value={duration}
-          onChange={(e) => setDuration(parseInt(e.target.value))}
+          onChange={(e) => setDuration(parseFloat(e.target.value))}
+          placeholder="Enter duration in hours"
           required
-        >
-          <option value={30}>30 minutes</option>
-          <option value={60}>1 hour</option>
-          <option value={90}>2 hours</option>
-          <option value={90}>3 hours</option>
-        </select>
+        />
 
         <div className="form-actions">
           <button type="submit" className="confirm-book-button">

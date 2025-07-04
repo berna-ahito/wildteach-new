@@ -53,12 +53,6 @@ export default function TutorStatData() {
       color: "orange",
     },
     {
-      label: "Earnings",
-      value: "₱1250",
-      icon: <MonetizationOnIcon className="statcard-icon statcard-purple" />,
-      color: "purple",
-    },
-    {
       label: "Pending",
       value: pendingSessions,
       icon: <HourglassBottomIcon className="statcard-icon statcard-yellow" />,
