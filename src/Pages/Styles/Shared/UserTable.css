@@ -1,13 +1,17 @@
-/* UserTable.css */
+
+.user-table-fullwidth {
+  min-width: 60vw;
+}
 
 .user-table-container {
   border-radius: 16px;
   max-height: 60vh;
-  min-width: 1000px;
+  width: 100%;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
   overflow: auto;
   background-color: #fffaf5;
 }
+
 
 .custom-headerTable {
   background-color: #89343B !important;

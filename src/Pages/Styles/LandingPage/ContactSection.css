@@ -19,6 +19,7 @@
   color: #fff;
   z-index: 2;
   position: relative;
+  margin-top: -200px;
 }
 
 .contact-inner {
@@ -56,6 +57,7 @@
   margin: 0 auto;
   padding: 2rem;
   width: 100%;
+  margin-top: -60px;
 }
 
 .contact-form-section {

@@ -49,7 +49,7 @@ export default function UserTable({ data = [], onToggleStatus, onRefresh }) {
   };
 
   return (
-    <div className="p-4">
+    <div className="p-4 user-table-fullwidth">
       <div className="button-toggle-group mb-4">
         <h1>Manage Users</h1>
         <button

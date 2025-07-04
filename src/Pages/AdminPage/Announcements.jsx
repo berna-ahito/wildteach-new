@@ -23,7 +23,7 @@ export default function Announcement() {
       role="admin"
       menuItems={adminMenu(navigate)}
     >
-      <div className="admin-dashboard-section" style={{ marginTop: "0vw" }}>
+      <div className="admin-dashboard-section" style={{ marginTop: "-15vw" }}>
         <div className="dashboard-container">
           <SectionHeader
             badge="ADMIN PANEL"

@@ -26,7 +26,7 @@ export default function Settings() {
       role={role}
       menuItems={adminMenu(navigate)}
     >
-      <div className="admin-dashboard-section" style={{ paddingTop: "10vw" }}>
+      <div className="admin-dashboard-section" style={{ paddingTop: "-15vw" }}>
         <div className="dashboard-container">
           <SectionHeader
             badge="SYSTEM"
