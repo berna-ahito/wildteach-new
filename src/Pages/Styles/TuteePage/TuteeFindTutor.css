@@ -1,30 +1,32 @@
 .find-tutor-container {
   text-align: center;
-  margin-top: 20px;
+  margin-top: 35%;
   margin-bottom: 30px;
+  color: #fff8dc;
 }
 
 .find-tutor-container h1 {
-  font-size: 32px;
-  color: #89343b;
+  font-size: 36px;
+  color: #f8c400;
   margin: 0;
+  margin-bottom: 30px;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
 }
 
 .search-bar {
   max-width: 400px;
   margin: 20px auto 0;
   display: block;
-  color: #572a2a;
-  align-items: center;
-
+  color: #34251f;
+  background-color: white;
+  border-radius: 8px;
 }
 
-/* Wrapper for all tutors */
 .tutor-wrapper {
   display: flex;
   justify-content: center;
   padding: 0 24px;
-  margin-bottom: -280px;
+  margin-bottom: 20px;
 }
 
 .all-tutors-wrapper {
@@ -36,26 +38,23 @@
   max-width: 1200px;
 }
 
-/* Tutor Card */
 .find-tutor-card {
   flex: 1 1 320px;
-  background: #fffaf8;
-  border-radius: 14px;
-  border-top: 5px solid #89343b;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  border-top: 5px solid #f8c400;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
   padding: 20px;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  backdrop-filter: blur(10px);
+  color: white;
   transition: transform 0.2s ease;
 }
 
 .find-tutor-card:hover {
   transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.15);
 }
 
-/* Tutor Info */
 .tutor-info {
   margin-bottom: 16px;
 }
@@ -64,16 +63,9 @@
   display: block;
   font-weight: bold;
   font-size: 20px;
-  color: #572a2a;
+  color: #fff;
 }
 
-.tutor-role {
-  font-size: 14px;
-  color: #8b5e5e;
-  margin-top: 4px;
-}
-
-/* Tutor Details */
 .tutor-details-row {
   display: flex;
   justify-content: space-between;
@@ -86,16 +78,15 @@
 .tutor-details-text {
   flex: 1;
   min-width: 200px;
+  color: #f0e8e8;
 }
 
 .tutor-subject {
   font-size: 15px;
-  color: #5f3a3a;
   margin-bottom: 8px;
   word-wrap: break-word;
 }
 
-/* Buttons */
 .action-buttons {
   display: flex;
   flex-direction: column;
@@ -112,27 +103,27 @@
   cursor: pointer;
   transition: background 0.2s ease;
   width: 100%;
+  font-weight: bold;
 }
 
 .profile-button {
-  background-color: #c4a29c;
-  color: white;
+  background-color: #f8c400;
+  color: #89343b;
 }
 
 .profile-button:hover {
-  background-color: #a47b73;
+  background-color: #e6b900;
 }
 
 .book-button {
-  background-color: #89343b;
-  color: white;
+  background-color: white;
+  color: #89343b;
 }
 
 .book-button:hover {
-  background-color: #6f2b30;
+  background-color: #fff3cd;
 }
 
-/* Responsive */
 @media (max-width: 1024px) {
   .find-tutor-card {
     flex: 1 1 45%;
@@ -156,7 +147,6 @@
   }
 }
 
-/* Modal Card Styling */
 .modal-card-title {
   background-color: #fdf4ec;
   font-weight: bold;
@@ -170,8 +160,7 @@
   padding: 24px;
   font-family: "Poppins", sans-serif;
   background-color: #fffefc;
-    border-radius: 30px;
-
+  border-radius: 30px;
 }
 
 .modal-card-content p {
@@ -179,4 +168,3 @@
   font-size: 15px;
   color: #4b2f2f;
 }
-

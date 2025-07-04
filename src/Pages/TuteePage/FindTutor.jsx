@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Header from "../../Components/Shared/Header";
 import Sidebar from "../../Components/Shared/Sidebar";
@@ -15,8 +15,14 @@ export default function FindTutor() {
   const menuItems = menuTutee(navigate);
   const { searchTerm, setSearchTerm, filteredTutors } = useFindTutorData();
 
+  // ✅ Apply red-theme to body (not just div)
+  useEffect(() => {
+    document.body.classList.add("red-theme");
+    return () => document.body.classList.remove("red-theme");
+  }, []);
+
   return (
-    <div className="tutee-dashboard red-theme">
+    <div className="tutee-dashboard">
       <Sidebar menuItems={menuItems} />
       <div className="tutee-content">
         <Header title="WILDTEACH" />
