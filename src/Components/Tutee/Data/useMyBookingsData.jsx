@@ -93,12 +93,11 @@ export default function useMyBookingsData() {
     "All",
     ...Array.from(new Set(
       bookings.map((b) =>
-        new Date(new Date(b.sessionDateTime).getTime() + 8 * 60 * 60 * 1000)
-          .getFullYear()
-          .toString()
+        new Date(new Date(b.sessionDateTime).getTime()).getFullYear().toString()
       )
     )).sort()
   ];
+
 
   // Filtered bookings based on selected month/year
   const filteredBookings = bookings.filter((b) => {
