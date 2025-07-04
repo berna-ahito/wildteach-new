@@ -7,8 +7,8 @@ import SectionHeader from '../../Components/Shared/LandingPage/SectionHeader';
 import { useNavigate } from 'react-router-dom';
 import adminMenu from '../../RoutesConfig/menuAdmin';
 
-export default function AdminDashboard() {
-  const navigate = useNavigate(); 
+export default function AdminDashboard({ setIsLoggedIn, setUserRole }) {
+  const navigate = useNavigate();
   const [refreshKey, setRefreshKey] = useState(0);
 
   const handleRefresh = () => setRefreshKey(prev => prev + 1);
@@ -17,9 +17,10 @@ export default function AdminDashboard() {
     <DashboardLayout
       title="WILDTEACH"
       role="admin"
-      menuItems={adminMenu(navigate)} 
+      menuItems={adminMenu(navigate)}
+      setIsLoggedIn={setIsLoggedIn}
+      setUserRole={setUserRole}
     >
-      ...
 
       <div className="admin-dashboard-section">
         {/* ✅ White central container */}
