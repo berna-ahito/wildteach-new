@@ -155,7 +155,7 @@ export default function MyBookingsPanel() {
         {/* Booking Cards */}
         <div className="bookings-cards-container">
           {filteredBookings.map((b, idx) => {
-            const sessionDate = new Date(new Date(b.sessionDateTime).getTime() + 8 * 60 * 60 * 1000);
+            const sessionDate = new Date(new Date(b.sessionDateTime).getTime();
             const formattedDate = sessionDate.toLocaleDateString();
             const formattedTime = sessionDate.toLocaleTimeString([], {
               hour: "2-digit",
