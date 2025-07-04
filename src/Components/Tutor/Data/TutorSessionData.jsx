@@ -15,10 +15,15 @@ export default function TutorSessionData() {
       if (!res.ok) throw new Error("Failed to fetch sessions");
 
       const data = await res.json();
-      console.log("📦 Raw bookings:", data);
+      data.forEach((s, i) => {
+        console.log(`📦 Booking[${i}]:`, JSON.stringify(s, null, 2));
+      });
 
       const withPaymentStatus = await Promise.all(
         data.map(async (s) => {
+          const sessionDate = new Date(s.sessionTime);
+          const isValidDate = !isNaN(sessionDate);
+
           let isPaid = false;
           try {
             const payRes = await fetch(
@@ -40,15 +45,17 @@ export default function TutorSessionData() {
 
           return {
             booking_id: s.bookingId,
-            name: `${s.student?.first_name} ${s.student?.last_name}`,
-            subject: s.subject,
-            date: new Date(s.sessionDateTime).toLocaleDateString(),
+            studentName: s.studentName || "Unknown",
+            subject: s.subject || "No Subject",
+            date: isValidDate
+              ? sessionDate.toLocaleDateString()
+              : "Invalid Date",
             duration: "1 hr",
-            month: new Date(s.sessionDateTime).toLocaleString("default", {
-              month: "long",
-            }),
-            year: new Date(s.sessionDateTime).getFullYear().toString(),
-            isPaid: isPaid,
+            month: isValidDate
+              ? sessionDate.toLocaleString("default", { month: "long" })
+              : "Invalid Date",
+            year: isValidDate ? sessionDate.getFullYear().toString() : "NaN",
+            isPaid,
           };
         })
       );

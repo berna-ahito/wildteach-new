@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ContactInput from "../Shared/LandingPage/ContactInput";
 import SectionHeader from "../Shared/LandingPage/SectionHeader";
-import ToastNotification from "../Panels/ToastNotification"; // ✅ optional toast
+import ToastNotification from "../Panels/ToastNotification";
 
 export default function ContactSection() {
   const [formData, setFormData] = useState({
@@ -30,7 +30,7 @@ export default function ContactSection() {
 
       if (!res.ok) throw new Error("Failed to send message");
 
-      const result = await res.text(); // or res.json() if backend returns JSON
+      const result = await res.text();
       console.log("✅ Message sent:", result);
 
       setToast({ message: "✅ Message sent successfully!", type: "success" });

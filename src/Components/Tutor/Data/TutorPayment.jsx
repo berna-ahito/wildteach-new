@@ -29,7 +29,7 @@ export default function TutorPayment({ open, onClose, bookingId, onSuccess }) {
       });
 
       console.log("✅ Payment successfully posted. Refreshing session...");
-      onSuccess?.(); // triggers fetchSessions
+      onSuccess?.();
       onClose();
       setAmount("");
     } catch (error) {
@@ -62,11 +62,7 @@ export default function TutorPayment({ open, onClose, bookingId, onSuccess }) {
         <Button onClick={handleCancel} disabled={loading}>
           Cancel
         </Button>
-        <Button
-          onClick={handleConfirm}
-          variant="contained"
-          disabled={loading}
-        >
+        <Button onClick={handleConfirm} variant="contained" disabled={loading}>
           {loading ? "Processing..." : "Confirm Payment"}
         </Button>
       </DialogActions>

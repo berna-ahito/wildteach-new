@@ -21,9 +21,6 @@ export default function ProfileInfo({ profile }) {
   const handleUpload = async () => {
     if (!imageFile) return;
 
-    const safeFileName = imageFile.name.replace(/[^a-zA-Z0-9.\-_]/g, "_");
-    const finalFileName = `student_${profile.student_id}_${safeFileName}`;
-
     const formData = new FormData();
     formData.append("file", imageFile);
 
@@ -38,13 +35,11 @@ export default function ProfileInfo({ profile }) {
 
       if (!res.ok) throw new Error("Upload failed");
 
-      // ✅ Refetch profile to get updated profileImage from DB
       const res2 = await fetch(
         `http://localhost:8080/student/getById/${profile.student_id}`
       );
       const updated = await res2.json();
 
-      // ✅ Update preview using new image path
       const fullUrl = `http://localhost:8080/uploads/profile/${
         updated.profileImage
       }?t=${Date.now()}`;
@@ -84,7 +79,7 @@ export default function ProfileInfo({ profile }) {
         </div>
       )}
 
-      {/* ✅ Toast */}
+      {/* Toast */}
       {toast.message && (
         <ToastNotification
           type={toast.type}

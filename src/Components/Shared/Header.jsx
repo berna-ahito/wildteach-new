@@ -8,7 +8,6 @@ export default function Header() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // ✅ Get role from localStorage's "user" object
   const user = localStorage.getItem("user");
   console.log("[Header] Raw localStorage user:", user);
 
@@ -18,7 +17,7 @@ export default function Header() {
   console.log("[Header] Parsed role from user object:", role);
 
   const handleToolbarClick = () => {
-    let targetPath = "/home"; // fallback
+    let targetPath = "/home";
     if (role === "admin") targetPath = "/adminDashboard";
     else if (role === "tutor") targetPath = "/tutorDashboard";
     else if (role === "tutee") targetPath = "/tuteeDashboard";

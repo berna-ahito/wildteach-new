@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import "../../../Pages/Styles/Admin/Admin.css"; 
+import "../../../Pages/Styles/Admin/Admin.css";
 import DeleteIcon from "@mui/icons-material/Delete";
 import IconButton from "@mui/material/IconButton";
 import DeleteDialog from "../../Panels/DeleteDialog";
 
-export default function AdminViewAll({ title = "All Announcements", onRefresh }) {
+export default function AdminViewAll({
+  title = "All Announcements",
+  onRefresh,
+}) {
   const [announcementList, setAnnouncementList] = useState([]);
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const [toast, setToast] = useState({ message: "", type: "" });
 
-  // ✅ Get user role from localStorage
   const user = JSON.parse(localStorage.getItem("user"));
   const isAdmin = user?.role === "admin";
 
@@ -34,17 +36,25 @@ export default function AdminViewAll({ title = "All Announcements", onRefresh })
 
   const handleConfirmDelete = async () => {
     try {
-      await axios.delete(`http://localhost:8080/announcement/delete/${selectedItem.announcement_id}`);
+      await axios.delete(
+        `http://localhost:8080/announcement/delete/${selectedItem.announcement_id}`
+      );
       const updatedList = announcementList.filter(
         (item) => item.announcement_id !== selectedItem.announcement_id
       );
       setAnnouncementList(updatedList);
-      setToast({ message: "Announcement deleted successfully.", type: "success" });
+      setToast({
+        message: "Announcement deleted successfully.",
+        type: "success",
+      });
 
       if (onRefresh) onRefresh();
     } catch (error) {
       console.error("Failed to delete announcement:", error);
-      setToast({ message: "Error deleting announcement. Please try again.", type: "error" });
+      setToast({
+        message: "Error deleting announcement. Please try again.",
+        type: "error",
+      });
     } finally {
       setOpenDialog(false);
       setSelectedItem(null);
@@ -60,6 +70,7 @@ export default function AdminViewAll({ title = "All Announcements", onRefresh })
 
   return (
     <div className="Page">
+      <h2 style={{ marginBottom: "16px" }}>{title}</h2>
       <div className="admin-manage-table">
         {announcementList.length > 0 ? (
           <div style={{ overflowX: "auto" }}>
@@ -67,8 +78,14 @@ export default function AdminViewAll({ title = "All Announcements", onRefresh })
               <thead>
                 <tr>
                   <th style={{ textAlign: "left", padding: "12px" }}>Title</th>
-                  <th style={{ textAlign: "left", padding: "12px" }}>Message</th>
-                  {isAdmin && <th style={{ textAlign: "left", padding: "12px" }}>Action</th>}
+                  <th style={{ textAlign: "left", padding: "12px" }}>
+                    Message
+                  </th>
+                  {isAdmin && (
+                    <th style={{ textAlign: "left", padding: "12px" }}>
+                      Action
+                    </th>
+                  )}
                 </tr>
               </thead>
               <tbody>
@@ -78,7 +95,10 @@ export default function AdminViewAll({ title = "All Announcements", onRefresh })
                     <td style={{ padding: "12px" }}>{item.message}</td>
                     {isAdmin && (
                       <td style={{ padding: "12px" }}>
-                        <IconButton color="error" onClick={() => handleOpenDialog(item)}>
+                        <IconButton
+                          color="error"
+                          onClick={() => handleOpenDialog(item)}
+                        >
                           <DeleteIcon />
                         </IconButton>
                       </td>
@@ -93,7 +113,7 @@ export default function AdminViewAll({ title = "All Announcements", onRefresh })
         )}
       </div>
 
-      {/* ✅ Only show DeleteDialog if user is admin */}
+      {/* Only show DeleteDialog if user is admin */}
       {isAdmin && (
         <DeleteDialog
           open={openDialog}
@@ -102,9 +122,6 @@ export default function AdminViewAll({ title = "All Announcements", onRefresh })
           itemTitle={selectedItem?.title}
         />
       )}
-
-     
-
     </div>
   );
 }

@@ -3,7 +3,7 @@ import axios from "axios";
 import InputCards from "../Shared/InputCards";
 import UserCredentials from "../Shared/Data/UserCredentials";
 import ToastNotification from "../Panels/ToastNotification";
-import "../../Pages/Styles/shared/CommonComponents.css"; // ✅ Correct styling path
+import "../../Pages/Styles/shared/CommonComponents.css";
 
 export default function ChangePassword({ role = "admin", userId, email }) {
   const [currentPassword, setCurrentPassword] = useState("");

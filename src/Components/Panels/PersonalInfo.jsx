@@ -124,7 +124,7 @@ export default function PersonalInfo({ profile }) {
         </div>
       )}
 
-      {/* ✅ Toast Notification */}
+      {/* Toast Notification */}
       {toast.message && (
         <ToastNotification
           type={toast.type}

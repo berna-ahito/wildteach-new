@@ -75,8 +75,11 @@ public class BookingController {
         return bookingService.getBookingsByTutor(tutorId).stream()
                 .map(b -> {
                     BookingDTO dto = new BookingDTO();
+                    dto.setBookingId(b.getBookingId()); // ✅ This line is the fix
                     dto.setSessionTime(b.getSessionDateTime());
-                    dto.setStudentName(b.getStudent().getFirst_name() + " " + b.getStudent().getLast_name());
+                    dto.setStudentName(
+                            (b.getStudent().getFirst_name() != null ? b.getStudent().getFirst_name() : "") + " " +
+                                    (b.getStudent().getLast_name() != null ? b.getStudent().getLast_name() : ""));
                     dto.setProfileImage(b.getStudent().getProfileImage());
                     dto.setSubject(b.getSubject());
                     dto.setStatus(b.getStatus());
@@ -103,6 +106,7 @@ public class BookingController {
                 })
                 .map(b -> {
                     BookingDTO dto = new BookingDTO();
+                    dto.setBookingId(b.getBookingId());
                     dto.setSessionTime(b.getSessionDateTime());
                     dto.setStudentName(b.getStudent().getFirst_name() + " " + b.getStudent().getLast_name());
                     dto.setProfileImage(b.getStudent().getProfileImage());

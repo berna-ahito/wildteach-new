@@ -1,10 +1,15 @@
-import React from 'react';
+import React from "react";
 import {
-  Table, TableBody, TableCell, TableContainer,
-  TableHead, TableRow, Paper
-} from '@mui/material';
-import '../../../Pages/Styles/Shared/CommonComponents.css';
-import '../../../Pages/Styles/Shared/UserTable.css'; // ✅ same as UserTable
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@mui/material";
+import "../../../Pages/Styles/Shared/CommonComponents.css";
+import "../../../Pages/Styles/Shared/UserTable.css";
 
 export default function AdminSessionTable({ bookings = [] }) {
   return (
@@ -36,11 +41,11 @@ export default function AdminSessionTable({ bookings = [] }) {
                 <TableCell>
                   <span
                     className={`status ${
-                      b.status === 'Accepted'
-                        ? 'active'
-                        : b.status === 'Pending'
-                        ? 'pending'
-                        : 'inactive'
+                      b.status === "Accepted"
+                        ? "active"
+                        : b.status === "Pending"
+                        ? "pending"
+                        : "inactive"
                     }`}
                   >
                     {b.status}

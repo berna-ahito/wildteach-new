@@ -22,7 +22,7 @@ export default function TutorDashboard({ setIsLoggedIn, setUserRole }) {
       setUserRole={setUserRole}
     >
       <div className="tutor-dashboard-section">
-        {/* ✅ White central container */}
+        {/* White central container */}
         <div className="dashboard-container">
           <SectionHeader
             badge="WELCOME BACK"

@@ -1,5 +1,3 @@
-// StatCards.jsx – Displays stat cards with icons and values
-
 import React from "react";
 import "../../Pages/Styles/shared/CommonComponents.css";
 

@@ -4,50 +4,50 @@ export async function loginUser(email, password) {
   const validRoles = ["admin", "tutor", "tutee"];
   let userData = null;
 
-  // === ADMIN LOGIN ATTEMPT ===
   try {
-    const adminRes = await fetch("http://localhost:8080/admin/login", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ email, password }),
-    });
+    // ADMIN LOGIN ATTEMPT 
+    try {
+      const adminRes = await fetch("http://localhost:8080/admin/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
 
-    console.log("[Login] Admin login response status:", adminRes.status);
+      console.log("[Login] Admin login response status:", adminRes.status);
 
-    const adminData = await adminRes.json();
+      const adminData = await adminRes.json();
 
-    if (!adminRes.ok) {
-      throw new Error(adminData.message || "Admin login failed.");
+      if (!adminRes.ok) {
+        throw new Error(adminData.message || "Admin login failed.");
+      }
+
+      if (adminData.is_active === false) {
+        throw new Error("Admin account is deactivated. Contact administrator.");
+      }
+
+      const role = adminData.role?.toLowerCase() || "admin";
+
+      if (!validRoles.includes(role)) {
+        throw new Error("Invalid role detected for admin.");
+      }
+
+      userData = {
+        isLoggedIn: true,
+        role,
+        admin_id: adminData.admin_id,
+        name: adminData.name,
+        email: adminData.email,
+      };
+
+      localStorage.setItem("user", JSON.stringify(userData));
+      console.log("[Login] Admin saved to localStorage:", userData);
+
+      return role;
+    } catch {
+      console.warn("[Login] Admin login failed, falling back to student login.");
     }
 
-    if (adminData.is_active === false) {
-      throw new Error("Admin account is deactivated. Contact administrator.");
-    }
-
-    const role = adminData.role?.toLowerCase() || "admin";
-
-    if (!validRoles.includes(role)) {
-      throw new Error("Invalid role detected for admin.");
-    }
-
-    userData = {
-      isLoggedIn: true,
-      role,
-      admin_id: adminData.admin_id,
-      name: adminData.name,
-      email: adminData.email,
-    };
-
-    localStorage.setItem("user", JSON.stringify(userData));
-    console.log("[Login] Admin saved to localStorage:", userData);
-
-    return role;
-  } catch (e) {
-    console.warn("[Login] Admin login failed, falling back to student login.");
-  }
-
-  // === STUDENT LOGIN ATTEMPT (TUTEE or TUTOR) ===
-  try {
+    // STUDENT LOGIN ATTEMPT (TUTEE or TUTOR)
     const res = await fetch("http://localhost:8080/student/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -83,7 +83,7 @@ export async function loginUser(email, password) {
 
     localStorage.setItem("student_id", studentId.toString());
 
-    // Optional: Check if tutor has a profile
+    // Checking if tutor has a profile
     if (role === "tutor") {
       try {
         const checkTutor = await fetch(`http://localhost:8080/student/hasTutorProfile/${studentId}`);
@@ -104,7 +104,7 @@ export async function loginUser(email, password) {
 
     return role;
   } catch (e) {
-    console.error("[Login] Student login error:", e.message);
+    console.error("[Login] Login error:", e.message);
     throw new Error(e.message || "Login failed. Please check your email and password.");
   }
 }

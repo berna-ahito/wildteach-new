@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Dialog, DialogTitle, DialogContent, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
-import AdminViewAll from "../Admin/Data/AdminViewAll"; // Adjust path if needed
+import AdminViewAll from "../Admin/Data/AdminViewAll";
 
 export default function Announcement({ announcements = [], onRefresh }) {
   const [open, setOpen] = useState(false);

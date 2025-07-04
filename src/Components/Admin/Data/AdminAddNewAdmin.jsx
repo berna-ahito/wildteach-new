@@ -6,13 +6,13 @@ import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
-import "../../../Pages/Styles/Admin/Admin.css"; 
+import "../../../Pages/Styles/Admin/Admin.css";
 export default function AdminAddNewAdmin({ onAdd }) {
   const [open, setOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    password: ""
+    password: "",
   });
   const [error, setError] = useState("");
 
@@ -29,15 +29,18 @@ export default function AdminAddNewAdmin({ onAdd }) {
     }
 
     try {
-      const response = await axios.post("http://localhost:8080/admin/addAdmin", {
-        name: formData.name,
-        email: formData.email,
-        password: formData.password,
-        role: "admin"
-      });
+      const response = await axios.post(
+        "http://localhost:8080/admin/addAdmin",
+        {
+          name: formData.name,
+          email: formData.email,
+          password: formData.password,
+          role: "admin",
+        }
+      );
 
       if (response.status === 200 || response.status === 201) {
-        if (onAdd) onAdd(); // Refresh admin list if needed
+        if (onAdd) onAdd();
         setFormData({ name: "", email: "", password: "" });
         setOpen(false);
       }
@@ -56,7 +59,12 @@ export default function AdminAddNewAdmin({ onAdd }) {
         onClick={() => setOpen(true)}
       />
 
-      <Dialog open={open} onClose={() => setOpen(false)} maxWidth="sm" fullWidth>
+      <Dialog
+        open={open}
+        onClose={() => setOpen(false)}
+        maxWidth="sm"
+        fullWidth
+      >
         <DialogTitle>
           <span className="page-title">Add New Admin</span>
           <IconButton

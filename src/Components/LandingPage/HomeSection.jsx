@@ -1,5 +1,5 @@
 import React from "react";
-import "../../Pages/Styles/LandingPage/HomeSection.css"; // Correct scoped CSS
+import "../../Pages/Styles/LandingPage/HomeSection.css";
 import SectionHeader from "../Shared/LandingPage/SectionHeader";
 import MainImage from "../../assets/images/Main.jpg";
 import bgLanding from "../../assets/images/bgLanding.jpg";

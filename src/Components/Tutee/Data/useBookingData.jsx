@@ -4,7 +4,6 @@ export default function useBookingData(tutorId) {
   const [tutor, setTutor] = useState(null);
   const [subject, setSubject] = useState("");
 
-  // Ensure time is set to a local datetime without timezone offset affecting MySQL
   const getInitialLocalDate = () => {
     const now = new Date();
     return new Date(

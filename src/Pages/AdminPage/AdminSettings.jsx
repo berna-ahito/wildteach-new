@@ -8,7 +8,6 @@ import SectionHeader from "../../Components/Shared/LandingPage/SectionHeader";
 import adminMenu from "../../RoutesConfig/menuAdmin";
 import { useNavigate } from "react-router-dom";
 
-
 import "../../Pages/Styles/shared/CommonComponents.css";
 import "../../Pages/Styles/TutorPage/TutorSettings.css";
 import "../../Pages/Styles/TutorPage/TutorGlobals.css";
@@ -21,14 +20,12 @@ export default function Settings() {
   const email = user?.email || "";
   const navigate = useNavigate();
 
-
   return (
     <DashboardLayout
       title="WILDTEACH"
       role={role}
-      menuItems={adminMenu(navigate)} // ✅ required for working links
+      menuItems={adminMenu(navigate)}
     >
-
       <div className="admin-dashboard-section" style={{ paddingTop: "10vw" }}>
         <div className="dashboard-container">
           <SectionHeader
@@ -38,13 +35,13 @@ export default function Settings() {
             subtitle="Manage your credentials and system preferences here."
             layout="vertical"
           />
-          <div className= "forms">
-              <ChangeEmail role={role} userId={userId} email={email} />
-              <ChangePassword role={role} userId={userId} email={email} />
-              <div className="forms-buttons">
-                <AdminAddNewAdmin />
-                <AdminDeleteAccount />
-              </div>
+          <div className="forms">
+            <ChangeEmail role={role} userId={userId} email={email} />
+            <ChangePassword role={role} userId={userId} email={email} />
+            <div className="forms-buttons">
+              <AdminAddNewAdmin />
+              <AdminDeleteAccount />
+            </div>
           </div>
         </div>
       </div>

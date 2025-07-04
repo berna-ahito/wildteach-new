@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import UserTable from '../../Shared/UserTable';
-import axios from 'axios';
-import "../../../Pages/Styles/Admin/Admin.css"; 
+import React, { useEffect, useState } from "react";
+import UserTable from "../../Shared/UserTable";
+import axios from "axios";
+import "../../../Pages/Styles/Admin/Admin.css";
 
 export default function AdminStudent({ onRefresh }) {
   const [students, setStudents] = useState([]);
@@ -12,7 +12,8 @@ export default function AdminStudent({ onRefresh }) {
   }, []);
 
   const fetchStudents = () => {
-    axios.get('http://localhost:8080/student/all')
+    axios
+      .get("http://localhost:8080/student/all")
       .then((res) => {
         const formatted = res.data.map((s) => {
           const role = (s.role || "Unknown").trim();
@@ -24,40 +25,43 @@ export default function AdminStudent({ onRefresh }) {
             email: s.email || "N/A",
             is_active: s.is_active,
             status: s.is_active ? "Active" : "Inactive",
-            role: role.charAt(0).toUpperCase() + role.slice(1).toLowerCase()
+            role: role.charAt(0).toUpperCase() + role.slice(1).toLowerCase(),
           };
         });
         setStudents(formatted);
         setLoading(false);
       })
       .catch((err) => {
-        console.error('❌ Error fetching students:', err);
+        console.error("❌ Error fetching students:", err);
         setLoading(false);
       });
   };
 
   const handleToggleStatus = async (studentId, newIsActive) => {
     try {
-      await axios.put(`http://localhost:8080/student/updateStatus/${studentId}?is_active=${newIsActive}`);
-      
-      if (onRefresh) onRefresh(); // ✅ Trigger refresh of stat cards
-      fetchStudents();            // ✅ Refresh table too
+      await axios.put(
+        `http://localhost:8080/student/updateStatus/${studentId}?is_active=${newIsActive}`
+      );
+
+      if (onRefresh) onRefresh();
+      fetchStudents();
       return true;
     } catch (err) {
-      console.error('Failed to update student status:', err);
+      console.error("Failed to update student status:", err);
       return false;
     }
   };
 
   if (loading) return <div className="p-6">Loading students...</div>;
-  if (students.length === 0) return <div className="p-6 text-red-500">No students found.</div>;
+  if (students.length === 0)
+    return <div className="p-6 text-red-500">No students found.</div>;
 
   return (
     <div className="p-6">
       <UserTable
         data={students}
         onToggleStatus={handleToggleStatus}
-        onRefresh={onRefresh} // ✅ Pass it down
+        onRefresh={onRefresh}
       />
     </div>
   );

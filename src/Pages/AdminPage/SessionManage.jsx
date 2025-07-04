@@ -7,11 +7,11 @@ import SectionHeader from "../../Components/Shared/LandingPage/SectionHeader";
 import { useNavigate } from "react-router-dom";
 import adminMenu from "../../RoutesConfig/menuAdmin";
 
-import "../../Pages/Styles/Admin/Admin.css"; 
+import "../../Pages/Styles/Admin/Admin.css";
 
 export default function SessionManage() {
   const navigate = useNavigate();
-  const bookings = useBookings(); // fetch session bookings
+  const bookings = useBookings();
 
   return (
     <DashboardLayout

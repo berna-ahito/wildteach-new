@@ -11,20 +11,19 @@ import "../../Pages/Styles/Shared/CommonComponents.css";
 
 export default function Announcement() {
   const navigate = useNavigate();
-  const [refreshKey, setRefreshKey] = useState(0); // 🔁 Refresh trigger
+  const [refreshKey, setRefreshKey] = useState(0);
 
   const handleRefresh = () => {
     setRefreshKey((prev) => prev + 1);
   };
 
   return (
-      <DashboardLayout
+    <DashboardLayout
       title="WILDTEACH"
       role="admin"
       menuItems={adminMenu(navigate)}
     >
       <div className="admin-dashboard-section" style={{ marginTop: "0vw" }}>
-        {/* ✅ Add this wrapper! */}
         <div className="dashboard-container">
           <SectionHeader
             badge="ADMIN PANEL"
@@ -36,7 +35,7 @@ export default function Announcement() {
           />
 
           <div className="dashboard-panels">
-            <div className="glass-card"  style={{ minWidth: "45vw" }}>
+            <div className="glass-card" style={{ minWidth: "45vw" }}>
               <AdminSystemAnnouncement
                 key={refreshKey}
                 refreshTrigger={refreshKey}
@@ -47,10 +46,8 @@ export default function Announcement() {
               <AdminAddAnnounce onAdd={handleRefresh} />
             </div>
           </div>
-            
-          </div>
+        </div>
       </div>
     </DashboardLayout>
-
   );
 }

@@ -36,14 +36,9 @@ export default function Sidebar(props) {
   const handleIconClick = () => setOpen((prev) => !prev);
 
   const handleLogoutConfirm = () => {
-    // 🔐 Clear session
     localStorage.clear();
-
-    // 🧠 Reset login state
     setIsLoggedIn(false);
     setUserRole(null);
-
-    // 🔁 Redirect to login page
     navigate("/login");
   };
 

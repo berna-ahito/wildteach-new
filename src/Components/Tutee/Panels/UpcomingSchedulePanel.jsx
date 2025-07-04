@@ -19,11 +19,7 @@ export default function UpcomingSchedulePanel() {
           <Typography variant="body2">No upcoming bookings.</Typography>
         ) : (
           bookings.map((booking) => (
-            <Paper
-              className="panel-card"
-              elevation={3}
-              key={booking.id}
-            >
+            <Paper className="panel-card" elevation={3} key={booking.id}>
               <Typography variant="h5" className="card-title">
                 {booking.tutorName}
               </Typography>

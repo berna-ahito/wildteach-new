@@ -19,8 +19,7 @@ export default function Profile() {
     <DashboardLayout title="Profile" role="tutor">
       <div className="glass-card">
         <div className="profile-container">
-          <h2 className="profile-title-inside">Profile</h2>{" "}
-          {/* ✅ moved inside */}
+          <h2 className="profile-title-inside">Profile</h2> {/* moved inside */}
           <div className="profile-info">
             <ProfileInfo profile={profile} />
           </div>

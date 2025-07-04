@@ -1,17 +1,17 @@
-import React, { useState } from 'react';
-import DashboardLayout from '../../Components/Layout/DashboardLayout';
-import AdminStatData from '../../Components/Admin/Data/AdminStatData';
-import AdminRecentActivity from '../../Components/Admin/Data/AdminRecentActivity';
-import AdminSystemAnnouncement from '../../Components/Admin/Data/AdminSystemAnnouncement';
-import SectionHeader from '../../Components/Shared/LandingPage/SectionHeader';
-import { useNavigate } from 'react-router-dom';
-import adminMenu from '../../RoutesConfig/menuAdmin';
+import React, { useState } from "react";
+import DashboardLayout from "../../Components/Layout/DashboardLayout";
+import AdminStatData from "../../Components/Admin/Data/AdminStatData";
+import AdminRecentActivity from "../../Components/Admin/Data/AdminRecentActivity";
+import AdminSystemAnnouncement from "../../Components/Admin/Data/AdminSystemAnnouncement";
+import SectionHeader from "../../Components/Shared/LandingPage/SectionHeader";
+import { useNavigate } from "react-router-dom";
+import adminMenu from "../../RoutesConfig/menuAdmin";
 
 export default function AdminDashboard({ setIsLoggedIn, setUserRole }) {
   const navigate = useNavigate();
   const [refreshKey, setRefreshKey] = useState(0);
 
-  const handleRefresh = () => setRefreshKey(prev => prev + 1);
+  const handleRefresh = () => setRefreshKey((prev) => prev + 1);
 
   return (
     <DashboardLayout
@@ -21,9 +21,7 @@ export default function AdminDashboard({ setIsLoggedIn, setUserRole }) {
       setIsLoggedIn={setIsLoggedIn}
       setUserRole={setUserRole}
     >
-
       <div className="admin-dashboard-section">
-        {/* ✅ White central container */}
         <div className="dashboard-container">
           <SectionHeader
             badge="WELCOME BACK"

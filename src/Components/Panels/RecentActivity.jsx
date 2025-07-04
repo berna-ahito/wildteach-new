@@ -11,7 +11,6 @@ export default function RecentActivity({ recent, role = "tutor" }) {
     console.log("🗑️ Delete not implemented for item id:", id);
   };
 
-  // ✅ Filter out "New tutor registered" activity if role is tutor
   const filteredRecent =
     role === "tutor"
       ? recent.filter((r) => r.content !== "New tutor registered")
@@ -48,7 +47,7 @@ export default function RecentActivity({ recent, role = "tutor" }) {
         ))}
       </ul>
 
-      {/* 💬 View All Dialog */}
+      {/* View All Dialog */}
       <Dialog
         open={open}
         onClose={() => setOpen(false)}

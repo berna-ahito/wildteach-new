@@ -18,7 +18,7 @@ export default function TutorScheduleData() {
         console.log("[Schedule] Today’s sessions:", data);
 
         const formatted = data.map((item) => {
-          const rawTime = item.sessionTime; // ✅ correct key
+          const rawTime = item.sessionTime;
           const formattedTime = formatTime(rawTime);
 
           console.log("[Schedule] Raw session time:", rawTime);
@@ -26,7 +26,7 @@ export default function TutorScheduleData() {
 
           return {
             time: formattedTime,
-            student: formatStudentName(item.studentName), // ✅ correct key
+            student: formatStudentName(item.studentName),
             subject: item.subject || "Unknown",
             status: item.status?.toLowerCase() || "pending",
             avatarUrl: item.profileImage

@@ -2,12 +2,12 @@ import React, { useState } from "react";
 import axios from "axios";
 import InputCards from "../Shared/InputCards";
 import UserCredentials from "../Shared/Data/UserCredentials";
-import ToastNotification from "../Panels/ToastNotification"; 
-import "../../Pages/Styles/Admin/Admin.css"; 
+import ToastNotification from "../Panels/ToastNotification";
+import "../../Pages/Styles/Admin/Admin.css";
 export default function ChangeEmail({ role = "admin", userId, email }) {
   const [newEmail, setNewEmail] = useState("");
   const [confirmEmail, setConfirmEmail] = useState("");
-  const [toast, setToast] = useState(null); 
+  const [toast, setToast] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,7 +19,9 @@ export default function ChangeEmail({ role = "admin", userId, email }) {
 
     try {
       if (role === "admin") {
-        const res = await axios.get(`http://localhost:8080/admin/getAdmin/${userId}`);
+        const res = await axios.get(
+          `http://localhost:8080/admin/getAdmin/${userId}`
+        );
         const currentAdmin = res.data;
 
         await axios.put(`http://localhost:8080/admin/updateAdmin/${userId}`, {
@@ -27,7 +29,9 @@ export default function ChangeEmail({ role = "admin", userId, email }) {
           email: newEmail,
         });
       } else {
-        const res = await axios.get(`http://localhost:8080/student/getById/${userId}`);
+        const res = await axios.get(
+          `http://localhost:8080/student/getById/${userId}`
+        );
         const currentStudent = res.data;
 
         await axios.put(`http://localhost:8080/student/update/${userId}`, {
@@ -36,16 +40,26 @@ export default function ChangeEmail({ role = "admin", userId, email }) {
         });
       }
 
-      // ✅ Update localStorage
-      const updatedUser = { ...JSON.parse(localStorage.getItem("user")), email: newEmail };
+      // Update localStorage
+      const updatedUser = {
+        ...JSON.parse(localStorage.getItem("user")),
+        email: newEmail,
+      };
       localStorage.setItem("user", JSON.stringify(updatedUser));
 
-      setToast({ type: "success", message: `Email updated to ${newEmail} successfully!` });
+      setToast({
+        type: "success",
+        message: `Email updated to ${newEmail} successfully!`,
+      });
       setNewEmail("");
       setConfirmEmail("");
     } catch (err) {
-      console.error("❌ Email update failed:", err.response?.data || err.message);
-      const msg = err.response?.data || "Email update failed. Please try again.";
+      console.error(
+        "❌ Email update failed:",
+        err.response?.data || err.message
+      );
+      const msg =
+        err.response?.data || "Email update failed. Please try again.";
       setToast({ type: "error", message: msg });
     }
   };

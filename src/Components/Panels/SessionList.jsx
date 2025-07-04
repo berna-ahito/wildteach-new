@@ -155,7 +155,7 @@ export default function SessionList({ sessions, onDelete, onRefresh }) {
             const isEditing = i === editingIndex;
             return (
               <Card key={s.booking_id} className="session-card">
-                <h3 className="card-title">Student Name: {s.name}</h3>
+                <h3 className="card-title">Student Name: {s.studentName}</h3>
                 <p>
                   Subject:{" "}
                   {isEditing ? (

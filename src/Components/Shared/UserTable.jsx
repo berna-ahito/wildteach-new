@@ -1,40 +1,51 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import {
-  Table, TableBody, TableCell, TableContainer,
-  TableHead, TableRow, Paper, Button
-} from '@mui/material';
-import '../../Pages/Styles/Shared/CommonComponents.css';
-import '../../Pages/Styles/Shared/UserTable.css'; 
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Button,
+} from "@mui/material";
+import "../../Pages/Styles/Shared/CommonComponents.css";
+import "../../Pages/Styles/Shared/UserTable.css";
 
-
-export default function UserTable({ data = [], onToggleStatus,onRefresh }) {
+export default function UserTable({ data = [], onToggleStatus, onRefresh }) {
   const [view, setView] = useState("Tutee");
   const [tableData, setTableData] = useState([]);
 
   useEffect(() => {
     if (!Array.isArray(data)) {
-      console.error("🚨 Expected 'data' to be an array but got:", typeof data, data);
+      console.error(
+        "🚨 Expected 'data' to be an array but got:",
+        typeof data,
+        data
+      );
       setTableData([]);
       return;
     }
 
-    const filtered = data.filter(user =>
-      user.role?.toLowerCase() === view.toLowerCase()
+    const filtered = data.filter(
+      (user) => user.role?.toLowerCase() === view.toLowerCase()
     );
     setTableData(filtered);
   }, [data, view]);
 
   const handleToggleStatus = async (user, index) => {
-    const newStatus = user.status === 'Active' ? 'Inactive' : 'Active';
-    const success = await onToggleStatus(user.student_id, newStatus === 'Active');
+    const newStatus = user.status === "Active" ? "Inactive" : "Active";
+    const success = await onToggleStatus(
+      user.student_id,
+      newStatus === "Active"
+    );
 
     if (success) {
       const updated = [...tableData];
       updated[index].status = newStatus;
       setTableData(updated);
-      if (onRefresh) onRefresh(); // ✅ trigger stat refresh
+      if (onRefresh) onRefresh();
     }
-
   };
 
   return (
@@ -55,7 +66,7 @@ export default function UserTable({ data = [], onToggleStatus,onRefresh }) {
         </button>
       </div>
 
-    <TableContainer component={Paper} className="user-table-container">
+      <TableContainer component={Paper} className="user-table-container">
         <Table stickyHeader>
           <TableHead>
             <TableRow>
@@ -76,7 +87,9 @@ export default function UserTable({ data = [], onToggleStatus,onRefresh }) {
                   <TableCell>{user.email}</TableCell>
                   <TableCell>
                     <Button
-                      className={`status ${user.status === 'Active' ? 'active' : 'inactive'}`}
+                      className={`status ${
+                        user.status === "Active" ? "active" : "inactive"
+                      }`}
                       variant="contained"
                       size="small"
                       onClick={() => handleToggleStatus(user, index)}

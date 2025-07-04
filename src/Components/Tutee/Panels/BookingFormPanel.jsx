@@ -13,12 +13,13 @@ export default function BookingFormPanel() {
   const { subject, setSubject, sessionDateTime, setSessionDateTime, tutor } =
     useBookingData(tutorId);
 
-  const [duration, setDuration] = useState(60); // default 1 hour
+  const [duration, setDuration] = useState(60);
 
-  // Format as 'yyyy-MM-ddTHH:mm:ss' for LocalDateTime (no time zone)
   const formatDateOnly = (date) => {
     const pad = (n) => n.toString().padStart(2, "0");
-    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}T${pad(date.getHours())}:${pad(date.getMinutes())}:00`;
+    return `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(
+      date.getDate()
+    )}T${pad(date.getHours())}:${pad(date.getMinutes())}:00`;
   };
 
   const handleBookingSubmit = async (e) => {
@@ -30,7 +31,13 @@ export default function BookingFormPanel() {
 
     console.log("📦 Final LocalDateTime to backend:", formattedDate);
 
-    if (!studentId || !resolvedTutorId || !subject || !formattedDate || !duration) {
+    if (
+      !studentId ||
+      !resolvedTutorId ||
+      !subject ||
+      !formattedDate ||
+      !duration
+    ) {
       setToast({ message: "Missing booking information.", type: "error" });
       return;
     }
@@ -93,13 +100,15 @@ export default function BookingFormPanel() {
           onChange={(date) => {
             setSessionDateTime(date);
 
-            // 🐞 DEBUGGER
             console.log("🕵️ Booking Debugger:");
             console.log("▶️ Raw Date object:", date);
             console.log("📆 Local time:", date.toString());
             console.log("🌐 UTC time:", date.toUTCString());
             console.log("🧾 ISO format:", date.toISOString());
-            console.log("✅ Formatted to send to backend:", formatDateOnly(date));
+            console.log(
+              "✅ Formatted to send to backend:",
+              formatDateOnly(date)
+            );
           }}
           showTimeSelect
           timeFormat="h:mm aa"
@@ -117,7 +126,6 @@ export default function BookingFormPanel() {
           <option value={60}>1 hour</option>
           <option value={90}>2 hours</option>
           <option value={90}>3 hours</option>
-
         </select>
 
         <div className="form-actions">

@@ -8,7 +8,7 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import ToastNotification from "../../Panels/ToastNotification";
 import DeleteDialog from "../../Panels/DeleteDialog";
-import "../../../Pages/Styles/Admin/Admin.css"; 
+import "../../../Pages/Styles/Admin/Admin.css";
 
 export default function AdminDeleteAccount({ onDelete }) {
   const [open, setOpen] = useState(false);
@@ -24,7 +24,9 @@ export default function AdminDeleteAccount({ onDelete }) {
 
   const fetchAdmins = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/admin/getAllAdmins");
+      const response = await axios.get(
+        "http://localhost:8080/admin/getAllAdmins"
+      );
       setAdminList(response.data);
     } catch (error) {
       console.error("Failed to fetch admins:", error);
@@ -34,24 +36,34 @@ export default function AdminDeleteAccount({ onDelete }) {
 
   const handlePromptDelete = (e) => {
     e.preventDefault();
-    const selectedAdmin = adminList.find(a => a.admin_id === parseInt(selectedAdminId));
+    const selectedAdmin = adminList.find(
+      (a) => a.admin_id === parseInt(selectedAdminId)
+    );
     setSelectedAdminName(selectedAdmin?.name || "this admin");
-    setConfirmOpen(true); // ✅ Open confirmation dialog
+    setConfirmOpen(true);
   };
 
   const handleConfirmDelete = async () => {
     try {
-      await axios.delete(`http://localhost:8080/admin/deleteAdmin/${selectedAdminId}`);
-      setToast({ type: "success", message: "Admin account deleted successfully!" });
+      await axios.delete(
+        `http://localhost:8080/admin/deleteAdmin/${selectedAdminId}`
+      );
+      setToast({
+        type: "success",
+        message: "Admin account deleted successfully!",
+      });
       setSelectedAdminId("");
       setSelectedAdminName("");
       setConfirmOpen(false);
       setOpen(false);
       if (onDelete) onDelete();
-      fetchAdmins(); // refresh list
+      fetchAdmins();
     } catch (error) {
       console.error("❌ Failed to delete admin:", error);
-      setToast({ type: "error", message: "Failed to delete admin. Please try again." });
+      setToast({
+        type: "error",
+        message: "Failed to delete admin. Please try again.",
+      });
     }
   };
 
@@ -72,7 +84,12 @@ export default function AdminDeleteAccount({ onDelete }) {
         onClick={() => setOpen(true)}
       />
 
-      <Dialog open={open} onClose={() => setOpen(false)} maxWidth="sm" fullWidth>
+      <Dialog
+        open={open}
+        onClose={() => setOpen(false)}
+        maxWidth="sm"
+        fullWidth
+      >
         <DialogTitle>
           <span className="page-title">Delete Admin Account</span>
           <IconButton
@@ -109,7 +126,7 @@ export default function AdminDeleteAccount({ onDelete }) {
         </DialogContent>
       </Dialog>
 
-      {/* ✅ Confirm Delete Dialog */}
+      {/* Confirm Delete Dialog */}
       <DeleteDialog
         open={confirmOpen}
         onClose={() => setConfirmOpen(false)}
