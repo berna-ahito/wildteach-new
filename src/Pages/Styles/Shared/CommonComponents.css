@@ -293,6 +293,31 @@
   border: 3px solid #F8C400;
 }
 
+/* Shared avatar circle for tutee/tutor panels */
+.avatar-circle {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background-color: #f8c400;
+  color: #8d2f2f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 16px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/* Image inside circular avatar */
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  display: block;
+}
+
 .stars {
   font-size: 16px;
   color: #F8C400;

@@ -32,7 +32,9 @@ export default function useTutorProfile(studentId) {
           city: student.city,
           province: student.province,
           home_address: student.address,
-          profileImage: student.profileImage || "default.jpg",
+          profileImage: student.profileImage
+            ? `http://localhost:8080/uploads/profile/${student.profileImage}`
+            : "http://localhost:8080/uploads/profile/default.jpg",
 
           // From tutor_entity
           tutor_id: tutor?.tutor_id || null,

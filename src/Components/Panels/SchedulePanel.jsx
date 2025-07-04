@@ -16,13 +16,19 @@ export default function SchedulePanel({ schedule }) {
         </button>
       </div>
       <ul>
-        {schedule.map((s, i) => (
+        {schedule.map((item, i) => (
           <li key={i} className="panel-item">
-            <span className="time">{s.time}</span>
-            <div className="info">
-              {s.student} • {s.subject}
+            <div className="avatar-circle">
+              {item.avatarUrl ? (
+                <img src={item.avatarUrl} alt="avatar" className="avatar-img" />
+              ) : (
+                <span>{item.student?.[0]}</span>
+              )}
             </div>
-            <span className={`status ${s.status}`}>{s.status}</span>
+            <div className="info">
+              {item.student} • {item.subject}
+            </div>
+            <span className={`status ${item.status}`}>{item.status}</span>
             <button className="join-btn">Join</button>
           </li>
         ))}

@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import com.wildteach.tutoringsystem.dto.BookingDTO;
 import com.wildteach.tutoringsystem.entity.bookingEntity;
 import com.wildteach.tutoringsystem.service.bookingService;
 
@@ -45,8 +46,7 @@ public class BookingController {
     @PutMapping("/update/{id}")
     public ResponseEntity<bookingEntity> updateBooking(
             @PathVariable Long id,
-            @RequestBody bookingEntity bookingDetails
-    ) {
+            @RequestBody bookingEntity bookingDetails) {
         bookingEntity updatedBooking = bookingService.updateBooking(id, bookingDetails);
         if (updatedBooking != null) {
             return ResponseEntity.ok(updatedBooking);
@@ -71,8 +71,18 @@ public class BookingController {
     }
 
     @GetMapping("/tutor/{tutorId}")
-    public List<bookingEntity> getBookingsByTutor(@PathVariable Long tutorId) {
-        return bookingService.getBookingsByTutor(tutorId);
+    public List<BookingDTO> getBookingsByTutor(@PathVariable Long tutorId) {
+        return bookingService.getBookingsByTutor(tutorId).stream()
+                .map(b -> {
+                    BookingDTO dto = new BookingDTO();
+                    dto.setSessionTime(b.getSessionDateTime());
+                    dto.setStudentName(b.getStudent().getFirst_name() + " " + b.getStudent().getLast_name());
+                    dto.setProfileImage(b.getStudent().getProfileImage());
+                    dto.setSubject(b.getSubject());
+                    dto.setStatus(b.getStatus());
+                    return dto;
+                })
+                .toList();
     }
 
     @GetMapping("/student/{studentId}")
@@ -81,26 +91,25 @@ public class BookingController {
     }
 
     @GetMapping("/sessions/tutor/today/{tutorId}")
-public List<Map<String, Object>> getTodaySessions(@PathVariable Long tutorId) {
-    LocalDate today = LocalDate.now(MANILA);
-    LocalDateTime start = today.atStartOfDay();
-    LocalDateTime end = today.atTime(23, 59, 59);
+    public List<BookingDTO> getTodaySessions(@PathVariable Long tutorId) {
+        LocalDate today = LocalDate.now(ZoneId.of("Asia/Manila"));
+        LocalDateTime start = today.atStartOfDay();
+        LocalDateTime end = today.atTime(23, 59, 59);
 
-    return bookingService.getBookingsByTutor(tutorId).stream()
-        .filter(b -> {
-            LocalDateTime dt = b.getSessionDateTime();
-            return dt != null && !dt.isBefore(start) && !dt.isAfter(end);
-        })
-        .map(b -> {
-            Map<String, Object> map = new HashMap<>();
-            map.put("session_time", b.getSessionDateTime());
-            map.put("student_name", 
-                b.getStudent().getFirst_name() + " " + b.getStudent().getLast_name());
-            map.put("subject", b.getSubject());
-            map.put("status", b.getStatus());
-            return map;
-        })
-        .toList();
-}
-
+        return bookingService.getBookingsByTutor(tutorId).stream()
+                .filter(b -> {
+                    LocalDateTime dt = b.getSessionDateTime();
+                    return dt != null && !dt.isBefore(start) && !dt.isAfter(end);
+                })
+                .map(b -> {
+                    BookingDTO dto = new BookingDTO();
+                    dto.setSessionTime(b.getSessionDateTime());
+                    dto.setStudentName(b.getStudent().getFirst_name() + " " + b.getStudent().getLast_name());
+                    dto.setProfileImage(b.getStudent().getProfileImage());
+                    dto.setSubject(b.getSubject());
+                    dto.setStatus(b.getStatus());
+                    return dto;
+                })
+                .toList();
+    }
 }

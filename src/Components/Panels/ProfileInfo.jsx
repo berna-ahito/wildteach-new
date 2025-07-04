@@ -7,8 +7,8 @@ export default function ProfileInfo({ profile }) {
   const [toast, setToast] = useState({ message: "", type: "" });
   const [preview, setPreview] = useState(
     profile.profileImage
-      ? `/uploads/profile/${profile.profileImage}?t=${Date.now()}`
-      : `/uploads/profile/default.jpg`
+      ? `${profile.profileImage}?t=${Date.now()}`
+      : `http://localhost:8080/uploads/profile/default.jpg`
   );
 
   const handleImageChange = (e) => {
@@ -38,9 +38,20 @@ export default function ProfileInfo({ profile }) {
 
       if (!res.ok) throw new Error("Upload failed");
 
+      // ✅ Refetch profile to get updated profileImage from DB
+      const res2 = await fetch(
+        `http://localhost:8080/student/getById/${profile.student_id}`
+      );
+      const updated = await res2.json();
+
+      // ✅ Update preview using new image path
+      const fullUrl = `http://localhost:8080/uploads/profile/${
+        updated.profileImage
+      }?t=${Date.now()}`;
+      setPreview(fullUrl);
+
       setToast({ message: "Profile image updated!", type: "success" });
       setEditMode(false);
-      setPreview(`/uploads/profile/${finalFileName}?t=${Date.now()}`);
     } catch (err) {
       console.error(err);
       setToast({ message: "Upload error", type: "error" });

@@ -27,26 +27,25 @@ export default function RecentActivity({ recent, role = "tutor" }) {
       </div>
 
       <ul>
-        {filteredRecent.length > 0 ? (
-          filteredRecent.slice(0, 3).map((r, i) => (
-            <li key={i} className="panel-item">
-              <div className="avatar-circle">{r.avatar}</div>
-              <div className="activity-details">
-                <div className="info">
-                  <strong>{r.name}</strong> • {r.subject || r.content} • {r.time}
-                </div>
-                <span className={`status ${r.status}`}>
-                  {r.status?.charAt(0).toUpperCase() + r.status?.slice(1)}
-                </span>
+        {recent.map((item, i) => (
+          <li key={i} className="panel-item">
+            <div className="avatar-circle">
+              {item.avatarUrl ? (
+                <img src={item.avatarUrl} alt="avatar" className="avatar-img" />
+              ) : (
+                <span>{item.avatar}</span>
+              )}
+            </div>
+            <div className="activity-details">
+              <div className="info">
+                <strong>{item.name}</strong> • {item.subject || item.content}
               </div>
-            </li>
-
-          ))
-        ) : (
-          <li className="panel-item">
-            <div className="info">No recent activity at this time.</div>
+              <span className={`status ${item.status}`}>
+                {item.status?.charAt(0).toUpperCase() + item.status?.slice(1)}
+              </span>
+            </div>
           </li>
-        )}
+        ))}
       </ul>
 
       {/* 💬 View All Dialog */}

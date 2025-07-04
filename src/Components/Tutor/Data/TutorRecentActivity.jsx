@@ -16,15 +16,24 @@ export default function TutorRecentActivity() {
         );
         const bookings = res.data || [];
 
-        const tutorBookings = bookings.slice(-5).map((b) => ({
-          avatar:
-            (b.student?.first_name?.[0] || "?") +
-            (b.student?.last_name?.[0] || ""),
-          name: `${b.student?.first_name || ""} ${b.student?.last_name || ""}`,
-          subject: b.subject || "N/A",
-          status: b.status?.toLowerCase() || "unknown",
-        }));
+        const tutorBookings = bookings.slice(-5).map((b) => {
+          const avatarUrl = b.profileImage
+            ? `http://localhost:8080/uploads/profile/${b.profileImage}`
+            : null;
 
+          const data = {
+            avatar: b.studentName?.[0] || "?",
+            avatarUrl,
+            name: b.studentName || "Unknown",
+            subject: b.subject || "N/A",
+            status: b.status?.toLowerCase() || "unknown",
+          };
+
+          console.log("🧠 Booking:", data);
+          return data;
+        });
+
+        console.log("✅ Recent Activity:", tutorBookings);
         setRecent(tutorBookings);
       } catch (err) {
         console.error("❌ Error fetching tutor activity:", err);

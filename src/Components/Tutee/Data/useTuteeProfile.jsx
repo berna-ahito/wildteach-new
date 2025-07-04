@@ -28,7 +28,7 @@ export default function useTuteeProfile(studentId) {
           city: data.city,
           province: data.province,
           home_address: data.address,
-          profileImage: data.profileImage || "default.jpg",
+          profileImage: `http://localhost:8080/uploads/profile/${data.profileImage}`,
         };
 
         setProfile(profile);

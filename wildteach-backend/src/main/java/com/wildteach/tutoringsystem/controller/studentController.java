@@ -81,28 +81,27 @@ public class studentController {
     }
 
     @PostMapping("/login")
-public ResponseEntity<?> loginStudent(@RequestBody studentEntity student) {
-    boolean isAuthenticated = studentService.authenticateStudent(student.getEmail(), student.getPassword());
-    if (!isAuthenticated) {
-        return ResponseEntity.status(401).body(Map.of("message", "Invalid email or password"));
+    public ResponseEntity<?> loginStudent(@RequestBody studentEntity student) {
+        boolean isAuthenticated = studentService.authenticateStudent(student.getEmail(), student.getPassword());
+        if (!isAuthenticated) {
+            return ResponseEntity.status(401).body(Map.of("message", "Invalid email or password"));
+        }
+
+        studentEntity foundStudent = studentService.findByEmail(student.getEmail());
+
+        if (!foundStudent.getIs_active()) {
+            return ResponseEntity.status(403).body(Map.of("message", "Account is deactivated."));
+        }
+
+        Map<String, Object> response = new HashMap<>();
+        response.put("message", "Login successful");
+        response.put("student_id", foundStudent.getStudent_id());
+        response.put("role", foundStudent.getRole());
+        response.put("name", foundStudent.getFirst_name() + " " + foundStudent.getLast_name());
+        response.put("email", foundStudent.getEmail());
+
+        return ResponseEntity.ok(response);
     }
-
-    studentEntity foundStudent = studentService.findByEmail(student.getEmail());
-
-    if (!foundStudent.getIs_active()) {
-        return ResponseEntity.status(403).body(Map.of("message", "Account is deactivated."));
-    }
-
-    Map<String, Object> response = new HashMap<>();
-    response.put("message", "Login successful");
-    response.put("student_id", foundStudent.getStudent_id());
-    response.put("role", foundStudent.getRole());
-    response.put("name", foundStudent.getFirst_name() + " " + foundStudent.getLast_name());
-    response.put("email", foundStudent.getEmail());
-
-    return ResponseEntity.ok(response);
-}
-
 
     @PutMapping("/updatePassword")
     public ResponseEntity<String> updateStudentPassword(
@@ -130,6 +129,7 @@ public ResponseEntity<?> loginStudent(@RequestBody studentEntity student) {
     public List<studentEntity> getAllTutorAccounts() {
         return studentService.getAllTutors();
     }
+
     @PutMapping("/updateStatus/{id}")
     public ResponseEntity<?> updateStudentStatus(@PathVariable Long id, @RequestParam boolean is_active) {
         studentEntity student = studentService.getStudentById(id);
@@ -142,7 +142,6 @@ public ResponseEntity<?> loginStudent(@RequestBody studentEntity student) {
         return ResponseEntity.ok("Student status updated");
     }
 
-
     @PostMapping("/upload-profile/{id}")
     public ResponseEntity<?> uploadProfileImage(
             @PathVariable Long id,
@@ -152,7 +151,7 @@ public ResponseEntity<?> loginStudent(@RequestBody studentEntity student) {
                 return ResponseEntity.status(400).body("Invalid file");
             }
 
-            String uploadDir = "../uploads/profile/";
+            String uploadDir = "uploads/profile/";
             String fileName = "student_" + id + "_" +
                     file.getOriginalFilename().replaceAll("[^a-zA-Z0-9\\.\\-_]", "_");
 
@@ -173,11 +172,11 @@ public ResponseEntity<?> loginStudent(@RequestBody studentEntity student) {
             return ResponseEntity.status(500).body("Upload failed: " + e.getMessage());
         }
     }
+
     @GetMapping("/existsByEmail")
     public ResponseEntity<Map<String, Boolean>> checkEmailExists(@RequestParam String email) {
         boolean exists = studentService.emailExists(email);
         return ResponseEntity.ok(Map.of("exists", exists));
     }
-
 
 }
