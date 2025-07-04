@@ -35,12 +35,16 @@ export default function Sidebar(props) {
 
   const handleIconClick = () => setOpen((prev) => !prev);
 
-  const handleLogoutConfirm = () => {
-    localStorage.clear();
-    setIsLoggedIn(false);
-    setUserRole(null);
-    navigate("/login");
-  };
+const handleLogoutConfirm = () => {
+  localStorage.clear();
+
+  // Safe fallback if props are not passed
+  if (setIsLoggedIn) setIsLoggedIn(false);
+  if (setUserRole) setUserRole(null);
+
+  navigate("/login");
+};
+
 
   return (
     <>
