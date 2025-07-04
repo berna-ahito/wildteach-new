@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import "../../Pages/Styles/shared/CommonGlobals.css";
 import "../../Pages/Styles/shared/CommonComponents.css";
 
-export default function TutorDashboard() {
+export default function TutorDashboard({ setIsLoggedIn, setUserRole }) {
   const navigate = useNavigate();
 
   return (
@@ -18,6 +18,8 @@ export default function TutorDashboard() {
       title="WILDTEACH"
       role="tutor"
       menuItems={menuTutor(navigate)}
+      setIsLoggedIn={setIsLoggedIn}
+      setUserRole={setUserRole}
     >
       <div className="tutor-dashboard-section">
         {/* ✅ White central container */}

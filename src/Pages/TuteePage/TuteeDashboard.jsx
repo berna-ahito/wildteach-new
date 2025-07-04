@@ -10,7 +10,7 @@ import WavingHandIcon from "@mui/icons-material/WavingHand";
 import "../../Pages/Styles/shared/CommonGlobals.css";
 import "../../Pages/Styles/shared/CommonComponents.css";
 
-export default function TuteeDashboard() {
+export default function TuteeDashboard({ setIsLoggedIn, setUserRole }) {
   const [studentName, setStudentName] = useState("");
   const studentId = localStorage.getItem("student_id");
   const navigate = useNavigate();
@@ -33,6 +33,8 @@ export default function TuteeDashboard() {
       title="WILDTEACH"
       role="tutee"
       menuItems={menuTutee(navigate)}
+      setIsLoggedIn={setIsLoggedIn}
+      setUserRole={setUserRole}
     >
       <div className="tutee-dashboard-section">
         <SectionHeader

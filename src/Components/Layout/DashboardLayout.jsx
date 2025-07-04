@@ -11,6 +11,8 @@ export default function DashboardLayout({
   children,
   role = "tutor",
   menuItems,
+  setIsLoggedIn,
+  setUserRole,
 }) {
   useEffect(() => {
     document.body.classList.add("red-theme");
@@ -27,7 +29,12 @@ export default function DashboardLayout({
 
   return (
     <div className={cssClass}>
-      <Sidebar role={role} menuItems={menuItems} />
+      <Sidebar
+        role={role}
+        menuItems={menuItems}
+        setIsLoggedIn={setIsLoggedIn}
+        setUserRole={setUserRole}
+      />
       <div className={contentClass}>
         <Header title={title} />
         {children}
