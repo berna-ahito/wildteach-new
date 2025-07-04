@@ -25,7 +25,7 @@ export default function TutorDashboard() {
           <SectionHeader
             badge="WELCOME BACK"
             title="Tutor"
-            highlight="Dashboard"
+            highlight={<span className="highlight-gold">Dashboard</span>}
             subtitle="Empower students through each session."
             layout="vertical"
           />

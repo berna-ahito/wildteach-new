@@ -427,8 +427,11 @@ ul li {
   background: linear-gradient(90deg, #89343B, #F8C400);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text; 
-  color: transparent;     
+  background-clip: text;
+  color: transparent;
+
+  /* 💡 Add glow like landing page */
+  text-shadow: 0 0 12px rgba(230, 184, 77, 0.4), 1px 1px 2px rgba(0, 0, 0, 0.25);
 }
 
 /* Tutee & Tutor Settings */
@@ -461,8 +464,8 @@ ul li {
   font-size: 28px;
   font-weight: 800;
   color: #fff;
-  margin: 0;
-  margin-right: 45%;
+  margin: 0 auto;
+  text-align: center;
 }
 
 /* InputCards Styling */
