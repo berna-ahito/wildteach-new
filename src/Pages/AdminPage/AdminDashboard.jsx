@@ -21,9 +21,7 @@ export default function AdminDashboard({ setIsLoggedIn, setUserRole }) {
       setIsLoggedIn={setIsLoggedIn}
       setUserRole={setUserRole}
     >
-
       <div className="admin-dashboard-section">
-        {/* ✅ White central container */}
         <div className="dashboard-container">
           <SectionHeader
             badge="WELCOME BACK"
@@ -33,12 +31,10 @@ export default function AdminDashboard({ setIsLoggedIn, setUserRole }) {
             layout="vertical"
           />
 
-          {/* Stat cards */}
           <div className="glass-card statcard-wrapper">
             <AdminStatData />
           </div>
 
-          {/* Grid block */}
           <div className="dashboard-panels">
             <div className="glass-card">
               <AdminRecentActivity />
