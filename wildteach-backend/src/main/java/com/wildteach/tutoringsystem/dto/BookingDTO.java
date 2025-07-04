@@ -3,10 +3,11 @@ package com.wildteach.tutoringsystem.dto;
 import java.time.LocalDateTime;
 
 public class BookingDTO {
-    private Long bookingId; // ✅ Add this field
+    private Long bookingId;
     private String subject;
     private String status;
     private LocalDateTime sessionTime;
+    private int duration; // ✅ Added field
     private String studentName;
     private String profileImage;
 
@@ -41,6 +42,14 @@ public class BookingDTO {
 
     public void setSessionTime(LocalDateTime sessionTime) {
         this.sessionTime = sessionTime;
+    }
+
+    public int getDuration() {
+        return duration;
+    }
+
+    public void setDuration(int duration) {
+        this.duration = duration;
     }
 
     public String getStudentName() {

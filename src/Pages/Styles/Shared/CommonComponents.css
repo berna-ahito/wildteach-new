@@ -66,14 +66,14 @@ body.red-theme {
   padding: 32px 24px;
   margin-top: 40px;
   margin-bottom: 35px;
-  max-width: 70%;
-  width: 100%;
-  margin-inline: auto;
+  max-width: 60%;
+  margin-inline: auto; 
 }
 
 
+
 .statcards-grid {
-  display: grid;
+  display: flex;
   grid-template-columns: 1fr;
   gap: 20px;
 }
@@ -199,6 +199,8 @@ body.red-theme {
   justify-content: space-between;
   align-items: center;
   flex: 1;
+  margin-left: 10px;
+  font-size: px;
 }
 
 .activity-details .info {
@@ -208,7 +210,6 @@ body.red-theme {
   white-space: normal;
 
 }
-
 
 /* dashboard buttons */
 .add-btn,
@@ -517,10 +518,13 @@ ul li {
   border-radius: 16px;
   padding: 28px 24px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
-  max-width: 500px;
-  min-width: none;
+
+  width: 100%;
+  max-width: 1000px;
+  min-width: 300px;
   margin: 0 auto;
 }
+
 
 .input-card-title {
   font-size: 18px;
@@ -533,5 +537,7 @@ ul li {
   display: flex;
   flex-direction: column;
   gap: 16px;
+  width: 100%;
 }
+
 

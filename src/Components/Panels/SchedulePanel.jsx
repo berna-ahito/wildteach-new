@@ -25,7 +25,7 @@ export default function SchedulePanel({ schedule }) {
                 <span>{item.student?.[0]}</span>
               )}
             </div>
-            <div className="info">
+            <div className="activity-details">
               {item.student} • {item.subject}
             </div>
             <span className={`status ${item.status}`}>{item.status}</span>

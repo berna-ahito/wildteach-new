@@ -21,7 +21,7 @@ export default function AdminDashboard({ setIsLoggedIn, setUserRole }) {
       setIsLoggedIn={setIsLoggedIn}
       setUserRole={setUserRole}
     >
-      <div className="admin-dashboard-section">
+      <div className="admin-dashboard-section" style={{ marginTop: "15%" }}>
         <div className="dashboard-container">
           <SectionHeader
             badge="WELCOME BACK"
