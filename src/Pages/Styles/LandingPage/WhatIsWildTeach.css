@@ -100,7 +100,7 @@
 }
 
 .title-highlight {
-  color: #e6b84d;
+  color: rgb(230, 184, 77);
   text-shadow: 0 0 20px rgba(230, 184, 77, 0.4);
 }
 
@@ -134,12 +134,6 @@
 
 .wildteach-description p {
   margin-bottom: 20px;
-}
-
-.highlight-text {
-  color: #e6b84d;
-  font-weight: 600;
-  text-shadow: 0 0 10px rgba(230, 184, 77, 0.3);
 }
 
 .features-showcase {
