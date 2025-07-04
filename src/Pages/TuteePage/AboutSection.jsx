@@ -5,6 +5,8 @@ import Sidebar from "../../Components/Shared/Sidebar";
 import menuTutee from "../../RoutesConfig/MenuTutee";
 import AboutSection from "../../Components/LandingPage/AboutSection";
 
+import "../../Pages/Styles/TuteePage/TuteeAbout.css";
+
 export default function About() {
   const navigate = useNavigate();
   const menuItems = menuTutee(navigate);

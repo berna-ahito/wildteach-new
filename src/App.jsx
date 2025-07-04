@@ -37,14 +37,19 @@ import SettingsTutee from './Pages/TuteePage/SettingsTutee';
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userRole, setUserRole] = useState(null);
+  const [loading, setLoading] = useState(true); // 🔥 Add loading flag
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user?.isLoggedIn && user?.role) {
       setIsLoggedIn(true);
-      setUserRole(user.role);
+      setUserRole(user.role.toLowerCase()); // ensure lowercase
     }
+    setLoading(false); // ✅ Done loading user info
   }, []);
+
+  if (loading) return <div>Loading...</div>; // 🔐 Prevent premature redirects
+
 
   return (
     <Router>

@@ -5,9 +5,10 @@ import Sidebar from "../../Components/Shared/Sidebar";
 import { useNavigate } from "react-router-dom";
 import menuTutee from "../../RoutesConfig/MenuTutee";
 import MyBookingsPanel from "../../Components/Tutee/Panels/MyBookingsPanel";
-import "../../Pages/Styles/TuteePage/TuteeGlobals.css";
-import "../../Pages/Styles/shared/CommonComponents.css";
-import "../../Pages/Styles/TuteePage/TuteeBooking.css";
+
+import "../../Pages/Styles/Shared/CommonComponents.css";
+import "../../Pages/Styles/TuteePage/TuteeMyBookings.css";
+
 
 export default function MyBookings() {
   const navigate = useNavigate();

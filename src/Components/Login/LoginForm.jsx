@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { loginUser } from "./LoginHandler";
 import LoadingScreen from "../Panels/LoadingScreen";
 
-export default function LoginForm({ setIsLoggedIn }) {
+export default function LoginForm({ setIsLoggedIn, setUserRole }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -19,12 +18,14 @@ export default function LoginForm({ setIsLoggedIn }) {
       const role = await loginUser(email, password);
       console.log("[LoginForm] Final role after login:", role);
 
-      setIsLoggedIn(true);
-      setIsLoading(false);
-
       if (!role) {
         throw new Error("Login failed: no role returned.");
       }
+
+      const user = JSON.parse(localStorage.getItem("user"));
+      setIsLoggedIn(true);
+      setUserRole(user.role);
+      setIsLoading(false);
 
       switch (role) {
         case "admin":
@@ -46,6 +47,104 @@ export default function LoginForm({ setIsLoggedIn }) {
       setError(err.message || "Login failed.");
     }
   };
+
+  async function loginUser(email, password) {
+    console.log("[Login] Starting login process for:", email);
+    const validRoles = ["admin", "tutor", "tutee"];
+    let userData = null;
+
+    try {
+      const adminRes = await fetch("http://localhost:8080/admin/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const adminData = await adminRes.json();
+      console.log("[Login] Admin login response:", adminData);
+
+      if (!adminRes.ok) {
+        throw new Error(adminData.message || "Admin login failed.");
+      }
+
+      if (adminData.is_active === false) {
+        throw new Error("Admin account is deactivated.");
+      }
+
+      const role = adminData.role?.toLowerCase() || "admin";
+      if (!validRoles.includes(role)) {
+        throw new Error("Invalid admin role.");
+      }
+
+      userData = {
+        isLoggedIn: true,
+        role,
+        admin_id: adminData.admin_id,
+        name: adminData.name,
+        email: adminData.email,
+      };
+
+      localStorage.setItem("user", JSON.stringify(userData));
+      return role;
+    } catch (err) {
+      console.warn("[Login] Admin login failed, trying student...");
+    }
+
+    try {
+      const res = await fetch("http://localhost:8080/student/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const data = await res.json();
+      console.log("[Login] Student login response:", data);
+
+      if (!res.ok) {
+        throw new Error(data.message || "Student login failed.");
+      }
+
+      if (data.is_active === false) {
+        throw new Error("Student account is deactivated.");
+      }
+
+      const role = data.role?.toLowerCase();
+      const studentId = data.student_id;
+
+      if (!validRoles.includes(role)) {
+        throw new Error("Invalid student role.");
+      }
+
+      userData = {
+        isLoggedIn: true,
+        role,
+        student_id: studentId,
+        name: data.name ?? "",
+        email: data.email || email,
+      };
+
+      localStorage.setItem("student_id", studentId.toString());
+
+      if (role === "tutor") {
+        try {
+          const checkTutor = await fetch(`http://localhost:8080/student/hasTutorProfile/${studentId}`);
+          const tutorCheck = await checkTutor.json();
+          if (tutorCheck.tutor_id) {
+            userData.tutor_id = tutorCheck.tutor_id;
+            localStorage.setItem("tutor_id", tutorCheck.tutor_id.toString());
+          }
+        } catch (err) {
+          console.warn("[Login] Tutor profile check failed.");
+        }
+      }
+
+      localStorage.setItem("user", JSON.stringify(userData));
+      return role;
+    } catch (err) {
+      console.error("[Login] Student login error:", err);
+      throw new Error(err.message || "Login failed.");
+    }
+  }
 
   return (
     <>
