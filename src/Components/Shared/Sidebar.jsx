@@ -14,7 +14,13 @@ import adminMenu from "../../RoutesConfig/menuAdmin";
 import tuteeMenu from "../../RoutesConfig/MenuTutee";
 
 export default function Sidebar(props) {
-  const { role = "tutor", menuItems: passedMenuItems } = props;
+  const {
+    role = "tutor",
+    menuItems: passedMenuItems,
+    setIsLoggedIn,
+    setUserRole,
+  } = props;
+
   const [open, setOpen] = useState(false);
   const [logoutDialogOpen, setLogoutDialogOpen] = useState(false);
   const navigate = useNavigate();
@@ -28,8 +34,16 @@ export default function Sidebar(props) {
       : tutorMenu(navigate));
 
   const handleIconClick = () => setOpen((prev) => !prev);
+
   const handleLogoutConfirm = () => {
+    // 🔐 Clear session
     localStorage.clear();
+
+    // 🧠 Reset login state
+    setIsLoggedIn(false);
+    setUserRole(null);
+
+    // 🔁 Redirect to login page
     navigate("/login");
   };
 

@@ -37,19 +37,18 @@ import SettingsTutee from './Pages/TuteePage/SettingsTutee';
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userRole, setUserRole] = useState(null);
-  const [loading, setLoading] = useState(true); // 🔥 Add loading flag
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user?.isLoggedIn && user?.role) {
       setIsLoggedIn(true);
-      setUserRole(user.role.toLowerCase()); // ensure lowercase
+      setUserRole(user.role.toLowerCase());
     }
-    setLoading(false); // ✅ Done loading user info
+    setLoading(false);
   }, []);
 
-  if (loading) return <div>Loading...</div>; // 🔐 Prevent premature redirects
-
+  if (loading) return <div>Loading...</div>;
 
   return (
     <Router>
@@ -62,11 +61,16 @@ function App() {
         <Route path="/contact-us" element={<LandingPage section="contact-us" />} />
         <Route path="/login" element={<LoginPage setIsLoggedIn={setIsLoggedIn} setUserRole={setUserRole} />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/unauthorized" element={<UnauthorizedPage />} /> {/* ✅ New Route */}
+        <Route path="/unauthorized" element={<UnauthorizedPage />} />
 
         {/* === Admin Routes === */}
         <Route path="/adminDashboard" element={
-          <ProtectedRoute element={<AdminDashboard />} isLoggedIn={isLoggedIn} allowedRoles={["admin"]} userRole={userRole} />
+          <ProtectedRoute
+            element={<AdminDashboard setIsLoggedIn={setIsLoggedIn} setUserRole={setUserRole} />}
+            isLoggedIn={isLoggedIn}
+            allowedRoles={["admin"]}
+            userRole={userRole}
+          />
         } />
         <Route path="/admin/manageUsers" element={
           <ProtectedRoute element={<ManageUsers />} isLoggedIn={isLoggedIn} allowedRoles={["admin"]} userRole={userRole} />
@@ -86,7 +90,12 @@ function App() {
 
         {/* === Tutee Routes === */}
         <Route path="/tuteeDashboard" element={
-          <ProtectedRoute element={<TuteeDashboard />} isLoggedIn={isLoggedIn} allowedRoles={["tutee"]} userRole={userRole} />
+          <ProtectedRoute
+            element={<TuteeDashboard setIsLoggedIn={setIsLoggedIn} setUserRole={setUserRole} />}
+            isLoggedIn={isLoggedIn}
+            allowedRoles={["tutee"]}
+            userRole={userRole}
+          />
         } />
         <Route path="/tutee/my-bookings" element={
           <ProtectedRoute element={<MyBookings />} isLoggedIn={isLoggedIn} allowedRoles={["tutee"]} userRole={userRole} />
@@ -112,10 +121,15 @@ function App() {
 
         {/* === Tutor Routes === */}
         <Route path="/tutorDashboard" element={
-          <ProtectedRoute element={<TutorDashboard />} isLoggedIn={isLoggedIn} allowedRoles={["tutor"]} userRole={userRole} />
+          <ProtectedRoute
+            element={<TutorDashboard setIsLoggedIn={setIsLoggedIn} setUserRole={setUserRole} />}
+            isLoggedIn={isLoggedIn}
+            allowedRoles={["tutor"]}
+            userRole={userRole}
+          />
         } />
         <Route path="/tutor/home" element={
-          <ProtectedRoute element={<TutorDashboard />} isLoggedIn={isLoggedIn} allowedRoles={["tutor"]} userRole={userRole} />
+          <ProtectedRoute element={<TutorDashboard setIsLoggedIn={setIsLoggedIn} setUserRole={setUserRole} />} isLoggedIn={isLoggedIn} allowedRoles={["tutor"]} userRole={userRole} />
         } />
         <Route path="/tutor/manageSessions" element={
           <ProtectedRoute element={<Sessions />} isLoggedIn={isLoggedIn} allowedRoles={["tutor"]} userRole={userRole} />
