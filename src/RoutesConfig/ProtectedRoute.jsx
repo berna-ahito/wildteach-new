@@ -8,18 +8,17 @@ const ProtectedRoute = ({ element, isLoggedIn, allowedRoles, userRole }) => {
     allowedRoles,
   });
 
-  // Still initializing
-  if (isLoggedIn === undefined || userRole === null) return null;
+  // Redirect immediately if not logged in
+  if (!isLoggedIn) {
+    return <Navigate to="/login" replace />;
+  }
 
-  // 🚫 Not logged in → redirect to login
-  if (!isLoggedIn) return <Navigate to="/login" replace />;
-
-  // ❌ Logged in but role not allowed → redirect to unauthorized
+  // Redirect if role is not allowed
   if (allowedRoles && !allowedRoles.includes(userRole)) {
     return <Navigate to="/unauthorized" replace />;
   }
 
-  // ✅ Authorized → render the element
+  // Render the element if allowed
   return element;
 };
 

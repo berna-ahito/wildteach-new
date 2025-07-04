@@ -129,7 +129,12 @@ function App() {
           />
         } />
         <Route path="/tutor/home" element={
-          <ProtectedRoute element={<TutorDashboard setIsLoggedIn={setIsLoggedIn} setUserRole={setUserRole} />} isLoggedIn={isLoggedIn} allowedRoles={["tutor"]} userRole={userRole} />
+          <ProtectedRoute
+            element={<TutorDashboard setIsLoggedIn={setIsLoggedIn} setUserRole={setUserRole} />}
+            isLoggedIn={isLoggedIn}
+            allowedRoles={["tutor"]}
+            userRole={userRole}
+          />
         } />
         <Route path="/tutor/manageSessions" element={
           <ProtectedRoute element={<Sessions />} isLoggedIn={isLoggedIn} allowedRoles={["tutor"]} userRole={userRole} />
