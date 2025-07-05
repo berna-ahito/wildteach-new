@@ -1,4 +1,5 @@
 import React from "react";
+import SectionHeader from "../../Shared/LandingPage/SectionHeader"; // ✅ import this
 import useMyBookingsData from "../../Tutee/Data/useMyBookingsData";
 
 export default function MyBookingsPanel() {
@@ -12,13 +13,19 @@ export default function MyBookingsPanel() {
     years,
   } = useMyBookingsData();
 
-  const hasBookings = filteredBookings.length > 0;
-
   return (
     <div className="my-bookings-wrapper">
-      <div className={`my-bookings-content ${hasBookings ? "scrollable-bookings" : ""}`}>
-        <div className="my-bookings-section-title">My Bookings</div>
+      <SectionHeader
+        badge="MY BOOKINGS"
+        title="View"
+        highlight="Bookings"
+        subtitle="Browse and manage your upcoming and past tutoring sessions"
+        layout="vertical"
+        align="center"
+        className="section-header-profile"
+      />
 
+      <div className="my-bookings-content">
         {/* Filters */}
         <div className="filter-container">
           <select
@@ -57,58 +64,52 @@ export default function MyBookingsPanel() {
         </div>
 
         {/* Booking Cards */}
-        {hasBookings ? (
-          <div className="my-bookings-scrollable-container">
-            <div className="my-bookings-cards-container">
-              {filteredBookings.map((b, idx) => {
-                const sessionDate = new Date(new Date(b.sessionDateTime).getTime());
-                const formattedDate = sessionDate.toLocaleDateString();
-                const formattedTime = sessionDate.toLocaleTimeString([], {
-                  hour: "2-digit",
-                  minute: "2-digit",
-                });
+        <div className="my-bookings-cards-container">
+          {filteredBookings.map((b, idx) => {
+            const sessionDate = new Date(b.sessionDateTime);
+            const formattedDate = sessionDate.toLocaleDateString();
+            const formattedTime = sessionDate.toLocaleTimeString([], {
+              hour: "2-digit",
+              minute: "2-digit",
+            });
 
-                return (
-                  <div className="tutee-card" key={idx}>
-                    <div className="tutee-card-item">
-                      <div className="content">
-                        <strong>Tutor:</strong> {b.tutor.student.first_name}{" "}
-                        {b.tutor.student.last_name}
-                      </div>
-                    </div>
-                    <div className="card-divider"></div>
-                    <div className="bookings-card-container">
-                      <div className="content">
-                        <strong>Subject:</strong> {b.subject}
-                      </div>
-                    </div>
-                    <div className="bookings-card-container">
-                      <div className="content">
-                        <strong>Date:</strong> {formattedDate}
-                      </div>
-                    </div>
-                    <div className="bookings-card-container">
-                      <div className="content">
-                        <strong>Time:</strong> {formattedTime}
-                      </div>
-                    </div>
-                    <div className="bookings-card-container">
-                      <div className="content">
-                        <strong>Status:</strong>
-                        <span className={`tutee-status ${b.status.toLowerCase()}`}>
-                          {" "}
-                          {b.status}
-                        </span>
-                      </div>
-                    </div>
+            return (
+              <div className="tutee-card" key={idx}>
+                <div className="tutee-card-item">
+                  <div className="content">
+                    <strong>Tutor:</strong> {b.tutor.student.first_name}{" "}
+                    {b.tutor.student.last_name}
                   </div>
-                );
-              })}
-            </div>
-          </div>
-        ) : (
-          <div>No bookings found.</div>
-        )}
+                </div>
+                <div className="card-divider"></div>
+                <div className="bookings-card-container">
+                  <div className="content">
+                    <strong>Subject:</strong> {b.subject}
+                  </div>
+                </div>
+                <div className="bookings-card-container">
+                  <div className="content">
+                    <strong>Date:</strong> {formattedDate}
+                  </div>
+                </div>
+                <div className="bookings-card-container">
+                  <div className="content">
+                    <strong>Time:</strong> {formattedTime}
+                  </div>
+                </div>
+                <div className="bookings-card-container">
+                  <div className="content">
+                    <strong>Status:</strong>
+                    <span className={`tutee-status ${b.status.toLowerCase()}`}>
+                      {" "}
+                      {b.status}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

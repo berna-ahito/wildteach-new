@@ -1,12 +1,12 @@
 .my-bookings-wrapper {
-  margin-top: 200px;
+  margin-top: 5px;
   padding: 60px 20px;
   min-height: 100vh;
   color: white;
 }
 
 .my-bookings-content {
-  background-color: white;
+  background-color: #fff7ef;
   color: #89343b;
   border-radius: 20px;
   border-top: 4px solid #f8c400;
@@ -15,6 +15,7 @@
   max-width: 1100px;
   width: 100%;
   margin: 0 auto;
+  margin-top: 30px;
   padding: 40px 28px;
   display: flex;
   flex-direction: column;
@@ -32,13 +33,6 @@
   display: flex;
   flex-direction: column;
   gap: 32px;
-}
-
-.my-bookings-section-title {
-  font-size: 28px;
-  font-weight: bold;
-  color: #89343b;
-  text-align: center;
 }
 
 .filter-container {

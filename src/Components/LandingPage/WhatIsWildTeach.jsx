@@ -1,11 +1,9 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { FaUserFriends, FaMoneyBillWave, FaUniversity } from "react-icons/fa";
 import FeatureCard from "../Shared/LandingPage/FeatureCard";
+import SectionHeader from "../Shared/LandingPage/SectionHeader";
 
 export default function WhatIsWildTeach() {
-  const navigate = useNavigate();
-
   const features = [
     {
       icon: <FaUserFriends />,
@@ -28,32 +26,29 @@ export default function WhatIsWildTeach() {
     <div className="wildteach-fullscreen">
       <div className="wildteach-content">
         <div className="wildteach-inner">
-          {/* HERO */}
-          <div className="wildteach-hero">
-            <div className="section-badge">🎓 PEER LEARNING REVOLUTION</div>
-            <h1 className="wildteach-title">
-              What is <span className="title-highlight">WildTeach</span>?
-            </h1>
-            <p className="wildteach-subtitle">
-              Transform Your Learning Experience
-            </p>
-            <p className="wildteach-description-text">
-              Connect with knowledgeable peers for personalized academic support
-            </p>
-          </div>
+          {/* SECTION HEADER */}
+          <SectionHeader
+            badge="🎓 PEER LEARNING REVOLUTION"
+            title="What is"
+            highlight="WildTeach"
+            subtitle="Transform Your Learning Experience"
+            layout="vertical"
+          />
+
+          <p className="wildteach-description-text">
+            Connect with knowledgeable peers for personalized academic support
+          </p>
 
           {/* DESCRIPTION */}
           <div className="wildteach-description">
             <p>
-              At WildTeach, learning feels less like a chore and more like a
-              team effort. We match you with fellow students who truly get the
-              subject, so you can ask questions, learn faster, and feel
-              supported every step of the way.
+              WildTeach makes studying feel less like pressure and more like
+              progress. Get paired with real students who’ve been in your shoes
+              and actually understand how to help.
             </p>
             <p className="highlight-text">
-              Whether you're getting help or giving it, everything happens right
-              on campus making learning easier, more meaningful, and even more
-              fun!
+              Whether you're learning or teaching, it all happens right on
+              campus so it’s easier, more relatable, and surprisingly fun.
             </p>
           </div>
 
@@ -67,16 +62,6 @@ export default function WhatIsWildTeach() {
                 description={f.description}
               />
             ))}
-          </div>
-
-          {/* CTA */}
-          <div className="cta-section">
-            <h2 className="cta-title">Join the Movement Today!</h2>
-            <p className="cta-subtitle">Start Your Learning Journey</p>
-            <button className="cta-btn" onClick={() => navigate("/login")}>
-              <span>BE PART OF IT</span>
-              <div className="btn-shine"></div>
-            </button>
           </div>
         </div>
       </div>

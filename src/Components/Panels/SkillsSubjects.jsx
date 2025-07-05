@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import ToastNotification from "../Panels/ToastNotification"; // ✅ Toast import
+import ToastNotification from "../Panels/ToastNotification";
 
 const SkillsSubjects = ({ profile }) => {
   const [editMode, setEditMode] = useState(false);
-  const [toast, setToast] = useState({ message: "", type: "" }); // ✅ Toast state
+  const [toast, setToast] = useState({ message: "", type: "" });
   const [formData, setFormData] = useState({
     subjects: profile.subjects_offered || "",
     availability: profile.availability || "",
@@ -44,7 +44,7 @@ const SkillsSubjects = ({ profile }) => {
 
   return (
     <div className="glass-card">
-      <div className="section-header">
+      <div className="card-header">
         <h4>Teaching Profile</h4>
         <button className="edit-btn" onClick={() => setEditMode(!editMode)}>
           {editMode ? "Cancel" : "Edit"}

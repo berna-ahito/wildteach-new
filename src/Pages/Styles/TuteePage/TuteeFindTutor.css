@@ -1,21 +1,13 @@
 .find-tutor-container {
   text-align: center;
-  margin-top: 35%;
-  margin-bottom: 30px;
+  margin-top: -50px;
+  margin-bottom: 50px;
   color: #fff8dc;
-}
-
-.find-tutor-container h1 {
-  font-size: 36px;
-  color: #f8c400;
-  margin: 0;
-  margin-bottom: 30px;
-  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
 }
 
 .search-bar {
   max-width: 400px;
-  margin: 20px auto 0;
+  margin: 30px auto 0;
   display: block;
   color: #34251f;
   background-color: white;
@@ -119,7 +111,7 @@
 }
 
 .book-button {
-  background-color: white;
+  background-color: #fff7ef;
   color: #89343b;
 }
 

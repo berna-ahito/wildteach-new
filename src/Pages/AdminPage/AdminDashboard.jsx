@@ -27,7 +27,7 @@ export default function AdminDashboard({ setIsLoggedIn, setUserRole }) {
             badge="WELCOME BACK"
             title="Admin"
             highlight="Dashboard"
-            subtitle="Manage tutors, students, and sessions efficiently."
+            subtitle="Manage tutors, students, and sessions efficiently"
             layout="vertical"
           />
 

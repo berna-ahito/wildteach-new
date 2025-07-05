@@ -113,7 +113,7 @@ export default function SessionList({ sessions, onDelete, onRefresh }) {
   return (
     <div className="sessions-container">
       <h2 className="section-title" style={{ marginTop: "-100px" }}>
-        Manage <span className="highlight-gold">Sessions</span>
+        Manage <span className="title-highlight">Sessions</span>
       </h2>
 
       <div className="filter-bar">

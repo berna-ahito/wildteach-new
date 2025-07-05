@@ -7,6 +7,7 @@ import DashboardLayout from "../../Components/Layout/DashboardLayout";
 import "../../Pages/Styles/Shared/CommonComponents.css";
 import "../../Pages/Styles/TutorPage/TutorGlobals.css";
 import useTutorProfile from "../../Components/Tutor/Data/TutorProfileData";
+import SectionHeader from "../../Components/Shared/LandingPage/SectionHeader";
 
 export default function Profile() {
   const userId = localStorage.getItem("student_id");
@@ -17,9 +18,22 @@ export default function Profile() {
 
   return (
     <DashboardLayout title="Profile" role="tutor">
-      <div className="glass-card" style={{ marginTop: "20%" }}>
-        <div className="profile-container" style={{ marginTop: "-40px" }}>
-          <h2 className="profile-title-inside">Profile</h2>
+      <div style={{ marginTop: "15%", marginBottom: "40px" }}>
+        <SectionHeader
+          badge="PROFILE"
+          title="Your"
+          highlight="Profile"
+          subtitle="Manage your personal information"
+          layout="vertical"
+          align="center"
+          className="profile-header"
+        />
+      </div>
+      <div
+        className="glass-card"
+        style={{ padding: "32px", marginTop: "-16px" }}
+      >
+        <div className="profile-container" style={{ marginTop: "0" }}>
           <div className="profile-info">
             <ProfileInfo profile={profile} />
           </div>

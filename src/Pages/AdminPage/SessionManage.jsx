@@ -18,12 +18,12 @@ export default function SessionManage() {
       role="admin"
       menuItems={adminMenu(navigate)}
     >
-      <div className="admin-dashboard-section" style={{ marginTop: "40vw" }}>
+      <div className="admin-dashboard-section" style={{ marginTop: "55%" }}>
         <SectionHeader
           badge="ADMIN PANEL"
           title="Manage"
           highlight="Sessions"
-          subtitle="Track, manage, and monitor tutoring sessions in the system."
+          subtitle="Track, manage, and monitor tutoring sessions in the system"
           layout="vertical"
         />
 
