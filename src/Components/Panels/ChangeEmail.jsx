@@ -74,7 +74,7 @@ export default function ChangeEmail({ role = "admin", userId, email }) {
         />
       )}
 
-      <InputCards title="Change Email">
+      <InputCards title="Change Email" className="wide-card border-top-gold">
         <form onSubmit={handleSubmit} className="settings-section">
           <UserCredentials role={role} email={email} />
 

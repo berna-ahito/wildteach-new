@@ -26,7 +26,9 @@ export default function Settings() {
       <div className="settings-container">
         <div className="settings-header-row">
           <SettingsIcon className="settings-icon" />
-          <h2 className="section-title">Settings Panel</h2>
+          <h2 className="section-title">
+            Settings<span className="title-highlight"> Panel</span>
+          </h2>
         </div>
 
         <ChangePassword role={role} userId={userId} email={email} />

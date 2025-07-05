@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
 import "../../../Pages/Styles/TuteePage/TuteeFindTutor.css";
 import "../../../Pages/Styles/Shared/CommonGlobals.css";
+import SectionHeader from "../../Shared/LandingPage/SectionHeader";
 
 export default function FindTutorPanel({
   searchTerm,
@@ -34,7 +35,15 @@ export default function FindTutorPanel({
       style={{ minHeight: "100vh", paddingBottom: "40px" }}
     >
       <div className="find-tutor-container">
-        <h1>Find a Tutor</h1>
+        <SectionHeader
+          badge="FIND TUTORS"
+          title="Find a"
+          highlight="Tutor"
+          subtitle="Browse available tutors by subject or name"
+          layout="vertical"
+          align="center"
+        />
+
         <TextField
           label="Search by name or subject"
           variant="outlined"

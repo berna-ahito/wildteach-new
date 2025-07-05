@@ -20,12 +20,12 @@ export default function ManageUsers() {
       role="admin"
       menuItems={adminMenu(navigate)}
     >
-      <div className="admin-dashboard-section" style={{ marginTop: "40vw" }}>
+      <div className="admin-dashboard-section" style={{ marginTop: "45%" }}>
         <SectionHeader
           badge="ADMIN PANEL"
           title="Manage"
           highlight="Users"
-          subtitle="Monitor and manage students and tutors in the system."
+          subtitle="Monitor and manage students and tutors in the system"
           layout="vertical"
         />
 

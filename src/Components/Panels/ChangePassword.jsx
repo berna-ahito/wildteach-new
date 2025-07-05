@@ -60,7 +60,7 @@ export default function ChangePassword({ role = "admin", userId, email }) {
         />
       )}
 
-      <InputCards title="Change Password">
+      <InputCards title="Change Password" className="wide-card border-top-gold">
         <form onSubmit={handleSubmit} className="settings-section">
           <UserCredentials role={role} email={email} />
 

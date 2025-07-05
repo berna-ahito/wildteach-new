@@ -23,19 +23,19 @@ export default function Announcement() {
       role="admin"
       menuItems={adminMenu(navigate)}
     >
-      <div className="admin-dashboard-section" style={{ marginTop: "-15vw" }}>
-        <div className="dashboard-container">
+      <div className="admin-dashboard-section">
+        <div className="dashboard-container" style={{ marginBottom: "20%" }}>
           <SectionHeader
             badge="ADMIN PANEL"
             title="System"
             highlight="Announcements"
-            subtitle="View, create, and manage public announcements for the system."
+            subtitle="View, create, and manage public announcements for the system"
             layout="vertical"
             icon={<CampaignIcon fontSize="large" />}
           />
 
           <div className="dashboard-panels">
-            <div className="glass-card" style={{ minWidth: "45vw" }}>
+            <div className="glass-card">
               <AdminSystemAnnouncement
                 key={refreshKey}
                 refreshTrigger={refreshKey}

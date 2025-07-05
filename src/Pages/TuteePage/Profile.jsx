@@ -1,11 +1,12 @@
 import React from "react";
-import Sidebar from "../../Components/Shared/Sidebar";
+import DashboardLayout from "../../Components/Layout/DashboardLayout";
 import ProfileInfo from "../../Components/Panels/ProfileInfo";
 import PersonalInfo from "../../Components/Panels/PersonalInfo";
-import DashboardLayout from "../../Components/Layout/DashboardLayout";
+import SectionHeader from "../../Components/Shared/LandingPage/SectionHeader";
+import useTutorProfile from "../../Components/Tutor/Data/TutorProfileData";
+
 import "../../Pages/Styles/Shared/CommonComponents.css";
 import "../../Pages/Styles/TutorPage/TutorGlobals.css";
-import useTutorProfile from "../../Components/Tutor/Data/TutorProfileData";
 
 export default function Profile() {
   const userId = localStorage.getItem("student_id");
@@ -16,16 +17,25 @@ export default function Profile() {
 
   return (
     <DashboardLayout title="Profile" role="tutee">
-      <div className="profile-container">
+      <div style={{ marginTop: "30%", marginBottom: "40px" }}>
+        <SectionHeader
+          badge="PROFILE"
+          title="Your"
+          highlight="Profile"
+          subtitle="Manage your personal and account information"
+          layout="vertical"
+          align="center"
+          className="profile-header section-header-profile"
+        />
+      </div>
+      <div className="glass-card">
         <div className="profile-container">
-          <h2 className="profile-title-inside">Profile</h2> {/* moved inside */}
           <div className="profile-info">
             <ProfileInfo profile={profile} />
           </div>
-          <div className="profile-infor">
-            <div className="personal-info">
-              <PersonalInfo profile={profile} />
-            </div>
+
+          <div className="personal-info">
+            <PersonalInfo profile={profile} />
           </div>
         </div>
       </div>

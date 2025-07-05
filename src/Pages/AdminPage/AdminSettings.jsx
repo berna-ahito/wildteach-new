@@ -9,7 +9,6 @@ import adminMenu from "../../RoutesConfig/menuAdmin";
 import { useNavigate } from "react-router-dom";
 
 import "../../Pages/Styles/shared/CommonComponents.css";
-import "../../Pages/Styles/TutorPage/TutorSettings.css";
 import "../../Pages/Styles/TutorPage/TutorGlobals.css";
 import "../../Pages/Styles/Admin/Admin.css";
 
@@ -32,7 +31,7 @@ export default function Settings() {
             badge="SYSTEM"
             title="Admin"
             highlight="Settings"
-            subtitle="Manage your credentials and system preferences here."
+            subtitle="Manage your credentials and system preferences here"
             layout="vertical"
           />
           <div className="forms">

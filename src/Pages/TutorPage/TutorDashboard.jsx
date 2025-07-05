@@ -26,7 +26,7 @@ export default function TutorDashboard({ setIsLoggedIn, setUserRole }) {
           <SectionHeader
             badge="WELCOME BACK"
             title="Tutor"
-            highlight={<span className="highlight-gold">Dashboard</span>}
+            highlight="Dashboard"
             subtitle="Empower students through each session."
             layout="vertical"
           />
